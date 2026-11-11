@@ -1,7 +1,15 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "1.0.0",
+  "latestVersion": "1.1.0",
   "releases": [
+    {
+      "version": "1.1.0",
+      "date": "2026-11-11",
+      "title": "מראה חדש, חיפוש מרכזי והרחבת הפקודות",
+      "summary": "עיצוב נקי בסגנון מדריך, סימון צבעוני לתחביר ודוגמאות, 20 פקודות חדשות ושיפור ניווט מקלדת",
+      "commandCount": 39,
+      "snapshot": "history/1.1.0.json"
+    },
     {
       "version": "1.0.0",
       "date": "2026-11-11",

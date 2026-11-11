@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "updatedAt": "2026-11-11",
   "commands": [
     {
@@ -30,6 +30,10 @@
         {
           "flag": "-t",
           "description": "ממיין לפי זמן השינוי האחרון."
+        },
+        {
+          "flag": "--color=auto",
+          "description": "הוספת צבעים אוטומטית לפי סוג קובץ (ב־GNU ls)."
         }
       ],
       "examples": [
@@ -812,6 +816,796 @@
         "screen"
       ],
       "note": null,
+      "type": "utility"
+    },
+    {
+      "id": "printf",
+      "name": "printf",
+      "category": "מערכת",
+      "summary": "הדפסת טקסט בפורמט קבוע",
+      "description": "מדפיס טקסט וערכים לפי מחרוזת פורמט. שימושי כאשר חשוב לשלוט בירידת שורה, רווחים או אופן הצגת נתונים.",
+      "syntax": "printf format [arguments...]",
+      "options": [
+        {
+          "flag": "%s",
+          "description": "הדפסת מחרוזת."
+        },
+        {
+          "flag": "%d",
+          "description": "הדפסת מספר שלם."
+        },
+        {
+          "flag": "\\n",
+          "description": "תו ירידת שורה בתוך מחרוזת הפורמט (לא דגל)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'Hello\\n'",
+          "description": "הדפסת Hello וירידת שורה."
+        },
+        {
+          "command": "printf '%s: %d\\n' apples 3",
+          "description": "הדפסת טקסט ומספר באותה שורה."
+        }
+      ],
+      "keywords": [
+        "פורמט",
+        "הדפסה",
+        "print format",
+        "newline"
+      ],
+      "note": "בניגוד ל־echo, printf אינו מוסיף ירידת שורה אוטומטית.",
+      "type": "builtin"
+    },
+    {
+      "id": "cut",
+      "name": "cut",
+      "category": "טקסט וחיפוש",
+      "summary": "בחירת עמודות או תווים",
+      "description": "מוציא עמודות או טווחי תווים מכל שורת קלט. שימושי במיוחד עבור טקסט עם מפריד קבוע כמו פסיק או נקודתיים.",
+      "syntax": "cut [options] [file...]",
+      "options": [
+        {
+          "flag": "-d DELIM",
+          "description": "הגדרת התו שמפריד בין שדות."
+        },
+        {
+          "flag": "-f LIST",
+          "description": "בחירת שדות לפי מספרם (הספירה מתחילה מ־1)."
+        },
+        {
+          "flag": "-c LIST",
+          "description": "בחירת מיקומי תווים."
+        }
+      ],
+      "examples": [
+        {
+          "command": "cut -d, -f1 data.csv",
+          "description": "הדפסת העמודה הראשונה בקובץ CSV פשוט."
+        },
+        {
+          "command": "cut -c1-5 names.txt",
+          "description": "הדפסת חמשת התווים הראשונים מכל שורה."
+        }
+      ],
+      "keywords": [
+        "עמודות",
+        "שדות",
+        "field",
+        "extract",
+        "csv"
+      ],
+      "note": "cut אינו מפענח CSV מורכב עם פסיקים בתוך שדות מצוטטים.",
+      "type": "utility"
+    },
+    {
+      "id": "uniq",
+      "name": "uniq",
+      "category": "טקסט וחיפוש",
+      "summary": "הסרת שורות כפולות סמוכות",
+      "description": "מאחד רצפים של שורות זהות שנמצאות זו לצד זו. כאשר רוצים להסיר כפילויות מכל הקובץ, לרוב ממיינים קודם.",
+      "syntax": "uniq [options] [input [output]]",
+      "options": [
+        {
+          "flag": "-c",
+          "description": "הצגת מספר ההופעות של כל רצף שורות."
+        },
+        {
+          "flag": "-d",
+          "description": "הצגת שורות שחוזרות לפחות פעמיים ברצף."
+        },
+        {
+          "flag": "-u",
+          "description": "הצגת שורות ייחודיות בלבד בכל רצף."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sort names.txt | uniq",
+          "description": "מיון והסרת שורות זהות."
+        },
+        {
+          "command": "sort names.txt | uniq -c",
+          "description": "ספירת הופעות של כל שורה אחרי מיון."
+        }
+      ],
+      "keywords": [
+        "unique",
+        "כפילויות",
+        "deduplicate",
+        "ספירה"
+      ],
+      "note": "uniq מסיר כפילויות סמוכות בלבד; הוא אינו ממיין את הקלט.",
+      "type": "utility"
+    },
+    {
+      "id": "tr",
+      "name": "tr",
+      "category": "טקסט וחיפוש",
+      "summary": "החלפה או מחיקה של תווים",
+      "description": "מחליף, מוחק או מצמצם רצפים של תווים בקלט שמגיע מ־stdin.",
+      "syntax": "tr [options] SET1 [SET2]",
+      "options": [
+        {
+          "flag": "-d",
+          "description": "מחיקת תווים מהקבוצה הראשונה."
+        },
+        {
+          "flag": "-s",
+          "description": "כיווץ חזרות של תווים זהים לתו בודד."
+        },
+        {
+          "flag": "SET1 SET2",
+          "description": "התאמת תווים בין שתי קבוצות (ארגומנטים, לא דגלים)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'abc\\n' | tr 'a-z' 'A-Z'",
+          "description": "המרת אותיות קטנות לגדולות."
+        },
+        {
+          "command": "tr -s ' ' < input.txt",
+          "description": "צמצום רווחים חוזרים בקלט."
+        }
+      ],
+      "keywords": [
+        "translate",
+        "החלפת תווים",
+        "uppercase",
+        "lowercase"
+      ],
+      "note": "tr פועל על תווים בודדים ואינו מחליף מילים שלמות.",
+      "type": "utility"
+    },
+    {
+      "id": "sed",
+      "name": "sed",
+      "category": "טקסט וחיפוש",
+      "summary": "עריכת זרמי טקסט",
+      "description": "מסנן ומשנה טקסט באמצעות הוראות קצרות. אפשר למשל להציג שורות מסוימות או להחליף הופעות של מחרוזת.",
+      "syntax": "sed [options] script [file...]",
+      "options": [
+        {
+          "flag": "-n",
+          "description": "מבטל הדפסה אוטומטית; שימושי עם פקודת p."
+        },
+        {
+          "flag": "s/old/new/g",
+          "description": "החלפת כל ההופעות בכל שורה (תחביר של sed)."
+        },
+        {
+          "flag": "-e script",
+          "description": "הוספת הוראת עריכה נוספת."        }
+      ],
+      "examples": [
+        {
+          "command": "sed -n '1,5p' notes.txt",
+          "description": "הצגת חמש השורות הראשונות."
+        },
+        {
+          "command": "sed 's/cat/dog/g' animals.txt",
+          "description": "החלפת cat ב־dog בפלט בלבד."
+        }
+      ],
+      "keywords": [
+        "stream editor",
+        "החלפה",
+        "replace",
+        "עריכת טקסט"
+      ],
+      "note": "ברירת המחדל אינה משנה את קובץ המקור: הפלט נשלח למסך. עריכה בקובץ עצמו דורשת אפשרויות נפרדות המשתנות בין מערכות.",
+      "type": "utility"
+    },
+    {
+      "id": "awk",
+      "name": "awk",
+      "category": "טקסט וחיפוש",
+      "summary": "עיבוד עמודות ושדות",
+      "description": "כלי לעיבוד שורות ושדות בטקסט. הוא מאפשר לבחור עמודות, להפעיל תנאים ולבצע חישובים קצרים.",
+      "syntax": "awk [options] program [file...]",
+      "options": [
+        {
+          "flag": "-F SEP",
+          "description": "הגדרת תו מפריד בין שדות."
+        },
+        {
+          "flag": "$1",
+          "description": "השדה הראשון בשורה (ביטוי בשפת awk)."
+        },
+        {
+          "flag": "NR",
+          "description": "מספר השורה הנוכחית (משתנה בשפת awk)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "awk '{print $1}' notes.txt",
+          "description": "הצגת המילה הראשונה מכל שורה."
+        },
+        {
+          "command": "awk -F, '{print $2}' data.csv",
+          "description": "הצגת השדה השני בקובץ מופרד בפסיקים."
+        }
+      ],
+      "keywords": [
+        "columns",
+        "שדות",
+        "הדפסת עמודה",
+        "processing"
+      ],
+      "note": "ב־awk, הסימון $1 מתייחס לשדה הראשון; $0 מתייחס לשורה כולה. זה אינו משתנה של Bash.",
+      "type": "utility"
+    },
+    {
+      "id": "tee",
+      "name": "tee",
+      "category": "טקסט וחיפוש",
+      "summary": "תצוגה ושמירה בו־זמנית",
+      "description": "קורא קלט ומעביר אותו גם למסך וגם לקובץ. שימושי בהמשך של pipe.",
+      "syntax": "tee [options] [file...]",
+      "options": [
+        {
+          "flag": "-a",
+          "description": "הוספת הפלט לסוף הקובץ במקום החלפתו."
+        },
+        {
+          "flag": "-i",
+          "description": "התעלמות מסיגנל interrupt (תלוי מימוש)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "echo hello | tee log.txt",
+          "description": "הצגת hello ושמירתו בקובץ."
+        },
+        {
+          "command": "echo another | tee -a log.txt",
+          "description": "הוספת שורה לקובץ קיים."
+        }
+      ],
+      "keywords": [
+        "שמור פלט",
+        "pipe",
+        "output",
+        "log",
+        "הצגה"
+      ],
+      "note": "ללא ‎-a, tee עלול להחליף תוכן של קובץ קיים.",
+      "type": "utility"
+    },
+    {
+      "id": "xargs",
+      "name": "xargs",
+      "category": "טקסט וחיפוש",
+      "summary": "הפיכת קלט לארגומנטים",
+      "description": "בונה פקודות מתוך ערכים שמתקבלים דרך stdin. משמש כאשר פקודה אחרת מציגה רשימת ערכים שיש להעביר הלאה.",
+      "syntax": "xargs [options] [command [arguments...]]",
+      "options": [
+        {
+          "flag": "-n N",
+          "description": "מספר ארגומנטים מרבי לכל הרצה."
+        },
+        {
+          "flag": "-0",
+          "description": "קריאת ערכים המופרדים בתו NUL; מתאים לשמות קבצים עם רווחים בשילוב מקור תואם."
+        },
+        {
+          "flag": "-I REPLACE",
+          "description": "החלפת סימון קבוע בערכי הקלט בכל הרצה."
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'one\\ntwo\\n' | xargs -n 1 echo",
+          "description": "הרצת echo פעם לכל ערך."
+        },
+        {
+          "command": "printf 'a\\nb\\n' | xargs -I '{}' echo 'item:{}'",
+          "description": "שילוב כל ערך במחרוזת."
+        }
+      ],
+      "keywords": [
+        "arguments",
+        "pipe",
+        "stdin",
+        "ארגומנטים"
+      ],
+      "note": "לטיפול בטוח בשמות קבצים עם רווחים או ירידות שורה משתמשים בפלט NUL וב־xargs -0 כאשר נתמך.",
+      "type": "utility"
+    },
+    {
+      "id": "diff",
+      "name": "diff",
+      "category": "קבצים ותיקיות",
+      "summary": "השוואת תוכן של שני קבצים",
+      "description": "מציג אילו שורות השתנו בין קבצים. הוא אינו משנה אותם.",
+      "syntax": "diff [options] file1 file2",
+      "options": [
+        {
+          "flag": "-u",
+          "description": "הצגת השוואה בפורמט unified."
+        },
+        {
+          "flag": "-q",
+          "description": "דיווח קצר אם הקבצים שונים."
+        },
+        {
+          "flag": "-r",
+          "description": "השוואה רקורסיבית של תיקיות."
+        }
+      ],
+      "examples": [
+        {
+          "command": "diff old.txt new.txt",
+          "description": "הצגת ההבדלים בין שני קבצים."
+        },
+        {
+          "command": "diff -u old.txt new.txt",
+          "description": "הצגת הבדלים עם שורות הקשר."
+        }
+      ],
+      "keywords": [
+        "compare",
+        "הבדלים",
+        "השוואת קבצים",
+        "changes"
+      ],
+      "note": "קוד יציאה 0 פירושו אין הבדל, וקוד 1 פירושו שנמצא הבדל.",
+      "type": "utility"
+    },
+    {
+      "id": "chmod",
+      "name": "chmod",
+      "category": "קבצים ותיקיות",
+      "summary": "שינוי הרשאות גישה",
+      "description": "משנה הרשאות קריאה, כתיבה והרצה לקבצים ולתיקיות.",
+      "syntax": "chmod [options] mode file...",
+      "options": [
+        {
+          "flag": "+x",
+          "description": "הוספת הרשאת הרצה בהתאם לקבוצת המשתמשים הרלוונטית."
+        },
+        {
+          "flag": "u+x",
+          "description": "הוספת הרשאת הרצה לבעל הקובץ."
+        },
+        {
+          "flag": "u-w",
+          "description": "הסרת הרשאת כתיבה מבעל הקובץ."
+        }
+      ],
+      "examples": [
+        {
+          "command": "chmod u+x script.sh",
+          "description": "הוספת הרשאת הרצה לבעל הסקריפט."
+        },
+        {
+          "command": "chmod u-w notes.txt",
+          "description": "מניעת כתיבה מבעל הקובץ."
+        }
+      ],
+      "keywords": [
+        "permissions",
+        "הרשאות",
+        "executable",
+        "הרצה"
+      ],
+      "note": "הסימון u הוא הבעלים, g היא הקבוצה, o הם אחרים ו־a מסמן את כולם. שינוי הרשאות אינו גורם לסקריפט להיות בטוח להרצה.",
+      "type": "utility"
+    },
+    {
+      "id": "du",
+      "name": "du",
+      "category": "קבצים ותיקיות",
+      "summary": "בדיקת נפח תיקיות וקבצים",
+      "description": "מדווח כמה מקום קבצים ותיקיות תופסים בדיסק.",
+      "syntax": "du [options] [path...]",
+      "options": [
+        {
+          "flag": "-h",
+          "description": "הצגת גדלים ביחידות קריאות כמו K, M ו־G."
+        },
+        {
+          "flag": "-s",
+          "description": "הצגת סיכום כולל לכל נתיב."
+        },
+        {
+          "flag": "-a",
+          "description": "כולל גם קבצים, לא רק תיקיות."
+        }
+      ],
+      "examples": [
+        {
+          "command": "du -sh Documents",
+          "description": "הערכת נפח התיקייה Documents."
+        },
+        {
+          "command": "du -h .",
+          "description": "הצגת גדלים של תיקיות ותיקיות משנה."
+        }
+      ],
+      "keywords": [
+        "disk usage",
+        "גודל תיקייה",
+        "נפח",
+        "storage"
+      ],
+      "note": "du מודד שימוש בדיסק ולא בהכרח את גודל הקובץ הלוגי.",
+      "type": "utility"
+    },
+    {
+      "id": "df",
+      "name": "df",
+      "category": "מערכת",
+      "summary": "בדיקת מקום פנוי בדיסק",
+      "description": "מציג מידע על שטח כולל, משומש ופנוי במערכות הקבצים.",
+      "syntax": "df [options] [path...]",
+      "options": [
+        {
+          "flag": "-h",
+          "description": "הצגת גדלים ביחידות קריאות לאדם."
+        },
+        {
+          "flag": "-k",
+          "description": "הצגת נפחים ביחידות של 1024 בתים."
+        },
+        {
+          "flag": "-i",
+          "description": "הצגת מידע על inodes, במערכות שתומכות בכך."
+        }
+      ],
+      "examples": [
+        {
+          "command": "df -h",
+          "description": "הצגת שטח פנוי בכל מערכות הקבצים."
+        },
+        {
+          "command": "df -h .",
+          "description": "בדיקת מערכת הקבצים של התיקייה הנוכחית."
+        }
+      ],
+      "keywords": [
+        "disk free",
+        "שטח פנוי",
+        "אחסון",
+        "כונן"
+      ],
+      "note": "df מציג מקום פנוי במערכת הקבצים; du מתמקד בנפח של קבצים ותיקיות.",
+      "type": "utility"
+    },
+    {
+      "id": "file",
+      "name": "file",
+      "category": "קבצים ותיקיות",
+      "summary": "זיהוי סוג קובץ",
+      "description": "מנסה לזהות את סוג התוכן של קובץ לפי המידע שבו, ולא רק לפי הסיומת.",
+      "syntax": "file [options] file...",
+      "options": [
+        {
+          "flag": "-b",
+          "description": "הצגת סוג הקובץ ללא שמו."
+        },
+        {
+          "flag": "-i",
+          "description": "הצגת סוג MIME, במימושים שתומכים בכך."
+        },
+        {
+          "flag": "-L",
+          "description": "מעקב אחרי קישורים סמליים."
+        }
+      ],
+      "examples": [
+        {
+          "command": "file image.png",
+          "description": "זיהוי סוג הקובץ."
+        },
+        {
+          "command": "file -b document.pdf",
+          "description": "קבלת תיאור סוג הקובץ ללא שם."
+        }
+      ],
+      "keywords": [
+        "mime",
+        "סוג קובץ",
+        "identify file",
+        "זיהוי"
+      ],
+      "note": "זיהוי המבוסס על תוכן הוא שימושי, אך לא תמיד חד־משמעי.",
+      "type": "utility"
+    },
+    {
+      "id": "type",
+      "name": "type",
+      "category": "מערכת",
+      "summary": "בדיקה מהי פקודה",
+      "description": "מציג כיצד Bash יפרש שם של פקודה: פקודה מובנית, alias, פונקציה או קובץ הרצה.",
+      "syntax": "type [options] name...",
+      "options": [
+        {
+          "flag": "-a",
+          "description": "הצגת כל האפשרויות שנמצאו עבור השם."
+        },
+        {
+          "flag": "-t",
+          "description": "הצגת סוג קצר כגון builtin או file."
+        },
+        {
+          "flag": "-P",
+          "description": "חיפוש הקובץ המיועד להרצה ב־PATH, אם קיים."
+        }
+      ],
+      "examples": [
+        {
+          "command": "type ls",
+          "description": "בדיקה האם ls הוא alias או קובץ הרצה."
+        },
+        {
+          "command": "type -a python",
+          "description": "הצגת כל המיקומים המוכרים של python."
+        }
+      ],
+      "keywords": [
+        "command location",
+        "איפה פקודה",
+        "alias",
+        "path"
+      ],
+      "note": "type היא פקודה מובנית ב־Bash, ולכן היא מודעת גם לפונקציות ול־aliases.",
+      "type": "builtin"
+    },
+    {
+      "id": "history",
+      "name": "history",
+      "category": "מערכת",
+      "summary": "הצגת פקודות קודמות",
+      "description": "מציג את הפקודות שנרשמו בהיסטוריה של Bash בסשן הנוכחי ובקובץ ההיסטוריה.",
+      "syntax": "history [N]",
+      "options": [
+        {
+          "flag": "N",
+          "description": "הצגת N הרשומות האחרונות (ארגומנט, לא דגל)."
+        },
+        {
+          "flag": "-c",
+          "description": "ניקוי רשימת ההיסטוריה בזיכרון של הסשן."
+        }
+      ],
+      "examples": [
+        {
+          "command": "history",
+          "description": "הצגת ההיסטוריה הזמינה."
+        },
+        {
+          "command": "history 10",
+          "description": "הצגת עשר הפקודות האחרונות."
+        }
+      ],
+      "keywords": [
+        "history",
+        "פקודות קודמות",
+        "היסטוריה",
+        "terminal"
+      ],
+      "note": "היסטוריית Bash תלויה בהגדרות הסביבה; לא כל הפקודות נשמרות תמיד.",
+      "type": "builtin"
+    },
+    {
+      "id": "ps",
+      "name": "ps",
+      "category": "מערכת",
+      "summary": "צפייה בתהליכים פעילים",
+      "description": "מציג מידע על תהליכים שרצים במערכת.",
+      "syntax": "ps [options]",
+      "options": [
+        {
+          "flag": "-e",
+          "description": "הצגת כל התהליכים (תחביר POSIX נפוץ)."
+        },
+        {
+          "flag": "-f",
+          "description": "פורמט תצוגה מפורט."
+        },
+        {
+          "flag": "aux",
+          "description": "תצוגת תהליכים בסגנון BSD, נפוצה ב־Linux וב־macOS."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ps",
+          "description": "הצגת התהליכים המשויכים למסוף הנוכחי."
+        },
+        {
+          "command": "ps -ef",
+          "description": "הצגת רשימת תהליכים מפורטת."
+        }
+      ],
+      "keywords": [
+        "process",
+        "תהליכים",
+        "running",
+        "pid"
+      ],
+      "note": "יש שני סגנונות אפשרויות נפוצים ל־ps, עם או בלי מקף; התמיכה המדויקת תלויה במערכת.",
+      "type": "utility"
+    },
+    {
+      "id": "tar",
+      "name": "tar",
+      "category": "קבצים ותיקיות",
+      "summary": "יצירת ארכיון ופתיחתו",
+      "description": "אוסף קבצים לתוך ארכיון, ויכול להשתמש בדחיסה דרך gzip או כלים אחרים.",
+      "syntax": "tar [options] archive [file...]",
+      "options": [
+        {
+          "flag": "-c",
+          "description": "יצירת ארכיון חדש."
+        },
+        {
+          "flag": "-t",
+          "description": "הצגת תוכן הארכיון ללא חילוץ."
+        },
+        {
+          "flag": "-x",
+          "description": "חילוץ קבצים מארכיון."
+        },
+        {
+          "flag": "-f FILE",
+          "description": "שימוש בקובץ ארכיון בשם שצוין."
+        },
+        {
+          "flag": "-z",
+          "description": "דחיסה או פירוק דחיסת gzip כשנתמך."
+        }
+      ],
+      "examples": [
+        {
+          "command": "tar -czf notes.tar.gz notes/",
+          "description": "יצירת ארכיון דחוס של התיקייה notes."
+        },
+        {
+          "command": "tar -tf notes.tar.gz",
+          "description": "הצגת שמות הקבצים בארכיון ללא חילוץ."
+        }
+      ],
+      "keywords": [
+        "archive",
+        "ארכיון",
+        "gzip",
+        "גיבוי",
+        "compress"
+      ],
+      "note": "כדאי לבדוק את תכולת הארכיון לפני חילוץ. בחלק מהכלים, סדר הפרמטרים קובע לאיזו אפשרות שייך שם הקובץ.",
+      "type": "utility"
+    },
+    {
+      "id": "date",
+      "name": "date",
+      "category": "מערכת",
+      "summary": "הצגת תאריך ושעה",
+      "description": "מדפיס את התאריך והשעה הנוכחיים בפורמט ברירת המחדל או בפורמט שתבחר.",
+      "syntax": "date [+FORMAT]",
+      "options": [
+        {
+          "flag": "+%Y-%m-%d",
+          "description": "פורמט שנה-חודש-יום."
+        },
+        {
+          "flag": "+%H:%M",
+          "description": "פורמט שעה ודקה לפי שעון 24 שעות."
+        },
+        {
+          "flag": "-u",
+          "description": "הצגת זמן UTC."
+        }
+      ],
+      "examples": [
+        {
+          "command": "date",
+          "description": "הצגת התאריך והשעה."
+        },
+        {
+          "command": "date '+%Y-%m-%d'",
+          "description": "הצגת תאריך בפורמט קבוע."
+        }
+      ],
+      "keywords": [
+        "time",
+        "שעה",
+        "תאריך",
+        "format"
+      ],
+      "note": "מחרוזת הפורמט מתחילה ב־+, וסימונים כגון %Y ו־%m מייצגים חלקי תאריך.",
+      "type": "utility"
+    },
+    {
+      "id": "basename",
+      "name": "basename",
+      "category": "קבצים ותיקיות",
+      "summary": "קבלת השם האחרון בנתיב",
+      "description": "מחזיר את שם הקובץ או התיקייה שבסוף נתיב, ללא חלקי התיקיות שקודמים לו.",
+      "syntax": "basename path [suffix]",
+      "options": [
+        {
+          "flag": "suffix",
+          "description": "סיומת שאפשר להסיר מן השם (ארגומנט, לא דגל)."
+        },
+        {
+          "flag": "--",
+          "description": "סימון סוף אפשרויות במימושים שתומכים בכך."
+        }
+      ],
+      "examples": [
+        {
+          "command": "basename /home/user/notes.txt",
+          "description": "הצגת notes.txt בלבד."
+        },
+        {
+          "command": "basename /home/user/notes.txt .txt",
+          "description": "הצגת notes בלי הסיומת .txt."
+        }
+      ],
+      "keywords": [
+        "filename",
+        "שם קובץ",
+        "path",
+        "נתיב"
+      ],
+      "note": "basename לא בודק בהכרח שהקובץ באמת קיים.",
+      "type": "utility"
+    },
+    {
+      "id": "dirname",
+      "name": "dirname",
+      "category": "קבצים ותיקיות",
+      "summary": "קבלת התיקייה מתוך נתיב",
+      "description": "מחזיר את חלק התיקייה של נתיב, ללא רכיב השם האחרון.",
+      "syntax": "dirname path",
+      "options": [
+        {
+          "flag": "--",
+          "description": "סימון סוף אפשרויות במימושים שתומכים בכך."
+        }
+      ],
+      "examples": [
+        {
+          "command": "dirname /home/user/notes.txt",
+          "description": "הצגת /home/user."
+        },
+        {
+          "command": "dirname ./docs/file.txt",
+          "description": "הצגת ./docs."
+        }
+      ],
+      "keywords": [
+        "parent directory",
+        "תיקיית אב",
+        "path",
+        "נתיב"
+      ],
+      "note": "dirname מעבד טקסט של נתיב; הוא לא חייב להצביע על תיקייה שקיימת בפועל.",
       "type": "utility"
     }
   ]

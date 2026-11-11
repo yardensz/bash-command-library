@@ -36,11 +36,32 @@
   }
   function renderCategories(){ $('categories').innerHTML=categories.map(c=>`<button type="button" class="chip ${state.category===c?'active':''}" data-category="${esc(c)}" aria-pressed="${state.category===c}">${esc(c)}</button>`).join('');$('categories').querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{state.category=b.dataset.category;render();})); }
   function select(id){state.selected=id;render();if(innerWidth<781)$('mainContent').scrollIntoView({behavior:'smooth',block:'start'});}
+  // Visual syntax guide: the raw command stays unchanged for copying.
+  // Token classes describe the role of each piece rather than attempting to parse all of Bash.
+  function colorCode(value, template=false) {
+    const tokens = String(value||'').match(/\s+|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\$\{[^}]+\}|\$[a-zA-Z_][\w]*|--?[\w-]+(?:=[^\s\]]+)?|[|&;<>]+|[\[\](){}]|[^\s\[\](){}|&;<>]+/g) || [];
+    let expectCommand = true;
+    return tokens.map(token => {
+      if (/^\s+$/.test(token)) return esc(token);
+      let kind = '';
+      if (/^[\[\](){}]$/.test(token)) kind = 'punct';
+      else if (/^[|&;<>]+$/.test(token)) {kind = template ? 'punct' : 'operator'; if(!template)expectCommand=true;}
+      else if (/^--?[a-zA-Z\w]/.test(token)) kind = 'flag';
+      else if (/^(options?|flags?)$/i.test(token)) kind = 'option';
+      else if (/^\$/.test(token)) kind = 'var';
+      else if (/^['"]/.test(token)) kind = 'string';
+      else if (expectCommand) {kind = 'command'; expectCommand=false;}
+      else if (/^(?:\.{1,2}\/|~\/|\/)|[\\/]|\.\w+(?:\.\w+)*$/.test(token) || /^(?:path|directory|source|destination|file|files|folder|dir|archive)$/i.test(token)) kind = 'path';
+      else if (template || /^(?:N|seconds|pattern|name|keyword|section|expression|text|command|mode|user)$/i.test(token)) kind = 'arg';
+      return kind ? `<span class="syntax-${kind}">${esc(token)}</span>` : esc(token);
+    }).join('');
+  }
+  const syntaxLegend = `<div class="syntax-legend" aria-label="מקרא צבעי התחביר"><span><i class="leg-command"></i>פקודה</span><span><i class="leg-flag"></i>אפשרות / דגל</span><span><i class="leg-arg"></i>ארגומנט</span><span><i class="leg-path"></i>נתיב או קובץ</span></div>`;
   function renderDetails(c){
     if(!c){$('mainContent').innerHTML='<div class="empty"><strong>אין פקודה להצגה</strong>נסה להסיר מסנן או לשנות את החיפוש.</div>';return;}
     const options=(c.options||[]).map(o=>`<div class="option-card"><code dir="ltr">${esc(o.flag)}</code><span>${esc(o.description)}</span></div>`).join('');
-    const examples=(c.examples||[]).map(e=>`<div class="example"><div class="example-head"><span class="example-desc">${esc(e.description)}</span><button class="btn tiny" type="button" data-copy="${esc(e.command)}" aria-label="העתק דוגמה">⧉ העתק</button></div><pre><code>${esc(e.command)}</code></pre></div>`).join('');
-    $('mainContent').innerHTML=`<article class="detail"><div class="detail-header"><div><div class="eyebrow">${esc(c.category)}${state.historical?' · גרסה היסטורית':''}</div><h2 dir="ltr">${esc(c.name)}</h2><p class="detail-description">${esc(c.summary)}</p><span class="tag">${c.type==='builtin'?'פקודה מובנית ב־Shell':'כלי שורת פקודה'}</span></div><button class="btn tiny" id="shareBtn" type="button" title="העתק קישור לפקודה">↗ קישור</button></div><p>${esc(c.description)}</p><h3>תחביר</h3><div class="codebar"><code>${esc(c.syntax)}</code><button class="copy-code" type="button" data-copy="${esc(c.syntax)}">⧉ העתק</button></div><h3>אפשרויות ופרמטרים</h3><div class="option-grid">${options||'<p>לפקודה זו אין אפשרויות בסיסיות נוספות במאגר.</p>'}</div><h3>דוגמאות לשימוש</h3>${examples}${c.note?`<div class="note">💡 ${esc(c.note)}</div>`:''}</article>`;
+    const examples=(c.examples||[]).map(e=>`<div class="example"><div class="example-head"><span class="example-desc">${esc(e.description)}</span><button class="btn tiny" type="button" data-copy="${esc(e.command)}" aria-label="העתק דוגמה">העתק</button></div><pre><code>${colorCode(e.command)}</code></pre></div>`).join('');
+    $('mainContent').innerHTML=`<article class="detail"><div class="detail-header"><div><div class="eyebrow">${esc(c.category)}${state.historical?' · גרסה היסטורית':''}</div><h2 dir="ltr">${esc(c.name)}</h2><p class="detail-description">${esc(c.summary)}</p><span class="tag">${c.type==='builtin'?'פקודה מובנית ב־Bash':'כלי שורת פקודה'}</span></div><button class="btn tiny" id="shareBtn" type="button" title="העתק קישור לפקודה">קישור</button></div><p>${esc(c.description)}</p><h3>תחביר</h3><div class="codebar"><code>${colorCode(c.syntax,true)}</code><button class="copy-code" type="button" data-copy="${esc(c.syntax)}">העתק</button></div>${syntaxLegend}<h3>אפשרויות ופרמטרים</h3><div class="option-grid">${options||'<p>לפקודה זו אין אפשרויות בסיסיות נוספות במאגר.</p>'}</div><h3>דוגמאות לשימוש</h3>${examples}${c.note?`<div class="note"><strong>כדאי לדעת:</strong> ${esc(c.note)}</div>`:''}</article>`;
     $('mainContent').querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(b.dataset.copy)));
     $('shareBtn').addEventListener('click',()=>{const url=new URL(location.href);url.hash='cmd='+encodeURIComponent(c.id);copy(url.href);});
   }
@@ -64,7 +85,7 @@
   }
   function showModal(title,html){$('modalTitle').textContent=title;$('modalContent').innerHTML=html;$('modalBackdrop').classList.remove('hidden');$('modalClose').focus();}
   function closeModal(){$('modalBackdrop').classList.add('hidden');}
-  function showHelp(){showModal('איך קוראים תחביר של Bash?',`<div class="legend"><p><code>ls [options] [directory]</code> היא דוגמה לתחביר כללי. הסוגריים המרובעים משמשים בהסבר בלבד — בדרך כלל לא מקלידים אותם.</p><p><code>[...]</code> = פרמטר אופציונלי. <code>...</code> = ייתכן שאפשר לחזור על פרמטר. <code>-a</code> או <code>--all</code> = אפשרות (flag). <code>~/Documents</code> = נתיב לדוגמה.</p><p>הרבה פקודות בדף הן כלי Unix הנפוצים ב־Bash, ולא פקודות המובנות ב־Bash עצמו. פרטי האפשרויות עשויים להשתנות בין Linux, macOS וסביבות נוספות.</p><p>אפשר לחפש בעברית או באנגלית, לפי פעולה, שם פקודה או דגל. המקש <code>/</code> מעביר לחיפוש, ו־<code>Enter</code> פותח את התוצאה הראשונה.</p><p>הפקודות הן דוגמאות ללמידה. כדאי לבדוק כל פקודה לפני שמריצים אותה על קבצים חשובים.</p></div>`);}
+  function showHelp(){showModal('איך קוראים את התחביר?',`<div class="legend"><p>התחביר מסמן את מבנה הפקודה, ולא תמיד משהו שצריך להקליד בדיוק כפי שמוצג. לדוגמה: <code>ls [options] [path]</code>.</p><p><strong>הצבעים:</strong> פקודה מופיעה בצבע בהיר, אפשרויות כגון <code>-a</code> בצבע ירקרק, ארגומנטים כגון <code>N</code> בצבע זהוב, ונתיבים בצבע ירוק בהיר. בדוגמאות מחרוזות במירכאות מקבלות צבע נפרד.</p><p><code>[...]</code> פירושו רכיב אופציונלי, והסוגריים אינם חלק מהפקודה. <code>...</code> פירושו שניתן לרוב לספק יותר מערך אחד. קו אנכי <code>|</code> בתבנית יכול לסמן בחירה; בין שתי פקודות אמיתיות הוא מעביר פלט ביניהן.</p><p>רבות מהפקודות כאן הן כלים של Unix ולא פקודות מובנות ב־Bash. דגלים מסוימים שונים בין Linux, macOS וסביבות אחרות. להרחבה אפשר להיעזר ב־<code>man</code> או <code>--help</code>, אם זמינים.</p><p>החיפוש עובד בעברית ובאנגלית. <code>/</code> מעביר לשדה החיפוש, החצים בוחרים תוצאה ו־Enter פותח אותה. העתקת פקודה מעתיקה את הטקסט המקורי — בלי צבעים או סימוני HTML.</p></div>`);}
   function renderVersionModal(){
     const list=state.versions?.releases||[];
     let html='<p>כל גרסה משמרת צילום מצב של מאגר הפקודות. צפייה בגרסה ישנה לא משנה את האתר עבור משתמשים אחרים.</p>';
@@ -86,7 +107,17 @@
     }catch{const current=readStorage(CACHE_KEYS.commands);if(current?.version===version){setData(current,false);closeModal();toast('נטענה הגרסה השמורה');}else toast('גרסה זו אינה זמינה כרגע. אפשר לנסות שוב עם אינטרנט.');}
   }
   $('searchInput').addEventListener('input',e=>{state.query=e.target.value;render();});
-  $('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter'){const first=filtered()[0];if(first)select(first.id);e.preventDefault();}});
+  $('searchInput').addEventListener('keydown',e=>{
+    const arr=filtered();
+    if((e.key==='ArrowDown'||e.key==='ArrowUp')&&arr.length){
+      const idx=arr.findIndex(c=>c.id===state.selected);
+      const next=e.key==='ArrowDown'?(idx+1)%arr.length:(idx-1+arr.length)%arr.length;
+      state.selected=arr[next].id;render();
+      $('commandList').querySelector('.cmd-item.active')?.scrollIntoView({block:'nearest'});
+      e.preventDefault();
+    }
+    if(e.key==='Enter'){const first=arr.find(c=>c.id===state.selected)||arr[0];if(first)select(first.id);e.preventDefault();}
+  });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();$('searchInput').blur();}if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)&&$('modalBackdrop').classList.contains('hidden')){e.preventDefault();$('searchInput').focus();$('searchInput').select();}});
   $('themeBtn').addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem(CACHE_KEYS.theme,next);}catch{}});
   $('historyBtn').addEventListener('click',renderVersionModal);
