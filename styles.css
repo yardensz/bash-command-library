@@ -205,3 +205,84 @@ button:focus-visible,input:focus-visible {outline:2px solid var(--accent); outli
   .stat-label {font-size:11px}
   .search-wrap input {height:52px;font-size:15px}
 }
+
+/* v1.2.0 — dense desktop reference, responsive on narrower screens */
+.app {max-width:1680px; width:100%; padding:0 clamp(14px,2vw,36px) 20px}
+.topbar {padding:7px 0; min-height:44px; gap:12px}
+.brand-mark {font-size:17px;letter-spacing:-.04em}
+.topbar-utilities {gap:15px}
+.header-actions {gap:5px}
+.header-actions .btn {font-size:12px;padding:5px 9px}
+.header-actions .theme-button {width:31px;height:31px;padding:0;font-size:16px}
+.stat {gap:6px}
+.stat-number {font-size:19px}
+.stat-label {font-size:10px}
+.search-zone {max-width:860px; margin:12px auto 12px; padding:0}
+.search-zone label {font-size:12px;margin-bottom:5px}
+.search-wrap input {height:48px;padding:10px 45px 10px 48px;font-size:15px}
+.search-icon {right:13px;font-size:23px}
+.shortcut {left:12px}
+.search-hint {margin:5px 0 0;font-size:11px}
+.meta-strip {margin-bottom:10px;padding:5px 0}
+.status {gap:10px}
+.meta-strip .btn.tiny {font-size:11px;padding:4px 8px}
+.workspace {grid-template-columns:minmax(240px,284px) minmax(0,1fr);gap:14px}
+.sidebar {padding:11px 11px 9px}
+.sidebar-title {margin:0 0 8px;padding-bottom:8px;font-size:14px}
+.categories {gap:4px;margin-bottom:9px}
+.chip {padding:4px 7px;font-size:11px}
+.list-meta {font-size:10px;margin-bottom:3px;padding-bottom:5px}
+.cmd-item {min-height:0;padding:8px 5px;gap:8px}
+.cmd-symbol {min-width:64px;font-size:14px}
+.cmd-description {font-size:11px;margin:0}
+.detail {padding:16px 20px 22px}
+.detail-header {padding-bottom:10px;gap:10px}
+.detail h2 {font-size:30px;line-height:1.14;letter-spacing:-1.5px}
+.eyebrow {font-size:11px;margin-bottom:5px}
+.detail-description {margin:5px 0 0;font-size:13px;line-height:1.45}
+.tag {font-size:10px;margin-top:4px;padding:3px 0}
+.detail h3 {font-size:14px;margin:15px 0 7px}
+.codebar {padding:9px 12px;gap:10px}
+.codebar code,.example pre code {font-size:13px;line-height:1.5}
+.copy-code {font-size:11px;padding:4px 7px}
+.syntax-legend {font-size:10px;margin:6px 0 0;gap:9px}
+.syntax-legend i {width:8px;height:8px}
+.option-grid {grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;row-gap:0}
+.option-card {grid-template-columns:minmax(75px,24%) minmax(0,1fr);gap:9px;align-items:baseline;padding:8px 2px}
+.option-card code {font-size:12px}
+.option-card span {font-size:12px;line-height:1.5}
+.command-explanation {margin-top:14px;padding-top:1px}
+.command-explanation h3 {margin:9px 0 5px}
+.command-explanation p {margin:0;font-size:12.5px;line-height:1.65}
+.example {padding:9px 0 10px}
+.example-head {margin-bottom:6px}
+.example-desc {font-size:12px}
+.example pre {padding:8px 11px}
+.note {margin-top:13px;padding:9px 12px;font-size:12px}
+.footer {margin-top:16px;padding:14px 0}
+@media(max-width:1150px) {
+ .option-grid {grid-template-columns:1fr}
+ .option-card {grid-template-columns:minmax(85px,23%) 1fr}
+}
+@media(max-width:850px) {
+ .app {padding:0 16px 24px}
+ .workspace {grid-template-columns:minmax(210px,252px) minmax(0,1fr);gap:11px}
+ .detail {padding:14px 16px}
+}
+@media(max-width:700px) {
+ .workspace {grid-template-columns:1fr;gap:13px}
+ .sidebar {position:static;max-height:none}
+ .commands-list {max-height:245px}
+ .search-zone {margin:12px auto}
+ .option-grid {grid-template-columns:1fr}
+}
+@media(max-width:480px) {
+ .topbar {flex-wrap:wrap;gap:7px;padding:9px 0}
+ .topbar-utilities {width:100%;justify-content:space-between;gap:8px}
+ .header-actions {width:auto}
+ .header-actions .btn {padding:5px 7px;font-size:11px}
+ .stat-number {font-size:18px}
+ .search-wrap input {height:48px;font-size:14px}
+ .detail h2 {font-size:27px}
+ .option-card {grid-template-columns:82px minmax(0,1fr)}
+}

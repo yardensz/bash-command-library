@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.1.1",
+  "version": "1.2.0",
   "updatedAt": "2026-11-11",
   "commands": [
     {
@@ -1607,6 +1607,331 @@
         "נתיב"
       ],
       "note": "dirname מעבד טקסט של נתיב; הוא לא חייב להצביע על תיקייה שקיימת בפועל.",
+      "type": "utility"
+    },
+    {
+      "id": "ln",
+      "name": "ln",
+      "category": "קבצים ותיקיות",
+      "summary": "יצירת קישור לקובץ או לתיקייה",
+      "description": "יוצר קישור קשיח (hard link) או קישור סמלי (symbolic link), המפנה ליעד אחר במערכת הקבצים.",
+      "syntax": "ln [options] target link_name",
+      "options": [
+        {
+          "flag": "-s",
+          "description": "יצירת קישור סמלי במקום קישור קשיח."
+        },
+        {
+          "flag": "-f",
+          "description": "החלפת קובץ יעד קיים, אם ניתן; להשתמש בזהירות."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ln -s notes.txt shortcut.txt",
+          "description": "יצירת קישור סמלי לקובץ notes.txt."
+        },
+        {
+          "command": "ln notes.txt copy-link.txt",
+          "description": "יצירת קישור קשיח לקובץ באותה מערכת קבצים."
+        }
+      ],
+      "keywords": [
+        "symbolic link",
+        "symlink",
+        "hard link",
+        "קיצור דרך",
+        "קישורים"
+      ],
+      "note": "בקישור סמלי עם נתיב יחסי, הנתיב מחושב ביחס לתיקייה שבה נמצא הקישור.",
+      "type": "utility"
+    },
+    {
+      "id": "stat",
+      "name": "stat",
+      "category": "קבצים ותיקיות",
+      "summary": "פרטים על קובץ",
+      "description": "מציג מידע על קובץ או תיקייה, למשל גודל, הרשאות וזמני שינוי.",
+      "syntax": "stat [options] file...",
+      "options": [
+        {
+          "flag": "-L",
+          "description": "במערכות שתומכות בכך: הצגת נתוני היעד של קישור סמלי."
+        },
+        {
+          "flag": "-c FORMAT",
+          "description": "ב־GNU/Linux: בחירת פורמט פלט, למשל ‎%s‎ לגודל בבייטים."
+        }
+      ],
+      "examples": [
+        {
+          "command": "stat notes.txt",
+          "description": "הצגת פרטי הקובץ."
+        },
+        {
+          "command": "stat -c '%s' notes.txt",
+          "description": "ב־GNU/Linux: הצגת גודל הקובץ בבייטים בלבד."
+        }
+      ],
+      "keywords": [
+        "file information",
+        "metadata",
+        "קובץ",
+        "מידע",
+        "גודל",
+        "הרשאות"
+      ],
+      "note": "אפשרויות העיצוב של stat שונות בין GNU/Linux ל־macOS. הצגת פרטים בסיסיים בעזרת stat FILE נפוצה בשניהם.",
+      "type": "utility"
+    },
+    {
+      "id": "read",
+      "name": "read",
+      "category": "מערכת",
+      "summary": "קריאת קלט למשתנה Bash",
+      "description": "קורא שורה מהקלט לתוך משתנה אחד או יותר. שימושי בסקריפטים ובקבלת קלט מהמשתמש.",
+      "syntax": "read [options] name...",
+      "options": [
+        {
+          "flag": "-r",
+          "description": "לא לפרש לוכסנים הפוכים כתווי בריחה; מומלץ בדרך כלל."
+        },
+        {
+          "flag": "-p PROMPT",
+          "description": "להציג הודעה לפני קריאת הקלט (Bash)."
+        },
+        {
+          "flag": "-a ARRAY",
+          "description": "לקרוא מילים למערך Bash."
+        }
+      ],
+      "examples": [
+        {
+          "command": "read -r name",
+          "description": "קריאת שורה למשתנה name."
+        },
+        {
+          "command": "read -r -p 'Name: ' name",
+          "description": "הצגת שאלה וקריאת תשובת המשתמש."
+        }
+      ],
+      "keywords": [
+        "input",
+        "prompt",
+        "variable",
+        "קלט",
+        "משתנה",
+        "סקריפט"
+      ],
+      "note": "read היא פקודה מובנית ב־Bash. כדי להשתמש בערך שנקלט אפשר לכתוב, למשל, ‎printf '%s\\n' \"$name\"‎.",
+      "type": "builtin"
+    },
+    {
+      "id": "export",
+      "name": "export",
+      "category": "מערכת",
+      "summary": "העברת משתנה לתהליכים חדשים",
+      "description": "מסמן משתנה כך שתהליכים שיופעלו מה־Shell יוכלו לקבל אותו בתור משתנה סביבה.",
+      "syntax": "export [options] [name[=value] ...]",
+      "options": [
+        {
+          "flag": "-p",
+          "description": "הצגת המשתנים שמסומנים לייצוא."
+        },
+        {
+          "flag": "-n",
+          "description": "הסרת סימון הייצוא ממשתנה (מבלי למחוק את ערכו)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "export PROJECT=demo",
+          "description": "יצירת משתנה סביבה בשם PROJECT."
+        },
+        {
+          "command": "export -p",
+          "description": "הצגת המשתנים שיוצאו."
+        }
+      ],
+      "keywords": [
+        "environment variable",
+        "variable",
+        "סביבה",
+        "משתנים",
+        "shell"
+      ],
+      "note": "המשתנה נשמר בסביבת ה־Shell הנוכחי ובתהליכי הבת שלו; הוא אינו נשמר אוטומטית לאחר סגירת הטרמינל.",
+      "type": "builtin"
+    },
+    {
+      "id": "env",
+      "name": "env",
+      "category": "מערכת",
+      "summary": "צפייה או שינוי זמני במשתני סביבה",
+      "description": "מציג את משתני הסביבה או מפעיל פקודה עם סביבת משתנים שונה באופן זמני.",
+      "syntax": "env [options] [name=value ...] [command]",
+      "options": [
+        {
+          "flag": "-i",
+          "description": "להפעיל עם סביבת משתנים ריקה."
+        },
+        {
+          "flag": "-u NAME",
+          "description": "להסיר משתנה מסביבת הפקודה שיופעל."
+        }
+      ],
+      "examples": [
+        {
+          "command": "env",
+          "description": "הצגת כל משתני הסביבה."
+        },
+        {
+          "command": "env LANG=C date",
+          "description": "הרצת date עם משתנה LANG זמני."
+        }
+      ],
+      "keywords": [
+        "environment",
+        "variables",
+        "סביבה",
+        "משתנים",
+        "פקודה זמנית"
+      ],
+      "note": "בניגוד ל־export, הצבה באמצעות env לפני פקודה משנה את סביבת אותה הרצה בלבד.",
+      "type": "utility"
+    },
+    {
+      "id": "sleep",
+      "name": "sleep",
+      "category": "מערכת",
+      "summary": "השהיית המשך הביצוע",
+      "description": "ממתין למשך זמן מסוים לפני שהשלב הבא בסקריפט או בטרמינל יבוצע.",
+      "syntax": "sleep number",
+      "options": [],
+      "examples": [
+        {
+          "command": "sleep 2",
+          "description": "השהיה של שתי שניות."
+        },
+        {
+          "command": "sleep 0.5",
+          "description": "השהיה של חצי שנייה במערכות התומכות בכך."
+        }
+      ],
+      "keywords": [
+        "delay",
+        "wait",
+        "pause",
+        "המתנה",
+        "השהיה",
+        "שניות"
+      ],
+      "note": "ברירת המחדל היא שניות. חלק מהגרסאות תומכות גם בסיומות זמן כגון m לדקות.",
+      "type": "utility"
+    },
+    {
+      "id": "whoami",
+      "name": "whoami",
+      "category": "מערכת",
+      "summary": "מי המשתמש הנוכחי?",
+      "description": "מדפיס את שם המשתמש של הזהות שמריצה את התהליך כרגע.",
+      "syntax": "whoami",
+      "options": [],
+      "examples": [
+        {
+          "command": "whoami",
+          "description": "הצגת שם המשתמש הנוכחי."
+        }
+      ],
+      "keywords": [
+        "user",
+        "username",
+        "account",
+        "משתמש",
+        "שם משתמש"
+      ],
+      "note": "בדרך כלל מציג את המשתמש האפקטיבי. למידע על מזהי משתמש וקבוצות אפשר להשתמש ב־id.",
+      "type": "utility"
+    },
+    {
+      "id": "uname",
+      "name": "uname",
+      "category": "מערכת",
+      "summary": "מידע על מערכת ההפעלה",
+      "description": "מדפיס מידע על ליבת מערכת ההפעלה והארכיטקטורה של המחשב.",
+      "syntax": "uname [options]",
+      "options": [
+        {
+          "flag": "-a",
+          "description": "הצגת כל המידע הזמין."
+        },
+        {
+          "flag": "-s",
+          "description": "הצגת שם הליבה/המערכת."
+        },
+        {
+          "flag": "-m",
+          "description": "הצגת ארכיטקטורת החומרה."
+        }
+      ],
+      "examples": [
+        {
+          "command": "uname -a",
+          "description": "סקירה רחבה של פרטי המערכת."
+        },
+        {
+          "command": "uname -m",
+          "description": "הצגת ארכיטקטורת המעבד כפי שמדווחת המערכת."
+        }
+      ],
+      "keywords": [
+        "system",
+        "OS",
+        "kernel",
+        "architecture",
+        "מערכת הפעלה",
+        "חומרה"
+      ],
+      "note": "uname מציג פרטי מערכת, ולא תמיד את שם הפצת Linux או גרסת מערכת ההפעלה הידידותית למשתמש.",
+      "type": "utility"
+    },
+    {
+      "id": "paste",
+      "name": "paste",
+      "category": "טקסט וחיפוש",
+      "summary": "חיבור שורות מקבצים",
+      "description": "מחבר שורות תואמות מכמה קבצים לטבלה פשוטה, עם מפריד בין העמודות.",
+      "syntax": "paste [options] file...",
+      "options": [
+        {
+          "flag": "-d ','",
+          "description": "שינוי מפריד העמודות לפסיק."
+        },
+        {
+          "flag": "-s",
+          "description": "חיבור השורות של כל קובץ ברצף בשורה אחת."
+        }
+      ],
+      "examples": [
+        {
+          "command": "paste names.txt scores.txt",
+          "description": "חיבור שורות תואמות משני קבצים."
+        },
+        {
+          "command": "paste -d ',' names.txt scores.txt",
+          "description": "יצירת שורות מופרדות בפסיקים."
+        }
+      ],
+      "keywords": [
+        "combine",
+        "columns",
+        "merge",
+        "tab",
+        "מיזוג",
+        "עמודות",
+        "קבצים"
+      ],
+      "note": "כברירת מחדל המפריד הוא טאב. מספר השורות בקבצים לא חייב להיות זהה.",
       "type": "utility"
     }
   ]

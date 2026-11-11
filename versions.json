@@ -1,7 +1,15 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "1.1.1",
+  "latestVersion": "1.2.0",
   "releases": [
+    {
+      "version": "1.2.0",
+      "date": "2026-11-11",
+      "title": "תצוגה רחבה וקומפקטית יותר",
+      "summary": "הרחבת הממשק למחשב, צמצום כותרת וריווחים, תחביר ואפשרויות בראש התוכן, תשע פקודות חדשות",
+      "commandCount": 48,
+      "snapshot": "history/1.2.0.json"
+    },
     {
       "version": "1.1.1",
       "date": "2026-11-11",
