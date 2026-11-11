@@ -1,7 +1,15 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "1.1.0",
+  "latestVersion": "1.1.1",
   "releases": [
+    {
+      "version": "1.1.1",
+      "date": "2026-11-11",
+      "title": "כותרת קומפקטית והפרדה בין אזורי התוכן",
+      "summary": "הקטנת אזור הכותרת, כותרת אנגלית בלבד, צבע רקע נפרד לאינדקס ושיפור ריווח וכיווניות",
+      "commandCount": 39,
+      "snapshot": "history/1.1.1.json"
+    },
     {
       "version": "1.1.0",
       "date": "2026-11-11",

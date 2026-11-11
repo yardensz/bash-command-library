@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f6f2">
   <meta name="description" content="ספריית פקודות Bash בעברית: חיפוש מהיר, תחביר צבעוני, אפשרויות ודוגמאות. זמינה גם אופליין.">
-  <title>Bash Library — מדריך פקודות</title>
+  <title>Bash Library — Command Reference</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="styles.css">
@@ -14,37 +14,30 @@
 <body>
 <div class="app">
   <header class="topbar">
-    <div class="brand">
-      <span class="brand-mark" aria-hidden="true">bash<span class="brand-caret">_</span></span>
-      <span class="brand-sub">ספריית פקודות אישית</span>
+    <a class="brand" href="./" aria-label="Bash Library" dir="ltr">
+      <span class="brand-mark">Bash Library</span>
+    </a>
+    <div class="topbar-utilities">
+      <div class="stat" aria-label="מספר הפקודות במאגר">
+        <span class="stat-number" id="commandCount">—</span>
+        <span class="stat-label">פקודות במאגר</span>
+      </div>
+      <nav class="header-actions" aria-label="פעולות באתר">
+        <button class="btn" id="helpBtn" type="button">מדריך תחביר</button>
+        <button class="btn" id="historyBtn" type="button">גרסאות</button>
+        <button class="btn theme-button" id="themeBtn" type="button" aria-label="החלפת מצב תצוגה" title="מצב בהיר או כהה">◐</button>
+      </nav>
     </div>
-    <nav class="header-actions" aria-label="פעולות באתר">
-      <button class="btn" id="helpBtn" type="button">מדריך תחביר</button>
-      <button class="btn" id="historyBtn" type="button">גרסאות</button>
-      <button class="btn theme-button" id="themeBtn" type="button" aria-label="החלפת מצב תצוגה" title="מצב בהיר או כהה">◐</button>
-    </nav>
   </header>
 
-  <section class="intro" aria-label="על הספרייה">
-    <div class="intro-copy">
-      <div class="kicker" dir="ltr">TERMINAL NOTES <span> / </span> 01</div>
-      <h1>פחות לזכור.<br>יותר לעשות.</h1>
-      <p>תחביר, אפשרויות ודוגמאות אמיתיות — כל הפקודות שלמדת, במקום אחד.</p>
-    </div>
-    <div class="stat" aria-label="מספר הפקודות במאגר">
-      <span class="stat-number" id="commandCount">—</span>
-      <span class="stat-label">פקודות במאגר</span>
-    </div>
-  </section>
-
   <section class="search-zone" aria-label="חיפוש בספרייה">
-    <label for="searchInput">מה מחפשים?</label>
+    <label for="searchInput">חיפוש פקודה</label>
     <div class="search-wrap">
       <span class="search-icon" aria-hidden="true">⌕</span>
-      <input id="searchInput" type="search" placeholder="למשל: sort, מיון, -r, חיפוש קבצים…" autocomplete="off" spellcheck="false" aria-label="חיפוש פקודות">
+      <input id="searchInput" type="search" placeholder="חיפוש לפי פקודה, פעולה או אפשרות…" autocomplete="off" spellcheck="false" aria-label="חיפוש פקודות">
       <span class="shortcut" aria-hidden="true">/</span>
     </div>
-    <p class="search-hint">חיפוש גם לפי פעולה, שם פקודה, אפשרות או דוגמה. <span>מקש / למעבר מהיר לחיפוש.</span></p>
+    <p class="search-hint">אפשר לחפש גם בעברית. הקש <kbd dir="ltr">/</kbd> כדי לעבור לכאן מכל מקום בעמוד.</p>
   </section>
 
   <div class="meta-strip">
@@ -54,7 +47,7 @@
 
   <div class="workspace">
     <aside class="sidebar" aria-label="רשימת פקודות">
-      <div class="sidebar-title"><span>ספריית פקודות</span><span class="side-annotation">INDEX</span></div>
+      <div class="sidebar-title"><span>אינדקס פקודות</span></div>
       <div id="categories" class="categories" aria-label="סינון לפי קטגוריה"></div>
       <div class="list-meta"><span id="resultsCount">— תוצאות</span><span>בחר פקודה ↓</span></div>
       <nav id="commandList" class="commands-list" aria-label="רשימת פקודות"></nav>
@@ -62,7 +55,7 @@
     <main class="main" id="mainContent" tabindex="-1" aria-live="polite"><div class="empty">טוען פקודות…</div></main>
   </div>
 
-  <footer class="footer"><span id="syncInfo">המאגר נשמר גם לעבודה אופליין לאחר טעינה ראשונה.</span><span class="footer-right">Bash Library · <a href="https://github.com/yardensz/bash-command-library" target="_blank" rel="noopener noreferrer">קוד המקור ב־GitHub</a></span></footer>
+  <footer class="footer"><span id="syncInfo">המאגר נשמר גם לעבודה אופליין לאחר טעינה ראשונה.</span><span class="footer-right"><bdi dir="ltr">Bash Library</bdi> · <a href="https://github.com/yardensz/bash-command-library" target="_blank" rel="noopener noreferrer">קוד המקור ב־GitHub</a></span></footer>
 </div>
 <div class="modal-backdrop hidden" id="modalBackdrop" role="presentation">
   <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><h2 id="modalTitle"></h2><button class="btn tiny" id="modalClose" type="button" aria-label="סגירה">✕</button></div><div id="modalContent"></div></section>

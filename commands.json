@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "updatedAt": "2026-11-11",
   "commands": [
     {
@@ -997,7 +997,8 @@
         },
         {
           "flag": "-e script",
-          "description": "הוספת הוראת עריכה נוספת."        }
+          "description": "הוספת הוראת עריכה נוספת."
+        }
       ],
       "examples": [
         {
