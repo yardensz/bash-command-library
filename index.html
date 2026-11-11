@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10243f">
+  <meta name="description" content="מאגר פקודות Bash אישי: חיפוש מהיר, תחביר, אפשרויות ודוגמאות. פועל גם ללא אינטרנט.">
+  <title>Bash Library — מאגר פקודות Bash</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div class="logo" aria-hidden="true">$_</div><div><h1>Bash Library</h1><p>מאגר הפקודות שלך — חיפוש, לימוד והעתקה</p></div></div>
+  <div class="header-actions">
+    <button class="btn" id="helpBtn" type="button" title="איך לקרוא תחביר">ⓘ &nbsp;עזרה</button>
+    <button class="btn" id="historyBtn" type="button">◷ &nbsp;גרסאות</button>
+    <button class="btn" id="themeBtn" type="button" aria-label="שינוי ערכת נושא">◐</button>
+  </div>
+</header>
+<section class="intro">
+ <div><h2>פקודת Bash שחיפשת? מצאת.</h2><p>תחביר, דגלים ודוגמאות — הכול במקום אחד, בעברית ובלי הסחות דעת.</p>
+ <div class="status"><span class="status-pill" id="statusPill">◌ &nbsp;טוען מאגר…</span><small id="versionLabel">גרסה —</small><button id="refreshBtn" class="btn tiny" type="button" title="בדיקת גרסה חדשה">↻ בדוק עדכונים</button></div></div>
+ <div><div class="stat-number" id="commandCount">—</div><div class="stat-label">פקודות במאגר</div></div>
+</section>
+<div class="workspace">
+  <aside class="sidebar panel" aria-label="חיפוש פקודות">
+    <label for="searchInput">חיפוש מהיר</label>
+    <div class="search-wrap"><span class="search-icon" aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="פקודה, דגל או פעולה…" autocomplete="off" spellcheck="false" aria-label="חיפוש פקודות"><span class="shortcut" aria-hidden="true">/</span></div>
+    <div id="categories" class="categories" aria-label="סינון לפי קטגוריה"></div>
+    <div class="list-meta"><span id="resultsCount">— תוצאות</span><span>↵ לבחירה</span></div>
+    <nav id="commandList" class="commands-list" aria-label="רשימת פקודות"></nav>
+  </aside>
+  <main class="main panel" id="mainContent" tabindex="-1" aria-live="polite"><div class="empty">טוען פקודות…</div></main>
+</div>
+<footer class="footer"><span id="syncInfo">המאגר נשמר גם לשימוש אופליין לאחר הביקור הראשון באתר.</span> · <a href="https://github.com" target="_blank" rel="noopener">GitHub</a></footer>
+</div>
+<div class="modal-backdrop hidden" id="modalBackdrop" role="presentation">
+ <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><h2 id="modalTitle"></h2><button class="btn tiny" id="modalClose" type="button" aria-label="סגירה">✕</button></div><div id="modalContent"></div></section>
+</div>
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+</body>
+</html>

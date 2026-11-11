@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "latestVersion": "1.0.0",
+  "releases": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-11",
+      "title": "השקת מאגר הפקודות",
+      "summary": "ממשק חיפוש, פקודות ראשונות, דוגמאות, תמיכה באופליין והיסטוריית גרסאות",
+      "commandCount": 19,
+      "snapshot": "history/1.0.0.json"
+    }
+  ]
+}

@@ -1,0 +1,818 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "updatedAt": "2026-11-11",
+  "commands": [
+    {
+      "id": "ls",
+      "name": "ls",
+      "category": "קבצים ותיקיות",
+      "summary": "הצגת קבצים ותיקיות",
+      "description": "מציג את תוכן התיקייה הנוכחית, או את התיקייה שציינת.",
+      "syntax": "ls [options] [path]",
+      "options": [
+        {
+          "flag": "-l",
+          "description": "רשימה מפורטת עם הרשאות, בעלים, גודל ותאריך."
+        },
+        {
+          "flag": "-a",
+          "description": "כולל פריטים מוסתרים ששמם מתחיל בנקודה."
+        },
+        {
+          "flag": "-h",
+          "description": "גדלים קריאים לאדם; שימושי בשילוב ‎-l."
+        },
+        {
+          "flag": "-R",
+          "description": "מציג גם תיקיות משנה באופן רקורסיבי."
+        },
+        {
+          "flag": "-t",
+          "description": "ממיין לפי זמן השינוי האחרון."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ls",
+          "description": "הצגת התיקייה הנוכחית."
+        },
+        {
+          "command": "ls -lah",
+          "description": "הצגה מפורטת, עם קבצים מוסתרים וגדלים קריאים."
+        },
+        {
+          "command": "ls ~/Documents",
+          "description": "הצגת תיקייה אחרת."
+        }
+      ],
+      "keywords": [
+        "רשימת קבצים",
+        "הצגה",
+        "list files"
+      ],
+      "note": "ב־Linux אפשר לשלב אפשרויות קצרות: ls -l -a שקול ל־ls -la. אפשרויות עשויות להשתנות במערכות שונות.",
+      "type": "utility"
+    },
+    {
+      "id": "cd",
+      "name": "cd",
+      "category": "קבצים ותיקיות",
+      "summary": "מעבר בין תיקיות",
+      "description": "משנה את התיקייה הנוכחית של ה־Shell. זו פקודה מובנית ב־Bash.",
+      "syntax": "cd [directory]",
+      "options": [
+        {
+          "flag": "..",
+          "description": "נתיב לתיקיית האב (לא דגל)."
+        },
+        {
+          "flag": "~",
+          "description": "קיצור לתיקיית הבית של המשתמש."
+        },
+        {
+          "flag": "-",
+          "description": "מעבר לתיקייה הקודמת; כאן המקף הוא ארגומנט."
+        }
+      ],
+      "examples": [
+        {
+          "command": "cd ~/Documents",
+          "description": "מעבר לתיקיית Documents בבית."
+        },
+        {
+          "command": "cd ..",
+          "description": "עלייה רמה אחת."
+        },
+        {
+          "command": "cd -",
+          "description": "חזרה לתיקייה הקודמת."
+        },
+        {
+          "command": "cd",
+          "description": "מעבר לתיקיית הבית."
+        }
+      ],
+      "keywords": [
+        "מעבר תיקייה",
+        "change directory",
+        "navigation"
+      ],
+      "note": "cd משנה את מיקום העבודה של הטרמינל בלבד; היא לא מעבירה קבצים.",
+      "type": "builtin"
+    },
+    {
+      "id": "pwd",
+      "name": "pwd",
+      "category": "קבצים ותיקיות",
+      "summary": "הצגת הנתיב לתיקייה הנוכחית",
+      "description": "מדפיס את הנתיב המלא לתיקייה שבה הטרמינל נמצא עכשיו.",
+      "syntax": "pwd [-L|-P]",
+      "options": [
+        {
+          "flag": "-L",
+          "description": "מציג את הנתיב הלוגי עם קישורים סמליים (בדרך כלל ברירת המחדל ב־Bash)."
+        },
+        {
+          "flag": "-P",
+          "description": "מציג את הנתיב הפיזי לאחר פתרון קישורים סמליים."
+        }
+      ],
+      "examples": [
+        {
+          "command": "pwd",
+          "description": "הצגת התיקייה הנוכחית."
+        },
+        {
+          "command": "pwd -P",
+          "description": "הצגת הנתיב הפיזי."
+        }
+      ],
+      "keywords": [
+        "איפה אני",
+        "path",
+        "current directory"
+      ],
+      "note": null,
+      "type": "builtin"
+    },
+    {
+      "id": "mkdir",
+      "name": "mkdir",
+      "category": "קבצים ותיקיות",
+      "summary": "יצירת תיקיות",
+      "description": "יוצר תיקייה חדשה בשם ובנתיב שסיפקת.",
+      "syntax": "mkdir [options] directory...",
+      "options": [
+        {
+          "flag": "-p",
+          "description": "יוצר גם תיקיות אב חסרות; לא נכשל אם התיקייה כבר קיימת."
+        },
+        {
+          "flag": "-v",
+          "description": "מציג הודעה על כל תיקייה שנוצרה."
+        }
+      ],
+      "examples": [
+        {
+          "command": "mkdir notes",
+          "description": "יצירת תיקייה בשם notes."
+        },
+        {
+          "command": "mkdir -p projects/demo",
+          "description": "יצירת מבנה תיקיות גם אם projects אינה קיימת."
+        }
+      ],
+      "keywords": [
+        "צור תיקייה",
+        "make directory",
+        "folder"
+      ],
+      "note": null,
+      "type": "utility"
+    },
+    {
+      "id": "touch",
+      "name": "touch",
+      "category": "קבצים ותיקיות",
+      "summary": "יצירת קובץ ריק או עדכון זמן שינוי",
+      "description": "מעדכן חותמות זמן של קבצים. אם קובץ לא קיים, יוצר קובץ ריק כברירת מחדל.",
+      "syntax": "touch [options] file...",
+      "options": [
+        {
+          "flag": "-c",
+          "description": "לא יוצר קובץ אם אינו קיים."
+        },
+        {
+          "flag": "-a",
+          "description": "מעדכן את זמן הגישה."
+        },
+        {
+          "flag": "-m",
+          "description": "מעדכן את זמן השינוי."
+        }
+      ],
+      "examples": [
+        {
+          "command": "touch notes.txt",
+          "description": "יצירת קובץ ריק אם אינו קיים."
+        },
+        {
+          "command": "touch -c existing.txt",
+          "description": "עדכון רק אם הקובץ קיים."
+        }
+      ],
+      "keywords": [
+        "new file",
+        "קובץ חדש",
+        "timestamps"
+      ],
+      "note": null,
+      "type": "utility"
+    },
+    {
+      "id": "cp",
+      "name": "cp",
+      "category": "קבצים ותיקיות",
+      "summary": "העתקת קבצים ותיקיות",
+      "description": "מעתיק קבצים, ועם אפשרות מתאימה גם תיקיות.",
+      "syntax": "cp [options] source destination",
+      "options": [
+        {
+          "flag": "-r",
+          "description": "העתקה רקורסיבית של תיקייה ותכולתה."
+        },
+        {
+          "flag": "-i",
+          "description": "מבקש אישור לפני דריסה של קובץ יעד קיים."
+        },
+        {
+          "flag": "-n",
+          "description": "לא דורס קובץ יעד קיים (תמיכה והתנהגות תלויות מימוש)."
+        },
+        {
+          "flag": "-v",
+          "description": "מציג מה מועתק."
+        }
+      ],
+      "examples": [
+        {
+          "command": "cp notes.txt backup.txt",
+          "description": "העתקת קובץ."
+        },
+        {
+          "command": "cp -ri folder folder-backup",
+          "description": "העתקת תיקייה עם בקשת אישור לפני דריסה."
+        }
+      ],
+      "keywords": [
+        "copy",
+        "העתק",
+        "duplicate"
+      ],
+      "note": "שינויי התנהגות בין GNU ל־BSD עשויים להשפיע על דגלים מסוימים.",
+      "type": "utility"
+    },
+    {
+      "id": "mv",
+      "name": "mv",
+      "category": "קבצים ותיקיות",
+      "summary": "העברה או שינוי שם של קובץ",
+      "description": "מעביר קובץ/תיקייה ממיקום למיקום, או משנה את השם שלהם.",
+      "syntax": "mv [options] source destination",
+      "options": [
+        {
+          "flag": "-i",
+          "description": "מבקש אישור לפני דריסה."
+        },
+        {
+          "flag": "-n",
+          "description": "לא דורס יעד קיים (תלוי מימוש)."
+        },
+        {
+          "flag": "-v",
+          "description": "מציג מה הועבר."
+        }
+      ],
+      "examples": [
+        {
+          "command": "mv old.txt new.txt",
+          "description": "שינוי שם."
+        },
+        {
+          "command": "mv notes.txt ~/Documents/",
+          "description": "העברה לתיקייה אחרת."
+        },
+        {
+          "command": "mv -i draft.txt final.txt",
+          "description": "העברה עם אישור לפני דריסת יעד."
+        }
+      ],
+      "keywords": [
+        "move",
+        "rename",
+        "שינוי שם",
+        "העבר"
+      ],
+      "note": "היזהר: ללא ‎-i ייתכן שקובץ יעד קיים יוחלף בהתאם למימוש ולהגדרות.",
+      "type": "utility"
+    },
+    {
+      "id": "rm",
+      "name": "rm",
+      "category": "קבצים ותיקיות",
+      "summary": "מחיקת קבצים",
+      "description": "מוחק קבצים. בניגוד להעברה לסל מחזור, המחיקה בדרך כלל אינה ניתנת לביטול בקלות.",
+      "syntax": "rm [options] file...",
+      "options": [
+        {
+          "flag": "-i",
+          "description": "מבקש אישור לפני כל מחיקה."
+        },
+        {
+          "flag": "-r",
+          "description": "מאפשר מחיקה רקורסיבית של תיקייה ותכולתה — פעולה מסוכנת."
+        },
+        {
+          "flag": "-v",
+          "description": "מציג אילו פריטים נמחקים."
+        }
+      ],
+      "examples": [
+        {
+          "command": "rm -i old-notes.txt",
+          "description": "בקשת אישור לפני מחיקת קובץ."
+        },
+        {
+          "command": "rm unwanted.txt",
+          "description": "מחיקת קובץ בשם זה."
+        }
+      ],
+      "keywords": [
+        "delete",
+        "remove",
+        "מחיקה"
+      ],
+      "note": "זהירות: מחיקה באמצעות rm אינה מעבירה קבצים לסל המחזור. כדאי לוודא את הנתיב ולהתחיל עם ‎-i.",
+      "type": "utility"
+    },
+    {
+      "id": "cat",
+      "name": "cat",
+      "category": "טקסט וחיפוש",
+      "summary": "הצגת תוכן קבצי טקסט",
+      "description": "מציג תוכן קובץ או מספר קבצים בטרמינל. מתאים לקבצים קצרים.",
+      "syntax": "cat [options] [file...]",
+      "options": [
+        {
+          "flag": "-n",
+          "description": "מוסיף מספר לכל שורה."
+        },
+        {
+          "flag": "-b",
+          "description": "ממספר רק שורות שאינן ריקות."
+        },
+        {
+          "flag": "-s",
+          "description": "מצמצם רצפים של שורות ריקות (תלוי מימוש)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "cat notes.txt",
+          "description": "הצגת תוכן הקובץ."
+        },
+        {
+          "command": "cat -n notes.txt",
+          "description": "הצגת תוכן עם מספרי שורות."
+        }
+      ],
+      "keywords": [
+        "read",
+        "view",
+        "הצגת קובץ",
+        "print file"
+      ],
+      "note": "לקבצים ארוכים כדאי להשתמש ב־less.",
+      "type": "utility"
+    },
+    {
+      "id": "sort",
+      "name": "sort",
+      "category": "טקסט וחיפוש",
+      "summary": "מיון שורות טקסט",
+      "description": "ממיין שורות מקובץ או מקלט שמועבר בצינור (pipe). כברירת מחדל המיון הוא לקסיקוגרפי לפי כללי המיקום.",
+      "syntax": "sort [options] [file...]",
+      "options": [
+        {
+          "flag": "-n",
+          "description": "מיון לפי ערך מספרי."
+        },
+        {
+          "flag": "-r",
+          "description": "היפוך סדר המיון."
+        },
+        {
+          "flag": "-u",
+          "description": "פלט של שורות ייחודיות בלבד."
+        },
+        {
+          "flag": "-k N",
+          "description": "מיון החל משדה מספר N; אפשר להגדיר שדה/מפתח מדויק."
+        },
+        {
+          "flag": "-t CHAR",
+          "description": "בחירת תו מפריד בין שדות."
+        },
+        {
+          "flag": "-o FILE",
+          "description": "כתיבת התוצאה לקובץ במקום ל־stdout."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sort names.txt",
+          "description": "מיון שורות בסדר עולה."
+        },
+        {
+          "command": "sort -nr numbers.txt",
+          "description": "מיון מספרי יורד."
+        },
+        {
+          "command": "sort -u names.txt",
+          "description": "מיון והסרת כפילויות."
+        },
+        {
+          "command": "sort -t, -k2,2 people.csv",
+          "description": "מיון CSV פשוט לפי השדה השני."
+        }
+      ],
+      "keywords": [
+        "מיון",
+        "reverse",
+        "numeric",
+        "ascending",
+        "descending"
+      ],
+      "note": "sort -r הופך את כיוון המיון; sort -n הופך את ההשוואה למספרית. ניתן לשלב: sort -nr.",
+      "type": "utility"
+    },
+    {
+      "id": "grep",
+      "name": "grep",
+      "category": "טקסט וחיפוש",
+      "summary": "חיפוש שורות שמתאימות לתבנית",
+      "description": "מחפש טקסט או ביטוי רגולרי בקלט, ומציג את השורות שמתאימות.",
+      "syntax": "grep [options] pattern [file...]",
+      "options": [
+        {
+          "flag": "-i",
+          "description": "התעלמות מהבדלי אותיות גדולות וקטנות."
+        },
+        {
+          "flag": "-n",
+          "description": "מציג מספרי שורות."
+        },
+        {
+          "flag": "-r",
+          "description": "מחפש גם בתיקיות משנה."
+        },
+        {
+          "flag": "-v",
+          "description": "מציג דווקא שורות שלא מתאימות."
+        },
+        {
+          "flag": "-F",
+          "description": "מתייחס לתבנית כטקסט רגיל ולא כביטוי רגולרי."
+        },
+        {
+          "flag": "-E",
+          "description": "שימוש בביטויים רגולריים מורחבים."
+        }
+      ],
+      "examples": [
+        {
+          "command": "grep -n error app.log",
+          "description": "חיפוש error עם מספרי שורות."
+        },
+        {
+          "command": "grep -ri hello .",
+          "description": "חיפוש לא רגיש לאותיות בתיקייה הנוכחית ובתיקיות משנה."
+        },
+        {
+          "command": "grep -F \"a.b\" notes.txt",
+          "description": "חיפוש הטקסט a.b כפשוטו."
+        }
+      ],
+      "keywords": [
+        "search text",
+        "חיפוש טקסט",
+        "pattern",
+        "regex"
+      ],
+      "note": "למחרוזת שמכילה רווחים השתמש במירכאות. לתבנית שאינה ביטוי רגולרי, ‎-F נוח וברור.",
+      "type": "utility"
+    },
+    {
+      "id": "find",
+      "name": "find",
+      "category": "טקסט וחיפוש",
+      "summary": "איתור קבצים לפי שם ותכונות",
+      "description": "סורק עץ תיקיות ומסנן קבצים לפי קריטריונים. הסדר של הפרמטרים יכול להשפיע.",
+      "syntax": "find [path...] [expression]",
+      "options": [
+        {
+          "flag": "-name \"*.txt\"",
+          "description": "איתור לפי שם באמצעות תבנית glob; מומלץ לשים במירכאות."
+        },
+        {
+          "flag": "-iname \"*.txt\"",
+          "description": "כמו ‎-name, ללא הבדל בין אותיות גדולות/קטנות (נפוץ)."
+        },
+        {
+          "flag": "-type f",
+          "description": "קבצים רגילים בלבד."
+        },
+        {
+          "flag": "-type d",
+          "description": "תיקיות בלבד."
+        },
+        {
+          "flag": "-maxdepth N",
+          "description": "מגביל עומק חיפוש (GNU find; לא זמין בכל מערכת)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "find . -name \"*.txt\"",
+          "description": "איתור קובצי txt בתיקייה הנוכחית ומתחתיה."
+        },
+        {
+          "command": "find ~/Documents -type d",
+          "description": "הצגת תיקיות ב־Documents."
+        },
+        {
+          "command": "find . -type f -name \"report*\"",
+          "description": "מציאת קבצים ששמם מתחיל ב־report."
+        }
+      ],
+      "keywords": [
+        "find files",
+        "איתור קבצים",
+        "תיקיות",
+        "files by name"
+      ],
+      "note": "המרכאות סביב *.txt מונעות מה־Shell להרחיב את הכוכבית לפני ש־find מקבל אותה.",
+      "type": "utility"
+    },
+    {
+      "id": "head",
+      "name": "head",
+      "category": "טקסט וחיפוש",
+      "summary": "הצגת שורות ראשונות של קובץ",
+      "description": "מציג כברירת מחדל את עשר השורות הראשונות של קובץ.",
+      "syntax": "head [options] [file...]",
+      "options": [
+        {
+          "flag": "-n N",
+          "description": "מציג N שורות ראשונות."
+        },
+        {
+          "flag": "-c N",
+          "description": "מציג N בתים ראשונים."
+        }
+      ],
+      "examples": [
+        {
+          "command": "head notes.txt",
+          "description": "עשר השורות הראשונות."
+        },
+        {
+          "command": "head -n 5 notes.txt",
+          "description": "חמש השורות הראשונות."
+        }
+      ],
+      "keywords": [
+        "first lines",
+        "תחילת קובץ",
+        "preview"
+      ],
+      "note": null,
+      "type": "utility"
+    },
+    {
+      "id": "tail",
+      "name": "tail",
+      "category": "טקסט וחיפוש",
+      "summary": "הצגת שורות אחרונות של קובץ",
+      "description": "מציג כברירת מחדל את עשר השורות האחרונות, ויכול לעקוב אחרי שינויים בזמן אמת.",
+      "syntax": "tail [options] [file...]",
+      "options": [
+        {
+          "flag": "-n N",
+          "description": "מציג N שורות אחרונות."
+        },
+        {
+          "flag": "-f",
+          "description": "ממשיך לעקוב אחרי שורות שנוספות לקובץ."
+        },
+        {
+          "flag": "-c N",
+          "description": "מציג N בתים אחרונים."
+        }
+      ],
+      "examples": [
+        {
+          "command": "tail notes.txt",
+          "description": "עשר השורות האחרונות."
+        },
+        {
+          "command": "tail -n 20 app.log",
+          "description": "עשרים השורות האחרונות."
+        },
+        {
+          "command": "tail -f app.log",
+          "description": "צפייה בתוספות לקובץ לוג (Ctrl+C לעצירה)."
+        }
+      ],
+      "keywords": [
+        "last lines",
+        "סוף קובץ",
+        "logs",
+        "follow"
+      ],
+      "note": null,
+      "type": "utility"
+    },
+    {
+      "id": "wc",
+      "name": "wc",
+      "category": "טקסט וחיפוש",
+      "summary": "ספירת שורות, מילים ובתים",
+      "description": "סופר נתונים בטקסט שנקרא מקובץ או מהקלט.",
+      "syntax": "wc [options] [file...]",
+      "options": [
+        {
+          "flag": "-l",
+          "description": "ספירת תווי ירידת שורה."
+        },
+        {
+          "flag": "-w",
+          "description": "ספירת מילים."
+        },
+        {
+          "flag": "-c",
+          "description": "ספירת בתים."
+        },
+        {
+          "flag": "-m",
+          "description": "ספירת תווים (בהתאם להגדרות locale)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "wc notes.txt",
+          "description": "הצגת ספירת שורות, מילים ובתים."
+        },
+        {
+          "command": "wc -l notes.txt",
+          "description": "ספירת שורות לפי תווי newline."
+        },
+        {
+          "command": "wc -w essay.txt",
+          "description": "ספירת מילים."
+        }
+      ],
+      "keywords": [
+        "count",
+        "word count",
+        "ספירה",
+        "lines"
+      ],
+      "note": "המספר של ‎wc -l הוא מספר תווי ירידת שורה, ולא תמיד מספר השורות הגלויות אם השורה האחרונה אינה מסתיימת ב־newline.",
+      "type": "utility"
+    },
+    {
+      "id": "less",
+      "name": "less",
+      "category": "טקסט וחיפוש",
+      "summary": "צפייה נוחה בקובץ ארוך",
+      "description": "פותח תוכן ארוך בתצוגה שניתן לגלול בה, בלי להציף את מסך הטרמינל.",
+      "syntax": "less [options] file",
+      "options": [
+        {
+          "flag": "-N",
+          "description": "הצגת מספרי שורות."
+        },
+        {
+          "flag": "-S",
+          "description": "מניעת שבירת שורות ארוכות."
+        },
+        {
+          "flag": "/text",
+          "description": "מתוך less: חיפוש קדימה אחר text (לא דגל)."
+        },
+        {
+          "flag": "q",
+          "description": "מתוך less: יציאה (לא דגל)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "less README.md",
+          "description": "פתיחת קובץ לצפייה."
+        },
+        {
+          "command": "less -N app.log",
+          "description": "צפייה עם מספרי שורות."
+        }
+      ],
+      "keywords": [
+        "pager",
+        "scroll",
+        "view file",
+        "צפייה"
+      ],
+      "note": "בתוך less: מקשי החיצים או Page Up/Down לגלילה, ‎/‎ לחיפוש, ו־q ליציאה.",
+      "type": "utility"
+    },
+    {
+      "id": "echo",
+      "name": "echo",
+      "category": "מערכת",
+      "summary": "הדפסת טקסט או ערך של משתנה",
+      "description": "מדפיס ארגומנטים למסך. זו פקודה מובנית ב־Bash.",
+      "syntax": "echo [options] [text...]",
+      "options": [
+        {
+          "flag": "-n",
+          "description": "אין ירידת שורה בסוף הפלט."
+        },
+        {
+          "flag": "$HOME",
+          "description": "דוגמה להרחבת משתנה בסביבת ה־Shell; לא דגל."
+        }
+      ],
+      "examples": [
+        {
+          "command": "echo \"Hello\"",
+          "description": "הדפסת Hello."
+        },
+        {
+          "command": "echo \"$HOME\"",
+          "description": "הצגת הנתיב לתיקיית הבית."
+        }
+      ],
+      "keywords": [
+        "print",
+        "output",
+        "הדפסה",
+        "variables"
+      ],
+      "note": "לפורמט צפוי ומדויק, במיוחד עם תווי בריחה, לעיתים עדיף printf.",
+      "type": "builtin"
+    },
+    {
+      "id": "man",
+      "name": "man",
+      "category": "מערכת",
+      "summary": "פתיחת עמוד העזרה של פקודה",
+      "description": "מציג את התיעוד המקומי (manual) של פקודה, אם מותקנות במערכת חוברות העזרה.",
+      "syntax": "man [section] command",
+      "options": [
+        {
+          "flag": "-k keyword",
+          "description": "חיפוש בתיאורים של עמודי man."
+        },
+        {
+          "flag": "q",
+          "description": "בתוך man: יציאה מעמוד העזרה (לא דגל)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "man ls",
+          "description": "הצגת ספר ההוראות של ls."
+        },
+        {
+          "command": "man sort",
+          "description": "תיעוד מלא של sort."
+        },
+        {
+          "command": "man -k copy",
+          "description": "חיפוש פקודות הקשורות להעתקה."
+        }
+      ],
+      "keywords": [
+        "manual",
+        "help",
+        "עזרה",
+        "תיעוד"
+      ],
+      "note": "המאגר הזה מציג אפשרויות שימושיות ולא בהכרח כל דגל אפשרי. man הוא המקור המקומי לפירוט המלא.",
+      "type": "utility"
+    },
+    {
+      "id": "clear",
+      "name": "clear",
+      "category": "מערכת",
+      "summary": "ניקוי התצוגה בטרמינל",
+      "description": "מנקה את אזור התצוגה של מסך הטרמינל (בהתאם לאמולטור).",
+      "syntax": "clear",
+      "options": [],
+      "examples": [
+        {
+          "command": "clear",
+          "description": "ניקוי אזור התצוגה."
+        }
+      ],
+      "keywords": [
+        "ניקוי מסך",
+        "terminal",
+        "screen"
+      ],
+      "note": null,
+      "type": "utility"
+    }
+  ]
+}
