@@ -1,39 +1,49 @@
-# Bash Command Library — מאגר פקודות Bash
+# Bash Command Library
 
-אתר סטטי בעברית לחיפוש פקודות, אפשרויות (flags), תחביר ודוגמאות. לאחר טעינה ראשונה דרך GitHub Pages, האתר יכול לפעול אופליין בעזרת Service Worker ושמירת מאגר הפקודות ב־localStorage.
+A fast, publicly accessible Bash and Unix command reference. Search commands, flags, descriptions, and examples in English. The site is hosted on GitHub Pages and keeps a local cache for offline use.
 
-## פרסום ב־GitHub Pages
+**Live website:** https://yardensz.github.io/bash-command-library/
 
-1. צרו Repository ציבורי בשם `bash-command-library` והוסיפו את הקבצים לענף `main`.
-2. ב־**Settings → Pages**, בחרו **Deploy from a branch**, ענף **main**, תיקייה **/(root)**, ולחצו **Save**.
-3. הכתובת הצפויה למאגר `yardensz/bash-command-library` היא `https://yardensz.github.io/bash-command-library/` (רק אחרי הפעלת Pages והשלמת הפרסום).
+## Features
 
-אין צורך בשרת, בבסיס נתונים, במפתחות API או בשלבי build. שירות ה־Service Worker דורש HTTPS או localhost, ולכן פתיחת `index.html` ישירות באמצעות `file://` אינה תחליף מלא ל־GitHub Pages.
+- Instant English-language search across names, descriptions, flags, examples, and keywords.
+- Syntax highlighting for command names, options, parameters, paths, strings, and operators.
+- Concise option explanations, copyable examples, and keyboard-driven navigation.
+- Compact, responsive layout with light and dark themes.
+- Offline access after the first successful online visit.
+- Named versions and read-only snapshots of earlier releases.
 
-## הוספת פקודות וגרסאות
+## Usage
 
-- **commands.json** — המאגר הנוכחי, עם `version`, `updatedAt` ומערך `commands`.
-- **versions.json** — היסטוריית גרסאות המסודרת מהחדשה לישנה; כל גרסה כוללת `snapshot`.
-- **history/X.Y.Z.json** — צילום מצב מלא ובלתי משתנה של מאגר הפקודות מאותה גרסה.
-- יש להגדיל את `version` של המאגר, לשנות את `updatedAt`, להוסיף צילום מצב חדש ולעדכן את `versions.json` בכל עדכון.
-- היסטוריית GitHub עצמה נשמרת בעזרת commit לכל עדכון; רצוי לתת לו הודעה תיאורית.
-- בקשות עדכון עתידיות אפשר לבצע ישירות דרך כלי GitHub עם הרשאות מתאימות.
+Open the website and start typing. Press `/` to focus search, use the arrow keys to navigate results, and press Enter to select a command. Click **Copy** to copy syntax or a command example.
 
-## חיפוש ושימוש
+This library includes both Bash builtins and standard Unix utilities. Options may differ between GNU/Linux, macOS, and other platforms; consult `man` or `--help` for local details.
 
-חיפוש חופשי בעברית ובאנגלית עובד על שם הפקודה, התיאור, דגלים ודוגמאות. `/` מעביר לחיפוש, Enter בוחר את התוצאה הראשונה. כפתור "גרסאות" מאפשר לטעון Snapshot ישן לתצוגה בלבד. כפתור "בדוק עדכונים" מחפש מאגר עדכני.
+## Publishing on GitHub Pages
 
-## הערות טכניות
+1. In **Settings → Pages**, choose **Deploy from a branch**.
+2. Select branch `main` and folder `/(root)`, then save.
+3. Once deployment finishes, visit https://yardensz.github.io/bash-command-library/.
 
-- השימוש ב־`fetch(..., {cache:'no-store'})` בתוספת אסטרטגיית network-first ב־Service Worker מסייע לבדוק תמיד את קובץ JSON העדכני, כשיש חיבור.
-- בהיעדר אינטרנט, הנתונים נשמרים מקומית בדפדפן. אם נתוני האתר נמחקים מהדפדפן, צריך לבקר בו שוב עם אינטרנט.
-- היסטוריות שלא נצפו קודם עשויות שלא להיות זמינות אופליין; גרסת ההשקה כלולה במטמון הראשוני.
-- פקודות רבות הן כלי Unix ולא Bash builtins. האפשרויות המוצגות הן נפוצות בלבד ותלויות מימוש GNU/BSD.
+The site does not require a dedicated server, API token, database, or build step. Its service worker requires HTTPS (as on GitHub Pages) or localhost; opening `index.html` using `file://` does not provide the same offline behavior.
 
-## עדכון עיצוב ותוכן v1.1.0
+## Maintaining the command library
 
-- ממשק בגישה של מדריך עזר, עם חיפוש מרכזי גדול יותר ופריסה ללא גרדיאנטים וצללים.
-- תחביר ודוגמאות עם הבחנה בין פקודה, אפשרויות, נתיבים, ארגומנטים, מחרוזות ואופרטורים; ההעתקה נשארת טקסט רגיל.
-- 39 פקודות ו־20 ערכים חדשים, עם דגלים ודוגמאות נוספות.
-- מקשי חצים לבחירה מתוך תוצאות החיפוש.
-- גרסת 1.0.0 נשמרה וניתנת לצפייה דרך כפתור הגרסאות.
+- `commands.json`: the current command database, including `version` and `updatedAt`.
+- `versions.json`: release metadata in newest-first order.
+- `history/X.Y.Z.json`: read-only snapshots of released data.
+- `app.js`: search, rendering, navigation, version selection, and caching.
+- `styles.css`: responsive presentation and syntax colors.
+- `sw.js`: network-first caching for offline use.
+
+For each new release, update `commands.json`, save a matching snapshot, add an entry to `versions.json`, and advance the cache version in `sw.js`. Write descriptive Git commit messages.
+
+Older reference snapshots have been translated to English so browsing previous library versions does not reintroduce a Hebrew interface. Original Git commits remain available in Git history.
+
+## Offline behavior
+
+The service worker caches the static site and selected snapshots. The latest fetched command database is also stored locally. When the internet is unavailable, the site falls back to its cached data. Clearing browser site data can remove those copies, and historical snapshots not previously cached may need an internet connection.
+
+## About
+
+A personal reference and learning resource, published openly for anyone studying Bash or working in a terminal.

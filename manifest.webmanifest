@@ -1,8 +1,8 @@
 {
-  "name": "Bash Library — מאגר פקודות",
+  "name": "Bash Command Library",
   "short_name": "Bash Library",
-  "lang": "he",
-  "dir": "rtl",
+  "lang": "en",
+  "dir": "ltr",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f7f6f2",

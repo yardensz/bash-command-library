@@ -1,6 +1,6 @@
 /* Same-origin offline cache for static GitHub Pages hosting. No third-party calls. */
-const CACHE_NAME = 'bash-library-shell-v4';
-const CORE = ['./','./index.html','./styles.css','./app.js','./commands.json','./versions.json','./favicon.svg','./manifest.webmanifest','./history/1.0.0.json','./history/1.1.0.json','./history/1.1.1.json','./history/1.2.0.json'];
+const CACHE_NAME = 'bash-library-shell-v5';
+const CORE = ['./','./index.html','./styles.css','./app.js','./commands.json','./versions.json','./favicon.svg','./manifest.webmanifest','./history/1.0.0.json','./history/1.1.0.json','./history/1.1.1.json','./history/1.2.0.json','./history/1.3.0.json'];
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
 });

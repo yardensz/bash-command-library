@@ -286,3 +286,28 @@ button:focus-visible,input:focus-visible {outline:2px solid var(--accent); outli
  .detail h2 {font-size:27px}
  .option-card {grid-template-columns:82px minmax(0,1fr)}
 }
+
+/* English left-to-right interface refinements */
+html {direction:ltr}
+body {direction:ltr}
+.app,.topbar,.workspace,.sidebar,.main,.detail,.footer,.modal {direction:ltr}
+.sidebar {border-left:1px solid var(--index-border);border-right:3px solid var(--accent)}
+.cmd-item {text-align:left}
+.cmd-item.active,.sidebar .cmd-item.active {box-shadow:inset 3px 0 0 var(--accent)}
+.cmd-symbol {text-align:left}
+.detail h2 {text-align:left;letter-spacing:-1.2px}
+.search-wrap input {direction:ltr;padding-left:45px;padding-right:48px}
+.search-icon {left:13px;right:auto}
+.shortcut {right:12px;left:auto}
+.stat {text-align:left}
+.stat-number {text-align:left}
+.kicker {text-align:left}
+.note {border-right:0;border-left:2px solid var(--accent)}
+.syntax-legend i {margin-left:0;margin-right:5px}
+.example pre,.codebar {direction:ltr;text-align:left}
+.option-card code {text-align:left}
+@media(max-width:480px) {
+ .search-wrap input {padding-left:45px;padding-right:42px}
+ .search-icon {left:12px;right:auto}
+ .shortcut {right:11px;left:auto}
+}

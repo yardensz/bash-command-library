@@ -2,8 +2,8 @@
 (() => {
   const FILES = {commands:'commands.json', versions:'versions.json'};
   const CACHE_KEYS = {commands:'bash-library-commands-v1', versions:'bash-library-versions-v1', theme:'bash-library-theme-v1'};
-  const categories = ['הכול','קבצים ותיקיות','טקסט וחיפוש','מערכת'];
-  const state = {data:null, versions:null, selected:null, category:'הכול', query:'', historical:false, online:false};
+  const categories = ['All','Files & Directories','Text & Search','System'];
+  const state = {data:null, versions:null, selected:null, category:'All', query:'', historical:false, online:false};
   const $ = id => document.getElementById(id);
   const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const clean = v => String(v||'').toLocaleLowerCase().normalize('NFKC').trim();
@@ -19,18 +19,18 @@
     if(!data || !Array.isArray(data.commands)) throw new Error('Invalid commands database');
     state.data=data;state.historical=historical;
     $('commandCount').textContent=data.commands.length;
-    $('versionLabel').textContent='גרסה '+(data.version||'—')+(historical?' · תצוגה היסטורית':'');
+    $('versionLabel').textContent='Version '+(data.version||'—')+(historical?' · historical view':'');
     const updated = data.updatedAt ? new Date(data.updatedAt+'T00:00:00') : null;
-    $('syncInfo').textContent=historical?'אתה צופה בגרסה קודמת. המאגר הציבורי לא השתנה.': 'עדכון המאגר: '+(updated&&!isNaN(updated)?updated.toLocaleDateString('he-IL'):'לא ידוע')+' · נשמר מקומית לצפייה אופליין';
+    $('syncInfo').textContent=historical?'Viewing an earlier version. The public library has not changed.': 'Library updated: '+(updated&&!isNaN(updated)?updated.toLocaleDateString('en-US'):'unknown')+' · saved locally for offline access';
     if(!data.commands.some(c=>c.id===state.selected))state.selected=data.commands[0]?.id||null;
     render();
   }
   function matches(cmd,q){if(!q)return true;const parts=q.split(/\s+/).filter(Boolean);const corpus=clean([cmd.id,cmd.name,cmd.summary,cmd.description,cmd.category,cmd.syntax,...(cmd.keywords||[]),...(cmd.options||[]).flatMap(o=>[o.flag,o.description]),...(cmd.examples||[]).flatMap(e=>[e.command,e.description])].join(' '));return parts.every(p=>corpus.includes(p));}
-  function filtered(){return(state.data?.commands||[]).filter(c=>(state.category==='הכול'||c.category===state.category)&&matches(c,clean(state.query)));}
+  function filtered(){return(state.data?.commands||[]).filter(c=>(state.category==='All'||c.category===state.category)&&matches(c,clean(state.query)));}
   function render(){
-    renderCategories(); const arr=filtered();$('resultsCount').textContent=arr.length+' תוצאות';
+    renderCategories(); const arr=filtered();$('resultsCount').textContent=arr.length+' results';
     if(arr.length && !arr.some(c=>c.id===state.selected))state.selected=arr[0].id;
-    $('commandList').innerHTML=arr.length?arr.map(c=>`<button type="button" class="cmd-item ${state.selected===c.id?'active':''}" data-command="${esc(c.id)}" aria-current="${state.selected===c.id?'true':'false'}"><span class="cmd-symbol" dir="ltr">${esc(c.name)}</span><span class="cmd-item-text"><span class="cmd-description">${esc(c.summary)}</span></span><span class="cmd-arrow">‹</span></button>`).join(''):'<div class="empty"><strong>לא נמצאו פקודות</strong>אפשר לנסות מילת חיפוש אחרת.</div>';
+    $('commandList').innerHTML=arr.length?arr.map(c=>`<button type="button" class="cmd-item ${state.selected===c.id?'active':''}" data-command="${esc(c.id)}" aria-current="${state.selected===c.id?'true':'false'}"><span class="cmd-symbol" dir="ltr">${esc(c.name)}</span><span class="cmd-item-text"><span class="cmd-description">${esc(c.summary)}</span></span><span class="cmd-arrow">‹</span></button>`).join(''):'<div class="empty"><strong>No commands found</strong>Try a different search.</div>';
     $('commandList').querySelectorAll('[data-command]').forEach(b=>b.addEventListener('click',()=>select(b.dataset.command)));
     renderDetails(arr.find(c=>c.id===state.selected)||arr[0]);
   }
@@ -56,45 +56,45 @@
       return kind ? `<span class="syntax-${kind}">${esc(token)}</span>` : esc(token);
     }).join('');
   }
-  const syntaxLegend = `<div class="syntax-legend" aria-label="מקרא צבעי התחביר"><span><i class="leg-command"></i>פקודה</span><span><i class="leg-flag"></i>אפשרות / דגל</span><span><i class="leg-arg"></i>ארגומנט</span><span><i class="leg-path"></i>נתיב או קובץ</span></div>`;
+  const syntaxLegend = `<div class="syntax-legend" aria-label="Syntax color legend"><span><i class="leg-command"></i>Command</span><span><i class="leg-flag"></i>Option / flag</span><span><i class="leg-arg"></i>Argument</span><span><i class="leg-path"></i>Path or file</span></div>`;
   function renderDetails(c){
-    if(!c){$('mainContent').innerHTML='<div class="empty"><strong>אין פקודה להצגה</strong>נסה להסיר מסנן או לשנות את החיפוש.</div>';return;}
+    if(!c){$('mainContent').innerHTML='<div class="empty"><strong>No command selected</strong>Change your search or remove a filter.</div>';return;}
     const options=(c.options||[]).map(o=>`<div class="option-card"><code dir="ltr">${esc(o.flag)}</code><span>${esc(o.description)}</span></div>`).join('');
-    const examples=(c.examples||[]).map(e=>`<div class="example"><div class="example-head"><span class="example-desc">${esc(e.description)}</span><button class="btn tiny" type="button" data-copy="${esc(e.command)}" aria-label="העתק דוגמה">העתק</button></div><pre><code>${colorCode(e.command)}</code></pre></div>`).join('');
-    $('mainContent').innerHTML=`<article class="detail"><div class="detail-header"><div><div class="eyebrow">${esc(c.category)}${state.historical?' · גרסה היסטורית':''}</div><h2 dir="ltr">${esc(c.name)}</h2><p class="detail-description">${esc(c.summary)}</p><span class="tag">${c.type==='builtin'?'פקודה מובנית ב־Bash':'כלי שורת פקודה'}</span></div><button class="btn tiny" id="shareBtn" type="button" title="העתק קישור לפקודה">קישור</button></div><h3>תחביר</h3><div class="codebar"><code>${colorCode(c.syntax,true)}</code><button class="copy-code" type="button" data-copy="${esc(c.syntax)}">העתק</button></div>${syntaxLegend}<h3>אפשרויות ופרמטרים</h3><div class="option-grid">${options||'<p>לפקודה זו אין אפשרויות בסיסיות נוספות במאגר.</p>'}</div><section class="command-explanation"><h3>הסבר קצר</h3><p>${esc(c.description)}</p></section><h3>דוגמאות לשימוש</h3>${examples}${c.note?`<div class="note"><strong>כדאי לדעת:</strong> ${esc(c.note)}</div>`:''}</article>`;
+    const examples=(c.examples||[]).map(e=>`<div class="example"><div class="example-head"><span class="example-desc">${esc(e.description)}</span><button class="btn tiny" type="button" data-copy="${esc(e.command)}" aria-label="Copy example">Copy</button></div><pre><code>${colorCode(e.command)}</code></pre></div>`).join('');
+    $('mainContent').innerHTML=`<article class="detail"><div class="detail-header"><div><div class="eyebrow">${esc(c.category)}${state.historical?' · historical version':''}</div><h2 dir="ltr">${esc(c.name)}</h2><p class="detail-description">${esc(c.summary)}</p><span class="tag">${c.type==='builtin'?'Bash builtin':'Command-line utility'}</span></div><button class="btn tiny" id="shareBtn" type="button" title="Copy a link to this command">Link</button></div><h3>Syntax</h3><div class="codebar"><code>${colorCode(c.syntax,true)}</code><button class="copy-code" type="button" data-copy="${esc(c.syntax)}">Copy</button></div>${syntaxLegend}<h3>Options and parameters</h3><div class="option-grid">${options||'<p>No additional options are listed for this command.</p>'}</div><section class="command-explanation"><h3>Overview</h3><p>${esc(c.description)}</p></section><h3>Examples</h3>${examples}${c.note?`<div class="note"><strong>Good to know:</strong> ${esc(c.note)}</div>`:''}</article>`;
     $('mainContent').querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(b.dataset.copy)));
     $('shareBtn').addEventListener('click',()=>{const url=new URL(location.href);url.hash='cmd='+encodeURIComponent(c.id);copy(url.href);});
   }
-  async function copy(value){try{await navigator.clipboard.writeText(value);toast('הועתק ללוח');}catch{try{const t=document.createElement('textarea');t.value=value;t.style.position='fixed';t.style.left='-9999px';document.body.append(t);t.select();document.execCommand('copy');t.remove();toast('הועתק ללוח');}catch{toast('לא ניתן להעתיק אוטומטית');}}}
+  async function copy(value){try{await navigator.clipboard.writeText(value);toast('Copied to clipboard');}catch{try{const t=document.createElement('textarea');t.value=value;t.style.position='fixed';t.style.left='-9999px';document.body.append(t);t.select();document.execCommand('copy');t.remove();toast('Copied to clipboard');}catch{toast('Could not copy automatically');}}}
   async function getJSON(path){const response=await fetch(path,{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);return response.json();}
   async function refresh(silent=false){
-    if(!silent)setStatus('בודק עדכונים…','loading');
+    if(!silent)setStatus('Checking for updates...','loading');
     try{
       const [data, versions]=await Promise.all([getJSON(FILES.commands),getJSON(FILES.versions)]);
       if(!data?.version||!Array.isArray(data.commands)||!Array.isArray(versions?.releases))throw new Error('Invalid JSON structure');
       const oldVersion=state.data?.version;
       state.versions=versions;writeStorage(CACHE_KEYS.commands,data);writeStorage(CACHE_KEYS.versions,versions);
       if(!state.historical)setData(data);
-      setStatus('מעודכן · מחובר','online');
-      if(!silent)toast(oldVersion&&oldVersion!==data.version?'גרסה חדשה נטענה: '+data.version:'המאגר מעודכן');
+      setStatus('Up to date · online','online');
+      if(!silent)toast(oldVersion&&oldVersion!==data.version?'New version loaded: '+data.version:'The library is up to date');
     }catch(error){
-      setStatus(state.data?'אופליין · עותק שמור':'לא ניתן לטעון','offline');
-      if(!state.data){$('mainContent').innerHTML='<div class="empty"><strong>לא ניתן לטעון את המאגר.</strong>יש לפתוח את האתר דרך GitHub Pages בזמן שיש אינטרנט, לפחות בפעם הראשונה.</div>';}
-      if(!silent)toast('לא הצלחנו לבדוק עדכונים. ניתן להשתמש בגרסה השמורה.');
+      setStatus(state.data?'Offline · cached copy':'Unable to load','offline');
+      if(!state.data){$('mainContent').innerHTML='<div class="empty"><strong>Unable to load the library.</strong>Open this site online through GitHub Pages at least once to enable offline access.</div>';}
+      if(!silent)toast('Update check failed; the cached library is still available.');
     }
   }
   function showModal(title,html){$('modalTitle').textContent=title;$('modalContent').innerHTML=html;$('modalBackdrop').classList.remove('hidden');$('modalClose').focus();}
   function closeModal(){$('modalBackdrop').classList.add('hidden');}
-  function showHelp(){showModal('איך קוראים את התחביר?',`<div class="legend"><p>התחביר מסמן את מבנה הפקודה, ולא תמיד משהו שצריך להקליד בדיוק כפי שמוצג. לדוגמה: <code>ls [options] [path]</code>.</p><p><strong>הצבעים:</strong> פקודה מופיעה בצבע בהיר, אפשרויות כגון <code>-a</code> בצבע ירקרק, ארגומנטים כגון <code>N</code> בצבע זהוב, ונתיבים בצבע ירוק בהיר. בדוגמאות מחרוזות במירכאות מקבלות צבע נפרד.</p><p><code>[...]</code> פירושו רכיב אופציונלי, והסוגריים אינם חלק מהפקודה. <code>...</code> פירושו שניתן לרוב לספק יותר מערך אחד. קו אנכי <code>|</code> בתבנית יכול לסמן בחירה; בין שתי פקודות אמיתיות הוא מעביר פלט ביניהן.</p><p>רבות מהפקודות כאן הן כלים של Unix ולא פקודות מובנות ב־Bash. דגלים מסוימים שונים בין Linux, macOS וסביבות אחרות. להרחבה אפשר להיעזר ב־<code>man</code> או <code>--help</code>, אם זמינים.</p><p>החיפוש עובד בעברית ובאנגלית. <code>/</code> מעביר לשדה החיפוש, החצים בוחרים תוצאה ו־Enter פותח אותה. העתקת פקודה מעתיקה את הטקסט המקורי — בלי צבעים או סימוני HTML.</p></div>`);}
+  function showHelp(){showModal('How to read command syntax',`<div class="legend"><p>Syntax describes the structure of a command; you do not always type every symbol shown. Example: <code>ls [options] [path]</code>.</p><p><strong>Colors:</strong> command names are light, flags such as <code>-a</code> are teal, arguments such as <code>N</code> are gold, and paths are green. Quoted strings use a separate color.</p><p><code>[...]</code> marks an optional element. Do not type these brackets unless the actual command requires them. <code>...</code> means an argument can usually be repeated. In a syntax template, <code>|</code> may mean a choice; between real commands it creates a pipeline.</p><p>Many entries are Unix command-line utilities rather than Bash builtins. Some flags differ between Linux, macOS, and other environments. See <code>man</code> or <code>--help</code> for platform-specific help.</p><p>Search by command, task, or flag. Press <code>/</code> to focus the search field; use arrow keys to select results and Enter to open one. Copy buttons copy plain text without styling.</p></div>`);}
   function renderVersionModal(){
     const list=state.versions?.releases||[];
-    let html='<p>כל גרסה משמרת צילום מצב של מאגר הפקודות. צפייה בגרסה ישנה לא משנה את האתר עבור משתמשים אחרים.</p>';
-    if(!list.length)html+='<p>היסטוריית גרסאות אינה זמינה כרגע.</p>';
-    html+=list.map(v=>`<div class="version-item"><div class="version-body"><strong>${esc(v.title)} · ${esc(v.version)}</strong> ${v.version===state.versions.latestVersion?'<span class="version-badge">החדשה ביותר</span>':''}<small>${esc(v.date)} · ${esc(v.summary)} · ${esc(v.commandCount)} פקודות</small></div><div class="version-actions"><button class="btn tiny" data-version="${esc(v.version)}" type="button">הצג</button></div></div>`).join('');
-    if(state.historical)html+='<button class="btn primary" id="returnCurrent" type="button">חזור לגרסה העדכנית</button>';
-    showModal('היסטוריית גרסאות',html);
+    let html='<p>Each release is a saved snapshot of the command library. Browsing older releases does not change the public website.</p>';
+    if(!list.length)html+='<p>Version history is not currently available.</p>';
+    html+=list.map(v=>`<div class="version-item"><div class="version-body"><strong>${esc(v.title)} · ${esc(v.version)}</strong> ${v.version===state.versions.latestVersion?'<span class="version-badge">Latest</span>':''}<small>${esc(v.date)} · ${esc(v.summary)} · ${esc(v.commandCount)} commands</small></div><div class="version-actions"><button class="btn tiny" data-version="${esc(v.version)}" type="button">View</button></div></div>`).join('');
+    if(state.historical)html+='<button class="btn primary" id="returnCurrent" type="button">Return to latest version</button>';
+    showModal('Version history',html);
     $('modalContent').querySelectorAll('[data-version]').forEach(b=>b.addEventListener('click',()=>loadVersion(b.dataset.version)));
-    $('returnCurrent')?.addEventListener('click',()=>{const data=readStorage(CACHE_KEYS.commands);if(data){setData(data);setStatus(navigator.onLine?'עותק עדכני שמור':'אופליין · עותק שמור',navigator.onLine?'online':'offline');closeModal();refresh(true);}});
+    $('returnCurrent')?.addEventListener('click',()=>{const data=readStorage(CACHE_KEYS.commands);if(data){setData(data);setStatus(navigator.onLine?'Latest cached copy':'Offline · cached copy',navigator.onLine?'online':'offline');closeModal();refresh(true);}});
   }
   async function loadVersion(version){
     const release=(state.versions?.releases||[]).find(v=>v.version===version);
@@ -103,8 +103,8 @@
       // Only versions advertised by versions.json may be loaded; no user-provided paths.
       const data=await getJSON(release.snapshot);
       if(data.version!==version||!Array.isArray(data.commands))throw new Error('Version mismatch');
-      setData(data,version!==state.versions.latestVersion);closeModal();toast('נטענה גרסה '+version);
-    }catch{const current=readStorage(CACHE_KEYS.commands);if(current?.version===version){setData(current,false);closeModal();toast('נטענה הגרסה השמורה');}else toast('גרסה זו אינה זמינה כרגע. אפשר לנסות שוב עם אינטרנט.');}
+      setData(data,version!==state.versions.latestVersion);closeModal();toast('Loaded version '+version);
+    }catch{const current=readStorage(CACHE_KEYS.commands);if(current?.version===version){setData(current,false);closeModal();toast('Loaded cached version');}else toast('This version is unavailable offline. Try again with an internet connection.');}
   }
   $('searchInput').addEventListener('input',e=>{state.query=e.target.value;render();});
   $('searchInput').addEventListener('keydown',e=>{
@@ -130,7 +130,7 @@
   state.selected=initialHash;
   const initial=readStorage(CACHE_KEYS.commands), versionCache=readStorage(CACHE_KEYS.versions);
   if(versionCache?.releases)state.versions=versionCache;
-  if(initial?.commands){setData(initial);setStatus('עותק שמור · בודק עדכונים','loading');}
+  if(initial?.commands){setData(initial);setStatus('Cached copy · checking for updates','loading');}
   refresh(true);
   if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 })();
