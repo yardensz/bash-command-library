@@ -6,136 +6,143 @@
     {
       "id": "ls",
       "name": "ls",
-      "category": "קבצים ותיקיות",
-      "summary": "הצגת קבצים ותיקיות",
-      "description": "מציג את תוכן התיקייה הנוכחית, או את התיקייה שציינת.",
+      "category": "Files & Directories",
+      "summary": "List files and directories",
+      "description": "Lists files and folders in the current or a specified directory.",
       "syntax": "ls [options] [path]",
       "options": [
         {
           "flag": "-l",
-          "description": "רשימה מפורטת עם הרשאות, בעלים, גודל ותאריך."
+          "description": "Show detailed information: permissions, ownership, size, and date."
         },
         {
           "flag": "-a",
-          "description": "כולל פריטים מוסתרים ששמם מתחיל בנקודה."
+          "description": "Include hidden entries beginning with a dot."
         },
         {
           "flag": "-h",
-          "description": "גדלים קריאים לאדם; שימושי בשילוב ‎-l."
+          "description": "Show human-readable file sizes, useful with -l."
         },
         {
           "flag": "-R",
-          "description": "מציג גם תיקיות משנה באופן רקורסיבי."
+          "description": "List subdirectories recursively."
         },
         {
           "flag": "-t",
-          "description": "ממיין לפי זמן השינוי האחרון."
+          "description": "Sort by modification time."
         },
         {
           "flag": "--color=auto",
-          "description": "הוספת צבעים אוטומטית לפי סוג קובץ (ב־GNU ls)."
+          "description": "Colorize entries automatically on GNU ls."
         }
       ],
       "examples": [
         {
           "command": "ls",
-          "description": "הצגת התיקייה הנוכחית."
+          "description": "List the current directory."
         },
         {
           "command": "ls -lah",
-          "description": "הצגה מפורטת, עם קבצים מוסתרים וגדלים קריאים."
+          "description": "Show details, hidden entries, and readable sizes."
         },
         {
           "command": "ls ~/Documents",
-          "description": "הצגת תיקייה אחרת."
+          "description": "List another directory."
         }
       ],
       "keywords": [
-        "רשימת קבצים",
-        "הצגה",
-        "list files"
+        "list files",
+        "list",
+        "files",
+        "directories",
+        "hidden",
+        "browse"
       ],
-      "note": "ב־Linux אפשר לשלב אפשרויות קצרות: ls -l -a שקול ל־ls -la. אפשרויות עשויות להשתנות במערכות שונות.",
+      "note": "Combine short flags: ls -la is equivalent to ls -l -a. Available options can differ by system.",
       "type": "utility"
     },
     {
       "id": "cd",
       "name": "cd",
-      "category": "קבצים ותיקיות",
-      "summary": "מעבר בין תיקיות",
-      "description": "משנה את התיקייה הנוכחית של ה־Shell. זו פקודה מובנית ב־Bash.",
+      "category": "Files & Directories",
+      "summary": "Change directory",
+      "description": "Changes the Bash shell's current working directory.",
       "syntax": "cd [directory]",
       "options": [
         {
           "flag": "..",
-          "description": "נתיב לתיקיית האב (לא דגל)."
+          "description": "Parent directory (an argument, not a flag)."
         },
         {
           "flag": "~",
-          "description": "קיצור לתיקיית הבית של המשתמש."
+          "description": "Shortcut for your home directory."
         },
         {
           "flag": "-",
-          "description": "מעבר לתיקייה הקודמת; כאן המקף הוא ארגומנט."
+          "description": "Go to the previous directory (an argument, not a flag)."
         }
       ],
       "examples": [
         {
           "command": "cd ~/Documents",
-          "description": "מעבר לתיקיית Documents בבית."
+          "description": "Go to Documents in your home directory."
         },
         {
           "command": "cd ..",
-          "description": "עלייה רמה אחת."
+          "description": "Move up one directory level."
         },
         {
           "command": "cd -",
-          "description": "חזרה לתיקייה הקודמת."
+          "description": "Return to the previous directory."
         },
         {
           "command": "cd",
-          "description": "מעבר לתיקיית הבית."
+          "description": "Go to your home directory."
         }
       ],
       "keywords": [
-        "מעבר תיקייה",
         "change directory",
-        "navigation"
+        "navigation",
+        "folder",
+        "change",
+        "directory"
       ],
-      "note": "cd משנה את מיקום העבודה של הטרמינל בלבד; היא לא מעבירה קבצים.",
+      "note": "cd changes your shell's location, not the location of files.",
       "type": "builtin"
     },
     {
       "id": "pwd",
       "name": "pwd",
-      "category": "קבצים ותיקיות",
-      "summary": "הצגת הנתיב לתיקייה הנוכחית",
-      "description": "מדפיס את הנתיב המלא לתיקייה שבה הטרמינל נמצא עכשיו.",
+      "category": "Files & Directories",
+      "summary": "Print working directory",
+      "description": "Prints the full path to the directory you are currently in.",
       "syntax": "pwd [-L|-P]",
       "options": [
         {
           "flag": "-L",
-          "description": "מציג את הנתיב הלוגי עם קישורים סמליים (בדרך כלל ברירת המחדל ב־Bash)."
+          "description": "Show the logical path, which may contain symbolic links."
         },
         {
           "flag": "-P",
-          "description": "מציג את הנתיב הפיזי לאחר פתרון קישורים סמליים."
+          "description": "Resolve symbolic links and print the physical path."
         }
       ],
       "examples": [
         {
           "command": "pwd",
-          "description": "הצגת התיקייה הנוכחית."
+          "description": "Print the current directory."
         },
         {
           "command": "pwd -P",
-          "description": "הצגת הנתיב הפיזי."
+          "description": "Print the physical path."
         }
       ],
       "keywords": [
-        "איפה אני",
         "path",
-        "current directory"
+        "current directory",
+        "current",
+        "location",
+        "directory"
       ],
       "note": null,
       "type": "builtin"
@@ -143,34 +150,36 @@
     {
       "id": "mkdir",
       "name": "mkdir",
-      "category": "קבצים ותיקיות",
-      "summary": "יצירת תיקיות",
-      "description": "יוצר תיקייה חדשה בשם ובנתיב שסיפקת.",
+      "category": "Files & Directories",
+      "summary": "Create directories",
+      "description": "Creates one or more directories at the specified paths.",
       "syntax": "mkdir [options] directory...",
       "options": [
         {
           "flag": "-p",
-          "description": "יוצר גם תיקיות אב חסרות; לא נכשל אם התיקייה כבר קיימת."
+          "description": "Create missing parent directories; allow directories that already exist."
         },
         {
           "flag": "-v",
-          "description": "מציג הודעה על כל תיקייה שנוצרה."
+          "description": "Print a message for each newly created directory."
         }
       ],
       "examples": [
         {
           "command": "mkdir notes",
-          "description": "יצירת תיקייה בשם notes."
+          "description": "Create a directory named notes."
         },
         {
           "command": "mkdir -p projects/demo",
-          "description": "יצירת מבנה תיקיות גם אם projects אינה קיימת."
+          "description": "Create nested directories, including missing parents."
         }
       ],
       "keywords": [
-        "צור תיקייה",
         "make directory",
-        "folder"
+        "folder",
+        "make",
+        "directory",
+        "create"
       ],
       "note": null,
       "type": "utility"
@@ -178,38 +187,39 @@
     {
       "id": "touch",
       "name": "touch",
-      "category": "קבצים ותיקיות",
-      "summary": "יצירת קובץ ריק או עדכון זמן שינוי",
-      "description": "מעדכן חותמות זמן של קבצים. אם קובץ לא קיים, יוצר קובץ ריק כברירת מחדל.",
+      "category": "Files & Directories",
+      "summary": "Create empty files or update timestamps",
+      "description": "Updates file access and modification timestamps; by default creates missing files.",
       "syntax": "touch [options] file...",
       "options": [
         {
           "flag": "-c",
-          "description": "לא יוצר קובץ אם אינו קיים."
+          "description": "Do not create missing files."
         },
         {
           "flag": "-a",
-          "description": "מעדכן את זמן הגישה."
+          "description": "Update the access timestamp."
         },
         {
           "flag": "-m",
-          "description": "מעדכן את זמן השינוי."
+          "description": "Update the modification timestamp."
         }
       ],
       "examples": [
         {
           "command": "touch notes.txt",
-          "description": "יצירת קובץ ריק אם אינו קיים."
+          "description": "Create an empty file if needed."
         },
         {
           "command": "touch -c existing.txt",
-          "description": "עדכון רק אם הקובץ קיים."
+          "description": "Update timestamps only if the file exists."
         }
       ],
       "keywords": [
         "new file",
-        "קובץ חדש",
-        "timestamps"
+        "timestamps",
+        "file",
+        "create"
       ],
       "note": null,
       "type": "utility"
@@ -217,369 +227,373 @@
     {
       "id": "cp",
       "name": "cp",
-      "category": "קבצים ותיקיות",
-      "summary": "העתקת קבצים ותיקיות",
-      "description": "מעתיק קבצים, ועם אפשרות מתאימה גם תיקיות.",
+      "category": "Files & Directories",
+      "summary": "Copy files and directories",
+      "description": "Copies files and, with an option, entire directories.",
       "syntax": "cp [options] source destination",
       "options": [
         {
           "flag": "-r",
-          "description": "העתקה רקורסיבית של תיקייה ותכולתה."
+          "description": "Copy directories recursively."
         },
         {
           "flag": "-i",
-          "description": "מבקש אישור לפני דריסה של קובץ יעד קיים."
+          "description": "Ask before overwriting a destination."
         },
         {
           "flag": "-n",
-          "description": "לא דורס קובץ יעד קיים (תמיכה והתנהגות תלויות מימוש)."
+          "description": "Avoid overwriting destinations when supported; behavior varies."
         },
         {
           "flag": "-v",
-          "description": "מציג מה מועתק."
+          "description": "Print the files being copied."
         }
       ],
       "examples": [
         {
           "command": "cp notes.txt backup.txt",
-          "description": "העתקת קובץ."
+          "description": "Copy a file."
         },
         {
           "command": "cp -ri folder folder-backup",
-          "description": "העתקת תיקייה עם בקשת אישור לפני דריסה."
+          "description": "Copy a directory and request confirmation before overwriting."
         }
       ],
       "keywords": [
         "copy",
-        "העתק",
-        "duplicate"
+        "duplicate",
+        "backup"
       ],
-      "note": "שינויי התנהגות בין GNU ל־BSD עשויים להשפיע על דגלים מסוימים.",
+      "note": "Some flags differ between GNU and BSD implementations.",
       "type": "utility"
     },
     {
       "id": "mv",
       "name": "mv",
-      "category": "קבצים ותיקיות",
-      "summary": "העברה או שינוי שם של קובץ",
-      "description": "מעביר קובץ/תיקייה ממיקום למיקום, או משנה את השם שלהם.",
+      "category": "Files & Directories",
+      "summary": "Move or rename files",
+      "description": "Moves files and folders or changes their names.",
       "syntax": "mv [options] source destination",
       "options": [
         {
           "flag": "-i",
-          "description": "מבקש אישור לפני דריסה."
+          "description": "Ask before overwriting the destination."
         },
         {
           "flag": "-n",
-          "description": "לא דורס יעד קיים (תלוי מימוש)."
+          "description": "Avoid overwriting an existing target when supported."
         },
         {
           "flag": "-v",
-          "description": "מציג מה הועבר."
+          "description": "Show the entries that were moved."
         }
       ],
       "examples": [
         {
           "command": "mv old.txt new.txt",
-          "description": "שינוי שם."
+          "description": "Rename a file."
         },
         {
           "command": "mv notes.txt ~/Documents/",
-          "description": "העברה לתיקייה אחרת."
+          "description": "Move a file into another directory."
         },
         {
           "command": "mv -i draft.txt final.txt",
-          "description": "העברה עם אישור לפני דריסת יעד."
+          "description": "Ask before replacing an existing file."
         }
       ],
       "keywords": [
         "move",
         "rename",
-        "שינוי שם",
-        "העבר"
+        "relocate"
       ],
-      "note": "היזהר: ללא ‎-i ייתכן שקובץ יעד קיים יוחלף בהתאם למימוש ולהגדרות.",
+      "note": "A destination file may be replaced without warning unless protective options are used.",
       "type": "utility"
     },
     {
       "id": "rm",
       "name": "rm",
-      "category": "קבצים ותיקיות",
-      "summary": "מחיקת קבצים",
-      "description": "מוחק קבצים. בניגוד להעברה לסל מחזור, המחיקה בדרך כלל אינה ניתנת לביטול בקלות.",
+      "category": "Files & Directories",
+      "summary": "Delete files",
+      "description": "Deletes files, typically without moving them to Trash or Recycle Bin.",
       "syntax": "rm [options] file...",
       "options": [
         {
           "flag": "-i",
-          "description": "מבקש אישור לפני כל מחיקה."
+          "description": "Ask for confirmation before each deletion."
         },
         {
           "flag": "-r",
-          "description": "מאפשר מחיקה רקורסיבית של תיקייה ותכולתה — פעולה מסוכנת."
+          "description": "Delete directories and their contents recursively; use caution."
         },
         {
           "flag": "-v",
-          "description": "מציג אילו פריטים נמחקים."
+          "description": "Print which items are removed."
         }
       ],
       "examples": [
         {
           "command": "rm -i old-notes.txt",
-          "description": "בקשת אישור לפני מחיקת קובץ."
+          "description": "Ask before deleting a file."
         },
         {
           "command": "rm unwanted.txt",
-          "description": "מחיקת קובץ בשם זה."
+          "description": "Delete a file."
         }
       ],
       "keywords": [
         "delete",
         "remove",
-        "מחיקה"
+        "file"
       ],
-      "note": "זהירות: מחיקה באמצעות rm אינה מעבירה קבצים לסל המחזור. כדאי לוודא את הנתיב ולהתחיל עם ‎-i.",
+      "note": "Warning: rm deletions are usually difficult to undo. Check paths carefully and consider -i.",
       "type": "utility"
     },
     {
       "id": "cat",
       "name": "cat",
-      "category": "טקסט וחיפוש",
-      "summary": "הצגת תוכן קבצי טקסט",
-      "description": "מציג תוכן קובץ או מספר קבצים בטרמינל. מתאים לקבצים קצרים.",
+      "category": "Text & Search",
+      "summary": "Display file contents",
+      "description": "Prints the contents of files to the terminal; suitable for relatively short files.",
       "syntax": "cat [options] [file...]",
       "options": [
         {
           "flag": "-n",
-          "description": "מוסיף מספר לכל שורה."
+          "description": "Number all output lines."
         },
         {
           "flag": "-b",
-          "description": "ממספר רק שורות שאינן ריקות."
+          "description": "Number only nonempty lines."
         },
         {
           "flag": "-s",
-          "description": "מצמצם רצפים של שורות ריקות (תלוי מימוש)."
+          "description": "Collapse repeated empty lines when supported."
         }
       ],
       "examples": [
         {
           "command": "cat notes.txt",
-          "description": "הצגת תוכן הקובץ."
+          "description": "Print a file's contents."
         },
         {
           "command": "cat -n notes.txt",
-          "description": "הצגת תוכן עם מספרי שורות."
+          "description": "Show a file with line numbers."
         }
       ],
       "keywords": [
         "read",
         "view",
-        "הצגת קובץ",
-        "print file"
+        "print file",
+        "print",
+        "concatenate"
       ],
-      "note": "לקבצים ארוכים כדאי להשתמש ב־less.",
+      "note": "Use less to browse long files.",
       "type": "utility"
     },
     {
       "id": "sort",
       "name": "sort",
-      "category": "טקסט וחיפוש",
-      "summary": "מיון שורות טקסט",
-      "description": "ממיין שורות מקובץ או מקלט שמועבר בצינור (pipe). כברירת מחדל המיון הוא לקסיקוגרפי לפי כללי המיקום.",
+      "category": "Text & Search",
+      "summary": "Sort text lines",
+      "description": "Sorts lines from files or standard input, using locale-specific ordering by default.",
       "syntax": "sort [options] [file...]",
       "options": [
         {
           "flag": "-n",
-          "description": "מיון לפי ערך מספרי."
+          "description": "Sort by numeric value."
         },
         {
           "flag": "-r",
-          "description": "היפוך סדר המיון."
+          "description": "Reverse the order."
         },
         {
           "flag": "-u",
-          "description": "פלט של שורות ייחודיות בלבד."
+          "description": "Show unique lines only."
         },
         {
           "flag": "-k N",
-          "description": "מיון החל משדה מספר N; אפשר להגדיר שדה/מפתח מדויק."
+          "description": "Sort using field N as the key."
         },
         {
           "flag": "-t CHAR",
-          "description": "בחירת תו מפריד בין שדות."
+          "description": "Choose the field separator."
         },
         {
           "flag": "-o FILE",
-          "description": "כתיבת התוצאה לקובץ במקום ל־stdout."
+          "description": "Write sorted output to the specified file."
         }
       ],
       "examples": [
         {
           "command": "sort names.txt",
-          "description": "מיון שורות בסדר עולה."
+          "description": "Sort lines in ascending order."
         },
         {
           "command": "sort -nr numbers.txt",
-          "description": "מיון מספרי יורד."
+          "description": "Sort numbers in descending order."
         },
         {
           "command": "sort -u names.txt",
-          "description": "מיון והסרת כפילויות."
+          "description": "Sort and deduplicate lines."
         },
         {
           "command": "sort -t, -k2,2 people.csv",
-          "description": "מיון CSV פשוט לפי השדה השני."
+          "description": "Sort simple CSV data by the second field."
         }
       ],
       "keywords": [
-        "מיון",
         "reverse",
         "numeric",
         "ascending",
-        "descending"
+        "descending",
+        "sorting"
       ],
-      "note": "sort -r הופך את כיוון המיון; sort -n הופך את ההשוואה למספרית. ניתן לשלב: sort -nr.",
+      "note": "Use -nr together for reverse numeric order.",
       "type": "utility"
     },
     {
       "id": "grep",
       "name": "grep",
-      "category": "טקסט וחיפוש",
-      "summary": "חיפוש שורות שמתאימות לתבנית",
-      "description": "מחפש טקסט או ביטוי רגולרי בקלט, ומציג את השורות שמתאימות.",
+      "category": "Text & Search",
+      "summary": "Search for matching text",
+      "description": "Searches text or regular expressions and prints matching lines.",
       "syntax": "grep [options] pattern [file...]",
       "options": [
         {
           "flag": "-i",
-          "description": "התעלמות מהבדלי אותיות גדולות וקטנות."
+          "description": "Ignore uppercase/lowercase differences."
         },
         {
           "flag": "-n",
-          "description": "מציג מספרי שורות."
+          "description": "Show matching line numbers."
         },
         {
           "flag": "-r",
-          "description": "מחפש גם בתיקיות משנה."
+          "description": "Search subdirectories recursively."
         },
         {
           "flag": "-v",
-          "description": "מציג דווקא שורות שלא מתאימות."
+          "description": "Print lines that do not match."
         },
         {
           "flag": "-F",
-          "description": "מתייחס לתבנית כטקסט רגיל ולא כביטוי רגולרי."
+          "description": "Treat the pattern as literal text."
         },
         {
           "flag": "-E",
-          "description": "שימוש בביטויים רגולריים מורחבים."
+          "description": "Enable extended regular expressions."
         }
       ],
       "examples": [
         {
           "command": "grep -n error app.log",
-          "description": "חיפוש error עם מספרי שורות."
+          "description": "Find error with line numbers."
         },
         {
           "command": "grep -ri hello .",
-          "description": "חיפוש לא רגיש לאותיות בתיקייה הנוכחית ובתיקיות משנה."
+          "description": "Search recursively without case sensitivity."
         },
         {
           "command": "grep -F \"a.b\" notes.txt",
-          "description": "חיפוש הטקסט a.b כפשוטו."
+          "description": "Find the literal string a.b."
         }
       ],
       "keywords": [
         "search text",
-        "חיפוש טקסט",
         "pattern",
-        "regex"
+        "regex",
+        "search",
+        "text"
       ],
-      "note": "למחרוזת שמכילה רווחים השתמש במירכאות. לתבנית שאינה ביטוי רגולרי, ‎-F נוח וברור.",
+      "note": "Quote patterns containing spaces. Use -F for plain-text matching.",
       "type": "utility"
     },
     {
       "id": "find",
       "name": "find",
-      "category": "טקסט וחיפוש",
-      "summary": "איתור קבצים לפי שם ותכונות",
-      "description": "סורק עץ תיקיות ומסנן קבצים לפי קריטריונים. הסדר של הפרמטרים יכול להשפיע.",
+      "category": "Text & Search",
+      "summary": "Find files by name or properties",
+      "description": "Walks directory trees and selects files or directories matching an expression.",
       "syntax": "find [path...] [expression]",
       "options": [
         {
           "flag": "-name \"*.txt\"",
-          "description": "איתור לפי שם באמצעות תבנית glob; מומלץ לשים במירכאות."
+          "description": "Match filenames with a glob; quote the pattern."
         },
         {
           "flag": "-iname \"*.txt\"",
-          "description": "כמו ‎-name, ללא הבדל בין אותיות גדולות/קטנות (נפוץ)."
+          "description": "Match filenames without case sensitivity when supported."
         },
         {
           "flag": "-type f",
-          "description": "קבצים רגילים בלבד."
+          "description": "Match regular files only."
         },
         {
           "flag": "-type d",
-          "description": "תיקיות בלבד."
+          "description": "Match directories only."
         },
         {
           "flag": "-maxdepth N",
-          "description": "מגביל עומק חיפוש (GNU find; לא זמין בכל מערכת)."
+          "description": "Limit recursion depth on GNU find."
         }
       ],
       "examples": [
         {
           "command": "find . -name \"*.txt\"",
-          "description": "איתור קובצי txt בתיקייה הנוכחית ומתחתיה."
+          "description": "Find .txt files under the current directory."
         },
         {
           "command": "find ~/Documents -type d",
-          "description": "הצגת תיקיות ב־Documents."
+          "description": "List directories under Documents."
         },
         {
           "command": "find . -type f -name \"report*\"",
-          "description": "מציאת קבצים ששמם מתחיל ב־report."
+          "description": "Find files whose names begin with report."
         }
       ],
       "keywords": [
         "find files",
-        "איתור קבצים",
-        "תיקיות",
-        "files by name"
+        "files by name",
+        "find",
+        "locate",
+        "files",
+        "directories"
       ],
-      "note": "המרכאות סביב *.txt מונעות מה־Shell להרחיב את הכוכבית לפני ש־find מקבל אותה.",
+      "note": "Quote *.txt so Bash does not expand the pattern before find receives it.",
       "type": "utility"
     },
     {
       "id": "head",
       "name": "head",
-      "category": "טקסט וחיפוש",
-      "summary": "הצגת שורות ראשונות של קובץ",
-      "description": "מציג כברירת מחדל את עשר השורות הראשונות של קובץ.",
+      "category": "Text & Search",
+      "summary": "Display the beginning of a file",
+      "description": "Shows the first ten lines of a file by default.",
       "syntax": "head [options] [file...]",
       "options": [
         {
           "flag": "-n N",
-          "description": "מציג N שורות ראשונות."
+          "description": "Show the first N lines."
         },
         {
           "flag": "-c N",
-          "description": "מציג N בתים ראשונים."
+          "description": "Show the first N bytes."
         }
       ],
       "examples": [
         {
           "command": "head notes.txt",
-          "description": "עשר השורות הראשונות."
+          "description": "Show the first ten lines."
         },
         {
           "command": "head -n 5 notes.txt",
-          "description": "חמש השורות הראשונות."
+          "description": "Show the first five lines."
         }
       ],
       "keywords": [
         "first lines",
-        "תחילת קובץ",
-        "preview"
+        "preview",
+        "first",
+        "lines"
       ],
       "note": null,
       "type": "utility"
@@ -587,43 +601,44 @@
     {
       "id": "tail",
       "name": "tail",
-      "category": "טקסט וחיפוש",
-      "summary": "הצגת שורות אחרונות של קובץ",
-      "description": "מציג כברירת מחדל את עשר השורות האחרונות, ויכול לעקוב אחרי שינויים בזמן אמת.",
+      "category": "Text & Search",
+      "summary": "Display the end of a file",
+      "description": "Shows the last ten lines of a file by default, optionally following additions.",
       "syntax": "tail [options] [file...]",
       "options": [
         {
           "flag": "-n N",
-          "description": "מציג N שורות אחרונות."
+          "description": "Show the last N lines."
         },
         {
           "flag": "-f",
-          "description": "ממשיך לעקוב אחרי שורות שנוספות לקובץ."
+          "description": "Follow new lines as they are added."
         },
         {
           "flag": "-c N",
-          "description": "מציג N בתים אחרונים."
+          "description": "Show the last N bytes."
         }
       ],
       "examples": [
         {
           "command": "tail notes.txt",
-          "description": "עשר השורות האחרונות."
+          "description": "Show the last ten lines."
         },
         {
           "command": "tail -n 20 app.log",
-          "description": "עשרים השורות האחרונות."
+          "description": "Show the last twenty lines."
         },
         {
           "command": "tail -f app.log",
-          "description": "צפייה בתוספות לקובץ לוג (Ctrl+C לעצירה)."
+          "description": "Follow a log file; press Ctrl+C to stop."
         }
       ],
       "keywords": [
         "last lines",
-        "סוף קובץ",
         "logs",
-        "follow"
+        "follow",
+        "last",
+        "lines"
       ],
       "note": null,
       "type": "utility"
@@ -631,189 +646,190 @@
     {
       "id": "wc",
       "name": "wc",
-      "category": "טקסט וחיפוש",
-      "summary": "ספירת שורות, מילים ובתים",
-      "description": "סופר נתונים בטקסט שנקרא מקובץ או מהקלט.",
+      "category": "Text & Search",
+      "summary": "Count lines, words, and bytes",
+      "description": "Counts words, newline characters, bytes, or characters in files or input.",
       "syntax": "wc [options] [file...]",
       "options": [
         {
           "flag": "-l",
-          "description": "ספירת תווי ירידת שורה."
+          "description": "Count newline characters."
         },
         {
           "flag": "-w",
-          "description": "ספירת מילים."
+          "description": "Count words."
         },
         {
           "flag": "-c",
-          "description": "ספירת בתים."
+          "description": "Count bytes."
         },
         {
           "flag": "-m",
-          "description": "ספירת תווים (בהתאם להגדרות locale)."
+          "description": "Count characters according to the locale."
         }
       ],
       "examples": [
         {
           "command": "wc notes.txt",
-          "description": "הצגת ספירת שורות, מילים ובתים."
+          "description": "Show line, word, and byte counts."
         },
         {
           "command": "wc -l notes.txt",
-          "description": "ספירת שורות לפי תווי newline."
+          "description": "Count newline characters."
         },
         {
           "command": "wc -w essay.txt",
-          "description": "ספירת מילים."
+          "description": "Count words."
         }
       ],
       "keywords": [
         "count",
         "word count",
-        "ספירה",
-        "lines"
+        "lines",
+        "word",
+        "bytes"
       ],
-      "note": "המספר של ‎wc -l הוא מספר תווי ירידת שורה, ולא תמיד מספר השורות הגלויות אם השורה האחרונה אינה מסתיימת ב־newline.",
+      "note": "wc -l counts newline characters; a final line without a newline might not be counted.",
       "type": "utility"
     },
     {
       "id": "less",
       "name": "less",
-      "category": "טקסט וחיפוש",
-      "summary": "צפייה נוחה בקובץ ארוך",
-      "description": "פותח תוכן ארוך בתצוגה שניתן לגלול בה, בלי להציף את מסך הטרמינל.",
+      "category": "Text & Search",
+      "summary": "Browse long text files",
+      "description": "Opens text in a scrollable pager instead of flooding the terminal.",
       "syntax": "less [options] file",
       "options": [
         {
           "flag": "-N",
-          "description": "הצגת מספרי שורות."
+          "description": "Show line numbers."
         },
         {
           "flag": "-S",
-          "description": "מניעת שבירת שורות ארוכות."
+          "description": "Do not wrap long lines."
         },
         {
           "flag": "/text",
-          "description": "מתוך less: חיפוש קדימה אחר text (לא דגל)."
+          "description": "Search for text inside less (not a flag)."
         },
         {
           "flag": "q",
-          "description": "מתוך less: יציאה (לא דגל)."
+          "description": "Quit the pager (a key, not a flag)."
         }
       ],
       "examples": [
         {
           "command": "less README.md",
-          "description": "פתיחת קובץ לצפייה."
+          "description": "Open a file for browsing."
         },
         {
           "command": "less -N app.log",
-          "description": "צפייה עם מספרי שורות."
+          "description": "Browse a log with line numbers."
         }
       ],
       "keywords": [
         "pager",
         "scroll",
         "view file",
-        "צפייה"
+        "view",
+        "file"
       ],
-      "note": "בתוך less: מקשי החיצים או Page Up/Down לגלילה, ‎/‎ לחיפוש, ו־q ליציאה.",
+      "note": "Use arrows to scroll, / to search, and q to quit.",
       "type": "utility"
     },
     {
       "id": "echo",
       "name": "echo",
-      "category": "מערכת",
-      "summary": "הדפסת טקסט או ערך של משתנה",
-      "description": "מדפיס ארגומנטים למסך. זו פקודה מובנית ב־Bash.",
+      "category": "System",
+      "summary": "Print text or variable values",
+      "description": "Prints its arguments; echo is a Bash builtin.",
       "syntax": "echo [options] [text...]",
       "options": [
         {
           "flag": "-n",
-          "description": "אין ירידת שורה בסוף הפלט."
+          "description": "Omit the trailing newline."
         },
         {
           "flag": "$HOME",
-          "description": "דוגמה להרחבת משתנה בסביבת ה־Shell; לא דגל."
+          "description": "Example of variable expansion; not a flag."
         }
       ],
       "examples": [
         {
           "command": "echo \"Hello\"",
-          "description": "הדפסת Hello."
+          "description": "Print Hello."
         },
         {
           "command": "echo \"$HOME\"",
-          "description": "הצגת הנתיב לתיקיית הבית."
+          "description": "Print your home directory path."
         }
       ],
       "keywords": [
         "print",
         "output",
-        "הדפסה",
-        "variables"
+        "variables",
+        "text"
       ],
-      "note": "לפורמט צפוי ומדויק, במיוחד עם תווי בריחה, לעיתים עדיף printf.",
+      "note": "For precise and portable formatting, consider printf.",
       "type": "builtin"
     },
     {
       "id": "man",
       "name": "man",
-      "category": "מערכת",
-      "summary": "פתיחת עמוד העזרה של פקודה",
-      "description": "מציג את התיעוד המקומי (manual) של פקודה, אם מותקנות במערכת חוברות העזרה.",
+      "category": "System",
+      "summary": "Open command manuals",
+      "description": "Displays locally installed manual pages for commands.",
       "syntax": "man [section] command",
       "options": [
         {
           "flag": "-k keyword",
-          "description": "חיפוש בתיאורים של עמודי man."
+          "description": "Search manual descriptions by keyword."
         },
         {
           "flag": "q",
-          "description": "בתוך man: יציאה מעמוד העזרה (לא דגל)."
+          "description": "Quit the manual viewer (not a flag)."
         }
       ],
       "examples": [
         {
           "command": "man ls",
-          "description": "הצגת ספר ההוראות של ls."
+          "description": "Read the ls manual."
         },
         {
           "command": "man sort",
-          "description": "תיעוד מלא של sort."
+          "description": "Read the sort manual."
         },
         {
           "command": "man -k copy",
-          "description": "חיפוש פקודות הקשורות להעתקה."
+          "description": "Search for commands related to copying."
         }
       ],
       "keywords": [
         "manual",
         "help",
-        "עזרה",
-        "תיעוד"
+        "documentation"
       ],
-      "note": "המאגר הזה מציג אפשרויות שימושיות ולא בהכרח כל דגל אפשרי. man הוא המקור המקומי לפירוט המלא.",
+      "note": "Manual pages may contain options beyond those in this quick reference.",
       "type": "utility"
     },
     {
       "id": "clear",
       "name": "clear",
-      "category": "מערכת",
-      "summary": "ניקוי התצוגה בטרמינל",
-      "description": "מנקה את אזור התצוגה של מסך הטרמינל (בהתאם לאמולטור).",
+      "category": "System",
+      "summary": "Clear the terminal display",
+      "description": "Clears the visible terminal screen.",
       "syntax": "clear",
       "options": [],
       "examples": [
         {
           "command": "clear",
-          "description": "ניקוי אזור התצוגה."
+          "description": "Clear the terminal."
         }
       ],
       "keywords": [
-        "ניקוי מסך",
         "terminal",
-        "screen"
+        "screen",
+        "clear"
       ],
       "note": null,
       "type": "utility"
@@ -821,791 +837,798 @@
     {
       "id": "printf",
       "name": "printf",
-      "category": "מערכת",
-      "summary": "הדפסת טקסט בפורמט קבוע",
-      "description": "מדפיס טקסט וערכים לפי מחרוזת פורמט. שימושי כאשר חשוב לשלוט בירידת שורה, רווחים או אופן הצגת נתונים.",
+      "category": "System",
+      "summary": "Print formatted text",
+      "description": "Prints data according to a format string, allowing control over line breaks and layout.",
       "syntax": "printf format [arguments...]",
       "options": [
         {
           "flag": "%s",
-          "description": "הדפסת מחרוזת."
+          "description": "Insert a string."
         },
         {
           "flag": "%d",
-          "description": "הדפסת מספר שלם."
+          "description": "Insert an integer."
         },
         {
           "flag": "\\n",
-          "description": "תו ירידת שורה בתוך מחרוזת הפורמט (לא דגל)."
+          "description": "Newline escape inside a format string (not a flag)."
         }
       ],
       "examples": [
         {
           "command": "printf 'Hello\\n'",
-          "description": "הדפסת Hello וירידת שורה."
+          "description": "Print Hello followed by a newline."
         },
         {
           "command": "printf '%s: %d\\n' apples 3",
-          "description": "הדפסת טקסט ומספר באותה שורה."
+          "description": "Print a label and a number."
         }
       ],
       "keywords": [
-        "פורמט",
-        "הדפסה",
         "print format",
-        "newline"
+        "newline",
+        "format",
+        "print",
+        "text"
       ],
-      "note": "בניגוד ל־echo, printf אינו מוסיף ירידת שורה אוטומטית.",
+      "note": "Unlike echo, printf does not add a newline automatically.",
       "type": "builtin"
     },
     {
       "id": "cut",
       "name": "cut",
-      "category": "טקסט וחיפוש",
-      "summary": "בחירת עמודות או תווים",
-      "description": "מוציא עמודות או טווחי תווים מכל שורת קלט. שימושי במיוחד עבור טקסט עם מפריד קבוע כמו פסיק או נקודתיים.",
+      "category": "Text & Search",
+      "summary": "Extract fields or characters",
+      "description": "Selects fields or character ranges from each input line.",
       "syntax": "cut [options] [file...]",
       "options": [
         {
           "flag": "-d DELIM",
-          "description": "הגדרת התו שמפריד בין שדות."
+          "description": "Set the field delimiter."
         },
         {
           "flag": "-f LIST",
-          "description": "בחירת שדות לפי מספרם (הספירה מתחילה מ־1)."
+          "description": "Select field numbers, starting at 1."
         },
         {
           "flag": "-c LIST",
-          "description": "בחירת מיקומי תווים."
+          "description": "Select character ranges."
         }
       ],
       "examples": [
         {
           "command": "cut -d, -f1 data.csv",
-          "description": "הדפסת העמודה הראשונה בקובץ CSV פשוט."
+          "description": "Get the first comma-separated field."
         },
         {
           "command": "cut -c1-5 names.txt",
-          "description": "הדפסת חמשת התווים הראשונים מכל שורה."
+          "description": "Get the first five characters."
         }
       ],
       "keywords": [
-        "עמודות",
-        "שדות",
         "field",
         "extract",
-        "csv"
+        "csv",
+        "cut",
+        "fields",
+        "columns",
+        "characters"
       ],
-      "note": "cut אינו מפענח CSV מורכב עם פסיקים בתוך שדות מצוטטים.",
+      "note": "cut is not a complete parser for complex quoted CSV files.",
       "type": "utility"
     },
     {
       "id": "uniq",
       "name": "uniq",
-      "category": "טקסט וחיפוש",
-      "summary": "הסרת שורות כפולות סמוכות",
-      "description": "מאחד רצפים של שורות זהות שנמצאות זו לצד זו. כאשר רוצים להסיר כפילויות מכל הקובץ, לרוב ממיינים קודם.",
+      "category": "Text & Search",
+      "summary": "Remove adjacent duplicate lines",
+      "description": "Collapses consecutive identical lines; sort input first to eliminate nonadjacent duplicates.",
       "syntax": "uniq [options] [input [output]]",
       "options": [
         {
           "flag": "-c",
-          "description": "הצגת מספר ההופעות של כל רצף שורות."
+          "description": "Count adjacent occurrences."
         },
         {
           "flag": "-d",
-          "description": "הצגת שורות שחוזרות לפחות פעמיים ברצף."
+          "description": "Show only repeated lines."
         },
         {
           "flag": "-u",
-          "description": "הצגת שורות ייחודיות בלבד בכל רצף."
+          "description": "Show lines that appear only once."
         }
       ],
       "examples": [
         {
           "command": "sort names.txt | uniq",
-          "description": "מיון והסרת שורות זהות."
+          "description": "Remove duplicates after sorting."
         },
         {
           "command": "sort names.txt | uniq -c",
-          "description": "ספירת הופעות של כל שורה אחרי מיון."
+          "description": "Count repeated values after sorting."
         }
       ],
       "keywords": [
         "unique",
-        "כפילויות",
         "deduplicate",
-        "ספירה"
+        "duplicate",
+        "lines"
       ],
-      "note": "uniq מסיר כפילויות סמוכות בלבד; הוא אינו ממיין את הקלט.",
+      "note": "uniq does not sort; it only checks neighboring lines.",
       "type": "utility"
     },
     {
       "id": "tr",
       "name": "tr",
-      "category": "טקסט וחיפוש",
-      "summary": "החלפה או מחיקה של תווים",
-      "description": "מחליף, מוחק או מצמצם רצפים של תווים בקלט שמגיע מ־stdin.",
+      "category": "Text & Search",
+      "summary": "Translate or delete characters",
+      "description": "Replaces, removes, or squeezes characters from standard input.",
       "syntax": "tr [options] SET1 [SET2]",
       "options": [
         {
           "flag": "-d",
-          "description": "מחיקת תווים מהקבוצה הראשונה."
+          "description": "Delete selected characters."
         },
         {
           "flag": "-s",
-          "description": "כיווץ חזרות של תווים זהים לתו בודד."
+          "description": "Collapse consecutive occurrences."
         },
         {
           "flag": "SET1 SET2",
-          "description": "התאמת תווים בין שתי קבוצות (ארגומנטים, לא דגלים)."
+          "description": "Map characters in SET1 to SET2 (arguments)."
         }
       ],
       "examples": [
         {
           "command": "printf 'abc\\n' | tr 'a-z' 'A-Z'",
-          "description": "המרת אותיות קטנות לגדולות."
+          "description": "Convert lowercase letters to uppercase."
         },
         {
           "command": "tr -s ' ' < input.txt",
-          "description": "צמצום רווחים חוזרים בקלט."
+          "description": "Collapse repeated spaces in a file."
         }
       ],
       "keywords": [
         "translate",
-        "החלפת תווים",
         "uppercase",
-        "lowercase"
+        "lowercase",
+        "replace",
+        "characters"
       ],
-      "note": "tr פועל על תווים בודדים ואינו מחליף מילים שלמות.",
+      "note": "tr works with characters rather than entire words.",
       "type": "utility"
     },
     {
       "id": "sed",
       "name": "sed",
-      "category": "טקסט וחיפוש",
-      "summary": "עריכת זרמי טקסט",
-      "description": "מסנן ומשנה טקסט באמצעות הוראות קצרות. אפשר למשל להציג שורות מסוימות או להחליף הופעות של מחרוזת.",
+      "category": "Text & Search",
+      "summary": "Edit text streams",
+      "description": "Processes text using editing expressions, such as displaying selected lines or replacing text.",
       "syntax": "sed [options] script [file...]",
       "options": [
         {
           "flag": "-n",
-          "description": "מבטל הדפסה אוטומטית; שימושי עם פקודת p."
+          "description": "Suppress normal automatic printing."
         },
         {
           "flag": "s/old/new/g",
-          "description": "החלפת כל ההופעות בכל שורה (תחביר של sed)."
+          "description": "Replace old with new throughout each line."
         },
         {
           "flag": "-e script",
-          "description": "הוספת הוראת עריכה נוספת."        }
+          "description": "Specify an additional sed expression."
+        }
       ],
       "examples": [
         {
           "command": "sed -n '1,5p' notes.txt",
-          "description": "הצגת חמש השורות הראשונות."
+          "description": "Show only the first five lines."
         },
         {
           "command": "sed 's/cat/dog/g' animals.txt",
-          "description": "החלפת cat ב־dog בפלט בלבד."
+          "description": "Replace every occurrence of cat with dog."
         }
       ],
       "keywords": [
         "stream editor",
-        "החלפה",
         "replace",
-        "עריכת טקסט"
+        "stream",
+        "editor",
+        "substitute"
       ],
-      "note": "ברירת המחדל אינה משנה את קובץ המקור: הפלט נשלח למסך. עריכה בקובץ עצמו דורשת אפשרויות נפרדות המשתנות בין מערכות.",
+      "note": "By default, sed outputs changes without modifying its source file. In-place options vary by system.",
       "type": "utility"
     },
     {
       "id": "awk",
       "name": "awk",
-      "category": "טקסט וחיפוש",
-      "summary": "עיבוד עמודות ושדות",
-      "description": "כלי לעיבוד שורות ושדות בטקסט. הוא מאפשר לבחור עמודות, להפעיל תנאים ולבצע חישובים קצרים.",
+      "category": "Text & Search",
+      "summary": "Process text fields",
+      "description": "Processes text records and fields with conditions, expressions, and simple calculations.",
       "syntax": "awk [options] program [file...]",
       "options": [
         {
           "flag": "-F SEP",
-          "description": "הגדרת תו מפריד בין שדות."
+          "description": "Choose the field separator."
         },
         {
           "flag": "$1",
-          "description": "השדה הראשון בשורה (ביטוי בשפת awk)."
+          "description": "Refer to the first input field in awk."
         },
         {
           "flag": "NR",
-          "description": "מספר השורה הנוכחית (משתנה בשפת awk)."
+          "description": "Built-in variable for the current record number."
         }
       ],
       "examples": [
         {
           "command": "awk '{print $1}' notes.txt",
-          "description": "הצגת המילה הראשונה מכל שורה."
+          "description": "Print the first field."
         },
         {
           "command": "awk -F, '{print $2}' data.csv",
-          "description": "הצגת השדה השני בקובץ מופרד בפסיקים."
+          "description": "Print the second comma-separated field."
         }
       ],
       "keywords": [
         "columns",
-        "שדות",
-        "הדפסת עמודה",
-        "processing"
+        "processing",
+        "fields",
+        "process",
+        "text"
       ],
-      "note": "ב־awk, הסימון $1 מתייחס לשדה הראשון; $0 מתייחס לשורה כולה. זה אינו משתנה של Bash.",
+      "note": "In awk, $1 refers to the first field and $0 to the entire record; these are not Bash variables.",
       "type": "utility"
     },
     {
       "id": "tee",
       "name": "tee",
-      "category": "טקסט וחיפוש",
-      "summary": "תצוגה ושמירה בו־זמנית",
-      "description": "קורא קלט ומעביר אותו גם למסך וגם לקובץ. שימושי בהמשך של pipe.",
+      "category": "Text & Search",
+      "summary": "Show and save output",
+      "description": "Sends input to both the terminal and a file, commonly in a pipeline.",
       "syntax": "tee [options] [file...]",
       "options": [
         {
           "flag": "-a",
-          "description": "הוספת הפלט לסוף הקובץ במקום החלפתו."
+          "description": "Append rather than overwrite."
         },
         {
           "flag": "-i",
-          "description": "התעלמות מסיגנל interrupt (תלוי מימוש)."
+          "description": "Ignore interrupts when supported."
         }
       ],
       "examples": [
         {
           "command": "echo hello | tee log.txt",
-          "description": "הצגת hello ושמירתו בקובץ."
+          "description": "Show text and save it to a file."
         },
         {
           "command": "echo another | tee -a log.txt",
-          "description": "הוספת שורה לקובץ קיים."
+          "description": "Append another line to an existing file."
         }
       ],
       "keywords": [
-        "שמור פלט",
         "pipe",
         "output",
         "log",
-        "הצגה"
+        "pipeline",
+        "save"
       ],
-      "note": "ללא ‎-a, tee עלול להחליף תוכן של קובץ קיים.",
+      "note": "Without -a, tee may overwrite an existing file.",
       "type": "utility"
     },
     {
       "id": "xargs",
       "name": "xargs",
-      "category": "טקסט וחיפוש",
-      "summary": "הפיכת קלט לארגומנטים",
-      "description": "בונה פקודות מתוך ערכים שמתקבלים דרך stdin. משמש כאשר פקודה אחרת מציגה רשימת ערכים שיש להעביר הלאה.",
+      "category": "Text & Search",
+      "summary": "Build commands from input",
+      "description": "Constructs command-line arguments from values read through standard input.",
       "syntax": "xargs [options] [command [arguments...]]",
       "options": [
         {
           "flag": "-n N",
-          "description": "מספר ארגומנטים מרבי לכל הרצה."
+          "description": "Use no more than N arguments per invocation."
         },
         {
           "flag": "-0",
-          "description": "קריאת ערכים המופרדים בתו NUL; מתאים לשמות קבצים עם רווחים בשילוב מקור תואם."
+          "description": "Read NUL-separated input for safe filename handling."
         },
         {
           "flag": "-I REPLACE",
-          "description": "החלפת סימון קבוע בערכי הקלט בכל הרצה."
+          "description": "Replace a placeholder with each input value."
         }
       ],
       "examples": [
         {
           "command": "printf 'one\\ntwo\\n' | xargs -n 1 echo",
-          "description": "הרצת echo פעם לכל ערך."
+          "description": "Run echo once per input item."
         },
         {
           "command": "printf 'a\\nb\\n' | xargs -I '{}' echo 'item:{}'",
-          "description": "שילוב כל ערך במחרוזת."
+          "description": "Insert each input item into a command argument."
         }
       ],
       "keywords": [
         "arguments",
         "pipe",
         "stdin",
-        "ארגומנטים"
+        "pipeline"
       ],
-      "note": "לטיפול בטוח בשמות קבצים עם רווחים או ירידות שורה משתמשים בפלט NUL וב־xargs -0 כאשר נתמך.",
+      "note": "Use NUL-separated input and xargs -0 for filenames containing spaces or newlines, when available.",
       "type": "utility"
     },
     {
       "id": "diff",
       "name": "diff",
-      "category": "קבצים ותיקיות",
-      "summary": "השוואת תוכן של שני קבצים",
-      "description": "מציג אילו שורות השתנו בין קבצים. הוא אינו משנה אותם.",
+      "category": "Files & Directories",
+      "summary": "Compare files",
+      "description": "Shows differences between files without changing them.",
       "syntax": "diff [options] file1 file2",
       "options": [
         {
           "flag": "-u",
-          "description": "הצגת השוואה בפורמט unified."
+          "description": "Use unified diff format."
         },
         {
           "flag": "-q",
-          "description": "דיווח קצר אם הקבצים שונים."
+          "description": "Report briefly whether differences exist."
         },
         {
           "flag": "-r",
-          "description": "השוואה רקורסיבית של תיקיות."
+          "description": "Compare directories recursively."
         }
       ],
       "examples": [
         {
           "command": "diff old.txt new.txt",
-          "description": "הצגת ההבדלים בין שני קבצים."
+          "description": "Compare two files."
         },
         {
           "command": "diff -u old.txt new.txt",
-          "description": "הצגת הבדלים עם שורות הקשר."
+          "description": "Show unified differences with context."
         }
       ],
       "keywords": [
         "compare",
-        "הבדלים",
-        "השוואת קבצים",
-        "changes"
+        "changes",
+        "diff"
       ],
-      "note": "קוד יציאה 0 פירושו אין הבדל, וקוד 1 פירושו שנמצא הבדל.",
+      "note": "Exit status 0 means equal; 1 means differences were detected.",
       "type": "utility"
     },
     {
       "id": "chmod",
       "name": "chmod",
-      "category": "קבצים ותיקיות",
-      "summary": "שינוי הרשאות גישה",
-      "description": "משנה הרשאות קריאה, כתיבה והרצה לקבצים ולתיקיות.",
+      "category": "Files & Directories",
+      "summary": "Change file permissions",
+      "description": "Changes read, write, and execute permissions for files and directories.",
       "syntax": "chmod [options] mode file...",
       "options": [
         {
           "flag": "+x",
-          "description": "הוספת הרשאת הרצה בהתאם לקבוצת המשתמשים הרלוונטית."
+          "description": "Add execute permission for selected classes."
         },
         {
           "flag": "u+x",
-          "description": "הוספת הרשאת הרצה לבעל הקובץ."
+          "description": "Let the owner execute the file."
         },
         {
           "flag": "u-w",
-          "description": "הסרת הרשאת כתיבה מבעל הקובץ."
+          "description": "Remove the owner's write permission."
         }
       ],
       "examples": [
         {
           "command": "chmod u+x script.sh",
-          "description": "הוספת הרשאת הרצה לבעל הסקריפט."
+          "description": "Make a script executable by its owner."
         },
         {
           "command": "chmod u-w notes.txt",
-          "description": "מניעת כתיבה מבעל הקובץ."
+          "description": "Disable writing for the owner."
         }
       ],
       "keywords": [
         "permissions",
-        "הרשאות",
         "executable",
-        "הרצה"
+        "execute",
+        "access"
       ],
-      "note": "הסימון u הוא הבעלים, g היא הקבוצה, o הם אחרים ו־a מסמן את כולם. שינוי הרשאות אינו גורם לסקריפט להיות בטוח להרצה.",
+      "note": "u means owner, g group, o others, and a everyone. Executable files are not necessarily safe.",
       "type": "utility"
     },
     {
       "id": "du",
       "name": "du",
-      "category": "קבצים ותיקיות",
-      "summary": "בדיקת נפח תיקיות וקבצים",
-      "description": "מדווח כמה מקום קבצים ותיקיות תופסים בדיסק.",
+      "category": "Files & Directories",
+      "summary": "Estimate disk usage",
+      "description": "Reports disk space occupied by files and directories.",
       "syntax": "du [options] [path...]",
       "options": [
         {
           "flag": "-h",
-          "description": "הצגת גדלים ביחידות קריאות כמו K, M ו־G."
+          "description": "Use human-readable units."
         },
         {
           "flag": "-s",
-          "description": "הצגת סיכום כולל לכל נתיב."
+          "description": "Display only a total per path."
         },
         {
           "flag": "-a",
-          "description": "כולל גם קבצים, לא רק תיקיות."
+          "description": "Include files as well as directories."
         }
       ],
       "examples": [
         {
           "command": "du -sh Documents",
-          "description": "הערכת נפח התיקייה Documents."
+          "description": "Summarize Documents disk usage."
         },
         {
           "command": "du -h .",
-          "description": "הצגת גדלים של תיקיות ותיקיות משנה."
+          "description": "Show usage of nested directories."
         }
       ],
       "keywords": [
         "disk usage",
-        "גודל תיקייה",
-        "נפח",
-        "storage"
+        "storage",
+        "disk",
+        "usage",
+        "folder",
+        "size"
       ],
-      "note": "du מודד שימוש בדיסק ולא בהכרח את גודל הקובץ הלוגי.",
+      "note": "Disk usage can differ from a file's apparent logical size.",
       "type": "utility"
     },
     {
       "id": "df",
       "name": "df",
-      "category": "מערכת",
-      "summary": "בדיקת מקום פנוי בדיסק",
-      "description": "מציג מידע על שטח כולל, משומש ופנוי במערכות הקבצים.",
+      "category": "System",
+      "summary": "Show free disk space",
+      "description": "Displays used and available capacity for mounted filesystems.",
       "syntax": "df [options] [path...]",
       "options": [
         {
           "flag": "-h",
-          "description": "הצגת גדלים ביחידות קריאות לאדם."
+          "description": "Use human-readable sizes."
         },
         {
           "flag": "-k",
-          "description": "הצגת נפחים ביחידות של 1024 בתים."
+          "description": "Use 1024-byte blocks."
         },
         {
           "flag": "-i",
-          "description": "הצגת מידע על inodes, במערכות שתומכות בכך."
+          "description": "Show inode statistics where supported."
         }
       ],
       "examples": [
         {
           "command": "df -h",
-          "description": "הצגת שטח פנוי בכל מערכות הקבצים."
+          "description": "Show filesystem capacities."
         },
         {
           "command": "df -h .",
-          "description": "בדיקת מערכת הקבצים של התיקייה הנוכחית."
+          "description": "Show free space for the current directory's filesystem."
         }
       ],
       "keywords": [
         "disk free",
-        "שטח פנוי",
-        "אחסון",
-        "כונן"
+        "disk",
+        "free",
+        "space",
+        "storage"
       ],
-      "note": "df מציג מקום פנוי במערכת הקבצים; du מתמקד בנפח של קבצים ותיקיות.",
+      "note": "df measures filesystem space, whereas du measures usage by individual paths.",
       "type": "utility"
     },
     {
       "id": "file",
       "name": "file",
-      "category": "קבצים ותיקיות",
-      "summary": "זיהוי סוג קובץ",
-      "description": "מנסה לזהות את סוג התוכן של קובץ לפי המידע שבו, ולא רק לפי הסיומת.",
+      "category": "Files & Directories",
+      "summary": "Identify file type",
+      "description": "Examines file contents to infer their type independently of the filename extension.",
       "syntax": "file [options] file...",
       "options": [
         {
           "flag": "-b",
-          "description": "הצגת סוג הקובץ ללא שמו."
+          "description": "Print the type without the filename."
         },
         {
           "flag": "-i",
-          "description": "הצגת סוג MIME, במימושים שתומכים בכך."
+          "description": "Print MIME information where supported."
         },
         {
           "flag": "-L",
-          "description": "מעקב אחרי קישורים סמליים."
+          "description": "Follow symbolic links."
         }
       ],
       "examples": [
         {
           "command": "file image.png",
-          "description": "זיהוי סוג הקובץ."
+          "description": "Identify a file type."
         },
         {
           "command": "file -b document.pdf",
-          "description": "קבלת תיאור סוג הקובץ ללא שם."
+          "description": "Show the type without the name."
         }
       ],
       "keywords": [
         "mime",
-        "סוג קובץ",
         "identify file",
-        "זיהוי"
+        "file",
+        "type",
+        "identify"
       ],
-      "note": "זיהוי המבוסס על תוכן הוא שימושי, אך לא תמיד חד־משמעי.",
+      "note": "Content-based detection is useful, but not always definitive.",
       "type": "utility"
     },
     {
       "id": "type",
       "name": "type",
-      "category": "מערכת",
-      "summary": "בדיקה מהי פקודה",
-      "description": "מציג כיצד Bash יפרש שם של פקודה: פקודה מובנית, alias, פונקציה או קובץ הרצה.",
+      "category": "System",
+      "summary": "Inspect how Bash resolves a command",
+      "description": "Shows whether a name is a builtin, alias, function, or executable.",
       "syntax": "type [options] name...",
       "options": [
         {
           "flag": "-a",
-          "description": "הצגת כל האפשרויות שנמצאו עבור השם."
+          "description": "Show all matches."
         },
         {
           "flag": "-t",
-          "description": "הצגת סוג קצר כגון builtin או file."
+          "description": "Print a short classification such as builtin or file."
         },
         {
           "flag": "-P",
-          "description": "חיפוש הקובץ המיועד להרצה ב־PATH, אם קיים."
+          "description": "Find the executable in PATH, if available."
         }
       ],
       "examples": [
         {
           "command": "type ls",
-          "description": "בדיקה האם ls הוא alias או קובץ הרצה."
+          "description": "Check whether ls is an alias or executable."
         },
         {
           "command": "type -a python",
-          "description": "הצגת כל המיקומים המוכרים של python."
+          "description": "Show all known python locations."
         }
       ],
       "keywords": [
         "command location",
-        "איפה פקודה",
         "alias",
-        "path"
+        "path",
+        "command",
+        "location",
+        "builtin"
       ],
-      "note": "type היא פקודה מובנית ב־Bash, ולכן היא מודעת גם לפונקציות ול־aliases.",
+      "note": "type is a Bash builtin and can recognize functions and aliases.",
       "type": "builtin"
     },
     {
       "id": "history",
       "name": "history",
-      "category": "מערכת",
-      "summary": "הצגת פקודות קודמות",
-      "description": "מציג את הפקודות שנרשמו בהיסטוריה של Bash בסשן הנוכחי ובקובץ ההיסטוריה.",
+      "category": "System",
+      "summary": "Show command history",
+      "description": "Prints previous Bash commands that are retained in the session's history.",
       "syntax": "history [N]",
       "options": [
         {
           "flag": "N",
-          "description": "הצגת N הרשומות האחרונות (ארגומנט, לא דגל)."
+          "description": "Show the most recent N entries (argument, not flag)."
         },
         {
           "flag": "-c",
-          "description": "ניקוי רשימת ההיסטוריה בזיכרון של הסשן."
+          "description": "Clear the current session's in-memory history."
         }
       ],
       "examples": [
         {
           "command": "history",
-          "description": "הצגת ההיסטוריה הזמינה."
+          "description": "Show available history."
         },
         {
           "command": "history 10",
-          "description": "הצגת עשר הפקודות האחרונות."
+          "description": "Show the last ten commands."
         }
       ],
       "keywords": [
         "history",
-        "פקודות קודמות",
-        "היסטוריה",
-        "terminal"
+        "terminal",
+        "previous",
+        "commands"
       ],
-      "note": "היסטוריית Bash תלויה בהגדרות הסביבה; לא כל הפקודות נשמרות תמיד.",
+      "note": "History retention depends on shell settings.",
       "type": "builtin"
     },
     {
       "id": "ps",
       "name": "ps",
-      "category": "מערכת",
-      "summary": "צפייה בתהליכים פעילים",
-      "description": "מציג מידע על תהליכים שרצים במערכת.",
+      "category": "System",
+      "summary": "List running processes",
+      "description": "Displays information about active system processes.",
       "syntax": "ps [options]",
       "options": [
         {
           "flag": "-e",
-          "description": "הצגת כל התהליכים (תחביר POSIX נפוץ)."
+          "description": "Show all processes (POSIX style)."
         },
         {
           "flag": "-f",
-          "description": "פורמט תצוגה מפורט."
+          "description": "Show more process details."
         },
         {
           "flag": "aux",
-          "description": "תצוגת תהליכים בסגנון BSD, נפוצה ב־Linux וב־macOS."
+          "description": "Show BSD-style process listing without a dash."
         }
       ],
       "examples": [
         {
           "command": "ps",
-          "description": "הצגת התהליכים המשויכים למסוף הנוכחי."
+          "description": "Show processes associated with your terminal."
         },
         {
           "command": "ps -ef",
-          "description": "הצגת רשימת תהליכים מפורטת."
+          "description": "Show a detailed process listing."
         }
       ],
       "keywords": [
         "process",
-        "תהליכים",
         "running",
         "pid"
       ],
-      "note": "יש שני סגנונות אפשרויות נפוצים ל־ps, עם או בלי מקף; התמיכה המדויקת תלויה במערכת.",
+      "note": "ps supports multiple flag styles; availability depends on the system.",
       "type": "utility"
     },
     {
       "id": "tar",
       "name": "tar",
-      "category": "קבצים ותיקיות",
-      "summary": "יצירת ארכיון ופתיחתו",
-      "description": "אוסף קבצים לתוך ארכיון, ויכול להשתמש בדחיסה דרך gzip או כלים אחרים.",
+      "category": "Files & Directories",
+      "summary": "Create or extract archives",
+      "description": "Bundles files into archives and can use compression such as gzip.",
       "syntax": "tar [options] archive [file...]",
       "options": [
         {
           "flag": "-c",
-          "description": "יצירת ארכיון חדש."
+          "description": "Create an archive."
         },
         {
           "flag": "-t",
-          "description": "הצגת תוכן הארכיון ללא חילוץ."
+          "description": "List archive contents."
         },
         {
           "flag": "-x",
-          "description": "חילוץ קבצים מארכיון."
+          "description": "Extract an archive."
         },
         {
           "flag": "-f FILE",
-          "description": "שימוש בקובץ ארכיון בשם שצוין."
+          "description": "Specify the archive filename."
         },
         {
           "flag": "-z",
-          "description": "דחיסה או פירוק דחיסת gzip כשנתמך."
+          "description": "Use gzip compression or decompression when supported."
         }
       ],
       "examples": [
         {
           "command": "tar -czf notes.tar.gz notes/",
-          "description": "יצירת ארכיון דחוס של התיקייה notes."
+          "description": "Create a gzip-compressed notes archive."
         },
         {
           "command": "tar -tf notes.tar.gz",
-          "description": "הצגת שמות הקבצים בארכיון ללא חילוץ."
+          "description": "List files in an archive without extracting."
         }
       ],
       "keywords": [
         "archive",
-        "ארכיון",
         "gzip",
-        "גיבוי",
-        "compress"
+        "compress",
+        "backup"
       ],
-      "note": "כדאי לבדוק את תכולת הארכיון לפני חילוץ. בחלק מהכלים, סדר הפרמטרים קובע לאיזו אפשרות שייך שם הקובץ.",
+      "note": "Inspect archives before extracting. Option ordering may determine which filename is used.",
       "type": "utility"
     },
     {
       "id": "date",
       "name": "date",
-      "category": "מערכת",
-      "summary": "הצגת תאריך ושעה",
-      "description": "מדפיס את התאריך והשעה הנוכחיים בפורמט ברירת המחדל או בפורמט שתבחר.",
+      "category": "System",
+      "summary": "Display date and time",
+      "description": "Prints the current date and time using default or custom formatting.",
       "syntax": "date [+FORMAT]",
       "options": [
         {
           "flag": "+%Y-%m-%d",
-          "description": "פורמט שנה-חודש-יום."
+          "description": "Use a year-month-day format."
         },
         {
           "flag": "+%H:%M",
-          "description": "פורמט שעה ודקה לפי שעון 24 שעות."
+          "description": "Use 24-hour hours and minutes."
         },
         {
           "flag": "-u",
-          "description": "הצגת זמן UTC."
+          "description": "Display UTC time."
         }
       ],
       "examples": [
         {
           "command": "date",
-          "description": "הצגת התאריך והשעה."
+          "description": "Show the date and time."
         },
         {
           "command": "date '+%Y-%m-%d'",
-          "description": "הצגת תאריך בפורמט קבוע."
+          "description": "Print a fixed date format."
         }
       ],
       "keywords": [
         "time",
-        "שעה",
-        "תאריך",
-        "format"
+        "format",
+        "date"
       ],
-      "note": "מחרוזת הפורמט מתחילה ב־+, וסימונים כגון %Y ו־%m מייצגים חלקי תאריך.",
+      "note": "Format strings start with +; tokens such as %Y and %m represent date components.",
       "type": "utility"
     },
     {
       "id": "basename",
       "name": "basename",
-      "category": "קבצים ותיקיות",
-      "summary": "קבלת השם האחרון בנתיב",
-      "description": "מחזיר את שם הקובץ או התיקייה שבסוף נתיב, ללא חלקי התיקיות שקודמים לו.",
+      "category": "Files & Directories",
+      "summary": "Extract filename from path",
+      "description": "Returns the last component of a path without preceding directories.",
       "syntax": "basename path [suffix]",
       "options": [
         {
           "flag": "suffix",
-          "description": "סיומת שאפשר להסיר מן השם (ארגומנט, לא דגל)."
+          "description": "Optional suffix to remove (argument, not flag)."
         },
         {
           "flag": "--",
-          "description": "סימון סוף אפשרויות במימושים שתומכים בכך."
+          "description": "Mark the end of options, where supported."
         }
       ],
       "examples": [
         {
           "command": "basename /home/user/notes.txt",
-          "description": "הצגת notes.txt בלבד."
+          "description": "Show only notes.txt."
         },
         {
           "command": "basename /home/user/notes.txt .txt",
-          "description": "הצגת notes בלי הסיומת .txt."
+          "description": "Show notes without its .txt suffix."
         }
       ],
       "keywords": [
         "filename",
-        "שם קובץ",
-        "path",
-        "נתיב"
+        "path"
       ],
-      "note": "basename לא בודק בהכרח שהקובץ באמת קיים.",
+      "note": "basename works on text paths and does not require the file to exist.",
       "type": "utility"
     },
     {
       "id": "dirname",
       "name": "dirname",
-      "category": "קבצים ותיקיות",
-      "summary": "קבלת התיקייה מתוך נתיב",
-      "description": "מחזיר את חלק התיקייה של נתיב, ללא רכיב השם האחרון.",
+      "category": "Files & Directories",
+      "summary": "Extract directory from path",
+      "description": "Returns the directory component of a path, omitting its last component.",
       "syntax": "dirname path",
       "options": [
         {
           "flag": "--",
-          "description": "סימון סוף אפשרויות במימושים שתומכים בכך."
+          "description": "Mark the end of options, where supported."
         }
       ],
       "examples": [
         {
           "command": "dirname /home/user/notes.txt",
-          "description": "הצגת /home/user."
+          "description": "Show /home/user."
         },
         {
           "command": "dirname ./docs/file.txt",
-          "description": "הצגת ./docs."
+          "description": "Show ./docs."
         }
       ],
       "keywords": [
         "parent directory",
-        "תיקיית אב",
         "path",
-        "נתיב"
+        "parent",
+        "directory"
       ],
-      "note": "dirname מעבד טקסט של נתיב; הוא לא חייב להצביע על תיקייה שקיימת בפועל.",
+      "note": "dirname operates on path strings and does not check for an existing directory.",
       "type": "utility"
     }
   ]

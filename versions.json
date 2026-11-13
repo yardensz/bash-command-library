@@ -1,36 +1,44 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "1.2.0",
+  "latestVersion": "1.3.0",
   "releases": [
+    {
+      "version": "1.3.0",
+      "date": "2026-11-13",
+      "title": "English-only reference library",
+      "summary": "English translations for all 48 commands, options, examples, interface labels, documentation and older snapshots",
+      "commandCount": 48,
+      "snapshot": "history/1.3.0.json"
+    },
     {
       "version": "1.2.0",
       "date": "2026-11-11",
-      "title": "תצוגה רחבה וקומפקטית יותר",
-      "summary": "הרחבת הממשק למחשב, צמצום כותרת וריווחים, תחביר ואפשרויות בראש התוכן, תשע פקודות חדשות",
+      "title": "Wider and denser reference layout",
+      "summary": "Wider desktop view, condensed spacing, syntax and options first, nine more commands",
       "commandCount": 48,
       "snapshot": "history/1.2.0.json"
     },
     {
       "version": "1.1.1",
       "date": "2026-11-11",
-      "title": "כותרת קומפקטית והפרדה בין אזורי התוכן",
-      "summary": "הקטנת אזור הכותרת, כותרת אנגלית בלבד, צבע רקע נפרד לאינדקס ושיפור ריווח וכיווניות",
+      "title": "Compact header and content separation",
+      "summary": "Smaller header, distinct command index, and improved spacing",
       "commandCount": 39,
       "snapshot": "history/1.1.1.json"
     },
     {
       "version": "1.1.0",
       "date": "2026-11-11",
-      "title": "מראה חדש, חיפוש מרכזי והרחבת הפקודות",
-      "summary": "עיצוב נקי בסגנון מדריך, סימון צבעוני לתחביר ודוגמאות, 20 פקודות חדשות ושיפור ניווט מקלדת",
+      "title": "Visual redesign and new commands",
+      "summary": "Color-coded syntax, cleaner interface, improved keyboard controls, and 20 new commands",
       "commandCount": 39,
       "snapshot": "history/1.1.0.json"
     },
     {
       "version": "1.0.0",
       "date": "2026-11-11",
-      "title": "השקת מאגר הפקודות",
-      "summary": "ממשק חיפוש, פקודות ראשונות, דוגמאות, תמיכה באופליין והיסטוריית גרסאות",
+      "title": "Initial library launch",
+      "summary": "Starter commands, examples, local search, offline support, and version history",
       "commandCount": 19,
       "snapshot": "history/1.0.0.json"
     }

@@ -1,0 +1,1947 @@
+{
+  "schemaVersion": 1,
+  "version": "1.3.0",
+  "updatedAt": "2026-11-13",
+  "commands": [
+    {
+      "id": "ls",
+      "name": "ls",
+      "category": "Files & Directories",
+      "summary": "List files and directories",
+      "description": "Lists files and folders in the current or a specified directory.",
+      "syntax": "ls [options] [path]",
+      "options": [
+        {
+          "flag": "-l",
+          "description": "Show detailed information: permissions, ownership, size, and date."
+        },
+        {
+          "flag": "-a",
+          "description": "Include hidden entries beginning with a dot."
+        },
+        {
+          "flag": "-h",
+          "description": "Show human-readable file sizes, useful with -l."
+        },
+        {
+          "flag": "-R",
+          "description": "List subdirectories recursively."
+        },
+        {
+          "flag": "-t",
+          "description": "Sort by modification time."
+        },
+        {
+          "flag": "--color=auto",
+          "description": "Colorize entries automatically on GNU ls."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ls",
+          "description": "List the current directory."
+        },
+        {
+          "command": "ls -lah",
+          "description": "Show details, hidden entries, and readable sizes."
+        },
+        {
+          "command": "ls ~/Documents",
+          "description": "List another directory."
+        }
+      ],
+      "keywords": [
+        "list files",
+        "list",
+        "files",
+        "directories",
+        "hidden",
+        "browse"
+      ],
+      "note": "Combine short flags: ls -la is equivalent to ls -l -a. Available options can differ by system.",
+      "type": "utility"
+    },
+    {
+      "id": "cd",
+      "name": "cd",
+      "category": "Files & Directories",
+      "summary": "Change directory",
+      "description": "Changes the Bash shell's current working directory.",
+      "syntax": "cd [directory]",
+      "options": [
+        {
+          "flag": "..",
+          "description": "Parent directory (an argument, not a flag)."
+        },
+        {
+          "flag": "~",
+          "description": "Shortcut for your home directory."
+        },
+        {
+          "flag": "-",
+          "description": "Go to the previous directory (an argument, not a flag)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "cd ~/Documents",
+          "description": "Go to Documents in your home directory."
+        },
+        {
+          "command": "cd ..",
+          "description": "Move up one directory level."
+        },
+        {
+          "command": "cd -",
+          "description": "Return to the previous directory."
+        },
+        {
+          "command": "cd",
+          "description": "Go to your home directory."
+        }
+      ],
+      "keywords": [
+        "change directory",
+        "navigation",
+        "folder",
+        "change",
+        "directory"
+      ],
+      "note": "cd changes your shell's location, not the location of files.",
+      "type": "builtin"
+    },
+    {
+      "id": "pwd",
+      "name": "pwd",
+      "category": "Files & Directories",
+      "summary": "Print working directory",
+      "description": "Prints the full path to the directory you are currently in.",
+      "syntax": "pwd [-L|-P]",
+      "options": [
+        {
+          "flag": "-L",
+          "description": "Show the logical path, which may contain symbolic links."
+        },
+        {
+          "flag": "-P",
+          "description": "Resolve symbolic links and print the physical path."
+        }
+      ],
+      "examples": [
+        {
+          "command": "pwd",
+          "description": "Print the current directory."
+        },
+        {
+          "command": "pwd -P",
+          "description": "Print the physical path."
+        }
+      ],
+      "keywords": [
+        "path",
+        "current directory",
+        "current",
+        "location",
+        "directory"
+      ],
+      "note": null,
+      "type": "builtin"
+    },
+    {
+      "id": "mkdir",
+      "name": "mkdir",
+      "category": "Files & Directories",
+      "summary": "Create directories",
+      "description": "Creates one or more directories at the specified paths.",
+      "syntax": "mkdir [options] directory...",
+      "options": [
+        {
+          "flag": "-p",
+          "description": "Create missing parent directories; allow directories that already exist."
+        },
+        {
+          "flag": "-v",
+          "description": "Print a message for each newly created directory."
+        }
+      ],
+      "examples": [
+        {
+          "command": "mkdir notes",
+          "description": "Create a directory named notes."
+        },
+        {
+          "command": "mkdir -p projects/demo",
+          "description": "Create nested directories, including missing parents."
+        }
+      ],
+      "keywords": [
+        "make directory",
+        "folder",
+        "make",
+        "directory",
+        "create"
+      ],
+      "note": null,
+      "type": "utility"
+    },
+    {
+      "id": "touch",
+      "name": "touch",
+      "category": "Files & Directories",
+      "summary": "Create empty files or update timestamps",
+      "description": "Updates file access and modification timestamps; by default creates missing files.",
+      "syntax": "touch [options] file...",
+      "options": [
+        {
+          "flag": "-c",
+          "description": "Do not create missing files."
+        },
+        {
+          "flag": "-a",
+          "description": "Update the access timestamp."
+        },
+        {
+          "flag": "-m",
+          "description": "Update the modification timestamp."
+        }
+      ],
+      "examples": [
+        {
+          "command": "touch notes.txt",
+          "description": "Create an empty file if needed."
+        },
+        {
+          "command": "touch -c existing.txt",
+          "description": "Update timestamps only if the file exists."
+        }
+      ],
+      "keywords": [
+        "new file",
+        "timestamps",
+        "file",
+        "create"
+      ],
+      "note": null,
+      "type": "utility"
+    },
+    {
+      "id": "cp",
+      "name": "cp",
+      "category": "Files & Directories",
+      "summary": "Copy files and directories",
+      "description": "Copies files and, with an option, entire directories.",
+      "syntax": "cp [options] source destination",
+      "options": [
+        {
+          "flag": "-r",
+          "description": "Copy directories recursively."
+        },
+        {
+          "flag": "-i",
+          "description": "Ask before overwriting a destination."
+        },
+        {
+          "flag": "-n",
+          "description": "Avoid overwriting destinations when supported; behavior varies."
+        },
+        {
+          "flag": "-v",
+          "description": "Print the files being copied."
+        }
+      ],
+      "examples": [
+        {
+          "command": "cp notes.txt backup.txt",
+          "description": "Copy a file."
+        },
+        {
+          "command": "cp -ri folder folder-backup",
+          "description": "Copy a directory and request confirmation before overwriting."
+        }
+      ],
+      "keywords": [
+        "copy",
+        "duplicate",
+        "backup"
+      ],
+      "note": "Some flags differ between GNU and BSD implementations.",
+      "type": "utility"
+    },
+    {
+      "id": "mv",
+      "name": "mv",
+      "category": "Files & Directories",
+      "summary": "Move or rename files",
+      "description": "Moves files and folders or changes their names.",
+      "syntax": "mv [options] source destination",
+      "options": [
+        {
+          "flag": "-i",
+          "description": "Ask before overwriting the destination."
+        },
+        {
+          "flag": "-n",
+          "description": "Avoid overwriting an existing target when supported."
+        },
+        {
+          "flag": "-v",
+          "description": "Show the entries that were moved."
+        }
+      ],
+      "examples": [
+        {
+          "command": "mv old.txt new.txt",
+          "description": "Rename a file."
+        },
+        {
+          "command": "mv notes.txt ~/Documents/",
+          "description": "Move a file into another directory."
+        },
+        {
+          "command": "mv -i draft.txt final.txt",
+          "description": "Ask before replacing an existing file."
+        }
+      ],
+      "keywords": [
+        "move",
+        "rename",
+        "relocate"
+      ],
+      "note": "A destination file may be replaced without warning unless protective options are used.",
+      "type": "utility"
+    },
+    {
+      "id": "rm",
+      "name": "rm",
+      "category": "Files & Directories",
+      "summary": "Delete files",
+      "description": "Deletes files, typically without moving them to Trash or Recycle Bin.",
+      "syntax": "rm [options] file...",
+      "options": [
+        {
+          "flag": "-i",
+          "description": "Ask for confirmation before each deletion."
+        },
+        {
+          "flag": "-r",
+          "description": "Delete directories and their contents recursively; use caution."
+        },
+        {
+          "flag": "-v",
+          "description": "Print which items are removed."
+        }
+      ],
+      "examples": [
+        {
+          "command": "rm -i old-notes.txt",
+          "description": "Ask before deleting a file."
+        },
+        {
+          "command": "rm unwanted.txt",
+          "description": "Delete a file."
+        }
+      ],
+      "keywords": [
+        "delete",
+        "remove",
+        "file"
+      ],
+      "note": "Warning: rm deletions are usually difficult to undo. Check paths carefully and consider -i.",
+      "type": "utility"
+    },
+    {
+      "id": "cat",
+      "name": "cat",
+      "category": "Text & Search",
+      "summary": "Display file contents",
+      "description": "Prints the contents of files to the terminal; suitable for relatively short files.",
+      "syntax": "cat [options] [file...]",
+      "options": [
+        {
+          "flag": "-n",
+          "description": "Number all output lines."
+        },
+        {
+          "flag": "-b",
+          "description": "Number only nonempty lines."
+        },
+        {
+          "flag": "-s",
+          "description": "Collapse repeated empty lines when supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "cat notes.txt",
+          "description": "Print a file's contents."
+        },
+        {
+          "command": "cat -n notes.txt",
+          "description": "Show a file with line numbers."
+        }
+      ],
+      "keywords": [
+        "read",
+        "view",
+        "print file",
+        "print",
+        "concatenate"
+      ],
+      "note": "Use less to browse long files.",
+      "type": "utility"
+    },
+    {
+      "id": "sort",
+      "name": "sort",
+      "category": "Text & Search",
+      "summary": "Sort text lines",
+      "description": "Sorts lines from files or standard input, using locale-specific ordering by default.",
+      "syntax": "sort [options] [file...]",
+      "options": [
+        {
+          "flag": "-n",
+          "description": "Sort by numeric value."
+        },
+        {
+          "flag": "-r",
+          "description": "Reverse the order."
+        },
+        {
+          "flag": "-u",
+          "description": "Show unique lines only."
+        },
+        {
+          "flag": "-k N",
+          "description": "Sort using field N as the key."
+        },
+        {
+          "flag": "-t CHAR",
+          "description": "Choose the field separator."
+        },
+        {
+          "flag": "-o FILE",
+          "description": "Write sorted output to the specified file."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sort names.txt",
+          "description": "Sort lines in ascending order."
+        },
+        {
+          "command": "sort -nr numbers.txt",
+          "description": "Sort numbers in descending order."
+        },
+        {
+          "command": "sort -u names.txt",
+          "description": "Sort and deduplicate lines."
+        },
+        {
+          "command": "sort -t, -k2,2 people.csv",
+          "description": "Sort simple CSV data by the second field."
+        }
+      ],
+      "keywords": [
+        "reverse",
+        "numeric",
+        "ascending",
+        "descending",
+        "sorting"
+      ],
+      "note": "Use -nr together for reverse numeric order.",
+      "type": "utility"
+    },
+    {
+      "id": "grep",
+      "name": "grep",
+      "category": "Text & Search",
+      "summary": "Search for matching text",
+      "description": "Searches text or regular expressions and prints matching lines.",
+      "syntax": "grep [options] pattern [file...]",
+      "options": [
+        {
+          "flag": "-i",
+          "description": "Ignore uppercase/lowercase differences."
+        },
+        {
+          "flag": "-n",
+          "description": "Show matching line numbers."
+        },
+        {
+          "flag": "-r",
+          "description": "Search subdirectories recursively."
+        },
+        {
+          "flag": "-v",
+          "description": "Print lines that do not match."
+        },
+        {
+          "flag": "-F",
+          "description": "Treat the pattern as literal text."
+        },
+        {
+          "flag": "-E",
+          "description": "Enable extended regular expressions."
+        }
+      ],
+      "examples": [
+        {
+          "command": "grep -n error app.log",
+          "description": "Find error with line numbers."
+        },
+        {
+          "command": "grep -ri hello .",
+          "description": "Search recursively without case sensitivity."
+        },
+        {
+          "command": "grep -F \"a.b\" notes.txt",
+          "description": "Find the literal string a.b."
+        }
+      ],
+      "keywords": [
+        "search text",
+        "pattern",
+        "regex",
+        "search",
+        "text"
+      ],
+      "note": "Quote patterns containing spaces. Use -F for plain-text matching.",
+      "type": "utility"
+    },
+    {
+      "id": "find",
+      "name": "find",
+      "category": "Text & Search",
+      "summary": "Find files by name or properties",
+      "description": "Walks directory trees and selects files or directories matching an expression.",
+      "syntax": "find [path...] [expression]",
+      "options": [
+        {
+          "flag": "-name \"*.txt\"",
+          "description": "Match filenames with a glob; quote the pattern."
+        },
+        {
+          "flag": "-iname \"*.txt\"",
+          "description": "Match filenames without case sensitivity when supported."
+        },
+        {
+          "flag": "-type f",
+          "description": "Match regular files only."
+        },
+        {
+          "flag": "-type d",
+          "description": "Match directories only."
+        },
+        {
+          "flag": "-maxdepth N",
+          "description": "Limit recursion depth on GNU find."
+        }
+      ],
+      "examples": [
+        {
+          "command": "find . -name \"*.txt\"",
+          "description": "Find .txt files under the current directory."
+        },
+        {
+          "command": "find ~/Documents -type d",
+          "description": "List directories under Documents."
+        },
+        {
+          "command": "find . -type f -name \"report*\"",
+          "description": "Find files whose names begin with report."
+        }
+      ],
+      "keywords": [
+        "find files",
+        "files by name",
+        "find",
+        "locate",
+        "files",
+        "directories"
+      ],
+      "note": "Quote *.txt so Bash does not expand the pattern before find receives it.",
+      "type": "utility"
+    },
+    {
+      "id": "head",
+      "name": "head",
+      "category": "Text & Search",
+      "summary": "Display the beginning of a file",
+      "description": "Shows the first ten lines of a file by default.",
+      "syntax": "head [options] [file...]",
+      "options": [
+        {
+          "flag": "-n N",
+          "description": "Show the first N lines."
+        },
+        {
+          "flag": "-c N",
+          "description": "Show the first N bytes."
+        }
+      ],
+      "examples": [
+        {
+          "command": "head notes.txt",
+          "description": "Show the first ten lines."
+        },
+        {
+          "command": "head -n 5 notes.txt",
+          "description": "Show the first five lines."
+        }
+      ],
+      "keywords": [
+        "first lines",
+        "preview",
+        "first",
+        "lines"
+      ],
+      "note": null,
+      "type": "utility"
+    },
+    {
+      "id": "tail",
+      "name": "tail",
+      "category": "Text & Search",
+      "summary": "Display the end of a file",
+      "description": "Shows the last ten lines of a file by default, optionally following additions.",
+      "syntax": "tail [options] [file...]",
+      "options": [
+        {
+          "flag": "-n N",
+          "description": "Show the last N lines."
+        },
+        {
+          "flag": "-f",
+          "description": "Follow new lines as they are added."
+        },
+        {
+          "flag": "-c N",
+          "description": "Show the last N bytes."
+        }
+      ],
+      "examples": [
+        {
+          "command": "tail notes.txt",
+          "description": "Show the last ten lines."
+        },
+        {
+          "command": "tail -n 20 app.log",
+          "description": "Show the last twenty lines."
+        },
+        {
+          "command": "tail -f app.log",
+          "description": "Follow a log file; press Ctrl+C to stop."
+        }
+      ],
+      "keywords": [
+        "last lines",
+        "logs",
+        "follow",
+        "last",
+        "lines"
+      ],
+      "note": null,
+      "type": "utility"
+    },
+    {
+      "id": "wc",
+      "name": "wc",
+      "category": "Text & Search",
+      "summary": "Count lines, words, and bytes",
+      "description": "Counts words, newline characters, bytes, or characters in files or input.",
+      "syntax": "wc [options] [file...]",
+      "options": [
+        {
+          "flag": "-l",
+          "description": "Count newline characters."
+        },
+        {
+          "flag": "-w",
+          "description": "Count words."
+        },
+        {
+          "flag": "-c",
+          "description": "Count bytes."
+        },
+        {
+          "flag": "-m",
+          "description": "Count characters according to the locale."
+        }
+      ],
+      "examples": [
+        {
+          "command": "wc notes.txt",
+          "description": "Show line, word, and byte counts."
+        },
+        {
+          "command": "wc -l notes.txt",
+          "description": "Count newline characters."
+        },
+        {
+          "command": "wc -w essay.txt",
+          "description": "Count words."
+        }
+      ],
+      "keywords": [
+        "count",
+        "word count",
+        "lines",
+        "word",
+        "bytes"
+      ],
+      "note": "wc -l counts newline characters; a final line without a newline might not be counted.",
+      "type": "utility"
+    },
+    {
+      "id": "less",
+      "name": "less",
+      "category": "Text & Search",
+      "summary": "Browse long text files",
+      "description": "Opens text in a scrollable pager instead of flooding the terminal.",
+      "syntax": "less [options] file",
+      "options": [
+        {
+          "flag": "-N",
+          "description": "Show line numbers."
+        },
+        {
+          "flag": "-S",
+          "description": "Do not wrap long lines."
+        },
+        {
+          "flag": "/text",
+          "description": "Search for text inside less (not a flag)."
+        },
+        {
+          "flag": "q",
+          "description": "Quit the pager (a key, not a flag)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "less README.md",
+          "description": "Open a file for browsing."
+        },
+        {
+          "command": "less -N app.log",
+          "description": "Browse a log with line numbers."
+        }
+      ],
+      "keywords": [
+        "pager",
+        "scroll",
+        "view file",
+        "view",
+        "file"
+      ],
+      "note": "Use arrows to scroll, / to search, and q to quit.",
+      "type": "utility"
+    },
+    {
+      "id": "echo",
+      "name": "echo",
+      "category": "System",
+      "summary": "Print text or variable values",
+      "description": "Prints its arguments; echo is a Bash builtin.",
+      "syntax": "echo [options] [text...]",
+      "options": [
+        {
+          "flag": "-n",
+          "description": "Omit the trailing newline."
+        },
+        {
+          "flag": "$HOME",
+          "description": "Example of variable expansion; not a flag."
+        }
+      ],
+      "examples": [
+        {
+          "command": "echo \"Hello\"",
+          "description": "Print Hello."
+        },
+        {
+          "command": "echo \"$HOME\"",
+          "description": "Print your home directory path."
+        }
+      ],
+      "keywords": [
+        "print",
+        "output",
+        "variables",
+        "text"
+      ],
+      "note": "For precise and portable formatting, consider printf.",
+      "type": "builtin"
+    },
+    {
+      "id": "man",
+      "name": "man",
+      "category": "System",
+      "summary": "Open command manuals",
+      "description": "Displays locally installed manual pages for commands.",
+      "syntax": "man [section] command",
+      "options": [
+        {
+          "flag": "-k keyword",
+          "description": "Search manual descriptions by keyword."
+        },
+        {
+          "flag": "q",
+          "description": "Quit the manual viewer (not a flag)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "man ls",
+          "description": "Read the ls manual."
+        },
+        {
+          "command": "man sort",
+          "description": "Read the sort manual."
+        },
+        {
+          "command": "man -k copy",
+          "description": "Search for commands related to copying."
+        }
+      ],
+      "keywords": [
+        "manual",
+        "help",
+        "documentation"
+      ],
+      "note": "Manual pages may contain options beyond those in this quick reference.",
+      "type": "utility"
+    },
+    {
+      "id": "clear",
+      "name": "clear",
+      "category": "System",
+      "summary": "Clear the terminal display",
+      "description": "Clears the visible terminal screen.",
+      "syntax": "clear",
+      "options": [],
+      "examples": [
+        {
+          "command": "clear",
+          "description": "Clear the terminal."
+        }
+      ],
+      "keywords": [
+        "terminal",
+        "screen",
+        "clear"
+      ],
+      "note": null,
+      "type": "utility"
+    },
+    {
+      "id": "printf",
+      "name": "printf",
+      "category": "System",
+      "summary": "Print formatted text",
+      "description": "Prints data according to a format string, allowing control over line breaks and layout.",
+      "syntax": "printf format [arguments...]",
+      "options": [
+        {
+          "flag": "%s",
+          "description": "Insert a string."
+        },
+        {
+          "flag": "%d",
+          "description": "Insert an integer."
+        },
+        {
+          "flag": "\\n",
+          "description": "Newline escape inside a format string (not a flag)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'Hello\\n'",
+          "description": "Print Hello followed by a newline."
+        },
+        {
+          "command": "printf '%s: %d\\n' apples 3",
+          "description": "Print a label and a number."
+        }
+      ],
+      "keywords": [
+        "print format",
+        "newline",
+        "format",
+        "print",
+        "text"
+      ],
+      "note": "Unlike echo, printf does not add a newline automatically.",
+      "type": "builtin"
+    },
+    {
+      "id": "cut",
+      "name": "cut",
+      "category": "Text & Search",
+      "summary": "Extract fields or characters",
+      "description": "Selects fields or character ranges from each input line.",
+      "syntax": "cut [options] [file...]",
+      "options": [
+        {
+          "flag": "-d DELIM",
+          "description": "Set the field delimiter."
+        },
+        {
+          "flag": "-f LIST",
+          "description": "Select field numbers, starting at 1."
+        },
+        {
+          "flag": "-c LIST",
+          "description": "Select character ranges."
+        }
+      ],
+      "examples": [
+        {
+          "command": "cut -d, -f1 data.csv",
+          "description": "Get the first comma-separated field."
+        },
+        {
+          "command": "cut -c1-5 names.txt",
+          "description": "Get the first five characters."
+        }
+      ],
+      "keywords": [
+        "field",
+        "extract",
+        "csv",
+        "cut",
+        "fields",
+        "columns",
+        "characters"
+      ],
+      "note": "cut is not a complete parser for complex quoted CSV files.",
+      "type": "utility"
+    },
+    {
+      "id": "uniq",
+      "name": "uniq",
+      "category": "Text & Search",
+      "summary": "Remove adjacent duplicate lines",
+      "description": "Collapses consecutive identical lines; sort input first to eliminate nonadjacent duplicates.",
+      "syntax": "uniq [options] [input [output]]",
+      "options": [
+        {
+          "flag": "-c",
+          "description": "Count adjacent occurrences."
+        },
+        {
+          "flag": "-d",
+          "description": "Show only repeated lines."
+        },
+        {
+          "flag": "-u",
+          "description": "Show lines that appear only once."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sort names.txt | uniq",
+          "description": "Remove duplicates after sorting."
+        },
+        {
+          "command": "sort names.txt | uniq -c",
+          "description": "Count repeated values after sorting."
+        }
+      ],
+      "keywords": [
+        "unique",
+        "deduplicate",
+        "duplicate",
+        "lines"
+      ],
+      "note": "uniq does not sort; it only checks neighboring lines.",
+      "type": "utility"
+    },
+    {
+      "id": "tr",
+      "name": "tr",
+      "category": "Text & Search",
+      "summary": "Translate or delete characters",
+      "description": "Replaces, removes, or squeezes characters from standard input.",
+      "syntax": "tr [options] SET1 [SET2]",
+      "options": [
+        {
+          "flag": "-d",
+          "description": "Delete selected characters."
+        },
+        {
+          "flag": "-s",
+          "description": "Collapse consecutive occurrences."
+        },
+        {
+          "flag": "SET1 SET2",
+          "description": "Map characters in SET1 to SET2 (arguments)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'abc\\n' | tr 'a-z' 'A-Z'",
+          "description": "Convert lowercase letters to uppercase."
+        },
+        {
+          "command": "tr -s ' ' < input.txt",
+          "description": "Collapse repeated spaces in a file."
+        }
+      ],
+      "keywords": [
+        "translate",
+        "uppercase",
+        "lowercase",
+        "replace",
+        "characters"
+      ],
+      "note": "tr works with characters rather than entire words.",
+      "type": "utility"
+    },
+    {
+      "id": "sed",
+      "name": "sed",
+      "category": "Text & Search",
+      "summary": "Edit text streams",
+      "description": "Processes text using editing expressions, such as displaying selected lines or replacing text.",
+      "syntax": "sed [options] script [file...]",
+      "options": [
+        {
+          "flag": "-n",
+          "description": "Suppress normal automatic printing."
+        },
+        {
+          "flag": "s/old/new/g",
+          "description": "Replace old with new throughout each line."
+        },
+        {
+          "flag": "-e script",
+          "description": "Specify an additional sed expression."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sed -n '1,5p' notes.txt",
+          "description": "Show only the first five lines."
+        },
+        {
+          "command": "sed 's/cat/dog/g' animals.txt",
+          "description": "Replace every occurrence of cat with dog."
+        }
+      ],
+      "keywords": [
+        "stream editor",
+        "replace",
+        "stream",
+        "editor",
+        "substitute"
+      ],
+      "note": "By default, sed outputs changes without modifying its source file. In-place options vary by system.",
+      "type": "utility"
+    },
+    {
+      "id": "awk",
+      "name": "awk",
+      "category": "Text & Search",
+      "summary": "Process text fields",
+      "description": "Processes text records and fields with conditions, expressions, and simple calculations.",
+      "syntax": "awk [options] program [file...]",
+      "options": [
+        {
+          "flag": "-F SEP",
+          "description": "Choose the field separator."
+        },
+        {
+          "flag": "$1",
+          "description": "Refer to the first input field in awk."
+        },
+        {
+          "flag": "NR",
+          "description": "Built-in variable for the current record number."
+        }
+      ],
+      "examples": [
+        {
+          "command": "awk '{print $1}' notes.txt",
+          "description": "Print the first field."
+        },
+        {
+          "command": "awk -F, '{print $2}' data.csv",
+          "description": "Print the second comma-separated field."
+        }
+      ],
+      "keywords": [
+        "columns",
+        "processing",
+        "fields",
+        "process",
+        "text"
+      ],
+      "note": "In awk, $1 refers to the first field and $0 to the entire record; these are not Bash variables.",
+      "type": "utility"
+    },
+    {
+      "id": "tee",
+      "name": "tee",
+      "category": "Text & Search",
+      "summary": "Show and save output",
+      "description": "Sends input to both the terminal and a file, commonly in a pipeline.",
+      "syntax": "tee [options] [file...]",
+      "options": [
+        {
+          "flag": "-a",
+          "description": "Append rather than overwrite."
+        },
+        {
+          "flag": "-i",
+          "description": "Ignore interrupts when supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "echo hello | tee log.txt",
+          "description": "Show text and save it to a file."
+        },
+        {
+          "command": "echo another | tee -a log.txt",
+          "description": "Append another line to an existing file."
+        }
+      ],
+      "keywords": [
+        "pipe",
+        "output",
+        "log",
+        "pipeline",
+        "save"
+      ],
+      "note": "Without -a, tee may overwrite an existing file.",
+      "type": "utility"
+    },
+    {
+      "id": "xargs",
+      "name": "xargs",
+      "category": "Text & Search",
+      "summary": "Build commands from input",
+      "description": "Constructs command-line arguments from values read through standard input.",
+      "syntax": "xargs [options] [command [arguments...]]",
+      "options": [
+        {
+          "flag": "-n N",
+          "description": "Use no more than N arguments per invocation."
+        },
+        {
+          "flag": "-0",
+          "description": "Read NUL-separated input for safe filename handling."
+        },
+        {
+          "flag": "-I REPLACE",
+          "description": "Replace a placeholder with each input value."
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'one\\ntwo\\n' | xargs -n 1 echo",
+          "description": "Run echo once per input item."
+        },
+        {
+          "command": "printf 'a\\nb\\n' | xargs -I '{}' echo 'item:{}'",
+          "description": "Insert each input item into a command argument."
+        }
+      ],
+      "keywords": [
+        "arguments",
+        "pipe",
+        "stdin",
+        "pipeline"
+      ],
+      "note": "Use NUL-separated input and xargs -0 for filenames containing spaces or newlines, when available.",
+      "type": "utility"
+    },
+    {
+      "id": "diff",
+      "name": "diff",
+      "category": "Files & Directories",
+      "summary": "Compare files",
+      "description": "Shows differences between files without changing them.",
+      "syntax": "diff [options] file1 file2",
+      "options": [
+        {
+          "flag": "-u",
+          "description": "Use unified diff format."
+        },
+        {
+          "flag": "-q",
+          "description": "Report briefly whether differences exist."
+        },
+        {
+          "flag": "-r",
+          "description": "Compare directories recursively."
+        }
+      ],
+      "examples": [
+        {
+          "command": "diff old.txt new.txt",
+          "description": "Compare two files."
+        },
+        {
+          "command": "diff -u old.txt new.txt",
+          "description": "Show unified differences with context."
+        }
+      ],
+      "keywords": [
+        "compare",
+        "changes",
+        "diff"
+      ],
+      "note": "Exit status 0 means equal; 1 means differences were detected.",
+      "type": "utility"
+    },
+    {
+      "id": "chmod",
+      "name": "chmod",
+      "category": "Files & Directories",
+      "summary": "Change file permissions",
+      "description": "Changes read, write, and execute permissions for files and directories.",
+      "syntax": "chmod [options] mode file...",
+      "options": [
+        {
+          "flag": "+x",
+          "description": "Add execute permission for selected classes."
+        },
+        {
+          "flag": "u+x",
+          "description": "Let the owner execute the file."
+        },
+        {
+          "flag": "u-w",
+          "description": "Remove the owner's write permission."
+        }
+      ],
+      "examples": [
+        {
+          "command": "chmod u+x script.sh",
+          "description": "Make a script executable by its owner."
+        },
+        {
+          "command": "chmod u-w notes.txt",
+          "description": "Disable writing for the owner."
+        }
+      ],
+      "keywords": [
+        "permissions",
+        "executable",
+        "execute",
+        "access"
+      ],
+      "note": "u means owner, g group, o others, and a everyone. Executable files are not necessarily safe.",
+      "type": "utility"
+    },
+    {
+      "id": "du",
+      "name": "du",
+      "category": "Files & Directories",
+      "summary": "Estimate disk usage",
+      "description": "Reports disk space occupied by files and directories.",
+      "syntax": "du [options] [path...]",
+      "options": [
+        {
+          "flag": "-h",
+          "description": "Use human-readable units."
+        },
+        {
+          "flag": "-s",
+          "description": "Display only a total per path."
+        },
+        {
+          "flag": "-a",
+          "description": "Include files as well as directories."
+        }
+      ],
+      "examples": [
+        {
+          "command": "du -sh Documents",
+          "description": "Summarize Documents disk usage."
+        },
+        {
+          "command": "du -h .",
+          "description": "Show usage of nested directories."
+        }
+      ],
+      "keywords": [
+        "disk usage",
+        "storage",
+        "disk",
+        "usage",
+        "folder",
+        "size"
+      ],
+      "note": "Disk usage can differ from a file's apparent logical size.",
+      "type": "utility"
+    },
+    {
+      "id": "df",
+      "name": "df",
+      "category": "System",
+      "summary": "Show free disk space",
+      "description": "Displays used and available capacity for mounted filesystems.",
+      "syntax": "df [options] [path...]",
+      "options": [
+        {
+          "flag": "-h",
+          "description": "Use human-readable sizes."
+        },
+        {
+          "flag": "-k",
+          "description": "Use 1024-byte blocks."
+        },
+        {
+          "flag": "-i",
+          "description": "Show inode statistics where supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "df -h",
+          "description": "Show filesystem capacities."
+        },
+        {
+          "command": "df -h .",
+          "description": "Show free space for the current directory's filesystem."
+        }
+      ],
+      "keywords": [
+        "disk free",
+        "disk",
+        "free",
+        "space",
+        "storage"
+      ],
+      "note": "df measures filesystem space, whereas du measures usage by individual paths.",
+      "type": "utility"
+    },
+    {
+      "id": "file",
+      "name": "file",
+      "category": "Files & Directories",
+      "summary": "Identify file type",
+      "description": "Examines file contents to infer their type independently of the filename extension.",
+      "syntax": "file [options] file...",
+      "options": [
+        {
+          "flag": "-b",
+          "description": "Print the type without the filename."
+        },
+        {
+          "flag": "-i",
+          "description": "Print MIME information where supported."
+        },
+        {
+          "flag": "-L",
+          "description": "Follow symbolic links."
+        }
+      ],
+      "examples": [
+        {
+          "command": "file image.png",
+          "description": "Identify a file type."
+        },
+        {
+          "command": "file -b document.pdf",
+          "description": "Show the type without the name."
+        }
+      ],
+      "keywords": [
+        "mime",
+        "identify file",
+        "file",
+        "type",
+        "identify"
+      ],
+      "note": "Content-based detection is useful, but not always definitive.",
+      "type": "utility"
+    },
+    {
+      "id": "type",
+      "name": "type",
+      "category": "System",
+      "summary": "Inspect how Bash resolves a command",
+      "description": "Shows whether a name is a builtin, alias, function, or executable.",
+      "syntax": "type [options] name...",
+      "options": [
+        {
+          "flag": "-a",
+          "description": "Show all matches."
+        },
+        {
+          "flag": "-t",
+          "description": "Print a short classification such as builtin or file."
+        },
+        {
+          "flag": "-P",
+          "description": "Find the executable in PATH, if available."
+        }
+      ],
+      "examples": [
+        {
+          "command": "type ls",
+          "description": "Check whether ls is an alias or executable."
+        },
+        {
+          "command": "type -a python",
+          "description": "Show all known python locations."
+        }
+      ],
+      "keywords": [
+        "command location",
+        "alias",
+        "path",
+        "command",
+        "location",
+        "builtin"
+      ],
+      "note": "type is a Bash builtin and can recognize functions and aliases.",
+      "type": "builtin"
+    },
+    {
+      "id": "history",
+      "name": "history",
+      "category": "System",
+      "summary": "Show command history",
+      "description": "Prints previous Bash commands that are retained in the session's history.",
+      "syntax": "history [N]",
+      "options": [
+        {
+          "flag": "N",
+          "description": "Show the most recent N entries (argument, not flag)."
+        },
+        {
+          "flag": "-c",
+          "description": "Clear the current session's in-memory history."
+        }
+      ],
+      "examples": [
+        {
+          "command": "history",
+          "description": "Show available history."
+        },
+        {
+          "command": "history 10",
+          "description": "Show the last ten commands."
+        }
+      ],
+      "keywords": [
+        "history",
+        "terminal",
+        "previous",
+        "commands"
+      ],
+      "note": "History retention depends on shell settings.",
+      "type": "builtin"
+    },
+    {
+      "id": "ps",
+      "name": "ps",
+      "category": "System",
+      "summary": "List running processes",
+      "description": "Displays information about active system processes.",
+      "syntax": "ps [options]",
+      "options": [
+        {
+          "flag": "-e",
+          "description": "Show all processes (POSIX style)."
+        },
+        {
+          "flag": "-f",
+          "description": "Show more process details."
+        },
+        {
+          "flag": "aux",
+          "description": "Show BSD-style process listing without a dash."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ps",
+          "description": "Show processes associated with your terminal."
+        },
+        {
+          "command": "ps -ef",
+          "description": "Show a detailed process listing."
+        }
+      ],
+      "keywords": [
+        "process",
+        "running",
+        "pid"
+      ],
+      "note": "ps supports multiple flag styles; availability depends on the system.",
+      "type": "utility"
+    },
+    {
+      "id": "tar",
+      "name": "tar",
+      "category": "Files & Directories",
+      "summary": "Create or extract archives",
+      "description": "Bundles files into archives and can use compression such as gzip.",
+      "syntax": "tar [options] archive [file...]",
+      "options": [
+        {
+          "flag": "-c",
+          "description": "Create an archive."
+        },
+        {
+          "flag": "-t",
+          "description": "List archive contents."
+        },
+        {
+          "flag": "-x",
+          "description": "Extract an archive."
+        },
+        {
+          "flag": "-f FILE",
+          "description": "Specify the archive filename."
+        },
+        {
+          "flag": "-z",
+          "description": "Use gzip compression or decompression when supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "tar -czf notes.tar.gz notes/",
+          "description": "Create a gzip-compressed notes archive."
+        },
+        {
+          "command": "tar -tf notes.tar.gz",
+          "description": "List files in an archive without extracting."
+        }
+      ],
+      "keywords": [
+        "archive",
+        "gzip",
+        "compress",
+        "backup"
+      ],
+      "note": "Inspect archives before extracting. Option ordering may determine which filename is used.",
+      "type": "utility"
+    },
+    {
+      "id": "date",
+      "name": "date",
+      "category": "System",
+      "summary": "Display date and time",
+      "description": "Prints the current date and time using default or custom formatting.",
+      "syntax": "date [+FORMAT]",
+      "options": [
+        {
+          "flag": "+%Y-%m-%d",
+          "description": "Use a year-month-day format."
+        },
+        {
+          "flag": "+%H:%M",
+          "description": "Use 24-hour hours and minutes."
+        },
+        {
+          "flag": "-u",
+          "description": "Display UTC time."
+        }
+      ],
+      "examples": [
+        {
+          "command": "date",
+          "description": "Show the date and time."
+        },
+        {
+          "command": "date '+%Y-%m-%d'",
+          "description": "Print a fixed date format."
+        }
+      ],
+      "keywords": [
+        "time",
+        "format",
+        "date"
+      ],
+      "note": "Format strings start with +; tokens such as %Y and %m represent date components.",
+      "type": "utility"
+    },
+    {
+      "id": "basename",
+      "name": "basename",
+      "category": "Files & Directories",
+      "summary": "Extract filename from path",
+      "description": "Returns the last component of a path without preceding directories.",
+      "syntax": "basename path [suffix]",
+      "options": [
+        {
+          "flag": "suffix",
+          "description": "Optional suffix to remove (argument, not flag)."
+        },
+        {
+          "flag": "--",
+          "description": "Mark the end of options, where supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "basename /home/user/notes.txt",
+          "description": "Show only notes.txt."
+        },
+        {
+          "command": "basename /home/user/notes.txt .txt",
+          "description": "Show notes without its .txt suffix."
+        }
+      ],
+      "keywords": [
+        "filename",
+        "path"
+      ],
+      "note": "basename works on text paths and does not require the file to exist.",
+      "type": "utility"
+    },
+    {
+      "id": "dirname",
+      "name": "dirname",
+      "category": "Files & Directories",
+      "summary": "Extract directory from path",
+      "description": "Returns the directory component of a path, omitting its last component.",
+      "syntax": "dirname path",
+      "options": [
+        {
+          "flag": "--",
+          "description": "Mark the end of options, where supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "dirname /home/user/notes.txt",
+          "description": "Show /home/user."
+        },
+        {
+          "command": "dirname ./docs/file.txt",
+          "description": "Show ./docs."
+        }
+      ],
+      "keywords": [
+        "parent directory",
+        "path",
+        "parent",
+        "directory"
+      ],
+      "note": "dirname operates on path strings and does not check for an existing directory.",
+      "type": "utility"
+    },
+    {
+      "id": "ln",
+      "name": "ln",
+      "category": "Files & Directories",
+      "summary": "Create file links",
+      "description": "Creates symbolic or hard links to other filesystem entries.",
+      "syntax": "ln [options] target link_name",
+      "options": [
+        {
+          "flag": "-s",
+          "description": "Create a symbolic rather than a hard link."
+        },
+        {
+          "flag": "-f",
+          "description": "Replace an existing destination if allowed; use carefully."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ln -s notes.txt shortcut.txt",
+          "description": "Create a symbolic link."
+        },
+        {
+          "command": "ln notes.txt copy-link.txt",
+          "description": "Create a hard link on the same filesystem."
+        }
+      ],
+      "keywords": [
+        "symbolic link",
+        "symlink",
+        "hard link",
+        "hard",
+        "link",
+        "shortcut"
+      ],
+      "note": "Relative symbolic-link targets are resolved from the directory containing the link.",
+      "type": "utility"
+    },
+    {
+      "id": "stat",
+      "name": "stat",
+      "category": "Files & Directories",
+      "summary": "Show file metadata",
+      "description": "Prints a file's size, permissions, timestamps, and other metadata.",
+      "syntax": "stat [options] file...",
+      "options": [
+        {
+          "flag": "-L",
+          "description": "Follow a symbolic link to its target where supported."
+        },
+        {
+          "flag": "-c FORMAT",
+          "description": "On GNU/Linux, choose an output format; %s prints size in bytes."
+        }
+      ],
+      "examples": [
+        {
+          "command": "stat notes.txt",
+          "description": "Show detailed file metadata."
+        },
+        {
+          "command": "stat -c '%s' notes.txt",
+          "description": "On GNU/Linux, show file size in bytes."
+        }
+      ],
+      "keywords": [
+        "file information",
+        "metadata",
+        "file",
+        "size",
+        "permissions"
+      ],
+      "note": "Formatting options differ between GNU/Linux and macOS; basic stat FILE is common to both.",
+      "type": "utility"
+    },
+    {
+      "id": "read",
+      "name": "read",
+      "category": "System",
+      "summary": "Read input into Bash variables",
+      "description": "Reads a line of input into one or more Bash variables.",
+      "syntax": "read [options] name...",
+      "options": [
+        {
+          "flag": "-r",
+          "description": "Do not interpret backslashes as escapes; usually recommended."
+        },
+        {
+          "flag": "-p PROMPT",
+          "description": "Display a prompt before reading (Bash)."
+        },
+        {
+          "flag": "-a ARRAY",
+          "description": "Read words into an array."
+        }
+      ],
+      "examples": [
+        {
+          "command": "read -r name",
+          "description": "Read a line into the name variable."
+        },
+        {
+          "command": "read -r -p 'Name: ' name",
+          "description": "Prompt for a name and save the answer."
+        }
+      ],
+      "keywords": [
+        "input",
+        "prompt",
+        "variable",
+        "script"
+      ],
+      "note": "read is a Bash builtin. For example, printf '%s\\n' \"$name\" displays the captured value.",
+      "type": "builtin"
+    },
+    {
+      "id": "export",
+      "name": "export",
+      "category": "System",
+      "summary": "Export variables to child processes",
+      "description": "Makes a shell variable available in the environments of programs started by the shell.",
+      "syntax": "export [options] [name[=value] ...]",
+      "options": [
+        {
+          "flag": "-p",
+          "description": "List exported variables."
+        },
+        {
+          "flag": "-n",
+          "description": "Stop exporting a variable without deleting its value."
+        }
+      ],
+      "examples": [
+        {
+          "command": "export PROJECT=demo",
+          "description": "Set the PROJECT environment variable."
+        },
+        {
+          "command": "export -p",
+          "description": "List exported variables."
+        }
+      ],
+      "keywords": [
+        "environment variable",
+        "variable",
+        "shell",
+        "environment",
+        "variables",
+        "export"
+      ],
+      "note": "Exported variables last for the current shell and its child processes, not automatically for future sessions.",
+      "type": "builtin"
+    },
+    {
+      "id": "env",
+      "name": "env",
+      "category": "System",
+      "summary": "Inspect or modify process environment",
+      "description": "Displays environment variables or launches a command with temporary environment changes.",
+      "syntax": "env [options] [name=value ...] [command]",
+      "options": [
+        {
+          "flag": "-i",
+          "description": "Start with an empty environment."
+        },
+        {
+          "flag": "-u NAME",
+          "description": "Remove a variable from the launched program's environment."
+        }
+      ],
+      "examples": [
+        {
+          "command": "env",
+          "description": "List environment variables."
+        },
+        {
+          "command": "env LANG=C date",
+          "description": "Run date with a temporary language setting."
+        }
+      ],
+      "keywords": [
+        "environment",
+        "variables",
+        "temporary"
+      ],
+      "note": "Unlike export, env assignments before a command apply only to that command.",
+      "type": "utility"
+    },
+    {
+      "id": "sleep",
+      "name": "sleep",
+      "category": "System",
+      "summary": "Delay execution",
+      "description": "Waits for the given duration before continuing.",
+      "syntax": "sleep number",
+      "options": [],
+      "examples": [
+        {
+          "command": "sleep 2",
+          "description": "Wait two seconds."
+        },
+        {
+          "command": "sleep 0.5",
+          "description": "Wait half a second if supported."
+        }
+      ],
+      "keywords": [
+        "delay",
+        "wait",
+        "pause"
+      ],
+      "note": "Seconds are the default unit; some implementations also accept time suffixes.",
+      "type": "utility"
+    },
+    {
+      "id": "whoami",
+      "name": "whoami",
+      "category": "System",
+      "summary": "Show current username",
+      "description": "Prints the effective user's name.",
+      "syntax": "whoami",
+      "options": [],
+      "examples": [
+        {
+          "command": "whoami",
+          "description": "Print the current username."
+        }
+      ],
+      "keywords": [
+        "user",
+        "username",
+        "account"
+      ],
+      "note": "For user and group IDs, use id.",
+      "type": "utility"
+    },
+    {
+      "id": "uname",
+      "name": "uname",
+      "category": "System",
+      "summary": "Show system information",
+      "description": "Prints kernel and machine architecture information.",
+      "syntax": "uname [options]",
+      "options": [
+        {
+          "flag": "-a",
+          "description": "Show all available information."
+        },
+        {
+          "flag": "-s",
+          "description": "Show the kernel or system name."
+        },
+        {
+          "flag": "-m",
+          "description": "Show the machine architecture."
+        }
+      ],
+      "examples": [
+        {
+          "command": "uname -a",
+          "description": "Show system information."
+        },
+        {
+          "command": "uname -m",
+          "description": "Show the reported architecture."
+        }
+      ],
+      "keywords": [
+        "system",
+        "OS",
+        "kernel",
+        "architecture"
+      ],
+      "note": "uname does not necessarily report the distribution name or its user-friendly version.",
+      "type": "utility"
+    },
+    {
+      "id": "paste",
+      "name": "paste",
+      "category": "Text & Search",
+      "summary": "Join columns from files",
+      "description": "Merges corresponding lines from files, separated by a delimiter.",
+      "syntax": "paste [options] file...",
+      "options": [
+        {
+          "flag": "-d ','",
+          "description": "Use a comma as the field separator."
+        },
+        {
+          "flag": "-s",
+          "description": "Join lines from each file into one long output line."
+        }
+      ],
+      "examples": [
+        {
+          "command": "paste names.txt scores.txt",
+          "description": "Merge corresponding lines from two files."
+        },
+        {
+          "command": "paste -d ',' names.txt scores.txt",
+          "description": "Create comma-separated output."
+        }
+      ],
+      "keywords": [
+        "combine",
+        "columns",
+        "merge",
+        "tab"
+      ],
+      "note": "The default separator is a tab. Input lengths may differ.",
+      "type": "utility"
+    }
+  ]
+}
