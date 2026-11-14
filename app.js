@@ -2,7 +2,7 @@
 (() => {
   const FILES = {commands:'commands.json', versions:'versions.json'};
   const CACHE_KEYS = {commands:'bash-library-commands-v1', versions:'bash-library-versions-v1', theme:'bash-library-theme-v1'};
-  const categories = ['All','Files & Directories','Text & Search','System'];
+  const categories = ['All','Files & Directories','Text & Search','System','Network & Web'];
   const state = {data:null, versions:null, selected:null, category:'All', query:'', historical:false, online:false};
   const $ = id => document.getElementById(id);
   const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

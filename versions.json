@@ -1,7 +1,15 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "1.3.0",
+  "latestVersion": "1.4.0",
   "releases": [
+    {
+      "version": "1.4.0",
+      "date": "2026-11-14",
+      "title": "100-command essential reference expansion",
+      "summary": "Added 52 practical commands spanning web downloads, networking, permissions, archives, services, processes, editors, shell job control, and Git",
+      "commandCount": 100,
+      "snapshot": "history/1.4.0.json"
+    },
     {
       "version": "1.3.0",
       "date": "2026-11-13",

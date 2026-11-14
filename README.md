@@ -1,12 +1,13 @@
 # Bash Command Library
 
-A fast, publicly accessible Bash and Unix command reference. Search commands, flags, descriptions, and examples in English. The site is hosted on GitHub Pages and keeps a local cache for offline use.
+A fast, publicly accessible Bash and Unix command reference. Browse 100 practical commands, flags, descriptions, and examples in English. The site is hosted on GitHub Pages and keeps a local cache for offline use.
 
 **Live website:** https://yardensz.github.io/bash-command-library/
 
 ## Features
 
-- Instant English-language search across names, descriptions, flags, examples, and keywords.
+- Instant English-language search across 100 commands, descriptions, flags, examples, and keywords.
+- Network & Web category covering wget, curl, SSH, DNS, and troubleshooting tools.
 - Syntax highlighting for command names, options, parameters, paths, strings, and operators.
 - Concise option explanations, copyable examples, and keyboard-driven navigation.
 - Compact, responsive layout with light and dark themes.
