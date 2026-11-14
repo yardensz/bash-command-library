@@ -311,3 +311,34 @@ body {direction:ltr}
  .search-icon {left:12px;right:auto}
  .shortcut {right:11px;left:auto}
 }
+
+/* v1.5.0: searchable reference concepts */
+.cmd-item.guide-item{border-left:2px solid var(--accent);padding-left:8px}
+.cmd-item .cmd-symbol{min-width:0;max-width:112px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cmd-kind{font:700 10px ui-monospace,Consolas,monospace;text-transform:uppercase;color:var(--accent);flex-shrink:0}
+.cmd-arrow{flex-shrink:0}
+.guide-detail h2{font-size:clamp(24px,2vw,30px);letter-spacing:-.5px;overflow-wrap:anywhere}
+.guide-intro,.guide-section p{font-size:13px;line-height:1.65}
+.guide-intro{margin:13px 0 0}
+.guide-section{margin-top:16px}
+.guide-section h3{margin:15px 0 7px}
+.guide-section p{margin:0 0 8px}
+.guide-table{border-top:1px solid var(--stroke);margin-top:8px}
+.guide-row{display:grid;grid-template-columns:minmax(96px,28%) minmax(0,1fr);gap:16px;padding:8px 0;border-bottom:1px solid var(--stroke);align-items:baseline}
+.guide-row code{overflow-wrap:anywhere;font:650 12px/1.5 ui-monospace,Consolas,monospace;color:var(--accent)}
+.guide-row span{font-size:12.5px;line-height:1.55}
+.practice-list{margin:7px 0 0;padding-left:20px;font-size:12.5px;line-height:1.7}
+.practice-list li{padding:2px 0}
+.guide-resources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.resource-link{display:flex;flex-direction:column;gap:4px;border:1px solid var(--stroke);border-left:3px solid var(--accent);padding:11px 13px;text-decoration:none;color:var(--ink);background:var(--surface-alt)}
+.resource-link:hover{border-color:var(--accent)}
+.resource-link strong{font-size:12.5px}
+.resource-link small{font-size:11px;color:var(--muted);line-height:1.5}
+.sample-label{margin-top:9px;text-transform:uppercase;letter-spacing:.07em;font-size:10px;font-weight:700;color:var(--muted)}
+.example .sample-output{margin:5px 0 0;background:var(--surface-alt);color:var(--ink);border-left:3px solid var(--accent);font-size:12px}
+.behavior-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px}
+.behavior-grid>div{display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--stroke);padding-top:8px}
+.behavior-grid strong{font:700 11px ui-monospace,Consolas,monospace;color:var(--accent)}
+.behavior-grid span{font-size:12px;line-height:1.55}
+@media(max-width:980px){.guide-resources,.behavior-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.cmd-item .cmd-symbol{max-width:90px}.guide-row{grid-template-columns:minmax(72px,32%) minmax(0,1fr);gap:9px}}

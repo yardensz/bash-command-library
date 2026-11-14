@@ -20,7 +20,7 @@
     <div class="topbar-utilities">
       <div class="stat" aria-label="Number of commands in the library">
         <span class="stat-number" id="commandCount">—</span>
-        <span class="stat-label">commands</span>
+        <span class="stat-label" id="itemCountLabel">commands · guides</span>
       </div>
       <nav class="header-actions" aria-label="Site actions">
         <button class="btn" id="helpBtn" type="button">Syntax guide</button>
@@ -31,13 +31,13 @@
   </header>
 
   <section class="search-zone" aria-label="Search the library">
-    <label for="searchInput">Search commands</label>
+    <label for="searchInput">Search commands &amp; guides</label>
     <div class="search-wrap">
       <span class="search-icon" aria-hidden="true">⌕</span>
-      <input id="searchInput" type="search" placeholder="Search commands, actions, or options..." autocomplete="off" spellcheck="false" aria-label="Search commands">
+      <input id="searchInput" type="search" placeholder="Search commands, regex, =, pipes, and more..." autocomplete="off" spellcheck="false" aria-label="Search commands">
       <span class="shortcut" aria-hidden="true">/</span>
     </div>
-    <p class="search-hint">Find commands by name, flag, or description. Press <kbd>/</kbd> to focus search.</p>
+    <p class="search-hint">Find commands and Bash concepts by name or keyword. Press <kbd>/</kbd> to search.</p>
   </section>
 
   <div class="meta-strip">
@@ -47,9 +47,9 @@
 
   <div class="workspace">
     <aside class="sidebar" aria-label="Command list">
-      <div class="sidebar-title"><span>Command index</span></div>
+      <div class="sidebar-title"><span>Library index</span></div>
       <div id="categories" class="categories" aria-label="Filter by category"></div>
-      <div class="list-meta"><span id="resultsCount">— results</span><span>Select a command ↓</span></div>
+      <div class="list-meta"><span id="resultsCount">— results</span><span>Select an entry ↓</span></div>
       <nav id="commandList" class="commands-list" aria-label="Command list"></nav>
     </aside>
     <main class="main" id="mainContent" tabindex="-1" aria-live="polite"><div class="empty">Loading commands...</div></main>

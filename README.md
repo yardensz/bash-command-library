@@ -1,6 +1,6 @@
 # Bash Command Library
 
-A fast, publicly accessible Bash and Unix command reference. Browse 100 practical commands, flags, descriptions, and examples in English. The site is hosted on GitHub Pages and keeps a local cache for offline use.
+A fast, publicly accessible Bash and Unix command reference. Browse 100 practical commands and eight searchable Bash syntax guides in English. The site is hosted on GitHub Pages and keeps a local cache for offline use.
 
 **Live website:** https://yardensz.github.io/bash-command-library/
 
@@ -8,6 +8,8 @@ A fast, publicly accessible Bash and Unix command reference. Browse 100 practica
 
 - Instant English-language search across 100 commands, descriptions, flags, examples, and keywords.
 - Network & Web category covering wget, curl, SSH, DNS, and troubleshooting tools.
+- Concepts & Syntax guides for regex, assignment, quoting, streams, redirection, substitution, and globs.
+- Selected commands document output, exit status, side effects, and best practices.
 - Syntax highlighting for command names, options, parameters, paths, strings, and operators.
 - Concise option explanations, copyable examples, and keyboard-driven navigation.
 - Compact, responsive layout with light and dark themes.
@@ -16,7 +18,7 @@ A fast, publicly accessible Bash and Unix command reference. Browse 100 practica
 
 ## Usage
 
-Open the website and start typing. Press `/` to focus search, use the arrow keys to navigate results, and press Enter to select a command. Click **Copy** to copy syntax or a command example.
+Search commands or concepts such as regex, =, quoting, stdout, or $(...). Search also recognizes accidental wrong-keyboard-layout input. Press `/` to focus search, use the arrow keys to navigate results, and press Enter to select a command. Click **Copy** to copy syntax or a command example.
 
 This library includes both Bash builtins and standard Unix utilities. Options may differ between GNU/Linux, macOS, and other platforms; consult `man` or `--help` for local details.
 
@@ -30,7 +32,7 @@ The site does not require a dedicated server, API token, database, or build step
 
 ## Maintaining the command library
 
-- `commands.json`: the current command database, including `version` and `updatedAt`.
+- `commands.json`: the current database, including `version`, `updatedAt`, `commands`, and `topics` (noncommand guides).
 - `versions.json`: release metadata in newest-first order.
 - `history/X.Y.Z.json`: read-only snapshots of released data.
 - `app.js`: search, rendering, navigation, version selection, and caching.
