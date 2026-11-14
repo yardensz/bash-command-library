@@ -13,27 +13,51 @@
       "options": [
         {
           "flag": "-l",
-          "description": "Show detailed information: permissions, ownership, size, and date."
+          "description": "Show detailed information: permissions, ownership, size, and date.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "L = Long listing format."
+          }
         },
         {
           "flag": "-a",
-          "description": "Include hidden entries beginning with a dot."
+          "description": "Include hidden entries beginning with a dot.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "A = All, including hidden dotfiles."
+          }
         },
         {
           "flag": "-h",
-          "description": "Show human-readable file sizes, useful with -l."
+          "description": "Show human-readable file sizes, useful with -l.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "H = Human-readable sizes."
+          }
         },
         {
           "flag": "-R",
-          "description": "List subdirectories recursively."
+          "description": "List subdirectories recursively.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "List subdirectories recursively."
+          }
         },
         {
           "flag": "-t",
-          "description": "Sort by modification time."
+          "description": "Sort by modification time.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Sort by modification time."
+          }
         },
         {
           "flag": "--color=auto",
-          "description": "Colorize entries automatically on GNU ls."
+          "description": "Colorize entries automatically on GNU ls.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Colorize entries automatically on GNU ls."
+          }
         }
       ],
       "examples": [
@@ -63,7 +87,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "List: lists the names of files and directories."
-      }
+      },
+      "output": {
+        "stdout": "Prints directory entries.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "cd",
@@ -75,15 +106,27 @@
       "options": [
         {
           "flag": "..",
-          "description": "Parent directory (an argument, not a flag)."
+          "description": "Parent directory (an argument, not a flag).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Parent directory (an argument, not a flag)."
+          }
         },
         {
           "flag": "~",
-          "description": "Shortcut for your home directory."
+          "description": "Shortcut for your home directory.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Shortcut for your home directory."
+          }
         },
         {
           "flag": "-",
-          "description": "Go to the previous directory (an argument, not a flag)."
+          "description": "Go to the previous directory (an argument, not a flag).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Go to the previous directory (an argument, not a flag)."
+          }
         }
       ],
       "examples": [
@@ -116,7 +159,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Change Directory: switches the current working directory."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; changes the shell's current directory.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "pwd",
@@ -128,11 +178,19 @@
       "options": [
         {
           "flag": "-L",
-          "description": "Show the logical path, which may contain symbolic links."
+          "description": "Show the logical path, which may contain symbolic links.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show the logical path, which may contain symbolic links."
+          }
         },
         {
           "flag": "-P",
-          "description": "Resolve symbolic links and print the physical path."
+          "description": "Resolve symbolic links and print the physical path.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Resolve symbolic links and print the physical path."
+          }
         }
       ],
       "examples": [
@@ -157,7 +215,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Print Working Directory: displays the directory you are in."
-      }
+      },
+      "output": {
+        "stdout": "Prints the current directory.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "mkdir",
@@ -169,11 +234,19 @@
       "options": [
         {
           "flag": "-p",
-          "description": "Create missing parent directories; allow directories that already exist."
+          "description": "Create missing parent directories; allow directories that already exist.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Create missing parent directories; allow directories that already exist."
+          }
         },
         {
           "flag": "-v",
-          "description": "Print a message for each newly created directory."
+          "description": "Print a message for each newly created directory.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Print a message for each newly created directory."
+          }
         }
       ],
       "examples": [
@@ -198,7 +271,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Make Directory: creates a directory."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; creates directories.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "touch",
@@ -210,15 +290,27 @@
       "options": [
         {
           "flag": "-c",
-          "description": "Do not create missing files."
+          "description": "Do not create missing files.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Do not create missing files."
+          }
         },
         {
           "flag": "-a",
-          "description": "Update the access timestamp."
+          "description": "Update the access timestamp.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Update the access timestamp."
+          }
         },
         {
           "flag": "-m",
-          "description": "Update the modification timestamp."
+          "description": "Update the modification timestamp.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Update the modification timestamp."
+          }
         }
       ],
       "examples": [
@@ -242,7 +334,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Think 'touch a file': create an empty one or update its timestamps."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; creates or updates files.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "cp",
@@ -254,19 +353,35 @@
       "options": [
         {
           "flag": "-r",
-          "description": "Copy directories recursively."
+          "description": "Copy directories recursively.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Copy directories recursively."
+          }
         },
         {
           "flag": "-i",
-          "description": "Ask before overwriting a destination."
+          "description": "Ask before overwriting a destination.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Ask before overwriting a destination."
+          }
         },
         {
           "flag": "-n",
-          "description": "Avoid overwriting destinations when supported; behavior varies."
+          "description": "Avoid overwriting destinations when supported; behavior varies.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Avoid overwriting destinations when supported; behavior varies."
+          }
         },
         {
           "flag": "-v",
-          "description": "Print the files being copied."
+          "description": "Print the files being copied.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Print the files being copied."
+          }
         }
       ],
       "examples": [
@@ -289,7 +404,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Copy: duplicates a file or directory."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; copies files.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "mv",
@@ -301,15 +423,27 @@
       "options": [
         {
           "flag": "-i",
-          "description": "Ask before overwriting the destination."
+          "description": "Ask before overwriting the destination.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Ask before overwriting the destination."
+          }
         },
         {
           "flag": "-n",
-          "description": "Avoid overwriting an existing target when supported."
+          "description": "Avoid overwriting an existing target when supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Avoid overwriting an existing target when supported."
+          }
         },
         {
           "flag": "-v",
-          "description": "Show the entries that were moved."
+          "description": "Show the entries that were moved.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show the entries that were moved."
+          }
         }
       ],
       "examples": [
@@ -336,7 +470,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Move: moves or renames a file or directory."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; moves or renames files.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "rm",
@@ -348,15 +489,27 @@
       "options": [
         {
           "flag": "-i",
-          "description": "Ask for confirmation before each deletion."
+          "description": "Ask for confirmation before each deletion.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Ask for confirmation before each deletion."
+          }
         },
         {
           "flag": "-r",
-          "description": "Delete directories and their contents recursively; use caution."
+          "description": "Delete directories and their contents recursively; use caution.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Delete directories and their contents recursively; use caution."
+          }
         },
         {
           "flag": "-v",
-          "description": "Print which items are removed."
+          "description": "Print which items are removed.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Print which items are removed."
+          }
         }
       ],
       "examples": [
@@ -379,7 +532,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Remove: deletes files or directories."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; removes files.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "cat",
@@ -391,15 +551,27 @@
       "options": [
         {
           "flag": "-n",
-          "description": "Number all output lines."
+          "description": "Number all output lines.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Number all output lines."
+          }
         },
         {
           "flag": "-b",
-          "description": "Number only nonempty lines."
+          "description": "Number only nonempty lines.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Number only nonempty lines."
+          }
         },
         {
           "flag": "-s",
-          "description": "Collapse repeated empty lines when supported."
+          "description": "Collapse repeated empty lines when supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Collapse repeated empty lines when supported."
+          }
         }
       ],
       "examples": [
@@ -424,7 +596,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Concatenate: joins file contents; also commonly used to display them."
-      }
+      },
+      "output": {
+        "stdout": "Prints file contents to stdout.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "sort",
@@ -436,27 +615,51 @@
       "options": [
         {
           "flag": "-n",
-          "description": "Sort by numeric value."
+          "description": "Sort by numeric value.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "N = Numeric sorting."
+          }
         },
         {
           "flag": "-r",
-          "description": "Reverse the order."
+          "description": "Reverse the order.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "R = Reverse sorting."
+          }
         },
         {
           "flag": "-u",
-          "description": "Show unique lines only."
+          "description": "Show unique lines only.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "U = Unique lines."
+          }
         },
         {
           "flag": "-k N",
-          "description": "Sort using field N as the key."
+          "description": "Sort using field N as the key.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Sort using field N as the key."
+          }
         },
         {
           "flag": "-t CHAR",
-          "description": "Choose the field separator."
+          "description": "Choose the field separator.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Choose the field separator."
+          }
         },
         {
           "flag": "-o FILE",
-          "description": "Write sorted output to the specified file."
+          "description": "Write sorted output to the specified file.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Write sorted output to the specified file."
+          }
         }
       ],
       "examples": [
@@ -489,7 +692,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Sort means arranging lines in an order."
-      }
+      },
+      "output": {
+        "stdout": "Prints sorted input lines.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "grep",
@@ -501,39 +711,75 @@
       "options": [
         {
           "flag": "-i",
-          "description": "Ignore uppercase/lowercase differences."
+          "description": "Ignore uppercase/lowercase differences.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "I = Ignore case: letter case does not affect matching."
+          }
         },
         {
           "flag": "-n",
-          "description": "Show matching line numbers."
+          "description": "Show matching line numbers.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "N = Number: show the line number for each match."
+          }
         },
         {
           "flag": "-r",
-          "description": "Search subdirectories recursively."
+          "description": "Search subdirectories recursively.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "R = Recursive: include subdirectories."
+          }
         },
         {
           "flag": "-v",
-          "description": "Print lines that do not match."
+          "description": "Print lines that do not match.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "V = InVert: select lines that do NOT match."
+          }
         },
         {
           "flag": "-F",
-          "description": "Treat the pattern as literal text."
+          "description": "Treat the pattern as literal text.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "F = Fixed strings: match literal text, not regex syntax."
+          }
         },
         {
           "flag": "-E",
-          "description": "Enable extended regex."
+          "description": "Enable extended regex.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "E = Extended regex: supports +, | and (...) without BRE escapes."
+          }
         },
         {
           "flag": "-o",
-          "description": "Print only matching substrings, one per line, instead of full matching lines."
+          "description": "Print only matching substrings, one per line, instead of full matching lines.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "O = Only matching: print each matched substring on a separate line."
+          }
         },
         {
           "flag": "-q",
-          "description": "Quiet mode: print nothing; signal whether a match was found through the exit status."
+          "description": "Quiet mode: print nothing; signal whether a match was found through the exit status.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Q = Quiet: suppress matches and use the exit status."
+          }
         },
         {
           "flag": "-w",
-          "description": "Require whole-word matches (word boundaries), rather than matching substrings inside larger words."
+          "description": "Require whole-word matches (word boundaries), rather than matching substrings inside larger words.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "W = Word: require word boundaries around a match."
+          }
         }
       ],
       "examples": [
@@ -605,23 +851,43 @@
       "options": [
         {
           "flag": "-name \"*.txt\"",
-          "description": "Match filenames with a glob; quote the pattern."
+          "description": "Match filenames with a glob; quote the pattern.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Match filenames with a glob; quote the pattern."
+          }
         },
         {
           "flag": "-iname \"*.txt\"",
-          "description": "Match filenames without case sensitivity when supported."
+          "description": "Match filenames without case sensitivity when supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Match filenames without case sensitivity when supported."
+          }
         },
         {
           "flag": "-type f",
-          "description": "Match regular files only."
+          "description": "Match regular files only.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Match regular files only."
+          }
         },
         {
           "flag": "-type d",
-          "description": "Match directories only."
+          "description": "Match directories only.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Match directories only."
+          }
         },
         {
           "flag": "-maxdepth N",
-          "description": "Limit recursion depth on GNU find."
+          "description": "Limit recursion depth on GNU find.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Limit recursion depth on GNU find."
+          }
         }
       ],
       "examples": [
@@ -651,7 +917,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Find searches for files and directories by conditions."
-      }
+      },
+      "output": {
+        "stdout": "Prints paths matching its tests by default.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "head",
@@ -663,11 +936,19 @@
       "options": [
         {
           "flag": "-n N",
-          "description": "Show the first N lines."
+          "description": "Show the first N lines.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "N = Number of lines from start."
+          }
         },
         {
           "flag": "-c N",
-          "description": "Show the first N bytes."
+          "description": "Show the first N bytes.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show the first N bytes."
+          }
         }
       ],
       "examples": [
@@ -691,7 +972,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Like the head of a document: read its first lines."
-      }
+      },
+      "output": {
+        "stdout": "Prints the initial lines.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "tail",
@@ -703,15 +991,27 @@
       "options": [
         {
           "flag": "-n N",
-          "description": "Show the last N lines."
+          "description": "Show the last N lines.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "N = Number of lines from end."
+          }
         },
         {
           "flag": "-f",
-          "description": "Follow new lines as they are added."
+          "description": "Follow new lines as they are added.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "F = Follow a growing file."
+          }
         },
         {
           "flag": "-c N",
-          "description": "Show the last N bytes."
+          "description": "Show the last N bytes.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show the last N bytes."
+          }
         }
       ],
       "examples": [
@@ -740,7 +1040,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Like the tail of a document: read its last lines."
-      }
+      },
+      "output": {
+        "stdout": "Prints the final lines.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "wc",
@@ -752,19 +1059,35 @@
       "options": [
         {
           "flag": "-l",
-          "description": "Count newline characters."
+          "description": "Count newline characters.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "L = Lines: counts newline characters."
+          }
         },
         {
           "flag": "-w",
-          "description": "Count words."
+          "description": "Count words.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "W = Words: counts ALL words in the input, not a specific search term."
+          }
         },
         {
           "flag": "-c",
-          "description": "Count bytes."
+          "description": "Count bytes.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "C = byte Count, not Unicode characters."
+          }
         },
         {
           "flag": "-m",
-          "description": "Count characters according to the locale."
+          "description": "Count characters according to the locale.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Character count rather than byte count; the letter is not a reliable acronym."
+          }
         }
       ],
       "examples": [
@@ -826,19 +1149,35 @@
       "options": [
         {
           "flag": "-N",
-          "description": "Show line numbers."
+          "description": "Show line numbers.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show line numbers."
+          }
         },
         {
           "flag": "-S",
-          "description": "Do not wrap long lines."
+          "description": "Do not wrap long lines.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Do not wrap long lines."
+          }
         },
         {
           "flag": "/text",
-          "description": "Search for text inside less (not a flag)."
+          "description": "Search for text inside less (not a flag).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Search for text inside less (not a flag)."
+          }
         },
         {
           "flag": "q",
-          "description": "Quit the pager (a key, not a flag)."
+          "description": "Quit the pager (a key, not a flag).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Quit the pager (a key, not a flag)."
+          }
         }
       ],
       "examples": [
@@ -863,7 +1202,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "A pager with an intentionally playful name, contrasting the older more program."
-      }
+      },
+      "output": {
+        "stdout": "Displays an interactive pager.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "echo",
@@ -875,11 +1221,19 @@
       "options": [
         {
           "flag": "-n",
-          "description": "Omit the trailing newline."
+          "description": "Omit the trailing newline.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Omit the trailing newline."
+          }
         },
         {
           "flag": "$HOME",
-          "description": "Example of variable expansion; not a flag."
+          "description": "Example of variable expansion; not a flag.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Example of variable expansion; not a flag."
+          }
         }
       ],
       "examples": [
@@ -907,7 +1261,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Like an echo, it repeats text to the output."
-      }
+      },
+      "output": {
+        "stdout": "Prints arguments with a final newline.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "man",
@@ -919,11 +1280,19 @@
       "options": [
         {
           "flag": "-k keyword",
-          "description": "Search manual descriptions by keyword."
+          "description": "Search manual descriptions by keyword.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Search manual descriptions by keyword."
+          }
         },
         {
           "flag": "q",
-          "description": "Quit the manual viewer (not a flag)."
+          "description": "Quit the manual viewer (not a flag).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Quit the manual viewer (not a flag)."
+          }
         }
       ],
       "examples": [
@@ -950,7 +1319,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Manual: opens command documentation."
-      }
+      },
+      "output": {
+        "stdout": "Displays manual documentation.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "clear",
@@ -976,7 +1352,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Clear the terminal display."
-      }
+      },
+      "output": {
+        "stdout": "Clears the terminal display.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "printf",
@@ -988,15 +1371,27 @@
       "options": [
         {
           "flag": "%s",
-          "description": "Insert a string."
+          "description": "Insert a string.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Insert a string."
+          }
         },
         {
           "flag": "%d",
-          "description": "Insert an integer."
+          "description": "Insert an integer.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Insert an integer."
+          }
         },
         {
           "flag": "\\n",
-          "description": "Newline escape inside a format string (not a flag)."
+          "description": "Newline escape inside a format string (not a flag).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Newline escape inside a format string (not a flag)."
+          }
         }
       ],
       "examples": [
@@ -1025,7 +1420,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Print Formatted: prints text using a format string."
-      }
+      },
+      "output": {
+        "stdout": "Prints text according to a format string.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "cut",
@@ -1037,15 +1439,27 @@
       "options": [
         {
           "flag": "-d DELIM",
-          "description": "Set the field delimiter."
+          "description": "Set the field delimiter.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Set the field delimiter."
+          }
         },
         {
           "flag": "-f LIST",
-          "description": "Select field numbers, starting at 1."
+          "description": "Select field numbers, starting at 1.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Select field numbers, starting at 1."
+          }
         },
         {
           "flag": "-c LIST",
-          "description": "Select character ranges."
+          "description": "Select character ranges.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Select character ranges."
+          }
         }
       ],
       "examples": [
@@ -1072,7 +1486,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Cuts out selected fields or columns from lines."
-      }
+      },
+      "output": {
+        "stdout": "Prints selected fields/columns.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "uniq",
@@ -1084,15 +1505,27 @@
       "options": [
         {
           "flag": "-c",
-          "description": "Count adjacent occurrences."
+          "description": "Count adjacent occurrences.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "C = Count repeated adjacent lines."
+          }
         },
         {
           "flag": "-d",
-          "description": "Show only repeated lines."
+          "description": "Show only repeated lines.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "D = Duplicates only."
+          }
         },
         {
           "flag": "-u",
-          "description": "Show lines that appear only once."
+          "description": "Show lines that appear only once.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "U = Unique only."
+          }
         }
       ],
       "examples": [
@@ -1116,7 +1549,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Unique: filters adjacent repeated lines."
-      }
+      },
+      "output": {
+        "stdout": "Prints lines with adjacent duplicates handled.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "tr",
@@ -1128,15 +1568,27 @@
       "options": [
         {
           "flag": "-d",
-          "description": "Delete selected characters."
+          "description": "Delete selected characters.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Delete selected characters."
+          }
         },
         {
           "flag": "-s",
-          "description": "Collapse consecutive occurrences."
+          "description": "Collapse consecutive occurrences.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Collapse consecutive occurrences."
+          }
         },
         {
           "flag": "SET1 SET2",
-          "description": "Map characters in SET1 to SET2 (arguments)."
+          "description": "Map characters in SET1 to SET2 (arguments).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Map characters in SET1 to SET2 (arguments)."
+          }
         }
       ],
       "examples": [
@@ -1161,7 +1613,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Translate: translates or deletes characters."
-      }
+      },
+      "output": {
+        "stdout": "Prints translated or deleted character stream.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "sed",
@@ -1173,15 +1632,27 @@
       "options": [
         {
           "flag": "-n",
-          "description": "Suppress normal automatic printing."
+          "description": "Suppress normal automatic printing.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Suppress normal automatic printing."
+          }
         },
         {
           "flag": "s/old/new/g",
-          "description": "Replace old with new throughout each line."
+          "description": "Replace old with new throughout each line.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Replace old with new throughout each line."
+          }
         },
         {
           "flag": "-e script",
-          "description": "Specify an additional sed expression."
+          "description": "Specify an additional sed expression.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Specify an additional sed expression."
+          }
         }
       ],
       "examples": [
@@ -1206,7 +1677,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Stream Editor: applies text transformations to a stream."
-      }
+      },
+      "output": {
+        "stdout": "Prints transformed text by default.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "awk",
@@ -1218,15 +1696,27 @@
       "options": [
         {
           "flag": "-F SEP",
-          "description": "Choose the field separator."
+          "description": "Choose the field separator.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Choose the field separator."
+          }
         },
         {
           "flag": "$1",
-          "description": "Refer to the first input field in awk."
+          "description": "Refer to the first input field in awk.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Refer to the first input field in awk."
+          }
         },
         {
           "flag": "NR",
-          "description": "Built-in variable for the current record number."
+          "description": "Built-in variable for the current record number.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Built-in variable for the current record number."
+          }
         }
       ],
       "examples": [
@@ -1251,7 +1741,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Named after its creators: Aho, Weinberger, and Kernighan."
-      }
+      },
+      "output": {
+        "stdout": "Prints values requested by the AWK program.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "tee",
@@ -1263,11 +1760,19 @@
       "options": [
         {
           "flag": "-a",
-          "description": "Append rather than overwrite."
+          "description": "Append rather than overwrite.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Append rather than overwrite."
+          }
         },
         {
           "flag": "-i",
-          "description": "Ignore interrupts when supported."
+          "description": "Ignore interrupts when supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Ignore interrupts when supported."
+          }
         }
       ],
       "examples": [
@@ -1292,7 +1797,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Named after a T-shaped pipe fitting: sends output to the screen and a file."
-      }
+      },
+      "output": {
+        "stdout": "Prints input and writes a copy to named files.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "xargs",
@@ -1304,15 +1816,27 @@
       "options": [
         {
           "flag": "-n N",
-          "description": "Use no more than N arguments per invocation."
+          "description": "Use no more than N arguments per invocation.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use no more than N arguments per invocation."
+          }
         },
         {
           "flag": "-0",
-          "description": "Read NUL-separated input for safe filename handling."
+          "description": "Read NUL-separated input for safe filename handling.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Read NUL-separated input for safe filename handling."
+          }
         },
         {
           "flag": "-I REPLACE",
-          "description": "Replace a placeholder with each input value."
+          "description": "Replace a placeholder with each input value.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Replace a placeholder with each input value."
+          }
         }
       ],
       "examples": [
@@ -1336,7 +1860,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Think 'arguments': builds command arguments from incoming text."
-      }
+      },
+      "output": {
+        "stdout": "Output comes from the command that xargs launches.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "diff",
@@ -1348,15 +1879,27 @@
       "options": [
         {
           "flag": "-u",
-          "description": "Use unified diff format."
+          "description": "Use unified diff format.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use unified diff format."
+          }
         },
         {
           "flag": "-q",
-          "description": "Report briefly whether differences exist."
+          "description": "Report briefly whether differences exist.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Report briefly whether differences exist."
+          }
         },
         {
           "flag": "-r",
-          "description": "Compare directories recursively."
+          "description": "Compare directories recursively.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Compare directories recursively."
+          }
         }
       ],
       "examples": [
@@ -1379,7 +1922,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Difference: compares text and shows differences."
-      }
+      },
+      "output": {
+        "stdout": "Prints differences; no differences normally yield no text.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "chmod",
@@ -1391,15 +1941,27 @@
       "options": [
         {
           "flag": "+x",
-          "description": "Add execute permission for selected classes."
+          "description": "Add execute permission for selected classes.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Add execute permission for selected classes."
+          }
         },
         {
           "flag": "u+x",
-          "description": "Let the owner execute the file."
+          "description": "Let the owner execute the file.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Let the owner execute the file."
+          }
         },
         {
           "flag": "u-w",
-          "description": "Remove the owner's write permission."
+          "description": "Remove the owner's write permission.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Remove the owner's write permission."
+          }
         }
       ],
       "examples": [
@@ -1427,7 +1989,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Change Mode: changes file permission bits."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; changes permission bits.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "du",
@@ -1439,15 +2008,27 @@
       "options": [
         {
           "flag": "-h",
-          "description": "Use human-readable units."
+          "description": "Use human-readable units.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "H = Human-readable sizes."
+          }
         },
         {
           "flag": "-s",
-          "description": "Display only a total per path."
+          "description": "Display only a total per path.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "S = Summary total."
+          }
         },
         {
           "flag": "-a",
-          "description": "Include files as well as directories."
+          "description": "Include files as well as directories.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "A = All files."
+          }
         }
       ],
       "examples": [
@@ -1473,7 +2054,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Disk Usage: reports space used by files and directories."
-      }
+      },
+      "output": {
+        "stdout": "Prints space usage.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "df",
@@ -1485,15 +2073,27 @@
       "options": [
         {
           "flag": "-h",
-          "description": "Use human-readable sizes."
+          "description": "Use human-readable sizes.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "H = Human-readable sizes."
+          }
         },
         {
           "flag": "-k",
-          "description": "Use 1024-byte blocks."
+          "description": "Use 1024-byte blocks.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use 1024-byte blocks."
+          }
         },
         {
           "flag": "-i",
-          "description": "Show inode statistics where supported."
+          "description": "Show inode statistics where supported.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "I = Inode counts."
+          }
         }
       ],
       "examples": [
@@ -1518,7 +2118,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Disk Free: shows filesystem space usage and availability."
-      }
+      },
+      "output": {
+        "stdout": "Prints filesystem usage.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "file",
@@ -1530,15 +2137,27 @@
       "options": [
         {
           "flag": "-b",
-          "description": "Print the type without the filename."
+          "description": "Print the type without the filename.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Print the type without the filename."
+          }
         },
         {
           "flag": "-i",
-          "description": "Print MIME information where supported."
+          "description": "Print MIME information where supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Print MIME information where supported."
+          }
         },
         {
           "flag": "-L",
-          "description": "Follow symbolic links."
+          "description": "Follow symbolic links.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Follow symbolic links."
+          }
         }
       ],
       "examples": [
@@ -1563,7 +2182,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Determines what kind of data a file contains."
-      }
+      },
+      "output": {
+        "stdout": "Prints detected file types.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "type",
@@ -1575,15 +2201,27 @@
       "options": [
         {
           "flag": "-a",
-          "description": "Show all matches."
+          "description": "Show all matches.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show all matches."
+          }
         },
         {
           "flag": "-t",
-          "description": "Print a short classification such as builtin or file."
+          "description": "Print a short classification such as builtin or file.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Print a short classification such as builtin or file."
+          }
         },
         {
           "flag": "-P",
-          "description": "Find the executable in PATH, if available."
+          "description": "Find the executable in PATH, if available.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Find the executable in PATH, if available."
+          }
         }
       ],
       "examples": [
@@ -1609,7 +2247,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Tells you what type of command name Bash recognizes."
-      }
+      },
+      "output": {
+        "stdout": "Prints command lookup type.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "history",
@@ -1621,11 +2266,19 @@
       "options": [
         {
           "flag": "N",
-          "description": "Show the most recent N entries (argument, not flag)."
+          "description": "Show the most recent N entries (argument, not flag).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show the most recent N entries (argument, not flag)."
+          }
         },
         {
           "flag": "-c",
-          "description": "Clear the current session's in-memory history."
+          "description": "Clear the current session's in-memory history.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Clear the current session's in-memory history."
+          }
         }
       ],
       "examples": [
@@ -1649,7 +2302,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Shows a history of shell commands."
-      }
+      },
+      "output": {
+        "stdout": "Prints history entries.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "ps",
@@ -1661,15 +2321,27 @@
       "options": [
         {
           "flag": "-e",
-          "description": "Show all processes (POSIX style)."
+          "description": "Show all processes (POSIX style).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show all processes (POSIX style)."
+          }
         },
         {
           "flag": "-f",
-          "description": "Show more process details."
+          "description": "Show more process details.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show more process details."
+          }
         },
         {
           "flag": "aux",
-          "description": "Show BSD-style process listing without a dash."
+          "description": "Show BSD-style process listing without a dash.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show BSD-style process listing without a dash."
+          }
         }
       ],
       "examples": [
@@ -1692,7 +2364,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Process Status: displays running processes."
-      }
+      },
+      "output": {
+        "stdout": "Prints process table.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "tar",
@@ -1704,23 +2383,43 @@
       "options": [
         {
           "flag": "-c",
-          "description": "Create an archive."
+          "description": "Create an archive.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Create an archive."
+          }
         },
         {
           "flag": "-t",
-          "description": "List archive contents."
+          "description": "List archive contents.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "List archive contents."
+          }
         },
         {
           "flag": "-x",
-          "description": "Extract an archive."
+          "description": "Extract an archive.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Extract an archive."
+          }
         },
         {
           "flag": "-f FILE",
-          "description": "Specify the archive filename."
+          "description": "Specify the archive filename.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Specify the archive filename."
+          }
         },
         {
           "flag": "-z",
-          "description": "Use gzip compression or decompression when supported."
+          "description": "Use gzip compression or decompression when supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use gzip compression or decompression when supported."
+          }
         }
       ],
       "examples": [
@@ -1744,7 +2443,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Tape Archiver: originally built to store and retrieve tape archives."
-      }
+      },
+      "output": {
+        "stdout": "Creates archive output or lists members depending on options.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "date",
@@ -1756,15 +2462,27 @@
       "options": [
         {
           "flag": "+%Y-%m-%d",
-          "description": "Use a year-month-day format."
+          "description": "Use a year-month-day format.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use a year-month-day format."
+          }
         },
         {
           "flag": "+%H:%M",
-          "description": "Use 24-hour hours and minutes."
+          "description": "Use 24-hour hours and minutes.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use 24-hour hours and minutes."
+          }
         },
         {
           "flag": "-u",
-          "description": "Display UTC time."
+          "description": "Display UTC time.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Display UTC time."
+          }
         }
       ],
       "examples": [
@@ -1787,7 +2505,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Displays or formats the date and time."
-      }
+      },
+      "output": {
+        "stdout": "Prints formatted date/time.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "basename",
@@ -1799,11 +2524,19 @@
       "options": [
         {
           "flag": "suffix",
-          "description": "Optional suffix to remove (argument, not flag)."
+          "description": "Optional suffix to remove (argument, not flag).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Optional suffix to remove (argument, not flag)."
+          }
         },
         {
           "flag": "--",
-          "description": "Mark the end of options, where supported."
+          "description": "Mark the end of options, where supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Mark the end of options, where supported."
+          }
         }
       ],
       "examples": [
@@ -1825,7 +2558,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Base Name: extracts the last part of a path."
-      }
+      },
+      "output": {
+        "stdout": "Prints the basename.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "dirname",
@@ -1837,7 +2577,11 @@
       "options": [
         {
           "flag": "--",
-          "description": "Mark the end of options, where supported."
+          "description": "Mark the end of options, where supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Mark the end of options, where supported."
+          }
         }
       ],
       "examples": [
@@ -1861,7 +2605,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Directory Name: extracts the containing directory from a path."
-      }
+      },
+      "output": {
+        "stdout": "Prints the directory path.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "ln",
@@ -1873,11 +2624,19 @@
       "options": [
         {
           "flag": "-s",
-          "description": "Create a symbolic rather than a hard link."
+          "description": "Create a symbolic rather than a hard link.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Create a symbolic rather than a hard link."
+          }
         },
         {
           "flag": "-f",
-          "description": "Replace an existing destination if allowed; use carefully."
+          "description": "Replace an existing destination if allowed; use carefully.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Replace an existing destination if allowed; use carefully."
+          }
         }
       ],
       "examples": [
@@ -1903,7 +2662,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Link: creates hard links or symbolic links."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; creates links.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "stat",
@@ -1915,11 +2681,19 @@
       "options": [
         {
           "flag": "-L",
-          "description": "Follow a symbolic link to its target where supported."
+          "description": "Follow a symbolic link to its target where supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Follow a symbolic link to its target where supported."
+          }
         },
         {
           "flag": "-c FORMAT",
-          "description": "On GNU/Linux, choose an output format; %s prints size in bytes."
+          "description": "On GNU/Linux, choose an output format; %s prints size in bytes.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "On GNU/Linux, choose an output format; %s prints size in bytes."
+          }
         }
       ],
       "examples": [
@@ -1944,7 +2718,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Think 'status': inspect file metadata such as size and timestamps."
-      }
+      },
+      "output": {
+        "stdout": "Prints file metadata.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "read",
@@ -1956,15 +2737,27 @@
       "options": [
         {
           "flag": "-r",
-          "description": "Do not interpret backslashes as escapes; usually recommended."
+          "description": "Do not interpret backslashes as escapes; usually recommended.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "R = Raw: preserve backslashes."
+          }
         },
         {
           "flag": "-p PROMPT",
-          "description": "Display a prompt before reading (Bash)."
+          "description": "Display a prompt before reading (Bash).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Display a prompt before reading (Bash)."
+          }
         },
         {
           "flag": "-a ARRAY",
-          "description": "Read words into an array."
+          "description": "Read words into an array.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Read words into an array."
+          }
         }
       ],
       "examples": [
@@ -1992,7 +2785,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Reads one line of input into shell variables."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; stores input in variables.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "export",
@@ -2004,11 +2804,19 @@
       "options": [
         {
           "flag": "-p",
-          "description": "List exported variables."
+          "description": "List exported variables.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "List exported variables."
+          }
         },
         {
           "flag": "-n",
-          "description": "Stop exporting a variable without deleting its value."
+          "description": "Stop exporting a variable without deleting its value.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Stop exporting a variable without deleting its value."
+          }
         }
       ],
       "examples": [
@@ -2034,7 +2842,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Exports a shell variable to processes started from the shell."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; may list exported variables.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "env",
@@ -2046,11 +2861,19 @@
       "options": [
         {
           "flag": "-i",
-          "description": "Start with an empty environment."
+          "description": "Start with an empty environment.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Start with an empty environment."
+          }
         },
         {
           "flag": "-u NAME",
-          "description": "Remove a variable from the launched program's environment."
+          "description": "Remove a variable from the launched program's environment.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Remove a variable from the launched program's environment."
+          }
         }
       ],
       "examples": [
@@ -2073,7 +2896,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Environment: displays or sets environment variables for a command."
-      }
+      },
+      "output": {
+        "stdout": "Prints environment or runs specified command.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "sleep",
@@ -2103,7 +2933,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Pauses execution for a specified amount of time."
-      }
+      },
+      "output": {
+        "stdout": "No output; waits.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "whoami",
@@ -2129,7 +2966,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Who Am I: prints the current effective username."
-      }
+      },
+      "output": {
+        "stdout": "Prints effective user name.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "uname",
@@ -2141,15 +2985,27 @@
       "options": [
         {
           "flag": "-a",
-          "description": "Show all available information."
+          "description": "Show all available information.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show all available information."
+          }
         },
         {
           "flag": "-s",
-          "description": "Show the kernel or system name."
+          "description": "Show the kernel or system name.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show the kernel or system name."
+          }
         },
         {
           "flag": "-m",
-          "description": "Show the machine architecture."
+          "description": "Show the machine architecture.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show the machine architecture."
+          }
         }
       ],
       "examples": [
@@ -2173,7 +3029,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Unix Name: reports system and kernel information."
-      }
+      },
+      "output": {
+        "stdout": "Prints system information.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "paste",
@@ -2185,11 +3048,19 @@
       "options": [
         {
           "flag": "-d ','",
-          "description": "Use a comma as the field separator."
+          "description": "Use a comma as the field separator.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use a comma as the field separator."
+          }
         },
         {
           "flag": "-s",
-          "description": "Join lines from each file into one long output line."
+          "description": "Join lines from each file into one long output line.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Join lines from each file into one long output line."
+          }
         }
       ],
       "examples": [
@@ -2213,7 +3084,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Pastes lines from files side by side."
-      }
+      },
+      "output": {
+        "stdout": "Prints merged input lines.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "wget",
@@ -2225,31 +3103,59 @@
       "options": [
         {
           "flag": "-O FILE",
-          "description": "Write downloaded data to FILE. Use -O - (or -O-) to send the response body to stdout; the second '-' is an argument, not another flag."
+          "description": "Write downloaded data to FILE. Use -O - (or -O-) to send the response body to stdout; the second '-' is an argument, not another flag.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Uppercase O = Output document. The value '-' means write it to stdout."
+          }
         },
         {
           "flag": "-o FILE",
-          "description": "Write wget log messages to FILE (lowercase o). This does NOT choose the downloaded content's destination."
+          "description": "Write wget log messages to FILE (lowercase o). This does NOT choose the downloaded content's destination.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Lowercase o = Output log; different from uppercase -O."
+          }
         },
         {
           "flag": "-q",
-          "description": "Quiet mode: suppress progress and diagnostics. Optional; it does not make downloads work."
+          "description": "Quiet mode: suppress progress and diagnostics. Optional; it does not make downloads work.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Q = Quiet: hides diagnostics, including errors."
+          }
         },
         {
           "flag": "-c",
-          "description": "Continue an interrupted download when supported by the server."
+          "description": "Continue an interrupted download when supported by the server.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "C = Continue a download when the server allows."
+          }
         },
         {
           "flag": "-P DIR",
-          "description": "Save downloaded files into the specified directory."
+          "description": "Save downloaded files into the specified directory.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "P = destination directory Prefix."
+          }
         },
         {
           "flag": "--spider",
-          "description": "Check whether a URL is accessible without downloading its contents."
+          "description": "Check whether a URL is accessible without downloading its contents.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Spider mode probes URLs without storing their content."
+          }
         },
         {
           "flag": "-nv",
-          "description": "No verbose: suppress normal progress chatter while still showing basic status and errors."
+          "description": "No verbose: suppress normal progress chatter while still showing basic status and errors.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "NV = No Verbose: less progress chatter, still basic messages and errors."
+          }
         }
       ],
       "examples": [
@@ -2316,27 +3222,51 @@
       "options": [
         {
           "flag": "-L",
-          "description": "Follow HTTP redirects."
+          "description": "Follow HTTP redirects.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "L = Location: follow HTTP redirects."
+          }
         },
         {
           "flag": "-o FILE",
-          "description": "Write the response to the specified file."
+          "description": "Write the response to the specified file.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Lowercase o = Output file of your choice."
+          }
         },
         {
           "flag": "-O",
-          "description": "Save using the remote filename."
+          "description": "Save using the remote filename.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Uppercase O = save using the remote filename."
+          }
         },
         {
           "flag": "-I",
-          "description": "Fetch response headers only."
+          "description": "Fetch response headers only.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "I = headers only (head request)."
+          }
         },
         {
           "flag": "-X METHOD",
-          "description": "Specify the HTTP request method."
+          "description": "Specify the HTTP request method.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Select an explicit HTTP method."
+          }
         },
         {
           "flag": "-H HEADER",
-          "description": "Add a request header."
+          "description": "Add a request header.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "H = Header: add a request header."
+          }
         }
       ],
       "examples": [
@@ -2367,7 +3297,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Think of a URL client: transfers data to or from a URL."
-      }
+      },
+      "output": {
+        "stdout": "Usually prints response data unless redirected.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "ping",
@@ -2379,15 +3316,27 @@
       "options": [
         {
           "flag": "-c COUNT",
-          "description": "On Linux and many Unix systems, stop after COUNT requests."
+          "description": "On Linux and many Unix systems, stop after COUNT requests.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "On Linux and many Unix systems, stop after COUNT requests."
+          }
         },
         {
           "flag": "-i SECONDS",
-          "description": "Wait the specified interval between requests."
+          "description": "Wait the specified interval between requests.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Wait the specified interval between requests."
+          }
         },
         {
           "flag": "-W SECONDS",
-          "description": "Set a response wait time on Linux; syntax differs across systems."
+          "description": "Set a response wait time on Linux; syntax differs across systems.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Set a response wait time on Linux; syntax differs across systems."
+          }
         }
       ],
       "examples": [
@@ -2412,7 +3361,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Named after the sound of sonar; checks network reachability."
-      }
+      },
+      "output": {
+        "stdout": "Prints reply timing and statistics.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "ssh",
@@ -2424,19 +3380,35 @@
       "options": [
         {
           "flag": "-p PORT",
-          "description": "Connect to a non-default SSH port."
+          "description": "Connect to a non-default SSH port.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Lowercase p = Port."
+          }
         },
         {
           "flag": "-i FILE",
-          "description": "Use the specified private-key identity file."
+          "description": "Use the specified private-key identity file.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "I = Identity key file."
+          }
         },
         {
           "flag": "-v",
-          "description": "Show verbose connection diagnostics."
+          "description": "Show verbose connection diagnostics.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "V = Verbose diagnostics."
+          }
         },
         {
           "flag": "-J HOST",
-          "description": "Connect through a jump host when supported."
+          "description": "Connect through a jump host when supported.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "J = Jump host."
+          }
         }
       ],
       "examples": [
@@ -2461,7 +3433,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Secure Shell: opens an encrypted remote session."
-      }
+      },
+      "output": {
+        "stdout": "Remote shell or command output.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "scp",
@@ -2473,19 +3452,35 @@
       "options": [
         {
           "flag": "-r",
-          "description": "Copy directories recursively."
+          "description": "Copy directories recursively.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "R = Recursive file copy."
+          }
         },
         {
           "flag": "-P PORT",
-          "description": "Use a custom SSH port (capital P)."
+          "description": "Use a custom SSH port (capital P).",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Uppercase P = Port, unlike ssh -p."
+          }
         },
         {
           "flag": "-i FILE",
-          "description": "Use the specified SSH private key."
+          "description": "Use the specified SSH private key.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use the specified SSH private key."
+          }
         },
         {
           "flag": "-p",
-          "description": "Preserve file timestamps and modes when possible."
+          "description": "Preserve file timestamps and modes when possible.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Lowercase p = Preserve timestamps and mode."
+          }
         }
       ],
       "examples": [
@@ -2511,7 +3506,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Secure Copy: transfers files over SSH."
-      }
+      },
+      "output": {
+        "stdout": "Usually no copied content to stdout.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "rsync",
@@ -2523,23 +3525,43 @@
       "options": [
         {
           "flag": "-a",
-          "description": "Archive mode: preserve structure and common metadata."
+          "description": "Archive mode: preserve structure and common metadata.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "A = Archive mode."
+          }
         },
         {
           "flag": "-v",
-          "description": "Show copied entries and progress messages."
+          "description": "Show copied entries and progress messages.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "V = Verbose."
+          }
         },
         {
           "flag": "--dry-run",
-          "description": "Preview planned changes without copying files."
+          "description": "Preview planned changes without copying files.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Dry run previews planned changes; no copying."
+          }
         },
         {
           "flag": "--delete",
-          "description": "Remove files from the destination that are absent at the source; destructive."
+          "description": "Remove files from the destination that are absent at the source; destructive.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Delete destination extras; dangerous without review."
+          }
         },
         {
           "flag": "-z",
-          "description": "Compress data during transfer when useful."
+          "description": "Compress data during transfer when useful.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Z = compression."
+          }
         }
       ],
       "examples": [
@@ -2565,7 +3587,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Think 'remote sync': efficiently synchronizes files and folders."
-      }
+      },
+      "output": {
+        "stdout": "May print status or copied entries with options.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "ip",
@@ -2577,19 +3606,35 @@
       "options": [
         {
           "flag": "addr show",
-          "description": "Show assigned IP addresses."
+          "description": "Show assigned IP addresses.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show assigned IP addresses."
+          }
         },
         {
           "flag": "link show",
-          "description": "List network interfaces and their state."
+          "description": "List network interfaces and their state.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "List network interfaces and their state."
+          }
         },
         {
           "flag": "route show",
-          "description": "Display the routing table."
+          "description": "Display the routing table.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Display the routing table."
+          }
         },
         {
           "flag": "-br",
-          "description": "Use brief output when supported."
+          "description": "Use brief output when supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use brief output when supported."
+          }
         }
       ],
       "examples": [
@@ -2615,7 +3660,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Internet Protocol: inspects and configures IP networking."
-      }
+      },
+      "output": {
+        "stdout": "Prints network addresses and routes for show operations.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "ss",
@@ -2627,23 +3679,43 @@
       "options": [
         {
           "flag": "-t",
-          "description": "Show TCP sockets."
+          "description": "Show TCP sockets.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show TCP sockets."
+          }
         },
         {
           "flag": "-u",
-          "description": "Show UDP sockets."
+          "description": "Show UDP sockets.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show UDP sockets."
+          }
         },
         {
           "flag": "-l",
-          "description": "Show listening sockets."
+          "description": "Show listening sockets.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show listening sockets."
+          }
         },
         {
           "flag": "-n",
-          "description": "Show numerical addresses and ports."
+          "description": "Show numerical addresses and ports.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show numerical addresses and ports."
+          }
         },
         {
           "flag": "-p",
-          "description": "Show owning processes when permitted."
+          "description": "Show owning processes when permitted.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show owning processes when permitted."
+          }
         }
       ],
       "examples": [
@@ -2669,7 +3741,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Socket Statistics: inspects network sockets."
-      }
+      },
+      "output": {
+        "stdout": "Prints socket listings.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "dig",
@@ -2681,19 +3760,35 @@
       "options": [
         {
           "flag": "+short",
-          "description": "Show a condensed answer."
+          "description": "Show a condensed answer.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show a condensed answer."
+          }
         },
         {
           "flag": "MX",
-          "description": "Ask for mail-exchanger records."
+          "description": "Ask for mail-exchanger records.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Ask for mail-exchanger records."
+          }
         },
         {
           "flag": "-x ADDRESS",
-          "description": "Perform a reverse DNS lookup."
+          "description": "Perform a reverse DNS lookup.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Perform a reverse DNS lookup."
+          }
         },
         {
           "flag": "@SERVER",
-          "description": "Query a specified DNS server."
+          "description": "Query a specified DNS server.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Query a specified DNS server."
+          }
         }
       ],
       "examples": [
@@ -2722,7 +3817,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Domain Information Groper: queries DNS records."
-      }
+      },
+      "output": {
+        "stdout": "Prints DNS query details.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "host",
@@ -2734,15 +3836,27 @@
       "options": [
         {
           "flag": "-t TYPE",
-          "description": "Choose a record type such as MX or AAAA."
+          "description": "Choose a record type such as MX or AAAA.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Choose a record type such as MX or AAAA."
+          }
         },
         {
           "flag": "-a",
-          "description": "Request a broader DNS report."
+          "description": "Request a broader DNS report.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Request a broader DNS report."
+          }
         },
         {
           "flag": "-v",
-          "description": "Show verbose output."
+          "description": "Show verbose output.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show verbose output."
+          }
         }
       ],
       "examples": [
@@ -2766,7 +3880,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Looks up information about a host or domain name."
-      }
+      },
+      "output": {
+        "stdout": "Prints DNS results.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "nc",
@@ -2778,19 +3899,35 @@
       "options": [
         {
           "flag": "-z",
-          "description": "Probe a port without sending application data."
+          "description": "Probe a port without sending application data.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Probe a port without sending application data."
+          }
         },
         {
           "flag": "-v",
-          "description": "Use verbose output."
+          "description": "Use verbose output.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use verbose output."
+          }
         },
         {
           "flag": "-w SECONDS",
-          "description": "Set a timeout (details depend on implementation)."
+          "description": "Set a timeout (details depend on implementation).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Set a timeout (details depend on implementation)."
+          }
         },
         {
           "flag": "-u",
-          "description": "Use UDP instead of TCP."
+          "description": "Use UDP instead of TCP.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use UDP instead of TCP."
+          }
         }
       ],
       "examples": [
@@ -2816,7 +3953,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Netcat: a network utility for connecting to ports."
-      }
+      },
+      "output": {
+        "stdout": "May print network traffic based on mode.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "traceroute",
@@ -2828,15 +3972,27 @@
       "options": [
         {
           "flag": "-m HOPS",
-          "description": "Limit the maximum number of hops."
+          "description": "Limit the maximum number of hops.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Limit the maximum number of hops."
+          }
         },
         {
           "flag": "-n",
-          "description": "Avoid DNS lookups for intermediate hops."
+          "description": "Avoid DNS lookups for intermediate hops.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Avoid DNS lookups for intermediate hops."
+          }
         },
         {
           "flag": "-w SECONDS",
-          "description": "Set a per-probe wait time on many Unix systems."
+          "description": "Set a per-probe wait time on many Unix systems.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Set a per-probe wait time on many Unix systems."
+          }
         }
       ],
       "examples": [
@@ -2861,7 +4017,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Trace the route network packets take to a host."
-      }
+      },
+      "output": {
+        "stdout": "Prints network hops.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "chown",
@@ -2873,15 +4036,27 @@
       "options": [
         {
           "flag": "-R",
-          "description": "Apply ownership changes recursively."
+          "description": "Apply ownership changes recursively.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Apply ownership changes recursively."
+          }
         },
         {
           "flag": "-v",
-          "description": "Describe each ownership change."
+          "description": "Describe each ownership change.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Describe each ownership change."
+          }
         },
         {
           "flag": "--reference=FILE",
-          "description": "On GNU systems, copy ownership from a reference file."
+          "description": "On GNU systems, copy ownership from a reference file.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "On GNU systems, copy ownership from a reference file."
+          }
         }
       ],
       "examples": [
@@ -2906,7 +4081,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Change Owner: changes the file owner."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; changes file owner.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "chgrp",
@@ -2918,11 +4100,19 @@
       "options": [
         {
           "flag": "-R",
-          "description": "Apply group changes recursively."
+          "description": "Apply group changes recursively.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Apply group changes recursively."
+          }
         },
         {
           "flag": "-v",
-          "description": "Print changed entries."
+          "description": "Print changed entries.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Print changed entries."
+          }
         }
       ],
       "examples": [
@@ -2946,7 +4136,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Change Group: changes a file's group."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; changes file group.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "tree",
@@ -2958,19 +4155,35 @@
       "options": [
         {
           "flag": "-L LEVEL",
-          "description": "Limit recursion depth."
+          "description": "Limit recursion depth.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Limit recursion depth."
+          }
         },
         {
           "flag": "-a",
-          "description": "Include hidden entries."
+          "description": "Include hidden entries.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Include hidden entries."
+          }
         },
         {
           "flag": "-d",
-          "description": "Display directories only."
+          "description": "Display directories only.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Display directories only."
+          }
         },
         {
           "flag": "-I PATTERN",
-          "description": "Exclude matching names."
+          "description": "Exclude matching names.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Exclude matching names."
+          }
         }
       ],
       "examples": [
@@ -2994,7 +4207,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Displays folders in a tree-shaped hierarchy."
-      }
+      },
+      "output": {
+        "stdout": "Prints indented tree.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "zip",
@@ -3006,15 +4226,27 @@
       "options": [
         {
           "flag": "-r",
-          "description": "Include directories recursively."
+          "description": "Include directories recursively.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "R = Recursive."
+          }
         },
         {
           "flag": "-9",
-          "description": "Use high compression when supported."
+          "description": "Use high compression when supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use high compression when supported."
+          }
         },
         {
           "flag": "-u",
-          "description": "Update entries in an existing archive."
+          "description": "Update entries in an existing archive.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "U = Update existing entries."
+          }
         }
       ],
       "examples": [
@@ -3038,7 +4270,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Creates a ZIP archive; 'zip' is a name, not an acronym."
-      }
+      },
+      "output": {
+        "stdout": "Prints archive status; writes ZIP file.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "unzip",
@@ -3050,19 +4289,35 @@
       "options": [
         {
           "flag": "-l",
-          "description": "List archive members without extracting."
+          "description": "List archive members without extracting.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "L = List archive entries."
+          }
         },
         {
           "flag": "-d DIR",
-          "description": "Extract into the specified directory."
+          "description": "Extract into the specified directory.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "D = destination Directory."
+          }
         },
         {
           "flag": "-n",
-          "description": "Never overwrite an existing file."
+          "description": "Never overwrite an existing file.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "N = Never overwrite."
+          }
         },
         {
           "flag": "-o",
-          "description": "Overwrite existing files without prompting; use carefully."
+          "description": "Overwrite existing files without prompting; use carefully.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "O = Overwrite without asking."
+          }
         }
       ],
       "examples": [
@@ -3086,7 +4341,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "The counterpart of zip: extracts a ZIP archive."
-      }
+      },
+      "output": {
+        "stdout": "Prints extraction status; extracts files.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "gzip",
@@ -3098,19 +4360,35 @@
       "options": [
         {
           "flag": "-k",
-          "description": "Keep the original input file when supported."
+          "description": "Keep the original input file when supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Keep the original input file when supported."
+          }
         },
         {
           "flag": "-d",
-          "description": "Decompress instead of compress."
+          "description": "Decompress instead of compress.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Decompress instead of compress."
+          }
         },
         {
           "flag": "-9",
-          "description": "Use higher compression."
+          "description": "Use higher compression.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use higher compression."
+          }
         },
         {
           "flag": "-l",
-          "description": "List compression information."
+          "description": "List compression information.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "List compression information."
+          }
         }
       ],
       "examples": [
@@ -3133,7 +4411,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "GNU zip: compresses a file using gzip format."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; writes gzip data/file.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "gunzip",
@@ -3145,15 +4430,27 @@
       "options": [
         {
           "flag": "-k",
-          "description": "Keep the compressed file when supported."
+          "description": "Keep the compressed file when supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Keep the compressed file when supported."
+          }
         },
         {
           "flag": "-c",
-          "description": "Write decompressed data to standard output."
+          "description": "Write decompressed data to standard output.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Write decompressed data to standard output."
+          }
         },
         {
           "flag": "-t",
-          "description": "Test compressed data integrity."
+          "description": "Test compressed data integrity.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Test compressed data integrity."
+          }
         }
       ],
       "examples": [
@@ -3177,7 +4474,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "GNU unzip: decompresses gzip data."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; extracts gzip data/file.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "realpath",
@@ -3189,11 +4493,19 @@
       "options": [
         {
           "flag": "-e",
-          "description": "Require all path components to exist on GNU systems."
+          "description": "Require all path components to exist on GNU systems.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Require all path components to exist on GNU systems."
+          }
         },
         {
           "flag": "-m",
-          "description": "On GNU systems, accept missing path components."
+          "description": "On GNU systems, accept missing path components.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "On GNU systems, accept missing path components."
+          }
         }
       ],
       "examples": [
@@ -3217,7 +4529,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Finds the real, canonical path."
-      }
+      },
+      "output": {
+        "stdout": "Prints canonical path.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "readlink",
@@ -3229,11 +4548,19 @@
       "options": [
         {
           "flag": "-f",
-          "description": "On GNU systems, resolve the full canonical target path."
+          "description": "On GNU systems, resolve the full canonical target path.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "On GNU systems, resolve the full canonical target path."
+          }
         },
         {
           "flag": "-n",
-          "description": "Avoid adding a newline to the output, where supported."
+          "description": "Avoid adding a newline to the output, where supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Avoid adding a newline to the output, where supported."
+          }
         }
       ],
       "examples": [
@@ -3258,7 +4585,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Reads the path stored in a symbolic link."
-      }
+      },
+      "output": {
+        "stdout": "Prints symlink target.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "mktemp",
@@ -3270,11 +4604,19 @@
       "options": [
         {
           "flag": "-d",
-          "description": "Create a temporary directory."
+          "description": "Create a temporary directory.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Create a temporary directory."
+          }
         },
         {
           "flag": "-p DIR",
-          "description": "Use a specified parent directory on GNU systems."
+          "description": "Use a specified parent directory on GNU systems.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use a specified parent directory on GNU systems."
+          }
         }
       ],
       "examples": [
@@ -3298,7 +4640,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Make Temporary: creates a unique temporary file or directory."
-      }
+      },
+      "output": {
+        "stdout": "Prints created temporary path.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "git",
@@ -3310,23 +4659,43 @@
       "options": [
         {
           "flag": "status",
-          "description": "Show changes in the working tree."
+          "description": "Show changes in the working tree.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show changes in the working tree."
+          }
         },
         {
           "flag": "add FILE",
-          "description": "Stage selected changes for a commit."
+          "description": "Stage selected changes for a commit.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Stage selected changes for a commit."
+          }
         },
         {
           "flag": "commit -m MESSAGE",
-          "description": "Record staged changes with a message."
+          "description": "Record staged changes with a message.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Record staged changes with a message."
+          }
         },
         {
           "flag": "log --oneline",
-          "description": "Show a compact commit history."
+          "description": "Show a compact commit history.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show a compact commit history."
+          }
         },
         {
           "flag": "-C DIR",
-          "description": "Run Git as though started inside DIR."
+          "description": "Run Git as though started inside DIR.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Run Git as though started inside DIR."
+          }
         }
       ],
       "examples": [
@@ -3355,7 +4724,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Git is the name of the version-control system, not a descriptive acronym."
-      }
+      },
+      "output": {
+        "stdout": "Depends on Git subcommand: status, logs, diffs, etc.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "sudo",
@@ -3367,15 +4743,27 @@
       "options": [
         {
           "flag": "-u USER",
-          "description": "Run as the specified user."
+          "description": "Run as the specified user.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Run as the specified user."
+          }
         },
         {
           "flag": "-v",
-          "description": "Refresh cached credentials without running a command."
+          "description": "Refresh cached credentials without running a command.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Refresh cached credentials without running a command."
+          }
         },
         {
           "flag": "-k",
-          "description": "Invalidate the current cached authentication timestamp."
+          "description": "Invalidate the current cached authentication timestamp.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Invalidate the current cached authentication timestamp."
+          }
         }
       ],
       "examples": [
@@ -3399,7 +4787,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Historically 'superuser do'; today it can execute as another authorized user."
-      }
+      },
+      "output": {
+        "stdout": "Passes through the invoked command's output.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "apt",
@@ -3411,23 +4806,43 @@
       "options": [
         {
           "flag": "update",
-          "description": "Refresh available package metadata."
+          "description": "Refresh available package metadata.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Refresh available package metadata."
+          }
         },
         {
           "flag": "install PACKAGE",
-          "description": "Install the specified package."
+          "description": "Install the specified package.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Install the specified package."
+          }
         },
         {
           "flag": "search QUERY",
-          "description": "Search the package index."
+          "description": "Search the package index.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Search the package index."
+          }
         },
         {
           "flag": "show PACKAGE",
-          "description": "Display package details."
+          "description": "Display package details.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Display package details."
+          }
         },
         {
           "flag": "remove PACKAGE",
-          "description": "Uninstall a package."
+          "description": "Uninstall a package.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Uninstall a package."
+          }
         }
       ],
       "examples": [
@@ -3456,7 +4871,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Advanced Package Tool: manages software packages on Debian-based systems."
-      }
+      },
+      "output": {
+        "stdout": "Prints package operation details.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "apt-get",
@@ -3468,19 +4890,35 @@
       "options": [
         {
           "flag": "update",
-          "description": "Refresh package metadata."
+          "description": "Refresh package metadata.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Refresh package metadata."
+          }
         },
         {
           "flag": "install PACKAGE",
-          "description": "Install a named package."
+          "description": "Install a named package.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Install a named package."
+          }
         },
         {
           "flag": "remove PACKAGE",
-          "description": "Remove a named package."
+          "description": "Remove a named package.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Remove a named package."
+          }
         },
         {
           "flag": "-y",
-          "description": "Automatically answer yes to prompts; use cautiously."
+          "description": "Automatically answer yes to prompts; use cautiously.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Automatically answer yes to prompts; use cautiously."
+          }
         }
       ],
       "examples": [
@@ -3505,7 +4943,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "APT + get: performs package-management operations through APT."
-      }
+      },
+      "output": {
+        "stdout": "Prints APT operation details.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "systemctl",
@@ -3517,23 +4962,43 @@
       "options": [
         {
           "flag": "status UNIT",
-          "description": "Show a service's current state and recent information."
+          "description": "Show a service's current state and recent information.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show a service's current state and recent information."
+          }
         },
         {
           "flag": "start UNIT",
-          "description": "Start a unit."
+          "description": "Start a unit.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Start a unit."
+          }
         },
         {
           "flag": "stop UNIT",
-          "description": "Stop a unit."
+          "description": "Stop a unit.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Stop a unit."
+          }
         },
         {
           "flag": "restart UNIT",
-          "description": "Restart a unit."
+          "description": "Restart a unit.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Restart a unit."
+          }
         },
         {
           "flag": "enable UNIT",
-          "description": "Enable automatic startup of a unit."
+          "description": "Enable automatic startup of a unit.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Enable automatic startup of a unit."
+          }
         }
       ],
       "examples": [
@@ -3559,7 +5024,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "System Control: manages systemd units and services."
-      }
+      },
+      "output": {
+        "stdout": "Shows status or service action information.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "journalctl",
@@ -3571,19 +5043,35 @@
       "options": [
         {
           "flag": "-u UNIT",
-          "description": "Show messages for a selected systemd unit."
+          "description": "Show messages for a selected systemd unit.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "U = systemd Unit."
+          }
         },
         {
           "flag": "-f",
-          "description": "Follow new log entries as they arrive."
+          "description": "Follow new log entries as they arrive.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "F = Follow new logs."
+          }
         },
         {
           "flag": "-n N",
-          "description": "Show the last N entries."
+          "description": "Show the last N entries.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "N = last Number of entries."
+          }
         },
         {
           "flag": "--since DATE",
-          "description": "Only show logs since a given date or time."
+          "description": "Only show logs since a given date or time.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Only show logs since a given date or time."
+          }
         }
       ],
       "examples": [
@@ -3608,7 +5096,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Journal Control: reads logs from the systemd journal."
-      }
+      },
+      "output": {
+        "stdout": "Prints journal logs.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "kill",
@@ -3620,15 +5115,27 @@
       "options": [
         {
           "flag": "-TERM",
-          "description": "Send SIGTERM, requesting graceful termination."
+          "description": "Send SIGTERM, requesting graceful termination.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "TERM = graceful termination request."
+          }
         },
         {
           "flag": "-KILL",
-          "description": "Send SIGKILL, forcing the process to stop."
+          "description": "Send SIGKILL, forcing the process to stop.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "KILL = force termination."
+          }
         },
         {
           "flag": "-l",
-          "description": "List available signals."
+          "description": "List available signals.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "L = List signals."
+          }
         }
       ],
       "examples": [
@@ -3653,7 +5160,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Sends a signal to a process; it does not necessarily force it to stop."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; sends process signal.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "pkill",
@@ -3665,15 +5179,27 @@
       "options": [
         {
           "flag": "-f",
-          "description": "Match the full command line rather than only the process name."
+          "description": "Match the full command line rather than only the process name.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "F = Full command line."
+          }
         },
         {
           "flag": "-u USER",
-          "description": "Only match processes owned by the specified user."
+          "description": "Only match processes owned by the specified user.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "U = User."
+          }
         },
         {
           "flag": "-TERM",
-          "description": "Send SIGTERM explicitly."
+          "description": "Send SIGTERM explicitly.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Send SIGTERM explicitly."
+          }
         }
       ],
       "examples": [
@@ -3698,7 +5224,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Process Kill: sends a signal to processes matched by a name or pattern."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; signals matching processes.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "top",
@@ -3710,15 +5243,27 @@
       "options": [
         {
           "flag": "-p PID",
-          "description": "Monitor a particular process ID on supported implementations."
+          "description": "Monitor a particular process ID on supported implementations.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Monitor a particular process ID on supported implementations."
+          }
         },
         {
           "flag": "-d SECONDS",
-          "description": "Set the refresh delay on Linux; syntax differs across systems."
+          "description": "Set the refresh delay on Linux; syntax differs across systems.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Set the refresh delay on Linux; syntax differs across systems."
+          }
         },
         {
           "flag": "-b",
-          "description": "Use batch output mode on Linux."
+          "description": "Use batch output mode on Linux.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use batch output mode on Linux."
+          }
         }
       ],
       "examples": [
@@ -3743,7 +5288,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Shows the top resource-consuming processes in a live view."
-      }
+      },
+      "output": {
+        "stdout": "Displays live process table.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "free",
@@ -3755,15 +5307,27 @@
       "options": [
         {
           "flag": "-h",
-          "description": "Use human-readable units."
+          "description": "Use human-readable units.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use human-readable units."
+          }
         },
         {
           "flag": "-m",
-          "description": "Show values in mebibytes."
+          "description": "Show values in mebibytes.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show values in mebibytes."
+          }
         },
         {
           "flag": "-s N",
-          "description": "Refresh every N seconds."
+          "description": "Refresh every N seconds.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Refresh every N seconds."
+          }
         }
       ],
       "examples": [
@@ -3788,7 +5352,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Displays free and available memory."
-      }
+      },
+      "output": {
+        "stdout": "Prints RAM/swap statistics.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "uptime",
@@ -3800,11 +5371,19 @@
       "options": [
         {
           "flag": "-p",
-          "description": "Show a concise, friendly uptime on Linux."
+          "description": "Show a concise, friendly uptime on Linux.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show a concise, friendly uptime on Linux."
+          }
         },
         {
           "flag": "-s",
-          "description": "Show the system startup time on Linux."
+          "description": "Show the system startup time on Linux.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show the system startup time on Linux."
+          }
         }
       ],
       "examples": [
@@ -3828,7 +5407,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "How long the system has been up and running."
-      }
+      },
+      "output": {
+        "stdout": "Prints uptime and load average.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "id",
@@ -3840,19 +5426,35 @@
       "options": [
         {
           "flag": "-u",
-          "description": "Show only the user ID."
+          "description": "Show only the user ID.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show only the user ID."
+          }
         },
         {
           "flag": "-g",
-          "description": "Show only the primary group ID."
+          "description": "Show only the primary group ID.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show only the primary group ID."
+          }
         },
         {
           "flag": "-G",
-          "description": "Show the numeric IDs of all groups."
+          "description": "Show the numeric IDs of all groups.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show the numeric IDs of all groups."
+          }
         },
         {
           "flag": "-n",
-          "description": "Use names instead of numeric IDs with another selection flag."
+          "description": "Use names instead of numeric IDs with another selection flag.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use names instead of numeric IDs with another selection flag."
+          }
         }
       ],
       "examples": [
@@ -3877,7 +5479,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Identity: prints user and group identifiers."
-      }
+      },
+      "output": {
+        "stdout": "Prints user/group identifiers.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "groups",
@@ -3908,7 +5517,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Lists group memberships."
-      }
+      },
+      "output": {
+        "stdout": "Prints groups.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "which",
@@ -3920,7 +5536,11 @@
       "options": [
         {
           "flag": "-a",
-          "description": "Show every matching path when supported."
+          "description": "Show every matching path when supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show every matching path when supported."
+          }
         }
       ],
       "examples": [
@@ -3944,7 +5564,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Answers 'which executable would run?' using command paths."
-      }
+      },
+      "output": {
+        "stdout": "Prints executable path(s).",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "whereis",
@@ -3956,15 +5583,27 @@
       "options": [
         {
           "flag": "-b",
-          "description": "Search only for binaries."
+          "description": "Search only for binaries.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Search only for binaries."
+          }
         },
         {
           "flag": "-m",
-          "description": "Search only for manual pages."
+          "description": "Search only for manual pages.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Search only for manual pages."
+          }
         },
         {
           "flag": "-s",
-          "description": "Search only for source files when known."
+          "description": "Search only for source files when known.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Search only for source files when known."
+          }
         }
       ],
       "examples": [
@@ -3988,7 +5627,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Asks 'where is this program or its manual?'"
-      }
+      },
+      "output": {
+        "stdout": "Prints binary/manual locations.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "alias",
@@ -4000,11 +5646,19 @@
       "options": [
         {
           "flag": "alias",
-          "description": "List currently defined aliases."
+          "description": "List currently defined aliases.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "List currently defined aliases."
+          }
         },
         {
           "flag": "name='command'",
-          "description": "Define a persistent-in-session alias (assignment syntax, not a flag)."
+          "description": "Define a persistent-in-session alias (assignment syntax, not a flag).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Define a persistent-in-session alias (assignment syntax, not a flag)."
+          }
         }
       ],
       "examples": [
@@ -4028,7 +5682,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "An alias is another name or shortcut for a shell command."
-      }
+      },
+      "output": {
+        "stdout": "Lists aliases or prints nothing when defining one.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "unalias",
@@ -4040,7 +5701,11 @@
       "options": [
         {
           "flag": "-a",
-          "description": "Remove all aliases in the current shell."
+          "description": "Remove all aliases in the current shell.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Remove all aliases in the current shell."
+          }
         }
       ],
       "examples": [
@@ -4064,7 +5729,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Removes a command alias from the current shell."
-      }
+      },
+      "output": {
+        "stdout": "Usually none; removes aliases.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "source",
@@ -4076,11 +5748,19 @@
       "options": [
         {
           "flag": ". filename",
-          "description": "POSIX-style dot syntax for sourcing a script."
+          "description": "POSIX-style dot syntax for sourcing a script.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "POSIX-style dot syntax for sourcing a script."
+          }
         },
         {
           "flag": "filename",
-          "description": "Path to the script to execute in the current shell."
+          "description": "Path to the script to execute in the current shell.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Path to the script to execute in the current shell."
+          }
         }
       ],
       "examples": [
@@ -4105,7 +5785,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Loads a shell script into the current shell rather than starting a new one."
-      }
+      },
+      "output": {
+        "stdout": "Output of sourced commands, if any.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "bash",
@@ -4117,19 +5804,35 @@
       "options": [
         {
           "flag": "-c STRING",
-          "description": "Run commands supplied as a string."
+          "description": "Run commands supplied as a string.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "C = execute a Command string."
+          }
         },
         {
           "flag": "-n",
-          "description": "Check script syntax without executing it."
+          "description": "Check script syntax without executing it.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "N = No execution: syntax checking."
+          }
         },
         {
           "flag": "-x",
-          "description": "Print commands as they execute for debugging."
+          "description": "Print commands as they execute for debugging.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "X = execution trace."
+          }
         },
         {
           "flag": "--version",
-          "description": "Show the Bash version."
+          "description": "Show the Bash version.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show the Bash version."
+          }
         }
       ],
       "examples": [
@@ -4162,7 +5865,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Bourne Again SHell: a successor to the Bourne shell (sh)."
-      }
+      },
+      "output": {
+        "stdout": "Output of Bash commands/scripts, if any.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "nano",
@@ -4174,11 +5884,19 @@
       "options": [
         {
           "flag": "-l",
-          "description": "Show line numbers."
+          "description": "Show line numbers.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show line numbers."
+          }
         },
         {
           "flag": "-B",
-          "description": "Make a backup when saving files, where supported."
+          "description": "Make a backup when saving files, where supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Make a backup when saving files, where supported."
+          }
         }
       ],
       "examples": [
@@ -4202,7 +5920,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "A small and simple editor; 'nano' is a name, not an acronym."
-      }
+      },
+      "output": {
+        "stdout": "Interactive terminal editor.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "vim",
@@ -4214,15 +5939,27 @@
       "options": [
         {
           "flag": "-R",
-          "description": "Open in read-only mode."
+          "description": "Open in read-only mode.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Open in read-only mode."
+          }
         },
         {
           "flag": "+N",
-          "description": "Open at line N (substitute a number)."
+          "description": "Open at line N (substitute a number).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Open at line N (substitute a number)."
+          }
         },
         {
           "flag": "-u NONE",
-          "description": "Skip loading user configuration files."
+          "description": "Skip loading user configuration files.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Skip loading user configuration files."
+          }
         }
       ],
       "examples": [
@@ -4246,7 +5983,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Vi IMproved: an enhanced version of the vi text editor."
-      }
+      },
+      "output": {
+        "stdout": "Interactive terminal editor.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "jobs",
@@ -4258,15 +6002,27 @@
       "options": [
         {
           "flag": "-l",
-          "description": "Include process IDs."
+          "description": "Include process IDs.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Include process IDs."
+          }
         },
         {
           "flag": "-p",
-          "description": "Show process group IDs only."
+          "description": "Show process group IDs only.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show process group IDs only."
+          }
         },
         {
           "flag": "-r",
-          "description": "Show running jobs only."
+          "description": "Show running jobs only.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show running jobs only."
+          }
         }
       ],
       "examples": [
@@ -4290,7 +6046,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Lists jobs associated with the current shell."
-      }
+      },
+      "output": {
+        "stdout": "Prints current shell job list.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "fg",
@@ -4302,11 +6065,19 @@
       "options": [
         {
           "flag": "%1",
-          "description": "Choose job number 1 (argument, not a flag)."
+          "description": "Choose job number 1 (argument, not a flag).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Choose job number 1 (argument, not a flag)."
+          }
         },
         {
           "flag": "%job",
-          "description": "Select a job from the output of jobs."
+          "description": "Select a job from the output of jobs.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Select a job from the output of jobs."
+          }
         }
       ],
       "examples": [
@@ -4330,7 +6101,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Foreground: brings a shell job to the foreground."
-      }
+      },
+      "output": {
+        "stdout": "Foreground job output.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "bg",
@@ -4342,7 +6120,11 @@
       "options": [
         {
           "flag": "%1",
-          "description": "Choose job number 1 (argument, not a flag)."
+          "description": "Choose job number 1 (argument, not a flag).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Choose job number 1 (argument, not a flag)."
+          }
         }
       ],
       "examples": [
@@ -4366,7 +6148,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Background: resumes a stopped shell job in the background."
-      }
+      },
+      "output": {
+        "stdout": "Usually prints job status.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "nohup",
@@ -4378,7 +6167,11 @@
       "options": [
         {
           "flag": "nohup.out",
-          "description": "Default file for output when output is not redirected; not a flag."
+          "description": "Default file for output when output is not redirected; not a flag.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Default file for output when output is not redirected; not a flag."
+          }
         }
       ],
       "examples": [
@@ -4403,7 +6196,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "No Hangup: runs a command while ignoring hangup signals."
-      }
+      },
+      "output": {
+        "stdout": "Runs command; output may go to nohup.out.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "timeout",
@@ -4415,15 +6215,27 @@
       "options": [
         {
           "flag": "-s SIGNAL",
-          "description": "Use the specified signal when time expires."
+          "description": "Use the specified signal when time expires.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use the specified signal when time expires."
+          }
         },
         {
           "flag": "-k DURATION",
-          "description": "After an initial signal, send SIGKILL if the command is still running."
+          "description": "After an initial signal, send SIGKILL if the command is still running.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "After an initial signal, send SIGKILL if the command is still running."
+          }
         },
         {
           "flag": "--preserve-status",
-          "description": "Return the command's exit status when possible."
+          "description": "Return the command's exit status when possible.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Return the command's exit status when possible."
+          }
         }
       ],
       "examples": [
@@ -4447,7 +6259,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Gives a command a time limit."
-      }
+      },
+      "output": {
+        "stdout": "Passes through wrapped command's output.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "watch",
@@ -4459,15 +6278,27 @@
       "options": [
         {
           "flag": "-n SECONDS",
-          "description": "Set the refresh interval."
+          "description": "Set the refresh interval.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Set the refresh interval."
+          }
         },
         {
           "flag": "-d",
-          "description": "Highlight changes between updates."
+          "description": "Highlight changes between updates.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Highlight changes between updates."
+          }
         },
         {
           "flag": "-t",
-          "description": "Hide the header line."
+          "description": "Hide the header line.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Hide the header line."
+          }
         }
       ],
       "examples": [
@@ -4491,7 +6322,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Watch the output of a command change over time."
-      }
+      },
+      "output": {
+        "stdout": "Displays periodically refreshed output.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "seq",
@@ -4503,11 +6341,19 @@
       "options": [
         {
           "flag": "-s TEXT",
-          "description": "Choose the separator between output numbers on GNU seq."
+          "description": "Choose the separator between output numbers on GNU seq.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Choose the separator between output numbers on GNU seq."
+          }
         },
         {
           "flag": "-w",
-          "description": "Pad numbers to equal width when supported."
+          "description": "Pad numbers to equal width when supported.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Pad numbers to equal width when supported."
+          }
         }
       ],
       "examples": [
@@ -4531,7 +6377,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "Sequence: prints a progression of numbers."
-      }
+      },
+      "output": {
+        "stdout": "Prints numeric sequence.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "sha256sum",
@@ -4543,11 +6396,19 @@
       "options": [
         {
           "flag": "-c FILE",
-          "description": "Verify files against the checksums listed in FILE."
+          "description": "Verify files against the checksums listed in FILE.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Verify files against the checksums listed in FILE."
+          }
         },
         {
           "flag": "-b",
-          "description": "Read files in binary mode (default on many systems)."
+          "description": "Read files in binary mode (default on many systems).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Read files in binary mode (default on many systems)."
+          }
         }
       ],
       "examples": [
@@ -4572,7 +6433,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "SHA-256 checksum: computes a hash using the 256-bit Secure Hash Algorithm."
-      }
+      },
+      "output": {
+        "stdout": "Prints file digests or verification results.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "command",
@@ -4584,15 +6452,27 @@
       "options": [
         {
           "flag": "-v",
-          "description": "Print a short description or path for a command."
+          "description": "Print a short description or path for a command.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Print a short description or path for a command."
+          }
         },
         {
           "flag": "-V",
-          "description": "Show a verbose description of command lookup."
+          "description": "Show a verbose description of command lookup.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Show a verbose description of command lookup."
+          }
         },
         {
           "flag": "-p",
-          "description": "Use a default executable search path."
+          "description": "Use a default executable search path.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Use a default executable search path."
+          }
         }
       ],
       "examples": [
@@ -4621,7 +6501,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Runs a command or checks how the shell would find it."
-      }
+      },
+      "output": {
+        "stdout": "Output of invoked command, or command-lookup information.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "if",
@@ -4633,19 +6520,35 @@
       "options": [
         {
           "flag": "then",
-          "description": "Starts the commands for a successful condition."
+          "description": "Starts the commands for a successful condition.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "THEN runs when the preceding test succeeds."
+          }
         },
         {
           "flag": "elif",
-          "description": "Else if: check another condition when earlier tests fail."
+          "description": "Else if: check another condition when earlier tests fail.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "ELIF = ELSE IF, check another condition."
+          }
         },
         {
           "flag": "else",
-          "description": "Fallback commands when earlier conditions fail."
+          "description": "Fallback commands when earlier conditions fail.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "ELSE is the fallback branch."
+          }
         },
         {
           "flag": "fi",
-          "description": "Ends the if construct (if spelled backward)."
+          "description": "Ends the if construct (if spelled backward).",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "FI is IF spelled backward and closes the construct."
+          }
         }
       ],
       "examples": [
@@ -4679,7 +6582,17 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "if / then / elif (else if) / else / fi: the shell's conditional keywords."
-      }
+      },
+      "output": {
+        "stdout": "Output comes from commands in the selected branch.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": [
+        "Indent nested bodies consistently.",
+        "Remember that Bash tests use exit status 0 for success."
+      ]
     },
     {
       "id": "for",
@@ -4691,19 +6604,35 @@
       "options": [
         {
           "flag": "in list",
-          "description": "Choose the values to iterate over. Without 'in', for iterates over the positional arguments."
+          "description": "Choose the values to iterate over. Without 'in', for iterates over the positional arguments.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "IN introduces the list of values."
+          }
         },
         {
           "flag": "do",
-          "description": "Begins the commands run on each iteration."
+          "description": "Begins the commands run on each iteration.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "DO starts the repeated body."
+          }
         },
         {
           "flag": "done",
-          "description": "Ends the loop body."
+          "description": "Ends the loop body.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "DONE ends the loop."
+          }
         },
         {
           "flag": "for ((init; test; update))",
-          "description": "C-style arithmetic for loop; Bash syntax."
+          "description": "C-style arithmetic for loop; Bash syntax.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "C-style loop: initialize, test, and update."
+          }
         }
       ],
       "examples": [
@@ -4737,7 +6666,17 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "for ... in ...; do ...; done: perform an action for each item."
-      }
+      },
+      "output": {
+        "stdout": "Output comes from commands in each iteration.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": [
+        "Indent nested bodies consistently.",
+        "Remember that Bash tests use exit status 0 for success."
+      ]
     },
     {
       "id": "while",
@@ -4749,15 +6688,27 @@
       "options": [
         {
           "flag": "condition",
-          "description": "A command or test; the loop continues while its exit status is 0."
+          "description": "A command or test; the loop continues while its exit status is 0.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "A successful command (status 0) keeps the loop running."
+          }
         },
         {
           "flag": "do",
-          "description": "Begins the body."
+          "description": "Begins the body.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "DO starts the loop body."
+          }
         },
         {
           "flag": "done",
-          "description": "Ends the body."
+          "description": "Ends the body.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "DONE ends the body."
+          }
         }
       ],
       "examples": [
@@ -4791,7 +6742,17 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "While the test command succeeds (exit status 0), keep executing the loop."
-      }
+      },
+      "output": {
+        "stdout": "Output comes from commands in each iteration.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": [
+        "Indent nested bodies consistently.",
+        "Remember that Bash tests use exit status 0 for success."
+      ]
     },
     {
       "id": "until",
@@ -4803,15 +6764,27 @@
       "options": [
         {
           "flag": "condition",
-          "description": "The loop continues while this command fails (nonzero exit status)."
+          "description": "The loop continues while this command fails (nonzero exit status).",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "UNTIL runs while the test fails and stops when it succeeds."
+          }
         },
         {
           "flag": "do",
-          "description": "Begins the loop body."
+          "description": "Begins the loop body.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Begins the loop body."
+          }
         },
         {
           "flag": "done",
-          "description": "Ends the loop body."
+          "description": "Ends the loop body.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Ends the loop body."
+          }
         }
       ],
       "examples": [
@@ -4834,7 +6807,17 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Until the condition becomes true, keep trying."
-      }
+      },
+      "output": {
+        "stdout": "Output comes from commands in each iteration.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": [
+        "Indent nested bodies consistently.",
+        "Remember that Bash tests use exit status 0 for success."
+      ]
     },
     {
       "id": "case",
@@ -4846,19 +6829,35 @@
       "options": [
         {
           "flag": ")",
-          "description": "Ends a branch pattern."
+          "description": "Ends a branch pattern.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Ends a branch pattern."
+          }
         },
         {
           "flag": ";;",
-          "description": "Stops the current branch so no further branches are considered."
+          "description": "Stops the current branch so no further branches are considered.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Double semicolon ends this branch."
+          }
         },
         {
           "flag": "*",
-          "description": "Default wildcard pattern; usually placed last."
+          "description": "Default wildcard pattern; usually placed last.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "An asterisk is the catch-all glob."
+          }
         },
         {
           "flag": "esac",
-          "description": "Ends the case construct (case spelled backward)."
+          "description": "Ends the case construct (case spelled backward).",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "ESAC is CASE spelled backward."
+          }
         }
       ],
       "examples": [
@@ -4885,7 +6884,17 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "case selects one branch. esac is 'case' reversed; ;; ends a branch."
-      }
+      },
+      "output": {
+        "stdout": "Output comes from commands in the chosen branch.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": [
+        "Indent nested bodies consistently.",
+        "Remember that Bash tests use exit status 0 for success."
+      ]
     },
     {
       "id": "break",
@@ -4897,7 +6906,11 @@
       "options": [
         {
           "flag": "n",
-          "description": "Optional number of nested loops to exit; default is 1."
+          "description": "Optional number of nested loops to exit; default is 1.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Optional number of nested loops to exit; default is 1."
+          }
         }
       ],
       "examples": [
@@ -4921,7 +6934,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "break breaks out of a loop."
-      }
+      },
+      "output": {
+        "stdout": "Nothing; leaves a loop.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "continue",
@@ -4933,7 +6953,11 @@
       "options": [
         {
           "flag": "n",
-          "description": "Optional number of nested loops whose iteration is continued; default is 1."
+          "description": "Optional number of nested loops whose iteration is continued; default is 1.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Optional number of nested loops whose iteration is continued; default is 1."
+          }
         }
       ],
       "examples": [
@@ -4957,7 +6981,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "continue continues with the next iteration."
-      }
+      },
+      "output": {
+        "stdout": "Nothing; skips to the next iteration.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "write",
@@ -4969,11 +7000,19 @@
       "options": [
         {
           "flag": "user",
-          "description": "Destination username of a logged-in user."
+          "description": "Destination username of a logged-in user.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Destination username of a logged-in user."
+          }
         },
         {
           "flag": "tty",
-          "description": "Optional particular terminal when the user has several sessions."
+          "description": "Optional particular terminal when the user has several sessions.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Optional particular terminal when the user has several sessions."
+          }
         }
       ],
       "examples": [
@@ -4999,7 +7038,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Write a message to a logged-in user's terminal, not to a file."
-      }
+      },
+      "output": {
+        "stdout": "Sends input to another terminal, not stdout.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "who",
@@ -5011,15 +7057,27 @@
       "options": [
         {
           "flag": "-u",
-          "description": "Show additional information about users and session activity where supported."
+          "description": "Show additional information about users and session activity where supported.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "U = User details."
+          }
         },
         {
           "flag": "-H",
-          "description": "Print a heading line."
+          "description": "Print a heading line.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "H = Header."
+          }
         },
         {
           "flag": "-b",
-          "description": "Display the last system boot time when supported."
+          "description": "Display the last system boot time when supported.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "B = Boot time."
+          }
         }
       ],
       "examples": [
@@ -5044,7 +7102,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "who asks: who is logged in?"
-      }
+      },
+      "output": {
+        "stdout": "Prints logged-in user records.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "tty",
@@ -5056,7 +7121,11 @@
       "options": [
         {
           "flag": "-s",
-          "description": "Silent: report terminal attachment through the exit status only."
+          "description": "Silent: report terminal attachment through the exit status only.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "S = Silent; report via exit status."
+          }
         }
       ],
       "examples": [
@@ -5081,7 +7150,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "TTY is short for teletypewriter, the historical name for text terminals."
-      }
+      },
+      "output": {
+        "stdout": "Prints terminal device path.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "mesg",
@@ -5093,11 +7169,19 @@
       "options": [
         {
           "flag": "y",
-          "description": "Allow other users to write to this terminal (subject to system policy)."
+          "description": "Allow other users to write to this terminal (subject to system policy).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Allow other users to write to this terminal (subject to system policy)."
+          }
         },
         {
           "flag": "n",
-          "description": "Disallow other users from writing to this terminal."
+          "description": "Disallow other users from writing to this terminal.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Disallow other users from writing to this terminal."
+          }
         }
       ],
       "examples": [
@@ -5126,7 +7210,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "mesg stands for message; it controls whether terminal messages are allowed."
-      }
+      },
+      "output": {
+        "stdout": "Reports or changes terminal message permissions.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "wall",
@@ -5138,7 +7229,11 @@
       "options": [
         {
           "flag": "-n",
-          "description": "Do not display the usual banner where supported (may require privileges)."
+          "description": "Do not display the usual banner where supported (may require privileges).",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Do not display the usual banner where supported (may require privileges)."
+          }
         }
       ],
       "examples": [
@@ -5164,7 +7259,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": "wall comes from write all: send a message to all logged-in users."
-      }
+      },
+      "output": {
+        "stdout": "Sends a message to logged-in terminals.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     },
     {
       "id": "test",
@@ -5176,19 +7278,35 @@
       "options": [
         {
           "flag": "-f FILE",
-          "description": "True if FILE exists and is a regular file."
+          "description": "True if FILE exists and is a regular file.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "F = regular File."
+          }
         },
         {
           "flag": "-d DIR",
-          "description": "True if DIR exists and is a directory."
+          "description": "True if DIR exists and is a directory.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "D = Directory."
+          }
         },
         {
           "flag": "-z STRING",
-          "description": "True if STRING is empty."
+          "description": "True if STRING is empty.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "Z = Zero-length string."
+          }
         },
         {
           "flag": "-eq",
-          "description": "Numeric equality between operands."
+          "description": "Numeric equality between operands.",
+          "info": {
+            "kind": "Flag meaning",
+            "text": "EQ = Equal (numbers)."
+          }
         }
       ],
       "examples": [
@@ -5216,7 +7334,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "test checks a condition and returns its truth as an exit status."
-      }
+      },
+      "output": {
+        "stdout": "Nothing; result is the exit status.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "[",
@@ -5228,19 +7353,35 @@
       "options": [
         {
           "flag": "]",
-          "description": "Required final argument ending the test."
+          "description": "Required final argument ending the test.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Required final argument ending the test."
+          }
         },
         {
           "flag": "-eq",
-          "description": "Compare numbers for equality."
+          "description": "Compare numbers for equality.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Compare numbers for equality."
+          }
         },
         {
           "flag": "=",
-          "description": "Compare strings for equality."
+          "description": "Compare strings for equality.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Compare strings for equality."
+          }
         },
         {
           "flag": "-s FILE",
-          "description": "Test whether a file exists and has nonzero size."
+          "description": "Test whether a file exists and has nonzero size.",
+          "info": {
+            "kind": "Quick reminder",
+            "text": "Test whether a file exists and has nonzero size."
+          }
         }
       ],
       "examples": [
@@ -5266,7 +7407,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "[ is the test command with a closing ] argument; write spaces around each bracket."
-      }
+      },
+      "output": {
+        "stdout": "Nothing; result is the exit status.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "true",
@@ -5295,7 +7443,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "true returns success (exit status 0), even though zero means false in C arithmetic."
-      }
+      },
+      "output": {
+        "stdout": "Nothing; returns status 0.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": "false",
@@ -5324,7 +7479,14 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "false returns failure (exit status 1), so an if condition does not succeed."
-      }
+      },
+      "output": {
+        "stdout": "Nothing; returns status 1.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "Normally reads or displays information."
+      },
+      "practice": []
     },
     {
       "id": ":",
@@ -5358,7 +7520,14 @@
       "nameInfo": {
         "kind": "Name meaning",
         "text": ": is the shell's null command: do nothing, but perform any attached redirections."
-      }
+      },
+      "output": {
+        "stdout": "Nothing; returns success when redirections succeed.",
+        "stderr": "Errors and diagnostics, when applicable.",
+        "exitStatus": "Usually 0 indicates success; other values are command-specific.",
+        "sideEffects": "May modify files, shell state, processes, or external systems; check options."
+      },
+      "practice": []
     }
   ],
   "topics": [
