@@ -2,7 +2,7 @@
 (() => {
   const FILES = {commands:'commands.json', versions:'versions.json'};
   const CACHE_KEYS = {commands:'bash-library-commands-v1', versions:'bash-library-versions-v1', theme:'bash-library-theme-v1'};
-  const categories = ['All','Files & Directories','Text & Search','System','Network & Web','Concepts & Syntax'];
+  const categories = ['All','Files & Directories','Text & Search','System','Network & Web','Control Flow & Loops','Concepts & Syntax'];
   const state = {data:null, versions:null, selected:null, category:'All', query:'', historical:false, online:false};
   const $ = id => document.getElementById(id);
   const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -40,27 +40,89 @@
     if(!/[\u0590-\u05FF]/.test(q))return q;
     return Array.from(q).map(ch=>layout[ch.codePointAt(0)]||(ch==="'"?'w':ch==='/'?'q':ch)).join('');
   }
-  function corpus(c){
-    return clean([c.id,c.name,c.category,c.summary,c.description,c.syntax,...(c.keywords||[]),
-      ...(c.practice||[]),...(c.options||[]).flatMap(o=>[o.flag,o.description]),
-      ...(c.examples||[]).flatMap(e=>[e.command,e.description,e.output||'']),
-      ...(c.sections||[]).flatMap(s=>[s.title,s.body,...(s.items||[]).flatMap(x=>[x.term,x.definition])]),
-      ...(c.links||[]).map(l=>l.title)].join(' '));
+
+  function searchFields(c){
+    const fields=[
+      {label:'Name',text:c.name},{label:'Summary',text:c.summary},
+      {label:'Description',text:c.description},{label:'Syntax',text:c.syntax},
+      ...(c.options||[]).flatMap(o=>[
+        {label:'Option '+o.flag,text:o.flag},
+        {label:'Option '+o.flag,text:o.description},
+        ...(o.info?.text?[{label:'Flag tip '+o.flag,text:o.info.text}]:[])
+      ]),
+      ...(c.examples||[]).flatMap(e=>[
+        {label:'Example',text:e.command},{label:'Example explanation',text:e.description},
+        ...(e.output?[{label:'Example output',text:e.output}]:[])
+      ]),
+      ...(c.sections||[]).flatMap(s=>[
+        {label:'Guide section',text:s.title},{label:'Guide section',text:s.body},
+        ...(s.items||[]).flatMap(x=>[{label:'Guide example',text:x.term},{label:'Guide explanation',text:x.definition}])
+      ]),
+      ...(c.practice||[]).map(x=>({label:'Best practices',text:x})),
+      ...(c.keywords||[]).map(x=>({label:'Keyword',text:x})),
+      ...Object.entries(c.output||{}).map(([k,v])=>({label:'Output & behavior',text:v})),
+      ...(c.nameInfo?[{label:'Name meaning',text:c.nameInfo.text}]:[]),
+      ...(c.links||[]).map(l=>({label:'Resource',text:l.title})),
+      {label:'Category',text:c.category},{label:'ID',text:c.id}
+    ];
+    return fields.filter(f=>typeof f.text==='string'&&f.text);
+  }
+  function corpus(c){return clean(searchFields(c).map(f=>f.text).join(' '));}
+  function activeQueries(){
+    const q=clean(state.query);
+    return q && /[\u0590-\u05FF]/.test(q)?[q,clean(alternateQuery(q))]:[q];
+  }
+  function score(c,queries){
+    if(!queries.some(Boolean))return 10;
+    const name=clean(c.name),id=clean(c.id);
+    return Math.min(...queries.filter(Boolean).map(q=>
+      name===q||id===q?0:name.startsWith(q)?1:
+      (c.keywords||[]).some(k=>clean(k)===q)?2:id.startsWith(q)?3:
+      name.includes(q)?4:5
+    ));
   }
   function filtered(){
-    const query=clean(state.query);
-    const queries=[query,...(query&&/[\u0590-\u05FF]/.test(query)?[clean(alternateQuery(query))]:[])];
-    function score(c){
-      if(!query)return 10;
-      const name=clean(c.name),id=clean(c.id);
-      return Math.min(...queries.map(q=>name===q||id===q?0:name.startsWith(q)?1:(c.keywords||[]).some(k=>clean(k)===q)?2:id.startsWith(q)?3:name.includes(q)?4:5));
+    const queries=activeQueries();
+    return allEntries().filter(c=>{
+      if(state.category!=='All'&&c.category!==state.category)return false;
+      const text=corpus(c);
+      return queries.some(q=>!q||q.split(/\s+/).every(t=>text.includes(t)));
+    }).sort((a,b)=>score(a,queries)-score(b,queries));
+  }
+  function reason(c){
+    const queries=activeQueries().filter(Boolean);
+    if(!queries.length)return null;
+    const fields=searchFields(c);
+    // Keep the highlighted text literal: never invent a reason for a search result.
+    for(const field of fields){
+      const hay=clean(field.text);
+      for(const q of queries){
+        const needle=hay.includes(q)?q:q.split(/\s+/).find(t=>t&&hay.includes(t));
+        if(needle)return {label:field.label,text:field.text,needle};
+      }
     }
-    return allEntries().filter(c=>(state.category==='All'||c.category===state.category)&&queries.some(q=>!q||q.split(/\s+/).every(part=>corpus(c).includes(part)))).sort((a,b)=>score(a)-score(b));
+    return null;
+  }
+  function highlight(value,needle,clip=false){
+    const original=String(value||''),low=clean(original),term=clean(needle);
+    const at=term?low.indexOf(term):-1;
+    if(at<0)return esc(clip&&original.length>105?original.slice(0,102)+'...':original);
+    const lo=clip?Math.max(0,at-30):0;
+    const hi=clip?Math.min(original.length,Math.max(at+term.length+52,lo+80)):original.length;
+    return (lo?'…':'')+esc(original.slice(lo,at))+
+      '<mark class="search-match">'+esc(original.slice(at,at+term.length))+'</mark>'+
+      esc(original.slice(at+term.length,hi))+(hi<original.length?'…':'');
   }
   function render(){
-    renderCategories(); const arr=filtered();$('resultsCount').textContent=arr.length+' results';
+    renderCategories();const arr=filtered();
+    $('resultsCount').textContent=arr.length+' results';
     if(arr.length&&!arr.some(c=>c.id===state.selected))state.selected=arr[0].id;
-    $('commandList').innerHTML=arr.length?arr.map(c=>`<button type="button" class="cmd-item ${c.type==='guide'?'guide-item':''} ${state.selected===c.id?'active':''}" data-command="${esc(c.id)}" aria-current="${state.selected===c.id?'true':'false'}"><span class="cmd-symbol" title="${esc(c.name)}">${esc(c.name)}</span><span class="cmd-item-text"><span class="cmd-description">${esc(c.summary)}</span></span>${c.type==='guide'?'<span class="cmd-kind">Guide</span>':''}<span class="cmd-arrow">›</span></button>`).join(''):'<div class="empty"><strong>No results found</strong>Try another command or syntax topic.</div>';
+    $('commandList').innerHTML=arr.length?arr.map(c=>{
+      const match=reason(c),name=match?.label==='Name'?highlight(c.name,match.needle):esc(c.name);
+      const context=state.query&&match&&match.label!=='Name'
+        ?`<span class="match-line"><span class="match-source">${esc(match.label)}:</span> ${highlight(match.text,match.needle,true)}</span>`:'';
+      return `<button type="button" class="cmd-item ${c.type==='guide'?'guide-item':''} ${state.selected===c.id?'active':''}" data-command="${esc(c.id)}" aria-current="${state.selected===c.id?'true':'false'}"><span class="cmd-symbol" title="${esc(c.name)}">${name}</span><span class="cmd-item-text"><span class="cmd-description">${esc(c.summary)}</span>${context}</span>${c.type==='guide'?'<span class="cmd-kind">Guide</span>':''}<span class="cmd-arrow">›</span></button>`;
+    }).join(''):'<div class="empty"><strong>No results found</strong>Try a different command, flag or syntax topic.</div>';
     $('commandList').querySelectorAll('[data-command]').forEach(b=>b.addEventListener('click',()=>select(b.dataset.command)));
     renderDetails(arr.find(c=>c.id===state.selected)||arr[0]);
   }
@@ -107,6 +169,29 @@
       button.setAttribute('aria-expanded',String(willOpen));
     });
   }
+
+  function optionHTML(o,i){
+    const tip=o.info;
+    const btn=tip?`<button class="flaginfo-button" id="flagInfoButton-${i}" data-flag-button="${i}" type="button" aria-label="Explain ${esc(o.flag)}" aria-expanded="false" aria-controls="flagInfoPopup-${i}" title="Remember this option">i</button>`:'';
+    const popup=tip?`<div class="flaginfo-popover" id="flagInfoPopup-${i}" data-flag-popover="${i}" role="note" hidden><strong>${esc(tip.kind)}</strong><p>${esc(tip.text)}</p></div>`:'';
+    return `<div class="option-card"><span class="option-key"><code dir="ltr">${esc(o.flag)}</code>${btn}</span><span class="option-description">${esc(o.description)}</span>${popup}</div>`;
+  }
+  function closeFlagInfos(){
+    $('mainContent').querySelectorAll('[data-flag-popover]').forEach(p=>{
+      p.hidden=true;p.parentElement.classList.remove('flag-open');
+    });
+    $('mainContent').querySelectorAll('[data-flag-button]').forEach(b=>b.setAttribute('aria-expanded','false'));
+  }
+  function setupFlagInfos(){
+    $('mainContent').querySelectorAll('[data-flag-button]').forEach(b=>b.addEventListener('click',()=>{
+      const idx=b.dataset.flagButton,p=$('flagInfoPopup-'+idx);
+      if(!p)return;
+      const open=p.hidden;
+      closeFlagInfos();
+      if(open){p.hidden=false;b.setAttribute('aria-expanded','true');p.parentElement.classList.add('flag-open');}
+    }));
+  }
+
   function exampleHTML(e){
     return `<div class="example"><div class="example-head"><span class="example-desc">${esc(e.description)}</span><button class="btn tiny" type="button" data-copy="${esc(e.command)}" aria-label="Copy example">Copy</button></div><pre><code>${colorCode(e.command)}</code></pre>${e.output!==undefined?`<div class="sample-label">Example output</div><pre class="sample-output"><code>${esc(e.output)}</code></pre>`:''}</div>`;
   }
@@ -119,13 +204,14 @@
       const links=(c.links||[]).filter(l=>/^https:\/\/[^\s]+$/i.test(l.url)).map(l=>`<a class="resource-link" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer"><strong>${esc(l.title)}</strong><small>${esc(l.note||'Open external resource')}</small></a>`).join('');
       $('mainContent').innerHTML=`<article class="detail guide-detail"><div class="detail-header"><div><div class="eyebrow">Concepts &amp; Syntax${state.historical?' · historical version':''}</div><h2>${esc(c.name)}</h2><p class="detail-description">${esc(c.summary)}</p><span class="tag">Reference guide · not a command</span></div>${infoControls(c)}</div><p class="guide-intro">${esc(c.description)}</p>${sections}${practices}<h3>Examples</h3>${examples}${links?`<section class="guide-section"><h3>Further resources</h3><div class="guide-resources">${links}</div></section>`:''}</article>`;
     }else{
-      const options=(c.options||[]).map(o=>`<div class="option-card"><code dir="ltr">${esc(o.flag)}</code><span>${esc(o.description)}</span></div>`).join('');
+      const options=(c.options||[]).map(optionHTML).join('');
       const output=c.output?`<section class="output-section"><h3>Output &amp; behavior</h3><div class="behavior-grid">${Object.entries({stdout:c.output.stdout,stderr:c.output.stderr,'Exit status':c.output.exitStatus,'Side effects':c.output.sideEffects}).filter(([,v])=>v).map(([k,v])=>`<div><strong>${esc(k)}</strong><span>${esc(v)}</span></div>`).join('')}</div></section>`:'';
-      $('mainContent').innerHTML=`<article class="detail"><div class="detail-header"><div><div class="eyebrow">${esc(c.category)}${state.historical?' · historical version':''}</div><h2 dir="ltr">${esc(c.name)}</h2><p class="detail-description">${esc(c.summary)}</p><span class="tag">${c.type==='builtin'?'Bash builtin':'Command-line utility'}</span></div>${infoControls(c)}</div><h3>Syntax</h3><div class="codebar"><code>${colorCode(c.syntax,true)}</code><button class="copy-code" type="button" data-copy="${esc(c.syntax)}">Copy</button></div>${syntaxLegend}<h3>Options and parameters</h3><div class="option-grid">${options||'<p>No additional options are listed for this command.</p>'}</div>${output}<section class="command-explanation"><h3>Overview</h3><p>${esc(c.description)}</p></section>${practices}<h3>Examples</h3>${examples}${c.note?`<div class="note"><strong>Good to know:</strong> ${esc(c.note)}</div>`:''}</article>`;
+      $('mainContent').innerHTML=`<article class="detail"><div class="detail-header"><div><div class="eyebrow">${esc(c.category)}${state.historical?' · historical version':''}</div><h2 dir="ltr">${esc(c.name)}</h2><p class="detail-description">${esc(c.summary)}</p><span class="tag">${c.type==='keyword'?'Bash keyword / syntax':c.type==='builtin'?'Bash builtin':'Command-line utility'}</span></div>${infoControls(c)}</div><h3>Syntax</h3><div class="codebar"><code>${colorCode(c.syntax,true)}</code><button class="copy-code" type="button" data-copy="${esc(c.syntax)}">Copy</button></div>${syntaxLegend}<h3>Options and parameters</h3><div class="option-grid">${options||'<p>No additional options are listed for this command.</p>'}</div>${output}<section class="command-explanation"><h3>Overview</h3><p>${esc(c.description)}</p></section>${practices}<h3>Examples</h3>${examples}${c.note?`<div class="note"><strong>Good to know:</strong> ${esc(c.note)}</div>`:''}</article>`;
     }
     $('mainContent').querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(b.dataset.copy)));
     $('shareBtn').addEventListener('click',()=>{const url=new URL(location.href);url.hash='cmd='+encodeURIComponent(c.id);copy(url.href);});
     setupNameInfo();
+    setupFlagInfos();
   }
   async function copy(value){try{await navigator.clipboard.writeText(value);toast('Copied to clipboard');}catch{try{const t=document.createElement('textarea');t.value=value;t.style.position='fixed';t.style.left='-9999px';document.body.append(t);t.select();document.execCommand('copy');t.remove();toast('Copied to clipboard');}catch{toast('Could not copy automatically');}}}
   async function getJSON(path){const response=await fetch(path,{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);return response.json();}
@@ -147,12 +233,12 @@
   }
   function showModal(title,html){$('modalTitle').textContent=title;$('modalContent').innerHTML=html;$('modalBackdrop').classList.remove('hidden');$('modalClose').focus();}
   function closeModal(){$('modalBackdrop').classList.add('hidden');}
-  function showHelp(){showModal('How to read command syntax',`<div class="legend"><p>Syntax describes the structure of a command; you do not always type every symbol shown. Example: <code>ls [options] [path]</code>.</p><p><strong>Colors:</strong> command names are light, flags such as <code>-a</code> are teal, arguments such as <code>N</code> are gold, and paths are green. Quoted strings use a separate color.</p><p><code>[...]</code> marks an optional element. Do not type these brackets unless the actual command requires them. <code>...</code> means an argument can usually be repeated. In a syntax template, <code>|</code> may mean a choice; between real commands it creates a pipeline.</p><p>Many entries are Unix command-line utilities rather than Bash builtins. Some flags differ between Linux, macOS, and other environments. See <code>man</code> or <code>--help</code> for platform-specific help.</p><p>Search by command, task, flag, or syntax guide. Press <code>/</code> to focus the search field; use arrow keys to select results and Enter to open one. Copy buttons copy plain text without styling.</p></div>`);}
+  function showHelp(){showModal('How to read command syntax',`<div class="legend"><p>Syntax describes the structure of a command; you do not always type every symbol shown. Example: <code>ls [options] [path]</code>.</p><p><strong>Colors:</strong> command names are light, flags such as <code>-a</code> are teal, arguments such as <code>N</code> are gold, and paths are green. Quoted strings use a separate color.</p><p><code>[...]</code> marks an optional element. Do not type these brackets unless the actual command requires them. <code>...</code> means an argument can usually be repeated. In a syntax template, <code>|</code> may mean a choice; between real commands it creates a pipeline.</p><p>Many entries are Unix command-line utilities rather than Bash builtins. Some flags differ between Linux, macOS, and other environments. See <code>man</code> or <code>--help</code> for platform-specific help.</p><p>Search by command, task, flag, or syntax guide. Results highlight the source of each match; use the small i buttons beside commands and flags for memory tips. Press <code>/</code> to focus the search field; use arrow keys to select results and Enter to open one. Copy buttons copy plain text without styling.</p></div>`);}
   function renderVersionModal(){
     const list=state.versions?.releases||[];
     let html='<p>Each release is a saved snapshot of the command library. Browsing older releases does not change the public website.</p>';
     if(!list.length)html+='<p>Version history is not currently available.</p>';
-    html+=list.map(v=>`<div class="version-item"><div class="version-body"><strong>${esc(v.title)} · ${esc(v.version)}</strong> ${v.version===state.versions.latestVersion?'<span class="version-badge">Latest</span>':''}<small>${esc(v.date)} · ${esc(v.summary)} · ${esc(v.commandCount)} commands</small></div><div class="version-actions"><button class="btn tiny" data-version="${esc(v.version)}" type="button">View</button></div></div>`).join('');
+    html+=list.map(v=>`<div class="version-item"><div class="version-body"><strong>${esc(v.title)} · ${esc(v.version)}</strong> ${v.version===state.versions.latestVersion?'<span class="version-badge">Latest</span>':''}<small>${esc(v.date)} · ${esc(v.summary)} · ${esc(v.commandCount)} commands${v.topicCount?' · '+esc(v.topicCount)+' guides':''}</small></div><div class="version-actions"><button class="btn tiny" data-version="${esc(v.version)}" type="button">View</button></div></div>`).join('');
     if(state.historical)html+='<button class="btn primary" id="returnCurrent" type="button">Return to latest version</button>';
     showModal('Version history',html);
     $('modalContent').querySelectorAll('[data-version]').forEach(b=>b.addEventListener('click',()=>loadVersion(b.dataset.version)));
@@ -171,6 +257,7 @@
   document.addEventListener('click',event=>{
     const wrapper=$('nameInfoControl');
     if(wrapper && !wrapper.contains(event.target))closeNameInfo();
+    if(!event.target.closest?.('.option-card'))closeFlagInfos();
   });
   $('searchInput').addEventListener('input',e=>{state.query=e.target.value;state.selected=null;render();});
   $('searchInput').addEventListener('keydown',e=>{
@@ -184,7 +271,7 @@
     }
     if(e.key==='Enter'){const first=arr.find(c=>c.id===state.selected)||arr[0];if(first)select(first.id);e.preventDefault();}
   });
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeNameInfo();$('searchInput').blur();}if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)&&$('modalBackdrop').classList.contains('hidden')){e.preventDefault();$('searchInput').focus();$('searchInput').select();}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeNameInfo();closeFlagInfos();$('searchInput').blur();}if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)&&$('modalBackdrop').classList.contains('hidden')){e.preventDefault();$('searchInput').focus();$('searchInput').select();}});
   $('themeBtn').addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem(CACHE_KEYS.theme,next);}catch{}});
   $('historyBtn').addEventListener('click',renderVersionModal);
   $('helpBtn').addEventListener('click',showHelp);

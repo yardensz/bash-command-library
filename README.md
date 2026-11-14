@@ -1,6 +1,6 @@
 # Bash Command Library
 
-A fast, publicly accessible Bash and Unix command reference. Browse 100 practical commands and eight searchable Bash syntax guides in English. The site is hosted on GitHub Pages and keeps a local cache for offline use.
+A fast, publicly accessible Bash and Unix command reference. Browse 117 practical commands and 18 searchable Bash syntax guides in English. The site is hosted on GitHub Pages and keeps a local cache for offline use.
 
 **Live website:** https://yardensz.github.io/bash-command-library/
 
@@ -8,9 +8,11 @@ A fast, publicly accessible Bash and Unix command reference. Browse 100 practica
 
 - Instant English-language search across 100 commands, descriptions, flags, examples, and keywords.
 - Network & Web category covering wget, curl, SSH, DNS, and troubleshooting tools.
-- Concepts & Syntax guides for regex, assignment, quoting, streams, redirection, substitution, and globs.
-- Selected commands document output, exit status, side effects, and best practices.
-- Small information buttons beside command and guide titles reveal command-name meanings or memory tips without cluttering the page.
+- Control Flow & Loops references for if, for, while, until, case, break, continue and test syntax.
+- Concepts & Syntax guides for regex, assignment, quoting, arithmetic, conditions, streams, redirection, scripts, logging, line wrapping, HTML scraping, and code style.
+- Every command documents stdout, stderr, exit status, and side effects; common scenarios include example output and best practices.
+- Small information buttons beside command names and all option flags reveal accurate names or quick memory tips without cluttering the page.
+- Search results show the actual matched text and where it was found (name, description, option, example or another field).
 - Syntax highlighting for command names, options, parameters, paths, strings, and operators.
 - Concise option explanations, copyable examples, and keyboard-driven navigation.
 - Compact, responsive layout with light and dark themes.
@@ -19,7 +21,7 @@ A fast, publicly accessible Bash and Unix command reference. Browse 100 practica
 
 ## Usage
 
-Search commands or concepts such as regex, =, quoting, stdout, or $(...). Search also recognizes accidental wrong-keyboard-layout input. Press `/` to focus search, use the arrow keys to navigate results, and press Enter to select a command. Click **Copy** to copy syntax or a command example.
+Search commands or concepts such as if, while, wc, regex, =, quoting, stdout, or $(...). Search also recognizes accidental wrong-keyboard-layout input. Press `/` to focus search, use the arrow keys to navigate results, and press Enter to select a command. Click **Copy** to copy syntax or a command example.
 
 This library includes both Bash builtins and standard Unix utilities. Options may differ between GNU/Linux, macOS, and other platforms; consult `man` or `--help` for local details.
 

@@ -352,3 +352,26 @@ body {direction:ltr}
 .nameinfo-popover strong{display:block;font-size:11px;color:var(--accent);margin:0 0 5px}
 .nameinfo-popover p{margin:0;font-size:12px;line-height:1.55;color:var(--ink);font-weight:400}
 @media(max-width:480px){.nameinfo-popover{right:-6px}.nameinfo-button{width:24px;height:24px}}
+/* v1.6.0: compact search explanations with real snippets */
+.cmd-item:has(.match-line){align-items:flex-start}
+.cmd-item .cmd-item-text{min-width:0;flex:1}
+.cmd-item .cmd-description{display:block}
+.match-line{display:block;margin-top:5px;font-size:10px;line-height:1.45;color:var(--muted);overflow-wrap:anywhere}
+.match-source{color:var(--accent);font-weight:700}
+.search-match{background:#ffe9a5;color:#392c18;padding:0 1px;border-radius:2px;font-weight:650}
+[data-theme=dark] .search-match{background:#7f5c26;color:#fff4cc}
+.cmd-symbol .search-match{font-weight:inherit}
+/* Tiny optional info buttons for every documented flag and syntax element */
+.option-card{position:relative;overflow:visible}
+.option-card.flag-open{z-index:30}
+.option-key{display:flex;align-items:center;gap:6px;min-width:0}
+.option-key code{overflow-wrap:anywhere;min-width:0;flex:0 1 auto}
+.option-key .flaginfo-button{flex-shrink:0}
+.flaginfo-button{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border:1px solid var(--stroke);border-radius:50%;background:transparent;color:var(--muted);font:italic 700 10px Georgia,serif;padding:0;line-height:1;cursor:pointer}
+.flaginfo-button:hover,.flaginfo-button[aria-expanded=true]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.flaginfo-button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.flaginfo-popover{position:absolute;top:calc(100% - 2px);left:0;z-index:35;width:min(285px,calc(100vw - 50px));padding:10px 12px;border:1px solid var(--stroke);border-radius:7px;background:var(--surface);box-shadow:0 10px 24px rgba(0,0,0,.16);text-align:left}
+.flaginfo-popover[hidden]{display:none!important}
+.flaginfo-popover strong{display:block;font-size:11px;color:var(--accent);margin-bottom:4px}
+.flaginfo-popover p{margin:0;font-size:12px;line-height:1.55;font-weight:400;color:var(--ink)}
+@media(max-width:700px){.option-key{gap:5px}.flaginfo-popover{width:min(260px,calc(100vw - 55px))}}
