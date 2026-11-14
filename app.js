@@ -60,7 +60,7 @@
       ]),
       ...(c.practice||[]).map(x=>({label:'Best practices',text:x})),
       ...(c.keywords||[]).map(x=>({label:'Keyword',text:x})),
-      ...Object.entries(c.output||{}).map(([k,v])=>({label:'Output & behavior',text:v})),
+      ...Object.entries(c.output||{}).filter(([k])=>k==='stdout').map(([k,v])=>({label:'Output & behavior',text:v})),
       ...(c.nameInfo?[{label:'Name meaning',text:c.nameInfo.text}]:[]),
       ...(c.links||[]).map(l=>({label:'Resource',text:l.title})),
       {label:'Category',text:c.category},{label:'ID',text:c.id}
@@ -86,6 +86,11 @@
     return allEntries().filter(c=>{
       if(state.category!=='All'&&c.category!==state.category)return false;
       const text=corpus(c);
+      const exactShort=queries.find(q=>/^[a-z0-9]{2,3}$/.test(q)&&allEntries().some(item=>clean(item.name)===q));
+      if(exactShort && clean(c.name)!==exactShort){
+        const wordPattern=new RegExp('(^|[^a-z0-9_])'+exactShort+'(?=$|[^a-z0-9_])');
+        if(!searchFields(c).some(field=>wordPattern.test(clean(field.text))))return false;
+      }
       return queries.some(q=>!q||q.split(/\s+/).every(t=>text.includes(t)));
     }).sort((a,b)=>score(a,queries)-score(b,queries));
   }
