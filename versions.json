@@ -1,7 +1,16 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "1.4.0",
+  "latestVersion": "1.5.0",
   "releases": [
+    {
+      "version": "1.5.0",
+      "date": "2026-11-14",
+      "title": "Searchable syntax guides and improved command reference",
+      "summary": "Eight Bash concepts including regex, assignment, quoting, streams and redirection; linked regex resources; clearer grep and wget output, flags and examples",
+      "commandCount": 100,
+      "topicCount": 8,
+      "snapshot": "history/1.5.0.json"
+    },
     {
       "version": "1.4.0",
       "date": "2026-11-14",

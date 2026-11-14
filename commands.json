@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.4.0",
+  "version": "1.5.0",
   "updatedAt": "2026-11-14",
   "commands": [
     {
@@ -456,7 +456,7 @@
       "name": "grep",
       "category": "Text & Search",
       "summary": "Search for matching text",
-      "description": "Searches text or regular expressions and prints matching lines.",
+      "description": "Searches input with basic regex by default and prints each complete matching line to stdout. With -o, prints only the matching portions.",
       "syntax": "grep [options] pattern [file...]",
       "options": [
         {
@@ -481,7 +481,15 @@
         },
         {
           "flag": "-E",
-          "description": "Enable extended regular expressions."
+          "description": "Enable extended regex."
+        },
+        {
+          "flag": "-o",
+          "description": "Print only matching substrings, one per line, instead of full matching lines."
+        },
+        {
+          "flag": "-q",
+          "description": "Quiet mode: print nothing; signal whether a match was found through the exit status."
         }
       ],
       "examples": [
@@ -496,6 +504,15 @@
         {
           "command": "grep -F \"a.b\" notes.txt",
           "description": "Find the literal string a.b."
+        },
+        {
+          "command": "printf 'apple\\npineapple\\n' | grep -o 'apple'",
+          "description": "Print the matching text only.",
+          "output": "apple\napple"
+        },
+        {
+          "command": "grep -oE 'https://www\\.ynetnews\\.com/article/[[:alnum:]]+' <<< \"$page_data\"",
+          "description": "Extract article URLs from HTML held in a variable, if those URLs appear."
         }
       ],
       "keywords": [
@@ -505,8 +522,20 @@
         "search",
         "text"
       ],
-      "note": "Quote patterns containing spaces. Use -F for plain-text matching.",
-      "type": "utility"
+      "note": "A literal dot must be escaped as \\. in regex. See the searchable regex and pipes & redirection guides. A match is based on text in the input; grep does not visit URLs.",
+      "type": "utility",
+      "output": {
+        "stdout": "By default, the FULL matching lines. With -o, only the matched substrings; with -q, nothing.",
+        "stderr": "File errors, invalid patterns, and other diagnostics.",
+        "exitStatus": "Usually 0 = match found, 1 = no match, 2 = error (GNU grep).",
+        "sideEffects": "Does not alter its input unless another command or redirection is involved."
+      },
+      "practice": [
+        "Use single quotes around a static regex to prevent Bash expansion.",
+        "Use -E when you need familiar +, | and (...) operators; default grep uses BRE.",
+        "Use -o to extract matching text; use -F for literal text.",
+        "The input filename is not a variable: use <<< \"$variable\" to search a variable's text."
+      ]
     },
     {
       "id": "find",
@@ -1953,7 +1982,15 @@
       "options": [
         {
           "flag": "-O FILE",
-          "description": "Write the download to a specific filename."
+          "description": "Write downloaded data to FILE. Use -O - (or -O-) to send the response body to stdout; the second '-' is an argument, not another flag."
+        },
+        {
+          "flag": "-o FILE",
+          "description": "Write wget log messages to FILE (lowercase o). This does NOT choose the downloaded content's destination."
+        },
+        {
+          "flag": "-q",
+          "description": "Quiet mode: suppress progress and diagnostics. Optional; it does not make downloads work."
         },
         {
           "flag": "-c",
@@ -1966,13 +2003,17 @@
         {
           "flag": "--spider",
           "description": "Check whether a URL is accessible without downloading its contents."
-        },
-        {
-          "flag": "-q",
-          "description": "Suppress most output."
         }
       ],
       "examples": [
+        {
+          "command": "wget -O - 'https://example.com/'",
+          "description": "Print downloaded HTML to stdout instead of creating a downloaded file."
+        },
+        {
+          "command": "page_data=$(wget -O - 'https://example.com/')",
+          "description": "Capture downloaded HTML in a Bash variable."
+        },
         {
           "command": "wget https://example.com/",
           "description": "Download a web page to a local file."
@@ -1994,8 +2035,20 @@
         "fetch",
         "file retrieval"
       ],
-      "note": "Some systems do not install wget by default. Only download or run files from sources you trust.",
-      "type": "utility"
+      "note": "Example: wget -O - 'https://example.com/' prints HTML. wget -O- is the same syntax with the argument attached. -o output.log writes a LOG, not page HTML.",
+      "type": "utility",
+      "output": {
+        "stdout": "With -O -, downloaded response data; otherwise usually no file contents on stdout.",
+        "stderr": "Progress and diagnostic messages by default. With -o FILE, log messages go to that file; -q suppresses them.",
+        "exitStatus": "0 generally means success; nonzero indicates a problem. Exit codes vary by failure.",
+        "sideEffects": "Without -O -, writes a downloaded file; with -O FILE, writes that destination. Some options may overwrite files."
+      },
+      "practice": [
+        "Quote URLs, especially those containing '&', '?', or shell metacharacters.",
+        "Uppercase -O controls the downloaded data; lowercase -o controls the log. They are different.",
+        "Use -O - to print the response body to stdout. The second '-' is the destination value.",
+        "-q is optional, and during troubleshooting it is useful to keep diagnostics visible."
+      ]
     },
     {
       "id": "curl",
@@ -4101,6 +4154,606 @@
       ],
       "note": "command -v is often preferable to which in portable shell scripts.",
       "type": "builtin"
+    }
+  ],
+  "topics": [
+    {
+      "id": "guide-regex",
+      "name": "regex",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Match text with patterns",
+      "description": "Regex is a pattern language, not a shell command. Tools such as grep, sed, and awk use related but sometimes different regex dialects.",
+      "keywords": [
+        "regular expression",
+        "regular expressions",
+        "regexp",
+        "ERE",
+        "BRE",
+        "pattern",
+        "grep",
+        "regex symbols",
+        "regex tester"
+      ],
+      "sections": [
+        {
+          "title": "In grep",
+          "body": "grep uses Basic Regex (BRE) by default. Use grep -E for Extended Regex (ERE), which supports familiar +, ?, |, and grouping (...) without extra backslashes. Use grep -o to print only matched substrings. Prefer single quotes around the pattern so Bash does not expand it.",
+          "items": []
+        },
+        {
+          "title": "Core regex symbols",
+          "body": "In regex, punctuation can have special meanings:",
+          "items": [
+            {
+              "term": ".",
+              "definition": "Matches one character (except a newline in common implementations)."
+            },
+            {
+              "term": "\\.",
+              "definition": "Matches a literal dot; important for website domains."
+            },
+            {
+              "term": "[A-Za-z0-9]",
+              "definition": "Matches one ASCII letter or digit."
+            },
+            {
+              "term": "+",
+              "definition": "Repeats the preceding element one or more times with grep -E."
+            },
+            {
+              "term": "*",
+              "definition": "Repeats the preceding element zero or more times."
+            },
+            {
+              "term": "?",
+              "definition": "Makes the preceding element optional with grep -E."
+            },
+            {
+              "term": "(a|b)",
+              "definition": "Groups alternatives: either a or b with grep -E."
+            },
+            {
+              "term": "^ / $",
+              "definition": "Match the start / end of a line."
+            },
+            {
+              "term": "[[:digit:]]",
+              "definition": "POSIX character class for a digit (portable to POSIX regex)."
+            }
+          ]
+        },
+        {
+          "title": "Literal dots in URLs",
+          "body": "A plain dot in regex matches any single character, so ynetnews.com would also match ynetnewsXcom. Write ynetnews\\.com when you need an actual dot. A URL is just text being matched; grep does not open the URL.",
+          "items": []
+        },
+        {
+          "title": "Which regex tester?",
+          "body": "The MDN cheat sheet documents JavaScript regex, not precisely grep's POSIX dialect. For grep -E, choose POSIX ERE in regex101 if available. Some JavaScript and PCRE-only features do not work in standard grep -E.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'cat\\ncot\\ncut\\n' | grep -E 'c[ao]t'",
+          "description": "Print lines containing cat or cot.",
+          "output": "cat\ncot"
+        },
+        {
+          "command": "printf 'catapult\\ncat\\n' | grep -oE 'cat'",
+          "description": "Print only the matching substring instead of entire lines.",
+          "output": "cat\ncat"
+        },
+        {
+          "command": "grep -oE 'https://www\\.ynetnews\\.com/article/[[:alnum:]]+' <<< \"$page_data\"",
+          "description": "Extract matching article URLs from HTML stored in page_data (if those URLs exist)."
+        }
+      ],
+      "practice": [
+        "Quote regex patterns with single quotes whenever you do not need shell expansion.",
+        "Use -E for extended regex, and -o when you only want the matching text.",
+        "Test patterns against real samples; regex flavors differ."
+      ],
+      "links": [
+        {
+          "title": "MDN: JavaScript regex cheat sheet",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet",
+          "note": "Syntax reference for JavaScript regex; not identical to grep."
+        },
+        {
+          "title": "Coddy: Regex Tester",
+          "url": "https://coddy.tech/tools/regex-tester",
+          "note": "Interactive matching and highlighting."
+        },
+        {
+          "title": "regex101",
+          "url": "https://regex101.com/",
+          "note": "Interactive tester; select the appropriate regex flavor."
+        }
+      ]
+    },
+    {
+      "id": "guide-assignment",
+      "name": "=",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Assign variables in Bash",
+      "description": "The equals sign is used for variable assignments, but its meaning depends on context. Assignment is shell syntax, not a standalone command.",
+      "keywords": [
+        "variable assignment",
+        "assignment",
+        "no spaces",
+        "equals",
+        "set variable",
+        "comparison",
+        "bash syntax"
+      ],
+      "sections": [
+        {
+          "title": "Variable assignment",
+          "body": "For a simple assignment, write name=value with NO spaces on either side of =. Spaces split words into separate shell arguments. Do not place $ before the variable name when assigning it.",
+          "items": []
+        },
+        {
+          "title": "Reading a value",
+          "body": "Use $name or, more safely inside other text, ${name} to expand an existing variable. Use quotes around expansions to prevent unwanted word splitting and globbing.",
+          "items": []
+        },
+        {
+          "title": "Not every equals sign is an assignment",
+          "body": "Inside [[ ... ]], = or == compares strings; inside (( ... )), = can assign arithmetic values. The spaces allowed in these constructs are different from ordinary variable assignments.",
+          "items": []
+        },
+        {
+          "title": "Keep in mind",
+          "body": "Variables can store text, including the stdout of a command through $(...). Bash variables cannot hold NUL bytes; command substitution also removes trailing newline characters.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "name='Ada Lovelace'",
+          "description": "Assign text, including a space, to name."
+        },
+        {
+          "command": "printf '%s\\n' \"$name\"",
+          "description": "Print the value stored in name."
+        },
+        {
+          "command": "page_data=$(wget -O - 'https://example.com/')",
+          "description": "Store the response body sent to stdout in page_data."
+        },
+        {
+          "command": "[[ \"$name\" == 'Ada Lovelace' ]]",
+          "description": "Compare strings using a Bash conditional expression."
+        }
+      ],
+      "practice": [
+        "No spaces around = for a plain assignment.",
+        "Write variable names without $ on the left side, and quote variable expansions when appropriate."
+      ],
+      "links": []
+    },
+    {
+      "id": "guide-quoting",
+      "name": "quoting",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Control how Bash interprets text",
+      "description": "Quoting protects text from shell interpretation. Single and double quotes are useful for different reasons.",
+      "keywords": [
+        "quotes",
+        "single quotes",
+        "double quotes",
+        "url",
+        "spaces",
+        "escaping",
+        "best practice"
+      ],
+      "sections": [
+        {
+          "title": "Single quotes",
+          "body": "'text' treats nearly everything inside literally. Even $HOME remains the characters $HOME. A single quote cannot be placed directly inside a single-quoted string.",
+          "items": []
+        },
+        {
+          "title": "Double quotes",
+          "body": "\"text\" protects spaces and most shell metacharacters but still permits variable and command substitution, such as \"$HOME\" and \"$(date)\".",
+          "items": []
+        },
+        {
+          "title": "Why quote URLs?",
+          "body": "An unquoted URL containing &, ?, * or spaces can be split or interpreted by Bash. Quoting URLs prevents these surprises. A simple URL may happen to work unquoted, but quoting is a reliable habit.",
+          "items": []
+        },
+        {
+          "title": "Regex patterns",
+          "body": "Use single quotes for static regex patterns such as 'https://example\\.com/[0-9]+'. The quotes are for Bash, not for enabling regex in grep.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "wget -O - 'https://example.com/page?x=1&y=2'",
+          "description": "Keep the complete URL as one argument."
+        },
+        {
+          "command": "printf '%s\\n' \"$HOME\"",
+          "description": "Safely print a variable that may contain spaces."
+        },
+        {
+          "command": "grep -E 'a+b' sample.txt",
+          "description": "Pass the regex pattern to grep without shell expansion."
+        }
+      ],
+      "practice": [
+        "Quote URLs and variable expansions by default.",
+        "Prefer single quotes for static regex; use double quotes when shell variables should expand."
+      ],
+      "links": []
+    },
+    {
+      "id": "guide-streams",
+      "name": "stdin / stdout / stderr",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Understand where program input and output go",
+      "description": "Unix programs commonly use three standard streams: input (stdin), normal output (stdout), and error output (stderr).",
+      "keywords": [
+        "stdin",
+        "stdout",
+        "stderr",
+        "standard input",
+        "standard output",
+        "standard error",
+        "file descriptors",
+        "0",
+        "1",
+        "2"
+      ],
+      "sections": [
+        {
+          "title": "The three streams",
+          "body": "They are connections, not Bash variables. By default stdin reads from the terminal, while stdout and stderr are displayed in the terminal. A command may instead read from a file or another process.",
+          "items": [
+            {
+              "term": "stdin (0)",
+              "definition": "Normal program input; often supplied by typing or a pipe."
+            },
+            {
+              "term": "stdout (1)",
+              "definition": "Normal output intended for data or results."
+            },
+            {
+              "term": "stderr (2)",
+              "definition": "Diagnostics, warnings, and error messages."
+            }
+          ]
+        },
+        {
+          "title": "Redirection",
+          "body": "Use > for stdout to a file, 2> for stderr to a file, and < to read stdin from a file. A pipe connects one process's stdout to another process's stdin.",
+          "items": []
+        },
+        {
+          "title": "Exit status is separate",
+          "body": "After a command finishes, Bash receives an exit status. Status 0 typically means success; a nonzero status signals a condition such as an error or no match. Exit status is not the text on stdout.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'hello\\n'",
+          "description": "Write hello to stdout.",
+          "output": "hello"
+        },
+        {
+          "command": "grep 'apple' fruits.txt 2> errors.txt",
+          "description": "Send grep error messages to a file while keeping normal output separate."
+        },
+        {
+          "command": "printf 'hello\\n' | wc -l",
+          "description": "Pass stdout to wc as stdin.",
+          "output": "1"
+        }
+      ],
+      "practice": [
+        "Do not assume everything displayed on screen is stdout.",
+        "Use 2> separately when you need error messages."
+      ],
+      "links": []
+    },
+    {
+      "id": "guide-redirection",
+      "name": "pipes & redirection",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Connect commands and redirect streams",
+      "description": "Bash operators route data between files, variables, and commands. They are shell syntax, not separate executables.",
+      "keywords": [
+        "pipe",
+        "redirect",
+        "redirection",
+        "stdin",
+        "stdout",
+        "stderr",
+        "here string",
+        "|",
+        ">",
+        ">>",
+        "2>",
+        "<",
+        "<<<"
+      ],
+      "sections": [
+        {
+          "title": "Common operators",
+          "body": "Each operator has a different role:",
+          "items": [
+            {
+              "term": "|",
+              "definition": "Connect the stdout of the command on the left to the stdin of the command on the right."
+            },
+            {
+              "term": ">",
+              "definition": "Write stdout to a file, overwriting it."
+            },
+            {
+              "term": ">>",
+              "definition": "Append stdout to a file."
+            },
+            {
+              "term": "2>",
+              "definition": "Write stderr to a file."
+            },
+            {
+              "term": "<",
+              "definition": "Read stdin from a file."
+            },
+            {
+              "term": "<<<",
+              "definition": "Bash here-string: send a string plus a newline to stdin."
+            },
+            {
+              "term": "2>&1",
+              "definition": "Make stderr go to the same destination as stdout at that point in the command."
+            }
+          ]
+        },
+        {
+          "title": "Passing a variable to grep",
+          "body": "Writing grep PATTERN page_data means open a FILE named page_data. To search the CONTENTS of the variable, use grep PATTERN <<< \"$page_data\" instead.",
+          "items": []
+        },
+        {
+          "title": "Order matters",
+          "body": "For example, command >out 2>&1 routes both streams to out. Reversing redirections can change their destinations.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'one\\ntwo\\n' | grep 'two'",
+          "description": "Send printf output to grep.",
+          "output": "two"
+        },
+        {
+          "command": "grep -oE '[[:digit:]]+' <<< \"$page_data\"",
+          "description": "Search for digits in the text stored in a Bash variable."
+        },
+        {
+          "command": "echo 'hello' >> notes.txt",
+          "description": "Append text to a file."
+        },
+        {
+          "command": "command_that_may_fail > output.txt 2> errors.txt",
+          "description": "Separate normal output and errors."
+        }
+      ],
+      "practice": [
+        "Use > carefully because it overwrites existing files.",
+        "Quote variables passed through here-strings."
+      ],
+      "links": []
+    },
+    {
+      "id": "guide-substitution",
+      "name": "$(...)",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Capture command output in a variable",
+      "description": "Command substitution runs a command and replaces $(...) with its stdout. This differs from simply expanding $variable.",
+      "keywords": [
+        "command substitution",
+        "capture stdout",
+        "assignment",
+        "dollar",
+        "parentheses",
+        "shell",
+        "page_data"
+      ],
+      "sections": [
+        {
+          "title": "How it works",
+          "body": "The shell executes the command inside $(...), captures stdout as text, removes trailing newlines, and substitutes the result into the surrounding expression.",
+          "items": []
+        },
+        {
+          "title": "What it does not capture",
+          "body": "stderr is not captured unless you explicitly redirect it. A program that writes downloaded data only to a file gives you no response body through $(...).",
+          "items": []
+        },
+        {
+          "title": "wget example",
+          "body": "wget normally downloads into a file. The argument -O - means 'write downloaded data to stdout'; it is the two-part form of -O-. The -q flag is optional and only controls progress and diagnostics.",
+          "items": []
+        },
+        {
+          "title": "Memory and size",
+          "body": "Avoid storing very large downloaded files in a shell variable. A file is often a better choice, especially for binary data.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "now=$(date '+%Y-%m-%d')",
+          "description": "Capture the formatted date."
+        },
+        {
+          "command": "page_data=$(wget -O - 'https://example.com/')",
+          "description": "Capture the HTTP response body rather than the wget progress messages."
+        },
+        {
+          "command": "printf '%s\\n' \"$page_data\"",
+          "description": "Print the captured text."
+        }
+      ],
+      "practice": [
+        "Use $(...) instead of legacy backticks for readability.",
+        "Quote the URL and the variable expansion."
+      ],
+      "links": []
+    },
+    {
+      "id": "guide-quantifiers",
+      "name": "regex + * ?",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Understand regex repetition operators",
+      "description": "In Extended Regex, quantifiers act on the preceding character, class, or group. Their meaning is different from Bash arithmetic operators.",
+      "keywords": [
+        "regex",
+        "plus",
+        "quantifier",
+        "repetition",
+        "star",
+        "asterisk",
+        "question mark",
+        "+",
+        "*",
+        "?"
+      ],
+      "sections": [
+        {
+          "title": "Extended Regex quantifiers",
+          "body": "The operator affects the PRECEDING element:",
+          "items": [
+            {
+              "term": "a+",
+              "definition": "One or more a characters: a, aa, aaa, etc."
+            },
+            {
+              "term": "a*",
+              "definition": "Zero or more a characters: empty text, a, aa, etc."
+            },
+            {
+              "term": "a?",
+              "definition": "Zero or one a character."
+            },
+            {
+              "term": "a{2,4}",
+              "definition": "Between two and four a characters."
+            },
+            {
+              "term": "[0-9]+",
+              "definition": "One or more digits."
+            },
+            {
+              "term": "(ab)+",
+              "definition": "One or more occurrences of the group ab."
+            }
+          ]
+        },
+        {
+          "title": "Bash arithmetic is different",
+          "body": "Bash's + inside $((...)) means arithmetic addition. += can update a variable in an arithmetic context. This has nothing to do with regex repetition.",
+          "items": []
+        },
+        {
+          "title": "Use the correct regex flavor",
+          "body": "Use grep -E for the ERE syntax shown here. Plain grep uses BRE, where + and ? are not special unless the implementation supports extensions or escaping.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'a\\naa\\nb\\n' | grep -E '^a+$'",
+          "description": "Match lines made of one or more a characters.",
+          "output": "a\naa"
+        },
+        {
+          "command": "printf 'abc123\\n' | grep -oE '[0-9]+'",
+          "description": "Extract a sequence of digits.",
+          "output": "123"
+        },
+        {
+          "command": "result=$((3 + 4))",
+          "description": "Arithmetic + adds numbers rather than matching text."
+        }
+      ],
+      "practice": [
+        "Check the regex flavor before assuming a symbol has the same behavior."
+      ],
+      "links": []
+    },
+    {
+      "id": "guide-globs",
+      "name": "globs vs regex",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Understand filename patterns versus regex",
+      "description": "Bash glob patterns and regex both match text, but use different syntax and operate in different places.",
+      "keywords": [
+        "globbing",
+        "wildcard",
+        "pattern",
+        "regex",
+        "*",
+        "?",
+        "file expansion",
+        "filename"
+      ],
+      "sections": [
+        {
+          "title": "Bash globs",
+          "body": "Filename globs are expanded by Bash before running a command. The pattern *.txt matches filenames ending in .txt; the * stands for any sequence of characters.",
+          "items": []
+        },
+        {
+          "title": "Regex",
+          "body": "In regex, * repeats the PRECEDING element. The regex .* means any number of arbitrary characters. Unlike a glob, a regex used by grep matches text inside files.",
+          "items": []
+        },
+        {
+          "title": "Why quoting changes behavior",
+          "body": "Quoting '*.txt' prevents Bash from expanding the glob, which is correct when you want a program such as find -name to receive the pattern itself.",
+          "items": []
+        },
+        {
+          "title": "An easy distinction",
+          "body": "ls *.txt lets Bash expand filenames first. find . -name '*.txt' lets find interpret its own filename pattern. grep -E '\\.txt$' searches text for a .txt suffix.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "ls *.txt",
+          "description": "Let Bash expand matching filenames."
+        },
+        {
+          "command": "find . -name '*.txt'",
+          "description": "Pass a literal glob pattern to find."
+        },
+        {
+          "command": "grep -E '\\.txt$' files.txt",
+          "description": "Match text lines ending in .txt."
+        }
+      ],
+      "practice": [
+        "Do not interchange regex and glob syntax; they are different pattern languages."
+      ],
+      "links": []
     }
   ]
 }
