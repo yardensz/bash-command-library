@@ -1,7 +1,16 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "1.5.0",
+  "latestVersion": "1.5.1",
   "releases": [
+    {
+      "version": "1.5.1",
+      "date": "2026-11-14",
+      "title": "Command-name mnemonics and compact info popovers",
+      "summary": "Click-to-open name meanings and memory tips for all 100 commands and eight guides, plus a clearer wc occurrence-counting example",
+      "commandCount": 100,
+      "topicCount": 8,
+      "snapshot": "history/1.5.1.json"
+    },
     {
       "version": "1.5.0",
       "date": "2026-11-14",

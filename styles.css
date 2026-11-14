@@ -342,3 +342,13 @@ body {direction:ltr}
 .behavior-grid span{font-size:12px;line-height:1.55}
 @media(max-width:980px){.guide-resources,.behavior-grid{grid-template-columns:1fr}}
 @media(max-width:480px){.cmd-item .cmd-symbol{max-width:90px}.guide-row{grid-template-columns:minmax(72px,32%) minmax(0,1fr);gap:9px}}
+/* v1.5.1: unobtrusive clickable command-name explanations */
+.detail-actions{display:flex;align-items:flex-start;gap:7px;position:relative;flex-shrink:0}
+.nameinfo-button{font-family:Georgia,serif;font-weight:700;font-style:italic;font-size:12px;line-height:1;width:25px;height:25px;display:inline-flex;justify-content:center;align-items:center;border:1px solid var(--stroke);border-radius:50%;background:var(--surface-alt);color:var(--muted);cursor:pointer;transition:color .14s ease,border-color .14s ease}
+.nameinfo-button:hover,.nameinfo-button[aria-expanded="true"]{color:var(--accent);border-color:var(--accent)}
+.nameinfo-button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.nameinfo-popover{position:absolute;right:0;top:calc(100% + 9px);z-index:15;width:min(280px,calc(100vw - 36px));border:1px solid var(--stroke);border-radius:9px;background:var(--surface);box-shadow:0 10px 24px rgba(0,0,0,.13);padding:11px 13px;text-align:left}
+.nameinfo-popover[hidden]{display:none!important}
+.nameinfo-popover strong{display:block;font-size:11px;color:var(--accent);margin:0 0 5px}
+.nameinfo-popover p{margin:0;font-size:12px;line-height:1.55;color:var(--ink);font-weight:400}
+@media(max-width:480px){.nameinfo-popover{right:-6px}.nameinfo-button{width:24px;height:24px}}

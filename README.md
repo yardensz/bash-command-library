@@ -10,6 +10,7 @@ A fast, publicly accessible Bash and Unix command reference. Browse 100 practica
 - Network & Web category covering wget, curl, SSH, DNS, and troubleshooting tools.
 - Concepts & Syntax guides for regex, assignment, quoting, streams, redirection, substitution, and globs.
 - Selected commands document output, exit status, side effects, and best practices.
+- Small information buttons beside command and guide titles reveal command-name meanings or memory tips without cluttering the page.
 - Syntax highlighting for command names, options, parameters, paths, strings, and operators.
 - Concise option explanations, copyable examples, and keyboard-driven navigation.
 - Compact, responsive layout with light and dark themes.

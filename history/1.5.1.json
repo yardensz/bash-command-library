@@ -1,0 +1,5212 @@
+{
+  "schemaVersion": 1,
+  "version": "1.5.1",
+  "updatedAt": "2026-11-14",
+  "commands": [
+    {
+      "id": "ls",
+      "name": "ls",
+      "category": "Files & Directories",
+      "summary": "List files and directories",
+      "description": "Lists files and folders in the current or a specified directory.",
+      "syntax": "ls [options] [path]",
+      "options": [
+        {
+          "flag": "-l",
+          "description": "Show detailed information: permissions, ownership, size, and date."
+        },
+        {
+          "flag": "-a",
+          "description": "Include hidden entries beginning with a dot."
+        },
+        {
+          "flag": "-h",
+          "description": "Show human-readable file sizes, useful with -l."
+        },
+        {
+          "flag": "-R",
+          "description": "List subdirectories recursively."
+        },
+        {
+          "flag": "-t",
+          "description": "Sort by modification time."
+        },
+        {
+          "flag": "--color=auto",
+          "description": "Colorize entries automatically on GNU ls."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ls",
+          "description": "List the current directory."
+        },
+        {
+          "command": "ls -lah",
+          "description": "Show details, hidden entries, and readable sizes."
+        },
+        {
+          "command": "ls ~/Documents",
+          "description": "List another directory."
+        }
+      ],
+      "keywords": [
+        "list files",
+        "list",
+        "files",
+        "directories",
+        "hidden",
+        "browse"
+      ],
+      "note": "Combine short flags: ls -la is equivalent to ls -l -a. Available options can differ by system.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "List: lists the names of files and directories."
+      }
+    },
+    {
+      "id": "cd",
+      "name": "cd",
+      "category": "Files & Directories",
+      "summary": "Change directory",
+      "description": "Changes the Bash shell's current working directory.",
+      "syntax": "cd [directory]",
+      "options": [
+        {
+          "flag": "..",
+          "description": "Parent directory (an argument, not a flag)."
+        },
+        {
+          "flag": "~",
+          "description": "Shortcut for your home directory."
+        },
+        {
+          "flag": "-",
+          "description": "Go to the previous directory (an argument, not a flag)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "cd ~/Documents",
+          "description": "Go to Documents in your home directory."
+        },
+        {
+          "command": "cd ..",
+          "description": "Move up one directory level."
+        },
+        {
+          "command": "cd -",
+          "description": "Return to the previous directory."
+        },
+        {
+          "command": "cd",
+          "description": "Go to your home directory."
+        }
+      ],
+      "keywords": [
+        "change directory",
+        "navigation",
+        "folder",
+        "change",
+        "directory"
+      ],
+      "note": "cd changes your shell's location, not the location of files.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Change Directory: switches the current working directory."
+      }
+    },
+    {
+      "id": "pwd",
+      "name": "pwd",
+      "category": "Files & Directories",
+      "summary": "Print working directory",
+      "description": "Prints the full path to the directory you are currently in.",
+      "syntax": "pwd [-L|-P]",
+      "options": [
+        {
+          "flag": "-L",
+          "description": "Show the logical path, which may contain symbolic links."
+        },
+        {
+          "flag": "-P",
+          "description": "Resolve symbolic links and print the physical path."
+        }
+      ],
+      "examples": [
+        {
+          "command": "pwd",
+          "description": "Print the current directory."
+        },
+        {
+          "command": "pwd -P",
+          "description": "Print the physical path."
+        }
+      ],
+      "keywords": [
+        "path",
+        "current directory",
+        "current",
+        "location",
+        "directory"
+      ],
+      "note": null,
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Print Working Directory: displays the directory you are in."
+      }
+    },
+    {
+      "id": "mkdir",
+      "name": "mkdir",
+      "category": "Files & Directories",
+      "summary": "Create directories",
+      "description": "Creates one or more directories at the specified paths.",
+      "syntax": "mkdir [options] directory...",
+      "options": [
+        {
+          "flag": "-p",
+          "description": "Create missing parent directories; allow directories that already exist."
+        },
+        {
+          "flag": "-v",
+          "description": "Print a message for each newly created directory."
+        }
+      ],
+      "examples": [
+        {
+          "command": "mkdir notes",
+          "description": "Create a directory named notes."
+        },
+        {
+          "command": "mkdir -p projects/demo",
+          "description": "Create nested directories, including missing parents."
+        }
+      ],
+      "keywords": [
+        "make directory",
+        "folder",
+        "make",
+        "directory",
+        "create"
+      ],
+      "note": null,
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Make Directory: creates a directory."
+      }
+    },
+    {
+      "id": "touch",
+      "name": "touch",
+      "category": "Files & Directories",
+      "summary": "Create empty files or update timestamps",
+      "description": "Updates file access and modification timestamps; by default creates missing files.",
+      "syntax": "touch [options] file...",
+      "options": [
+        {
+          "flag": "-c",
+          "description": "Do not create missing files."
+        },
+        {
+          "flag": "-a",
+          "description": "Update the access timestamp."
+        },
+        {
+          "flag": "-m",
+          "description": "Update the modification timestamp."
+        }
+      ],
+      "examples": [
+        {
+          "command": "touch notes.txt",
+          "description": "Create an empty file if needed."
+        },
+        {
+          "command": "touch -c existing.txt",
+          "description": "Update timestamps only if the file exists."
+        }
+      ],
+      "keywords": [
+        "new file",
+        "timestamps",
+        "file",
+        "create"
+      ],
+      "note": null,
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Think 'touch a file': create an empty one or update its timestamps."
+      }
+    },
+    {
+      "id": "cp",
+      "name": "cp",
+      "category": "Files & Directories",
+      "summary": "Copy files and directories",
+      "description": "Copies files and, with an option, entire directories.",
+      "syntax": "cp [options] source destination",
+      "options": [
+        {
+          "flag": "-r",
+          "description": "Copy directories recursively."
+        },
+        {
+          "flag": "-i",
+          "description": "Ask before overwriting a destination."
+        },
+        {
+          "flag": "-n",
+          "description": "Avoid overwriting destinations when supported; behavior varies."
+        },
+        {
+          "flag": "-v",
+          "description": "Print the files being copied."
+        }
+      ],
+      "examples": [
+        {
+          "command": "cp notes.txt backup.txt",
+          "description": "Copy a file."
+        },
+        {
+          "command": "cp -ri folder folder-backup",
+          "description": "Copy a directory and request confirmation before overwriting."
+        }
+      ],
+      "keywords": [
+        "copy",
+        "duplicate",
+        "backup"
+      ],
+      "note": "Some flags differ between GNU and BSD implementations.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Copy: duplicates a file or directory."
+      }
+    },
+    {
+      "id": "mv",
+      "name": "mv",
+      "category": "Files & Directories",
+      "summary": "Move or rename files",
+      "description": "Moves files and folders or changes their names.",
+      "syntax": "mv [options] source destination",
+      "options": [
+        {
+          "flag": "-i",
+          "description": "Ask before overwriting the destination."
+        },
+        {
+          "flag": "-n",
+          "description": "Avoid overwriting an existing target when supported."
+        },
+        {
+          "flag": "-v",
+          "description": "Show the entries that were moved."
+        }
+      ],
+      "examples": [
+        {
+          "command": "mv old.txt new.txt",
+          "description": "Rename a file."
+        },
+        {
+          "command": "mv notes.txt ~/Documents/",
+          "description": "Move a file into another directory."
+        },
+        {
+          "command": "mv -i draft.txt final.txt",
+          "description": "Ask before replacing an existing file."
+        }
+      ],
+      "keywords": [
+        "move",
+        "rename",
+        "relocate"
+      ],
+      "note": "A destination file may be replaced without warning unless protective options are used.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Move: moves or renames a file or directory."
+      }
+    },
+    {
+      "id": "rm",
+      "name": "rm",
+      "category": "Files & Directories",
+      "summary": "Delete files",
+      "description": "Deletes files, typically without moving them to Trash or Recycle Bin.",
+      "syntax": "rm [options] file...",
+      "options": [
+        {
+          "flag": "-i",
+          "description": "Ask for confirmation before each deletion."
+        },
+        {
+          "flag": "-r",
+          "description": "Delete directories and their contents recursively; use caution."
+        },
+        {
+          "flag": "-v",
+          "description": "Print which items are removed."
+        }
+      ],
+      "examples": [
+        {
+          "command": "rm -i old-notes.txt",
+          "description": "Ask before deleting a file."
+        },
+        {
+          "command": "rm unwanted.txt",
+          "description": "Delete a file."
+        }
+      ],
+      "keywords": [
+        "delete",
+        "remove",
+        "file"
+      ],
+      "note": "Warning: rm deletions are usually difficult to undo. Check paths carefully and consider -i.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Remove: deletes files or directories."
+      }
+    },
+    {
+      "id": "cat",
+      "name": "cat",
+      "category": "Text & Search",
+      "summary": "Display file contents",
+      "description": "Prints the contents of files to the terminal; suitable for relatively short files.",
+      "syntax": "cat [options] [file...]",
+      "options": [
+        {
+          "flag": "-n",
+          "description": "Number all output lines."
+        },
+        {
+          "flag": "-b",
+          "description": "Number only nonempty lines."
+        },
+        {
+          "flag": "-s",
+          "description": "Collapse repeated empty lines when supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "cat notes.txt",
+          "description": "Print a file's contents."
+        },
+        {
+          "command": "cat -n notes.txt",
+          "description": "Show a file with line numbers."
+        }
+      ],
+      "keywords": [
+        "read",
+        "view",
+        "print file",
+        "print",
+        "concatenate"
+      ],
+      "note": "Use less to browse long files.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Concatenate: joins file contents; also commonly used to display them."
+      }
+    },
+    {
+      "id": "sort",
+      "name": "sort",
+      "category": "Text & Search",
+      "summary": "Sort text lines",
+      "description": "Sorts lines from files or standard input, using locale-specific ordering by default.",
+      "syntax": "sort [options] [file...]",
+      "options": [
+        {
+          "flag": "-n",
+          "description": "Sort by numeric value."
+        },
+        {
+          "flag": "-r",
+          "description": "Reverse the order."
+        },
+        {
+          "flag": "-u",
+          "description": "Show unique lines only."
+        },
+        {
+          "flag": "-k N",
+          "description": "Sort using field N as the key."
+        },
+        {
+          "flag": "-t CHAR",
+          "description": "Choose the field separator."
+        },
+        {
+          "flag": "-o FILE",
+          "description": "Write sorted output to the specified file."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sort names.txt",
+          "description": "Sort lines in ascending order."
+        },
+        {
+          "command": "sort -nr numbers.txt",
+          "description": "Sort numbers in descending order."
+        },
+        {
+          "command": "sort -u names.txt",
+          "description": "Sort and deduplicate lines."
+        },
+        {
+          "command": "sort -t, -k2,2 people.csv",
+          "description": "Sort simple CSV data by the second field."
+        }
+      ],
+      "keywords": [
+        "reverse",
+        "numeric",
+        "ascending",
+        "descending",
+        "sorting"
+      ],
+      "note": "Use -nr together for reverse numeric order.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Sort means arranging lines in an order."
+      }
+    },
+    {
+      "id": "grep",
+      "name": "grep",
+      "category": "Text & Search",
+      "summary": "Search for matching text",
+      "description": "Searches input with basic regex by default and prints each complete matching line to stdout. With -o, prints only the matching portions.",
+      "syntax": "grep [options] pattern [file...]",
+      "options": [
+        {
+          "flag": "-i",
+          "description": "Ignore uppercase/lowercase differences."
+        },
+        {
+          "flag": "-n",
+          "description": "Show matching line numbers."
+        },
+        {
+          "flag": "-r",
+          "description": "Search subdirectories recursively."
+        },
+        {
+          "flag": "-v",
+          "description": "Print lines that do not match."
+        },
+        {
+          "flag": "-F",
+          "description": "Treat the pattern as literal text."
+        },
+        {
+          "flag": "-E",
+          "description": "Enable extended regex."
+        },
+        {
+          "flag": "-o",
+          "description": "Print only matching substrings, one per line, instead of full matching lines."
+        },
+        {
+          "flag": "-q",
+          "description": "Quiet mode: print nothing; signal whether a match was found through the exit status."
+        }
+      ],
+      "examples": [
+        {
+          "command": "grep -n error app.log",
+          "description": "Find error with line numbers."
+        },
+        {
+          "command": "grep -ri hello .",
+          "description": "Search recursively without case sensitivity."
+        },
+        {
+          "command": "grep -F \"a.b\" notes.txt",
+          "description": "Find the literal string a.b."
+        },
+        {
+          "command": "printf 'apple\\npineapple\\n' | grep -o 'apple'",
+          "description": "Print the matching text only.",
+          "output": "apple\napple"
+        },
+        {
+          "command": "grep -oE 'https://www\\.ynetnews\\.com/article/[[:alnum:]]+' <<< \"$page_data\"",
+          "description": "Extract article URLs from HTML held in a variable, if those URLs appear."
+        },
+        {
+          "command": "printf 'Netanyahu Netanyahu\\n' | grep -oF 'Netanyahu' | wc -l",
+          "description": "Count literal occurrences instead of matching lines.",
+          "output": "2"
+        }
+      ],
+      "keywords": [
+        "search text",
+        "pattern",
+        "regex",
+        "search",
+        "text"
+      ],
+      "note": "A literal dot must be escaped as \\. in regex. See the searchable regex and pipes & redirection guides. A match is based on text in the input; grep does not visit URLs.",
+      "type": "utility",
+      "output": {
+        "stdout": "By default, the FULL matching lines. With -o, only the matched substrings; with -q, nothing.",
+        "stderr": "File errors, invalid patterns, and other diagnostics.",
+        "exitStatus": "Usually 0 = match found, 1 = no match, 2 = error (GNU grep).",
+        "sideEffects": "Does not alter its input unless another command or redirection is involved."
+      },
+      "practice": [
+        "Use single quotes around a static regex to prevent Bash expansion.",
+        "Use -E when you need familiar +, | and (...) operators; default grep uses BRE.",
+        "Use -o to extract matching text; use -F for literal text.",
+        "The input filename is not a variable: use <<< \"$variable\" to search a variable's text."
+      ],
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "From the Unix editor command g/re/p: global / regular expression / print."
+      }
+    },
+    {
+      "id": "find",
+      "name": "find",
+      "category": "Text & Search",
+      "summary": "Find files by name or properties",
+      "description": "Walks directory trees and selects files or directories matching an expression.",
+      "syntax": "find [path...] [expression]",
+      "options": [
+        {
+          "flag": "-name \"*.txt\"",
+          "description": "Match filenames with a glob; quote the pattern."
+        },
+        {
+          "flag": "-iname \"*.txt\"",
+          "description": "Match filenames without case sensitivity when supported."
+        },
+        {
+          "flag": "-type f",
+          "description": "Match regular files only."
+        },
+        {
+          "flag": "-type d",
+          "description": "Match directories only."
+        },
+        {
+          "flag": "-maxdepth N",
+          "description": "Limit recursion depth on GNU find."
+        }
+      ],
+      "examples": [
+        {
+          "command": "find . -name \"*.txt\"",
+          "description": "Find .txt files under the current directory."
+        },
+        {
+          "command": "find ~/Documents -type d",
+          "description": "List directories under Documents."
+        },
+        {
+          "command": "find . -type f -name \"report*\"",
+          "description": "Find files whose names begin with report."
+        }
+      ],
+      "keywords": [
+        "find files",
+        "files by name",
+        "find",
+        "locate",
+        "files",
+        "directories"
+      ],
+      "note": "Quote *.txt so Bash does not expand the pattern before find receives it.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Find searches for files and directories by conditions."
+      }
+    },
+    {
+      "id": "head",
+      "name": "head",
+      "category": "Text & Search",
+      "summary": "Display the beginning of a file",
+      "description": "Shows the first ten lines of a file by default.",
+      "syntax": "head [options] [file...]",
+      "options": [
+        {
+          "flag": "-n N",
+          "description": "Show the first N lines."
+        },
+        {
+          "flag": "-c N",
+          "description": "Show the first N bytes."
+        }
+      ],
+      "examples": [
+        {
+          "command": "head notes.txt",
+          "description": "Show the first ten lines."
+        },
+        {
+          "command": "head -n 5 notes.txt",
+          "description": "Show the first five lines."
+        }
+      ],
+      "keywords": [
+        "first lines",
+        "preview",
+        "first",
+        "lines"
+      ],
+      "note": null,
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Like the head of a document: read its first lines."
+      }
+    },
+    {
+      "id": "tail",
+      "name": "tail",
+      "category": "Text & Search",
+      "summary": "Display the end of a file",
+      "description": "Shows the last ten lines of a file by default, optionally following additions.",
+      "syntax": "tail [options] [file...]",
+      "options": [
+        {
+          "flag": "-n N",
+          "description": "Show the last N lines."
+        },
+        {
+          "flag": "-f",
+          "description": "Follow new lines as they are added."
+        },
+        {
+          "flag": "-c N",
+          "description": "Show the last N bytes."
+        }
+      ],
+      "examples": [
+        {
+          "command": "tail notes.txt",
+          "description": "Show the last ten lines."
+        },
+        {
+          "command": "tail -n 20 app.log",
+          "description": "Show the last twenty lines."
+        },
+        {
+          "command": "tail -f app.log",
+          "description": "Follow a log file; press Ctrl+C to stop."
+        }
+      ],
+      "keywords": [
+        "last lines",
+        "logs",
+        "follow",
+        "last",
+        "lines"
+      ],
+      "note": null,
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Like the tail of a document: read its last lines."
+      }
+    },
+    {
+      "id": "wc",
+      "name": "wc",
+      "category": "Text & Search",
+      "summary": "Count lines, words, and bytes",
+      "description": "Counts words, newline characters, bytes, or characters in files or input.",
+      "syntax": "wc [options] [file...]",
+      "options": [
+        {
+          "flag": "-l",
+          "description": "Count newline characters."
+        },
+        {
+          "flag": "-w",
+          "description": "Count words."
+        },
+        {
+          "flag": "-c",
+          "description": "Count bytes."
+        },
+        {
+          "flag": "-m",
+          "description": "Count characters according to the locale."
+        }
+      ],
+      "examples": [
+        {
+          "command": "wc notes.txt",
+          "description": "Show line, word, and byte counts."
+        },
+        {
+          "command": "wc -l notes.txt",
+          "description": "Count newline characters."
+        },
+        {
+          "command": "wc -w essay.txt",
+          "description": "Count words."
+        },
+        {
+          "command": "printf 'Netanyahu Netanyahu\\n' | grep -oF 'Netanyahu' | wc -l",
+          "description": "Count two matching occurrences even when both appear on one line.",
+          "output": "2"
+        }
+      ],
+      "keywords": [
+        "count",
+        "word count",
+        "lines",
+        "word",
+        "bytes"
+      ],
+      "note": "wc means Word Count, but -w counts ALL words in its input. It does not count how many times a chosen word appears. Use grep -oF 'word' | wc -l for that.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Word Count: counts words, and can also count lines, bytes, or characters."
+      },
+      "output": {
+        "stdout": "Counts of lines, words, characters, or bytes, depending on options. With -w it counts whitespace-delimited words, not specific word matches.",
+        "stderr": "File reading errors and diagnostics.",
+        "exitStatus": "0 for success; nonzero for errors.",
+        "sideEffects": "Does not modify the input files."
+      },
+      "practice": [
+        "Use wc -l to count newline characters, not occurrences of a search word.",
+        "To count exact text occurrences, use grep -oF 'text' | wc -l: grep prints one line per match.",
+        "Use grep -owF 'word' to require a whole-word match, then wc -l to count them."
+      ]
+    },
+    {
+      "id": "less",
+      "name": "less",
+      "category": "Text & Search",
+      "summary": "Browse long text files",
+      "description": "Opens text in a scrollable pager instead of flooding the terminal.",
+      "syntax": "less [options] file",
+      "options": [
+        {
+          "flag": "-N",
+          "description": "Show line numbers."
+        },
+        {
+          "flag": "-S",
+          "description": "Do not wrap long lines."
+        },
+        {
+          "flag": "/text",
+          "description": "Search for text inside less (not a flag)."
+        },
+        {
+          "flag": "q",
+          "description": "Quit the pager (a key, not a flag)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "less README.md",
+          "description": "Open a file for browsing."
+        },
+        {
+          "command": "less -N app.log",
+          "description": "Browse a log with line numbers."
+        }
+      ],
+      "keywords": [
+        "pager",
+        "scroll",
+        "view file",
+        "view",
+        "file"
+      ],
+      "note": "Use arrows to scroll, / to search, and q to quit.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "A pager with an intentionally playful name, contrasting the older more program."
+      }
+    },
+    {
+      "id": "echo",
+      "name": "echo",
+      "category": "System",
+      "summary": "Print text or variable values",
+      "description": "Prints its arguments; echo is a Bash builtin.",
+      "syntax": "echo [options] [text...]",
+      "options": [
+        {
+          "flag": "-n",
+          "description": "Omit the trailing newline."
+        },
+        {
+          "flag": "$HOME",
+          "description": "Example of variable expansion; not a flag."
+        }
+      ],
+      "examples": [
+        {
+          "command": "echo \"Hello\"",
+          "description": "Print Hello."
+        },
+        {
+          "command": "echo \"$HOME\"",
+          "description": "Print your home directory path."
+        }
+      ],
+      "keywords": [
+        "print",
+        "output",
+        "variables",
+        "text"
+      ],
+      "note": "For precise and portable formatting, consider printf.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Like an echo, it repeats text to the output."
+      }
+    },
+    {
+      "id": "man",
+      "name": "man",
+      "category": "System",
+      "summary": "Open command manuals",
+      "description": "Displays locally installed manual pages for commands.",
+      "syntax": "man [section] command",
+      "options": [
+        {
+          "flag": "-k keyword",
+          "description": "Search manual descriptions by keyword."
+        },
+        {
+          "flag": "q",
+          "description": "Quit the manual viewer (not a flag)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "man ls",
+          "description": "Read the ls manual."
+        },
+        {
+          "command": "man sort",
+          "description": "Read the sort manual."
+        },
+        {
+          "command": "man -k copy",
+          "description": "Search for commands related to copying."
+        }
+      ],
+      "keywords": [
+        "manual",
+        "help",
+        "documentation"
+      ],
+      "note": "Manual pages may contain options beyond those in this quick reference.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Manual: opens command documentation."
+      }
+    },
+    {
+      "id": "clear",
+      "name": "clear",
+      "category": "System",
+      "summary": "Clear the terminal display",
+      "description": "Clears the visible terminal screen.",
+      "syntax": "clear",
+      "options": [],
+      "examples": [
+        {
+          "command": "clear",
+          "description": "Clear the terminal."
+        }
+      ],
+      "keywords": [
+        "terminal",
+        "screen",
+        "clear"
+      ],
+      "note": null,
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Clear the terminal display."
+      }
+    },
+    {
+      "id": "printf",
+      "name": "printf",
+      "category": "System",
+      "summary": "Print formatted text",
+      "description": "Prints data according to a format string, allowing control over line breaks and layout.",
+      "syntax": "printf format [arguments...]",
+      "options": [
+        {
+          "flag": "%s",
+          "description": "Insert a string."
+        },
+        {
+          "flag": "%d",
+          "description": "Insert an integer."
+        },
+        {
+          "flag": "\\n",
+          "description": "Newline escape inside a format string (not a flag)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'Hello\\n'",
+          "description": "Print Hello followed by a newline."
+        },
+        {
+          "command": "printf '%s: %d\\n' apples 3",
+          "description": "Print a label and a number."
+        }
+      ],
+      "keywords": [
+        "print format",
+        "newline",
+        "format",
+        "print",
+        "text"
+      ],
+      "note": "Unlike echo, printf does not add a newline automatically.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Print Formatted: prints text using a format string."
+      }
+    },
+    {
+      "id": "cut",
+      "name": "cut",
+      "category": "Text & Search",
+      "summary": "Extract fields or characters",
+      "description": "Selects fields or character ranges from each input line.",
+      "syntax": "cut [options] [file...]",
+      "options": [
+        {
+          "flag": "-d DELIM",
+          "description": "Set the field delimiter."
+        },
+        {
+          "flag": "-f LIST",
+          "description": "Select field numbers, starting at 1."
+        },
+        {
+          "flag": "-c LIST",
+          "description": "Select character ranges."
+        }
+      ],
+      "examples": [
+        {
+          "command": "cut -d, -f1 data.csv",
+          "description": "Get the first comma-separated field."
+        },
+        {
+          "command": "cut -c1-5 names.txt",
+          "description": "Get the first five characters."
+        }
+      ],
+      "keywords": [
+        "field",
+        "extract",
+        "csv",
+        "cut",
+        "fields",
+        "columns",
+        "characters"
+      ],
+      "note": "cut is not a complete parser for complex quoted CSV files.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Cuts out selected fields or columns from lines."
+      }
+    },
+    {
+      "id": "uniq",
+      "name": "uniq",
+      "category": "Text & Search",
+      "summary": "Remove adjacent duplicate lines",
+      "description": "Collapses consecutive identical lines; sort input first to eliminate nonadjacent duplicates.",
+      "syntax": "uniq [options] [input [output]]",
+      "options": [
+        {
+          "flag": "-c",
+          "description": "Count adjacent occurrences."
+        },
+        {
+          "flag": "-d",
+          "description": "Show only repeated lines."
+        },
+        {
+          "flag": "-u",
+          "description": "Show lines that appear only once."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sort names.txt | uniq",
+          "description": "Remove duplicates after sorting."
+        },
+        {
+          "command": "sort names.txt | uniq -c",
+          "description": "Count repeated values after sorting."
+        }
+      ],
+      "keywords": [
+        "unique",
+        "deduplicate",
+        "duplicate",
+        "lines"
+      ],
+      "note": "uniq does not sort; it only checks neighboring lines.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Unique: filters adjacent repeated lines."
+      }
+    },
+    {
+      "id": "tr",
+      "name": "tr",
+      "category": "Text & Search",
+      "summary": "Translate or delete characters",
+      "description": "Replaces, removes, or squeezes characters from standard input.",
+      "syntax": "tr [options] SET1 [SET2]",
+      "options": [
+        {
+          "flag": "-d",
+          "description": "Delete selected characters."
+        },
+        {
+          "flag": "-s",
+          "description": "Collapse consecutive occurrences."
+        },
+        {
+          "flag": "SET1 SET2",
+          "description": "Map characters in SET1 to SET2 (arguments)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'abc\\n' | tr 'a-z' 'A-Z'",
+          "description": "Convert lowercase letters to uppercase."
+        },
+        {
+          "command": "tr -s ' ' < input.txt",
+          "description": "Collapse repeated spaces in a file."
+        }
+      ],
+      "keywords": [
+        "translate",
+        "uppercase",
+        "lowercase",
+        "replace",
+        "characters"
+      ],
+      "note": "tr works with characters rather than entire words.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Translate: translates or deletes characters."
+      }
+    },
+    {
+      "id": "sed",
+      "name": "sed",
+      "category": "Text & Search",
+      "summary": "Edit text streams",
+      "description": "Processes text using editing expressions, such as displaying selected lines or replacing text.",
+      "syntax": "sed [options] script [file...]",
+      "options": [
+        {
+          "flag": "-n",
+          "description": "Suppress normal automatic printing."
+        },
+        {
+          "flag": "s/old/new/g",
+          "description": "Replace old with new throughout each line."
+        },
+        {
+          "flag": "-e script",
+          "description": "Specify an additional sed expression."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sed -n '1,5p' notes.txt",
+          "description": "Show only the first five lines."
+        },
+        {
+          "command": "sed 's/cat/dog/g' animals.txt",
+          "description": "Replace every occurrence of cat with dog."
+        }
+      ],
+      "keywords": [
+        "stream editor",
+        "replace",
+        "stream",
+        "editor",
+        "substitute"
+      ],
+      "note": "By default, sed outputs changes without modifying its source file. In-place options vary by system.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Stream Editor: applies text transformations to a stream."
+      }
+    },
+    {
+      "id": "awk",
+      "name": "awk",
+      "category": "Text & Search",
+      "summary": "Process text fields",
+      "description": "Processes text records and fields with conditions, expressions, and simple calculations.",
+      "syntax": "awk [options] program [file...]",
+      "options": [
+        {
+          "flag": "-F SEP",
+          "description": "Choose the field separator."
+        },
+        {
+          "flag": "$1",
+          "description": "Refer to the first input field in awk."
+        },
+        {
+          "flag": "NR",
+          "description": "Built-in variable for the current record number."
+        }
+      ],
+      "examples": [
+        {
+          "command": "awk '{print $1}' notes.txt",
+          "description": "Print the first field."
+        },
+        {
+          "command": "awk -F, '{print $2}' data.csv",
+          "description": "Print the second comma-separated field."
+        }
+      ],
+      "keywords": [
+        "columns",
+        "processing",
+        "fields",
+        "process",
+        "text"
+      ],
+      "note": "In awk, $1 refers to the first field and $0 to the entire record; these are not Bash variables.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Named after its creators: Aho, Weinberger, and Kernighan."
+      }
+    },
+    {
+      "id": "tee",
+      "name": "tee",
+      "category": "Text & Search",
+      "summary": "Show and save output",
+      "description": "Sends input to both the terminal and a file, commonly in a pipeline.",
+      "syntax": "tee [options] [file...]",
+      "options": [
+        {
+          "flag": "-a",
+          "description": "Append rather than overwrite."
+        },
+        {
+          "flag": "-i",
+          "description": "Ignore interrupts when supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "echo hello | tee log.txt",
+          "description": "Show text and save it to a file."
+        },
+        {
+          "command": "echo another | tee -a log.txt",
+          "description": "Append another line to an existing file."
+        }
+      ],
+      "keywords": [
+        "pipe",
+        "output",
+        "log",
+        "pipeline",
+        "save"
+      ],
+      "note": "Without -a, tee may overwrite an existing file.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Named after a T-shaped pipe fitting: sends output to the screen and a file."
+      }
+    },
+    {
+      "id": "xargs",
+      "name": "xargs",
+      "category": "Text & Search",
+      "summary": "Build commands from input",
+      "description": "Constructs command-line arguments from values read through standard input.",
+      "syntax": "xargs [options] [command [arguments...]]",
+      "options": [
+        {
+          "flag": "-n N",
+          "description": "Use no more than N arguments per invocation."
+        },
+        {
+          "flag": "-0",
+          "description": "Read NUL-separated input for safe filename handling."
+        },
+        {
+          "flag": "-I REPLACE",
+          "description": "Replace a placeholder with each input value."
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'one\\ntwo\\n' | xargs -n 1 echo",
+          "description": "Run echo once per input item."
+        },
+        {
+          "command": "printf 'a\\nb\\n' | xargs -I '{}' echo 'item:{}'",
+          "description": "Insert each input item into a command argument."
+        }
+      ],
+      "keywords": [
+        "arguments",
+        "pipe",
+        "stdin",
+        "pipeline"
+      ],
+      "note": "Use NUL-separated input and xargs -0 for filenames containing spaces or newlines, when available.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Think 'arguments': builds command arguments from incoming text."
+      }
+    },
+    {
+      "id": "diff",
+      "name": "diff",
+      "category": "Files & Directories",
+      "summary": "Compare files",
+      "description": "Shows differences between files without changing them.",
+      "syntax": "diff [options] file1 file2",
+      "options": [
+        {
+          "flag": "-u",
+          "description": "Use unified diff format."
+        },
+        {
+          "flag": "-q",
+          "description": "Report briefly whether differences exist."
+        },
+        {
+          "flag": "-r",
+          "description": "Compare directories recursively."
+        }
+      ],
+      "examples": [
+        {
+          "command": "diff old.txt new.txt",
+          "description": "Compare two files."
+        },
+        {
+          "command": "diff -u old.txt new.txt",
+          "description": "Show unified differences with context."
+        }
+      ],
+      "keywords": [
+        "compare",
+        "changes",
+        "diff"
+      ],
+      "note": "Exit status 0 means equal; 1 means differences were detected.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Difference: compares text and shows differences."
+      }
+    },
+    {
+      "id": "chmod",
+      "name": "chmod",
+      "category": "Files & Directories",
+      "summary": "Change file permissions",
+      "description": "Changes read, write, and execute permissions for files and directories.",
+      "syntax": "chmod [options] mode file...",
+      "options": [
+        {
+          "flag": "+x",
+          "description": "Add execute permission for selected classes."
+        },
+        {
+          "flag": "u+x",
+          "description": "Let the owner execute the file."
+        },
+        {
+          "flag": "u-w",
+          "description": "Remove the owner's write permission."
+        }
+      ],
+      "examples": [
+        {
+          "command": "chmod u+x script.sh",
+          "description": "Make a script executable by its owner."
+        },
+        {
+          "command": "chmod u-w notes.txt",
+          "description": "Disable writing for the owner."
+        }
+      ],
+      "keywords": [
+        "permissions",
+        "executable",
+        "execute",
+        "access"
+      ],
+      "note": "u means owner, g group, o others, and a everyone. Executable files are not necessarily safe.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Change Mode: changes file permission bits."
+      }
+    },
+    {
+      "id": "du",
+      "name": "du",
+      "category": "Files & Directories",
+      "summary": "Estimate disk usage",
+      "description": "Reports disk space occupied by files and directories.",
+      "syntax": "du [options] [path...]",
+      "options": [
+        {
+          "flag": "-h",
+          "description": "Use human-readable units."
+        },
+        {
+          "flag": "-s",
+          "description": "Display only a total per path."
+        },
+        {
+          "flag": "-a",
+          "description": "Include files as well as directories."
+        }
+      ],
+      "examples": [
+        {
+          "command": "du -sh Documents",
+          "description": "Summarize Documents disk usage."
+        },
+        {
+          "command": "du -h .",
+          "description": "Show usage of nested directories."
+        }
+      ],
+      "keywords": [
+        "disk usage",
+        "storage",
+        "disk",
+        "usage",
+        "folder",
+        "size"
+      ],
+      "note": "Disk usage can differ from a file's apparent logical size.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Disk Usage: reports space used by files and directories."
+      }
+    },
+    {
+      "id": "df",
+      "name": "df",
+      "category": "System",
+      "summary": "Show free disk space",
+      "description": "Displays used and available capacity for mounted filesystems.",
+      "syntax": "df [options] [path...]",
+      "options": [
+        {
+          "flag": "-h",
+          "description": "Use human-readable sizes."
+        },
+        {
+          "flag": "-k",
+          "description": "Use 1024-byte blocks."
+        },
+        {
+          "flag": "-i",
+          "description": "Show inode statistics where supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "df -h",
+          "description": "Show filesystem capacities."
+        },
+        {
+          "command": "df -h .",
+          "description": "Show free space for the current directory's filesystem."
+        }
+      ],
+      "keywords": [
+        "disk free",
+        "disk",
+        "free",
+        "space",
+        "storage"
+      ],
+      "note": "df measures filesystem space, whereas du measures usage by individual paths.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Disk Free: shows filesystem space usage and availability."
+      }
+    },
+    {
+      "id": "file",
+      "name": "file",
+      "category": "Files & Directories",
+      "summary": "Identify file type",
+      "description": "Examines file contents to infer their type independently of the filename extension.",
+      "syntax": "file [options] file...",
+      "options": [
+        {
+          "flag": "-b",
+          "description": "Print the type without the filename."
+        },
+        {
+          "flag": "-i",
+          "description": "Print MIME information where supported."
+        },
+        {
+          "flag": "-L",
+          "description": "Follow symbolic links."
+        }
+      ],
+      "examples": [
+        {
+          "command": "file image.png",
+          "description": "Identify a file type."
+        },
+        {
+          "command": "file -b document.pdf",
+          "description": "Show the type without the name."
+        }
+      ],
+      "keywords": [
+        "mime",
+        "identify file",
+        "file",
+        "type",
+        "identify"
+      ],
+      "note": "Content-based detection is useful, but not always definitive.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Determines what kind of data a file contains."
+      }
+    },
+    {
+      "id": "type",
+      "name": "type",
+      "category": "System",
+      "summary": "Inspect how Bash resolves a command",
+      "description": "Shows whether a name is a builtin, alias, function, or executable.",
+      "syntax": "type [options] name...",
+      "options": [
+        {
+          "flag": "-a",
+          "description": "Show all matches."
+        },
+        {
+          "flag": "-t",
+          "description": "Print a short classification such as builtin or file."
+        },
+        {
+          "flag": "-P",
+          "description": "Find the executable in PATH, if available."
+        }
+      ],
+      "examples": [
+        {
+          "command": "type ls",
+          "description": "Check whether ls is an alias or executable."
+        },
+        {
+          "command": "type -a python",
+          "description": "Show all known python locations."
+        }
+      ],
+      "keywords": [
+        "command location",
+        "alias",
+        "path",
+        "command",
+        "location",
+        "builtin"
+      ],
+      "note": "type is a Bash builtin and can recognize functions and aliases.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Tells you what type of command name Bash recognizes."
+      }
+    },
+    {
+      "id": "history",
+      "name": "history",
+      "category": "System",
+      "summary": "Show command history",
+      "description": "Prints previous Bash commands that are retained in the session's history.",
+      "syntax": "history [N]",
+      "options": [
+        {
+          "flag": "N",
+          "description": "Show the most recent N entries (argument, not flag)."
+        },
+        {
+          "flag": "-c",
+          "description": "Clear the current session's in-memory history."
+        }
+      ],
+      "examples": [
+        {
+          "command": "history",
+          "description": "Show available history."
+        },
+        {
+          "command": "history 10",
+          "description": "Show the last ten commands."
+        }
+      ],
+      "keywords": [
+        "history",
+        "terminal",
+        "previous",
+        "commands"
+      ],
+      "note": "History retention depends on shell settings.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Shows a history of shell commands."
+      }
+    },
+    {
+      "id": "ps",
+      "name": "ps",
+      "category": "System",
+      "summary": "List running processes",
+      "description": "Displays information about active system processes.",
+      "syntax": "ps [options]",
+      "options": [
+        {
+          "flag": "-e",
+          "description": "Show all processes (POSIX style)."
+        },
+        {
+          "flag": "-f",
+          "description": "Show more process details."
+        },
+        {
+          "flag": "aux",
+          "description": "Show BSD-style process listing without a dash."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ps",
+          "description": "Show processes associated with your terminal."
+        },
+        {
+          "command": "ps -ef",
+          "description": "Show a detailed process listing."
+        }
+      ],
+      "keywords": [
+        "process",
+        "running",
+        "pid"
+      ],
+      "note": "ps supports multiple flag styles; availability depends on the system.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Process Status: displays running processes."
+      }
+    },
+    {
+      "id": "tar",
+      "name": "tar",
+      "category": "Files & Directories",
+      "summary": "Create or extract archives",
+      "description": "Bundles files into archives and can use compression such as gzip.",
+      "syntax": "tar [options] archive [file...]",
+      "options": [
+        {
+          "flag": "-c",
+          "description": "Create an archive."
+        },
+        {
+          "flag": "-t",
+          "description": "List archive contents."
+        },
+        {
+          "flag": "-x",
+          "description": "Extract an archive."
+        },
+        {
+          "flag": "-f FILE",
+          "description": "Specify the archive filename."
+        },
+        {
+          "flag": "-z",
+          "description": "Use gzip compression or decompression when supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "tar -czf notes.tar.gz notes/",
+          "description": "Create a gzip-compressed notes archive."
+        },
+        {
+          "command": "tar -tf notes.tar.gz",
+          "description": "List files in an archive without extracting."
+        }
+      ],
+      "keywords": [
+        "archive",
+        "gzip",
+        "compress",
+        "backup"
+      ],
+      "note": "Inspect archives before extracting. Option ordering may determine which filename is used.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Tape Archiver: originally built to store and retrieve tape archives."
+      }
+    },
+    {
+      "id": "date",
+      "name": "date",
+      "category": "System",
+      "summary": "Display date and time",
+      "description": "Prints the current date and time using default or custom formatting.",
+      "syntax": "date [+FORMAT]",
+      "options": [
+        {
+          "flag": "+%Y-%m-%d",
+          "description": "Use a year-month-day format."
+        },
+        {
+          "flag": "+%H:%M",
+          "description": "Use 24-hour hours and minutes."
+        },
+        {
+          "flag": "-u",
+          "description": "Display UTC time."
+        }
+      ],
+      "examples": [
+        {
+          "command": "date",
+          "description": "Show the date and time."
+        },
+        {
+          "command": "date '+%Y-%m-%d'",
+          "description": "Print a fixed date format."
+        }
+      ],
+      "keywords": [
+        "time",
+        "format",
+        "date"
+      ],
+      "note": "Format strings start with +; tokens such as %Y and %m represent date components.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Displays or formats the date and time."
+      }
+    },
+    {
+      "id": "basename",
+      "name": "basename",
+      "category": "Files & Directories",
+      "summary": "Extract filename from path",
+      "description": "Returns the last component of a path without preceding directories.",
+      "syntax": "basename path [suffix]",
+      "options": [
+        {
+          "flag": "suffix",
+          "description": "Optional suffix to remove (argument, not flag)."
+        },
+        {
+          "flag": "--",
+          "description": "Mark the end of options, where supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "basename /home/user/notes.txt",
+          "description": "Show only notes.txt."
+        },
+        {
+          "command": "basename /home/user/notes.txt .txt",
+          "description": "Show notes without its .txt suffix."
+        }
+      ],
+      "keywords": [
+        "filename",
+        "path"
+      ],
+      "note": "basename works on text paths and does not require the file to exist.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Base Name: extracts the last part of a path."
+      }
+    },
+    {
+      "id": "dirname",
+      "name": "dirname",
+      "category": "Files & Directories",
+      "summary": "Extract directory from path",
+      "description": "Returns the directory component of a path, omitting its last component.",
+      "syntax": "dirname path",
+      "options": [
+        {
+          "flag": "--",
+          "description": "Mark the end of options, where supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "dirname /home/user/notes.txt",
+          "description": "Show /home/user."
+        },
+        {
+          "command": "dirname ./docs/file.txt",
+          "description": "Show ./docs."
+        }
+      ],
+      "keywords": [
+        "parent directory",
+        "path",
+        "parent",
+        "directory"
+      ],
+      "note": "dirname operates on path strings and does not check for an existing directory.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Directory Name: extracts the containing directory from a path."
+      }
+    },
+    {
+      "id": "ln",
+      "name": "ln",
+      "category": "Files & Directories",
+      "summary": "Create file links",
+      "description": "Creates symbolic or hard links to other filesystem entries.",
+      "syntax": "ln [options] target link_name",
+      "options": [
+        {
+          "flag": "-s",
+          "description": "Create a symbolic rather than a hard link."
+        },
+        {
+          "flag": "-f",
+          "description": "Replace an existing destination if allowed; use carefully."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ln -s notes.txt shortcut.txt",
+          "description": "Create a symbolic link."
+        },
+        {
+          "command": "ln notes.txt copy-link.txt",
+          "description": "Create a hard link on the same filesystem."
+        }
+      ],
+      "keywords": [
+        "symbolic link",
+        "symlink",
+        "hard link",
+        "hard",
+        "link",
+        "shortcut"
+      ],
+      "note": "Relative symbolic-link targets are resolved from the directory containing the link.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Link: creates hard links or symbolic links."
+      }
+    },
+    {
+      "id": "stat",
+      "name": "stat",
+      "category": "Files & Directories",
+      "summary": "Show file metadata",
+      "description": "Prints a file's size, permissions, timestamps, and other metadata.",
+      "syntax": "stat [options] file...",
+      "options": [
+        {
+          "flag": "-L",
+          "description": "Follow a symbolic link to its target where supported."
+        },
+        {
+          "flag": "-c FORMAT",
+          "description": "On GNU/Linux, choose an output format; %s prints size in bytes."
+        }
+      ],
+      "examples": [
+        {
+          "command": "stat notes.txt",
+          "description": "Show detailed file metadata."
+        },
+        {
+          "command": "stat -c '%s' notes.txt",
+          "description": "On GNU/Linux, show file size in bytes."
+        }
+      ],
+      "keywords": [
+        "file information",
+        "metadata",
+        "file",
+        "size",
+        "permissions"
+      ],
+      "note": "Formatting options differ between GNU/Linux and macOS; basic stat FILE is common to both.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Think 'status': inspect file metadata such as size and timestamps."
+      }
+    },
+    {
+      "id": "read",
+      "name": "read",
+      "category": "System",
+      "summary": "Read input into Bash variables",
+      "description": "Reads a line of input into one or more Bash variables.",
+      "syntax": "read [options] name...",
+      "options": [
+        {
+          "flag": "-r",
+          "description": "Do not interpret backslashes as escapes; usually recommended."
+        },
+        {
+          "flag": "-p PROMPT",
+          "description": "Display a prompt before reading (Bash)."
+        },
+        {
+          "flag": "-a ARRAY",
+          "description": "Read words into an array."
+        }
+      ],
+      "examples": [
+        {
+          "command": "read -r name",
+          "description": "Read a line into the name variable."
+        },
+        {
+          "command": "read -r -p 'Name: ' name",
+          "description": "Prompt for a name and save the answer."
+        }
+      ],
+      "keywords": [
+        "input",
+        "prompt",
+        "variable",
+        "script"
+      ],
+      "note": "read is a Bash builtin. For example, printf '%s\\n' \"$name\" displays the captured value.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Reads one line of input into shell variables."
+      }
+    },
+    {
+      "id": "export",
+      "name": "export",
+      "category": "System",
+      "summary": "Export variables to child processes",
+      "description": "Makes a shell variable available in the environments of programs started by the shell.",
+      "syntax": "export [options] [name[=value] ...]",
+      "options": [
+        {
+          "flag": "-p",
+          "description": "List exported variables."
+        },
+        {
+          "flag": "-n",
+          "description": "Stop exporting a variable without deleting its value."
+        }
+      ],
+      "examples": [
+        {
+          "command": "export PROJECT=demo",
+          "description": "Set the PROJECT environment variable."
+        },
+        {
+          "command": "export -p",
+          "description": "List exported variables."
+        }
+      ],
+      "keywords": [
+        "environment variable",
+        "variable",
+        "shell",
+        "environment",
+        "variables",
+        "export"
+      ],
+      "note": "Exported variables last for the current shell and its child processes, not automatically for future sessions.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Exports a shell variable to processes started from the shell."
+      }
+    },
+    {
+      "id": "env",
+      "name": "env",
+      "category": "System",
+      "summary": "Inspect or modify process environment",
+      "description": "Displays environment variables or launches a command with temporary environment changes.",
+      "syntax": "env [options] [name=value ...] [command]",
+      "options": [
+        {
+          "flag": "-i",
+          "description": "Start with an empty environment."
+        },
+        {
+          "flag": "-u NAME",
+          "description": "Remove a variable from the launched program's environment."
+        }
+      ],
+      "examples": [
+        {
+          "command": "env",
+          "description": "List environment variables."
+        },
+        {
+          "command": "env LANG=C date",
+          "description": "Run date with a temporary language setting."
+        }
+      ],
+      "keywords": [
+        "environment",
+        "variables",
+        "temporary"
+      ],
+      "note": "Unlike export, env assignments before a command apply only to that command.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Environment: displays or sets environment variables for a command."
+      }
+    },
+    {
+      "id": "sleep",
+      "name": "sleep",
+      "category": "System",
+      "summary": "Delay execution",
+      "description": "Waits for the given duration before continuing.",
+      "syntax": "sleep number",
+      "options": [],
+      "examples": [
+        {
+          "command": "sleep 2",
+          "description": "Wait two seconds."
+        },
+        {
+          "command": "sleep 0.5",
+          "description": "Wait half a second if supported."
+        }
+      ],
+      "keywords": [
+        "delay",
+        "wait",
+        "pause"
+      ],
+      "note": "Seconds are the default unit; some implementations also accept time suffixes.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Pauses execution for a specified amount of time."
+      }
+    },
+    {
+      "id": "whoami",
+      "name": "whoami",
+      "category": "System",
+      "summary": "Show current username",
+      "description": "Prints the effective user's name.",
+      "syntax": "whoami",
+      "options": [],
+      "examples": [
+        {
+          "command": "whoami",
+          "description": "Print the current username."
+        }
+      ],
+      "keywords": [
+        "user",
+        "username",
+        "account"
+      ],
+      "note": "For user and group IDs, use id.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Who Am I: prints the current effective username."
+      }
+    },
+    {
+      "id": "uname",
+      "name": "uname",
+      "category": "System",
+      "summary": "Show system information",
+      "description": "Prints kernel and machine architecture information.",
+      "syntax": "uname [options]",
+      "options": [
+        {
+          "flag": "-a",
+          "description": "Show all available information."
+        },
+        {
+          "flag": "-s",
+          "description": "Show the kernel or system name."
+        },
+        {
+          "flag": "-m",
+          "description": "Show the machine architecture."
+        }
+      ],
+      "examples": [
+        {
+          "command": "uname -a",
+          "description": "Show system information."
+        },
+        {
+          "command": "uname -m",
+          "description": "Show the reported architecture."
+        }
+      ],
+      "keywords": [
+        "system",
+        "OS",
+        "kernel",
+        "architecture"
+      ],
+      "note": "uname does not necessarily report the distribution name or its user-friendly version.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Unix Name: reports system and kernel information."
+      }
+    },
+    {
+      "id": "paste",
+      "name": "paste",
+      "category": "Text & Search",
+      "summary": "Join columns from files",
+      "description": "Merges corresponding lines from files, separated by a delimiter.",
+      "syntax": "paste [options] file...",
+      "options": [
+        {
+          "flag": "-d ','",
+          "description": "Use a comma as the field separator."
+        },
+        {
+          "flag": "-s",
+          "description": "Join lines from each file into one long output line."
+        }
+      ],
+      "examples": [
+        {
+          "command": "paste names.txt scores.txt",
+          "description": "Merge corresponding lines from two files."
+        },
+        {
+          "command": "paste -d ',' names.txt scores.txt",
+          "description": "Create comma-separated output."
+        }
+      ],
+      "keywords": [
+        "combine",
+        "columns",
+        "merge",
+        "tab"
+      ],
+      "note": "The default separator is a tab. Input lengths may differ.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Pastes lines from files side by side."
+      }
+    },
+    {
+      "id": "wget",
+      "name": "wget",
+      "category": "Network & Web",
+      "summary": "Download files from the web",
+      "description": "Downloads files from HTTP, HTTPS, or FTP URLs to your computer.",
+      "syntax": "wget [options] URL",
+      "options": [
+        {
+          "flag": "-O FILE",
+          "description": "Write downloaded data to FILE. Use -O - (or -O-) to send the response body to stdout; the second '-' is an argument, not another flag."
+        },
+        {
+          "flag": "-o FILE",
+          "description": "Write wget log messages to FILE (lowercase o). This does NOT choose the downloaded content's destination."
+        },
+        {
+          "flag": "-q",
+          "description": "Quiet mode: suppress progress and diagnostics. Optional; it does not make downloads work."
+        },
+        {
+          "flag": "-c",
+          "description": "Continue an interrupted download when supported by the server."
+        },
+        {
+          "flag": "-P DIR",
+          "description": "Save downloaded files into the specified directory."
+        },
+        {
+          "flag": "--spider",
+          "description": "Check whether a URL is accessible without downloading its contents."
+        }
+      ],
+      "examples": [
+        {
+          "command": "wget -O - 'https://example.com/'",
+          "description": "Print downloaded HTML to stdout instead of creating a downloaded file."
+        },
+        {
+          "command": "page_data=$(wget -O - 'https://example.com/')",
+          "description": "Capture downloaded HTML in a Bash variable."
+        },
+        {
+          "command": "wget https://example.com/",
+          "description": "Download a web page to a local file."
+        },
+        {
+          "command": "wget -O page.html https://example.com/",
+          "description": "Save the response as page.html."
+        },
+        {
+          "command": "wget -c https://example.com/archive.zip",
+          "description": "Resume a download if the server permits it."
+        }
+      ],
+      "keywords": [
+        "download",
+        "web",
+        "http",
+        "https",
+        "fetch",
+        "file retrieval"
+      ],
+      "note": "Example: wget -O - 'https://example.com/' prints HTML. wget -O- is the same syntax with the argument attached. -o output.log writes a LOG, not page HTML.",
+      "type": "utility",
+      "output": {
+        "stdout": "With -O -, downloaded response data; otherwise usually no file contents on stdout.",
+        "stderr": "Progress and diagnostic messages by default. With -o FILE, log messages go to that file; -q suppresses them.",
+        "exitStatus": "0 generally means success; nonzero indicates a problem. Exit codes vary by failure.",
+        "sideEffects": "Without -O -, writes a downloaded file; with -O FILE, writes that destination. Some options may overwrite files."
+      },
+      "practice": [
+        "Quote URLs, especially those containing '&', '?', or shell metacharacters.",
+        "Uppercase -O controls the downloaded data; lowercase -o controls the log. They are different.",
+        "Use -O - to print the response body to stdout. The second '-' is the destination value.",
+        "-q is optional, and during troubleshooting it is useful to keep diagnostics visible."
+      ],
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "World Wide Web + get: retrieves content from a URL."
+      }
+    },
+    {
+      "id": "curl",
+      "name": "curl",
+      "category": "Network & Web",
+      "summary": "Make web requests and download data",
+      "description": "Transfers data to or from URLs, commonly used for HTTP requests and APIs.",
+      "syntax": "curl [options] URL",
+      "options": [
+        {
+          "flag": "-L",
+          "description": "Follow HTTP redirects."
+        },
+        {
+          "flag": "-o FILE",
+          "description": "Write the response to the specified file."
+        },
+        {
+          "flag": "-O",
+          "description": "Save using the remote filename."
+        },
+        {
+          "flag": "-I",
+          "description": "Fetch response headers only."
+        },
+        {
+          "flag": "-X METHOD",
+          "description": "Specify the HTTP request method."
+        },
+        {
+          "flag": "-H HEADER",
+          "description": "Add a request header."
+        }
+      ],
+      "examples": [
+        {
+          "command": "curl -I https://example.com",
+          "description": "Show the site's HTTP response headers."
+        },
+        {
+          "command": "curl -L -o page.html https://example.com/",
+          "description": "Follow redirects and save a response."
+        },
+        {
+          "command": "curl -L -O https://example.com/file.zip",
+          "description": "Download using the URL's filename."
+        }
+      ],
+      "keywords": [
+        "download",
+        "web",
+        "http",
+        "https",
+        "api",
+        "headers",
+        "request"
+      ],
+      "note": "curl normally writes the response to the terminal. Use -o or -O to save a file. Avoid piping untrusted downloads into a shell.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Think of a URL client: transfers data to or from a URL."
+      }
+    },
+    {
+      "id": "ping",
+      "name": "ping",
+      "category": "Network & Web",
+      "summary": "Check network reachability",
+      "description": "Sends ICMP echo requests and reports whether a host responds and how long packets take.",
+      "syntax": "ping [options] host",
+      "options": [
+        {
+          "flag": "-c COUNT",
+          "description": "On Linux and many Unix systems, stop after COUNT requests."
+        },
+        {
+          "flag": "-i SECONDS",
+          "description": "Wait the specified interval between requests."
+        },
+        {
+          "flag": "-W SECONDS",
+          "description": "Set a response wait time on Linux; syntax differs across systems."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ping -c 4 example.com",
+          "description": "Send four echo requests."
+        },
+        {
+          "command": "ping 192.168.1.1",
+          "description": "Test a local IP address; press Ctrl+C to stop."
+        }
+      ],
+      "keywords": [
+        "network",
+        "connectivity",
+        "latency",
+        "icmp",
+        "reachability"
+      ],
+      "note": "Some networks block ICMP; a failed ping does not always mean a website is unavailable.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Named after the sound of sonar; checks network reachability."
+      }
+    },
+    {
+      "id": "ssh",
+      "name": "ssh",
+      "category": "Network & Web",
+      "summary": "Connect to a remote computer securely",
+      "description": "Opens an encrypted remote shell session using SSH.",
+      "syntax": "ssh [options] user@host",
+      "options": [
+        {
+          "flag": "-p PORT",
+          "description": "Connect to a non-default SSH port."
+        },
+        {
+          "flag": "-i FILE",
+          "description": "Use the specified private-key identity file."
+        },
+        {
+          "flag": "-v",
+          "description": "Show verbose connection diagnostics."
+        },
+        {
+          "flag": "-J HOST",
+          "description": "Connect through a jump host when supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ssh user@example.com",
+          "description": "Connect to a remote account."
+        },
+        {
+          "command": "ssh -p 2222 user@example.com",
+          "description": "Connect using port 2222."
+        }
+      ],
+      "keywords": [
+        "remote",
+        "login",
+        "server",
+        "secure",
+        "shell"
+      ],
+      "note": "Verify server host keys before trusting a new connection. Never share your private SSH key.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Secure Shell: opens an encrypted remote session."
+      }
+    },
+    {
+      "id": "scp",
+      "name": "scp",
+      "category": "Network & Web",
+      "summary": "Copy files over SSH",
+      "description": "Copies files between your machine and another host over an SSH connection.",
+      "syntax": "scp [options] source destination",
+      "options": [
+        {
+          "flag": "-r",
+          "description": "Copy directories recursively."
+        },
+        {
+          "flag": "-P PORT",
+          "description": "Use a custom SSH port (capital P)."
+        },
+        {
+          "flag": "-i FILE",
+          "description": "Use the specified SSH private key."
+        },
+        {
+          "flag": "-p",
+          "description": "Preserve file timestamps and modes when possible."
+        }
+      ],
+      "examples": [
+        {
+          "command": "scp report.txt user@example.com:/tmp/",
+          "description": "Copy a local file to a remote host."
+        },
+        {
+          "command": "scp user@example.com:/tmp/report.txt ./",
+          "description": "Copy a remote file to the current directory."
+        }
+      ],
+      "keywords": [
+        "copy",
+        "remote",
+        "ssh",
+        "transfer",
+        "upload",
+        "download"
+      ],
+      "note": "scp uses -P for the port, unlike ssh which uses lowercase -p.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Secure Copy: transfers files over SSH."
+      }
+    },
+    {
+      "id": "rsync",
+      "name": "rsync",
+      "category": "Network & Web",
+      "summary": "Synchronize files and folders",
+      "description": "Efficiently copies and synchronizes local directories or directories over SSH.",
+      "syntax": "rsync [options] source destination",
+      "options": [
+        {
+          "flag": "-a",
+          "description": "Archive mode: preserve structure and common metadata."
+        },
+        {
+          "flag": "-v",
+          "description": "Show copied entries and progress messages."
+        },
+        {
+          "flag": "--dry-run",
+          "description": "Preview planned changes without copying files."
+        },
+        {
+          "flag": "--delete",
+          "description": "Remove files from the destination that are absent at the source; destructive."
+        },
+        {
+          "flag": "-z",
+          "description": "Compress data during transfer when useful."
+        }
+      ],
+      "examples": [
+        {
+          "command": "rsync -av --dry-run ./docs/ ./backup/",
+          "description": "Preview syncing the contents of docs."
+        },
+        {
+          "command": "rsync -av ./docs/ ./backup/",
+          "description": "Sync the contents of docs into backup."
+        }
+      ],
+      "keywords": [
+        "sync",
+        "backup",
+        "files",
+        "copy",
+        "ssh",
+        "remote"
+      ],
+      "note": "A trailing slash on the source changes which directory level is copied. Test --delete with --dry-run first.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Think 'remote sync': efficiently synchronizes files and folders."
+      }
+    },
+    {
+      "id": "ip",
+      "name": "ip",
+      "category": "Network & Web",
+      "summary": "Inspect network interfaces and routes",
+      "description": "Linux utility for showing and managing network addresses, interfaces, and routing.",
+      "syntax": "ip [options] object command",
+      "options": [
+        {
+          "flag": "addr show",
+          "description": "Show assigned IP addresses."
+        },
+        {
+          "flag": "link show",
+          "description": "List network interfaces and their state."
+        },
+        {
+          "flag": "route show",
+          "description": "Display the routing table."
+        },
+        {
+          "flag": "-br",
+          "description": "Use brief output when supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ip -br addr",
+          "description": "Show a compact list of interface addresses."
+        },
+        {
+          "command": "ip route show",
+          "description": "Display routes and the default gateway."
+        }
+      ],
+      "keywords": [
+        "linux",
+        "network",
+        "address",
+        "interface",
+        "routing",
+        "ip address"
+      ],
+      "note": "ip is primarily a Linux command and may not exist on macOS. Changing network settings can disconnect remote sessions.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Internet Protocol: inspects and configures IP networking."
+      }
+    },
+    {
+      "id": "ss",
+      "name": "ss",
+      "category": "Network & Web",
+      "summary": "Inspect network sockets and listening ports",
+      "description": "Shows active sockets and listening network ports on Linux.",
+      "syntax": "ss [options]",
+      "options": [
+        {
+          "flag": "-t",
+          "description": "Show TCP sockets."
+        },
+        {
+          "flag": "-u",
+          "description": "Show UDP sockets."
+        },
+        {
+          "flag": "-l",
+          "description": "Show listening sockets."
+        },
+        {
+          "flag": "-n",
+          "description": "Show numerical addresses and ports."
+        },
+        {
+          "flag": "-p",
+          "description": "Show owning processes when permitted."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ss -tuln",
+          "description": "List listening TCP and UDP ports."
+        },
+        {
+          "command": "ss -tn",
+          "description": "Display TCP connections numerically."
+        }
+      ],
+      "keywords": [
+        "network",
+        "ports",
+        "tcp",
+        "udp",
+        "sockets",
+        "linux"
+      ],
+      "note": "ss is mainly available on Linux; process details may require elevated privileges.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Socket Statistics: inspects network sockets."
+      }
+    },
+    {
+      "id": "dig",
+      "name": "dig",
+      "category": "Network & Web",
+      "summary": "Query DNS records",
+      "description": "Looks up DNS information, including addresses, mail servers, and other records.",
+      "syntax": "dig [@server] name [type]",
+      "options": [
+        {
+          "flag": "+short",
+          "description": "Show a condensed answer."
+        },
+        {
+          "flag": "MX",
+          "description": "Ask for mail-exchanger records."
+        },
+        {
+          "flag": "-x ADDRESS",
+          "description": "Perform a reverse DNS lookup."
+        },
+        {
+          "flag": "@SERVER",
+          "description": "Query a specified DNS server."
+        }
+      ],
+      "examples": [
+        {
+          "command": "dig example.com A",
+          "description": "Request IPv4 address records."
+        },
+        {
+          "command": "dig +short example.com",
+          "description": "Print a concise DNS answer."
+        },
+        {
+          "command": "dig example.com MX",
+          "description": "Check the domain's mail servers."
+        }
+      ],
+      "keywords": [
+        "dns",
+        "domain",
+        "nameserver",
+        "records",
+        "lookup"
+      ],
+      "note": "dig may need the dnsutils or bind-tools package on some Linux distributions.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Domain Information Groper: queries DNS records."
+      }
+    },
+    {
+      "id": "host",
+      "name": "host",
+      "category": "Network & Web",
+      "summary": "Look up DNS information",
+      "description": "Resolves hostnames to addresses and can request specific DNS record types.",
+      "syntax": "host [options] name",
+      "options": [
+        {
+          "flag": "-t TYPE",
+          "description": "Choose a record type such as MX or AAAA."
+        },
+        {
+          "flag": "-a",
+          "description": "Request a broader DNS report."
+        },
+        {
+          "flag": "-v",
+          "description": "Show verbose output."
+        }
+      ],
+      "examples": [
+        {
+          "command": "host example.com",
+          "description": "Look up a domain name."
+        },
+        {
+          "command": "host -t MX example.com",
+          "description": "Look up mail server records."
+        }
+      ],
+      "keywords": [
+        "dns",
+        "domain",
+        "hostname",
+        "lookup"
+      ],
+      "note": "host is often provided with DNS utility packages and may not be preinstalled.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Looks up information about a host or domain name."
+      }
+    },
+    {
+      "id": "nc",
+      "name": "nc",
+      "category": "Network & Web",
+      "summary": "Open or test TCP and UDP connections",
+      "description": "Netcat is a small tool for connecting to network endpoints or listening on ports.",
+      "syntax": "nc [options] host port",
+      "options": [
+        {
+          "flag": "-z",
+          "description": "Probe a port without sending application data."
+        },
+        {
+          "flag": "-v",
+          "description": "Use verbose output."
+        },
+        {
+          "flag": "-w SECONDS",
+          "description": "Set a timeout (details depend on implementation)."
+        },
+        {
+          "flag": "-u",
+          "description": "Use UDP instead of TCP."
+        }
+      ],
+      "examples": [
+        {
+          "command": "nc -vz example.com 443",
+          "description": "Check whether a TCP port is reachable."
+        },
+        {
+          "command": "nc -w 3 example.com 80",
+          "description": "Open a TCP connection with a short timeout."
+        }
+      ],
+      "keywords": [
+        "netcat",
+        "network",
+        "tcp",
+        "udp",
+        "port",
+        "connectivity"
+      ],
+      "note": "Netcat implementations differ (OpenBSD, GNU, Ncat, and others). Only probe systems you are authorized to access.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Netcat: a network utility for connecting to ports."
+      }
+    },
+    {
+      "id": "traceroute",
+      "name": "traceroute",
+      "category": "Network & Web",
+      "summary": "Trace the path to a network host",
+      "description": "Shows intermediate network hops toward a destination when routers respond.",
+      "syntax": "traceroute [options] host",
+      "options": [
+        {
+          "flag": "-m HOPS",
+          "description": "Limit the maximum number of hops."
+        },
+        {
+          "flag": "-n",
+          "description": "Avoid DNS lookups for intermediate hops."
+        },
+        {
+          "flag": "-w SECONDS",
+          "description": "Set a per-probe wait time on many Unix systems."
+        }
+      ],
+      "examples": [
+        {
+          "command": "traceroute example.com",
+          "description": "Trace network hops to a website."
+        },
+        {
+          "command": "traceroute -n example.com",
+          "description": "Display hops without reverse DNS lookups."
+        }
+      ],
+      "keywords": [
+        "network",
+        "route",
+        "hops",
+        "latency",
+        "diagnostics"
+      ],
+      "note": "The package might not be installed by default, and some routers do not answer trace probes.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Trace the route network packets take to a host."
+      }
+    },
+    {
+      "id": "chown",
+      "name": "chown",
+      "category": "Files & Directories",
+      "summary": "Change file ownership",
+      "description": "Changes the user or group ownership of a file or directory.",
+      "syntax": "chown [options] owner[:group] file...",
+      "options": [
+        {
+          "flag": "-R",
+          "description": "Apply ownership changes recursively."
+        },
+        {
+          "flag": "-v",
+          "description": "Describe each ownership change."
+        },
+        {
+          "flag": "--reference=FILE",
+          "description": "On GNU systems, copy ownership from a reference file."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sudo chown alice notes.txt",
+          "description": "Set a file's owner to alice."
+        },
+        {
+          "command": "sudo chown alice:developers project.txt",
+          "description": "Set both owner and group."
+        }
+      ],
+      "keywords": [
+        "permissions",
+        "ownership",
+        "user",
+        "group",
+        "filesystem"
+      ],
+      "note": "Changing ownership often requires sudo. Double-check recursive operations before running them.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Change Owner: changes the file owner."
+      }
+    },
+    {
+      "id": "chgrp",
+      "name": "chgrp",
+      "category": "Files & Directories",
+      "summary": "Change file group ownership",
+      "description": "Changes the group assigned to files or directories.",
+      "syntax": "chgrp [options] group file...",
+      "options": [
+        {
+          "flag": "-R",
+          "description": "Apply group changes recursively."
+        },
+        {
+          "flag": "-v",
+          "description": "Print changed entries."
+        }
+      ],
+      "examples": [
+        {
+          "command": "chgrp developers report.txt",
+          "description": "Assign the developers group if permitted."
+        },
+        {
+          "command": "sudo chgrp -R staff shared/",
+          "description": "Change the group on a directory tree."
+        }
+      ],
+      "keywords": [
+        "permissions",
+        "group",
+        "ownership",
+        "filesystem"
+      ],
+      "note": "Group changes require suitable permissions; recursive changes affect all descendants.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Change Group: changes a file's group."
+      }
+    },
+    {
+      "id": "tree",
+      "name": "tree",
+      "category": "Files & Directories",
+      "summary": "Display directories as a tree",
+      "description": "Shows folders and files in an indented tree structure.",
+      "syntax": "tree [options] [directory]",
+      "options": [
+        {
+          "flag": "-L LEVEL",
+          "description": "Limit recursion depth."
+        },
+        {
+          "flag": "-a",
+          "description": "Include hidden entries."
+        },
+        {
+          "flag": "-d",
+          "description": "Display directories only."
+        },
+        {
+          "flag": "-I PATTERN",
+          "description": "Exclude matching names."
+        }
+      ],
+      "examples": [
+        {
+          "command": "tree -L 2",
+          "description": "Show the current directory two levels deep."
+        },
+        {
+          "command": "tree -a project/",
+          "description": "Show the project tree including hidden files."
+        }
+      ],
+      "keywords": [
+        "folders",
+        "directories",
+        "listing",
+        "hierarchy"
+      ],
+      "note": "tree is not installed by default on some systems.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Displays folders in a tree-shaped hierarchy."
+      }
+    },
+    {
+      "id": "zip",
+      "name": "zip",
+      "category": "Files & Directories",
+      "summary": "Create ZIP archives",
+      "description": "Packages files or directories into a ZIP archive.",
+      "syntax": "zip [options] archive.zip file...",
+      "options": [
+        {
+          "flag": "-r",
+          "description": "Include directories recursively."
+        },
+        {
+          "flag": "-9",
+          "description": "Use high compression when supported."
+        },
+        {
+          "flag": "-u",
+          "description": "Update entries in an existing archive."
+        }
+      ],
+      "examples": [
+        {
+          "command": "zip notes.zip notes.txt",
+          "description": "Create a ZIP containing one file."
+        },
+        {
+          "command": "zip -r project.zip project/",
+          "description": "Archive a whole directory."
+        }
+      ],
+      "keywords": [
+        "archive",
+        "compress",
+        "zip",
+        "backup"
+      ],
+      "note": "Adding a file with the same name to an existing archive may replace its entry.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Creates a ZIP archive; 'zip' is a name, not an acronym."
+      }
+    },
+    {
+      "id": "unzip",
+      "name": "unzip",
+      "category": "Files & Directories",
+      "summary": "Extract ZIP archives",
+      "description": "Lists or extracts files from ZIP archives.",
+      "syntax": "unzip [options] archive.zip",
+      "options": [
+        {
+          "flag": "-l",
+          "description": "List archive members without extracting."
+        },
+        {
+          "flag": "-d DIR",
+          "description": "Extract into the specified directory."
+        },
+        {
+          "flag": "-n",
+          "description": "Never overwrite an existing file."
+        },
+        {
+          "flag": "-o",
+          "description": "Overwrite existing files without prompting; use carefully."
+        }
+      ],
+      "examples": [
+        {
+          "command": "unzip -l project.zip",
+          "description": "Preview the contents of an archive."
+        },
+        {
+          "command": "unzip project.zip -d extracted/",
+          "description": "Extract into a dedicated folder."
+        }
+      ],
+      "keywords": [
+        "extract",
+        "archive",
+        "zip",
+        "files"
+      ],
+      "note": "Review unfamiliar archives before extracting; extraction may create nested paths or overwrite files.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "The counterpart of zip: extracts a ZIP archive."
+      }
+    },
+    {
+      "id": "gzip",
+      "name": "gzip",
+      "category": "Files & Directories",
+      "summary": "Compress files with gzip",
+      "description": "Compresses a file to gzip format, usually replacing the original with a .gz file.",
+      "syntax": "gzip [options] file...",
+      "options": [
+        {
+          "flag": "-k",
+          "description": "Keep the original input file when supported."
+        },
+        {
+          "flag": "-d",
+          "description": "Decompress instead of compress."
+        },
+        {
+          "flag": "-9",
+          "description": "Use higher compression."
+        },
+        {
+          "flag": "-l",
+          "description": "List compression information."
+        }
+      ],
+      "examples": [
+        {
+          "command": "gzip -k report.txt",
+          "description": "Create a gzip file while retaining the original."
+        },
+        {
+          "command": "gzip -l report.txt.gz",
+          "description": "Inspect gzip file statistics."
+        }
+      ],
+      "keywords": [
+        "compress",
+        "gz",
+        "archive"
+      ],
+      "note": "gzip compresses individual streams, not directory structures. Combine with tar for complete directories.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "GNU zip: compresses a file using gzip format."
+      }
+    },
+    {
+      "id": "gunzip",
+      "name": "gunzip",
+      "category": "Files & Directories",
+      "summary": "Decompress gzip files",
+      "description": "Decompresses gzip-compressed files, normally removing the .gz suffix.",
+      "syntax": "gunzip [options] file.gz",
+      "options": [
+        {
+          "flag": "-k",
+          "description": "Keep the compressed file when supported."
+        },
+        {
+          "flag": "-c",
+          "description": "Write decompressed data to standard output."
+        },
+        {
+          "flag": "-t",
+          "description": "Test compressed data integrity."
+        }
+      ],
+      "examples": [
+        {
+          "command": "gunzip report.txt.gz",
+          "description": "Restore the original text file."
+        },
+        {
+          "command": "gunzip -c report.txt.gz > report.txt",
+          "description": "Write decompressed contents to a chosen file."
+        }
+      ],
+      "keywords": [
+        "decompress",
+        "extract",
+        "gzip",
+        "gz"
+      ],
+      "note": "gunzip usually removes its input compressed file after successful decompression unless told otherwise.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "GNU unzip: decompresses gzip data."
+      }
+    },
+    {
+      "id": "realpath",
+      "name": "realpath",
+      "category": "Files & Directories",
+      "summary": "Resolve an absolute path",
+      "description": "Prints a canonicalized absolute path for a file or directory.",
+      "syntax": "realpath [options] path...",
+      "options": [
+        {
+          "flag": "-e",
+          "description": "Require all path components to exist on GNU systems."
+        },
+        {
+          "flag": "-m",
+          "description": "On GNU systems, accept missing path components."
+        }
+      ],
+      "examples": [
+        {
+          "command": "realpath ./notes.txt",
+          "description": "Show an absolute canonical path."
+        },
+        {
+          "command": "realpath .",
+          "description": "Show the current directory as a canonical path."
+        }
+      ],
+      "keywords": [
+        "absolute",
+        "path",
+        "resolve",
+        "canonical"
+      ],
+      "note": "Available options differ between GNU coreutils and other implementations.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Finds the real, canonical path."
+      }
+    },
+    {
+      "id": "readlink",
+      "name": "readlink",
+      "category": "Files & Directories",
+      "summary": "Inspect symbolic-link targets",
+      "description": "Prints the target path stored in a symbolic link.",
+      "syntax": "readlink [options] link",
+      "options": [
+        {
+          "flag": "-f",
+          "description": "On GNU systems, resolve the full canonical target path."
+        },
+        {
+          "flag": "-n",
+          "description": "Avoid adding a newline to the output, where supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "readlink shortcut.txt",
+          "description": "Show the link's stored target."
+        },
+        {
+          "command": "readlink -f shortcut.txt",
+          "description": "Resolve the target path on GNU/Linux."
+        }
+      ],
+      "keywords": [
+        "symlink",
+        "symbolic",
+        "link",
+        "target",
+        "path"
+      ],
+      "note": "Without -f, the target may be relative and may not exist. The -f option is not universal.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Reads the path stored in a symbolic link."
+      }
+    },
+    {
+      "id": "mktemp",
+      "name": "mktemp",
+      "category": "Files & Directories",
+      "summary": "Create temporary files or directories",
+      "description": "Safely creates a unique temporary file or directory.",
+      "syntax": "mktemp [options] [template]",
+      "options": [
+        {
+          "flag": "-d",
+          "description": "Create a temporary directory."
+        },
+        {
+          "flag": "-p DIR",
+          "description": "Use a specified parent directory on GNU systems."
+        }
+      ],
+      "examples": [
+        {
+          "command": "mktemp",
+          "description": "Create a unique temporary file and print its name."
+        },
+        {
+          "command": "mktemp -d",
+          "description": "Create a unique temporary directory."
+        }
+      ],
+      "keywords": [
+        "temporary",
+        "temp",
+        "file",
+        "folder"
+      ],
+      "note": "Use the returned path rather than guessing temporary filenames; remove files you no longer need.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Make Temporary: creates a unique temporary file or directory."
+      }
+    },
+    {
+      "id": "git",
+      "name": "git",
+      "category": "System",
+      "summary": "Track changes with Git",
+      "description": "Runs Git version-control commands in a repository.",
+      "syntax": "git [global-options] command [args...]",
+      "options": [
+        {
+          "flag": "status",
+          "description": "Show changes in the working tree."
+        },
+        {
+          "flag": "add FILE",
+          "description": "Stage selected changes for a commit."
+        },
+        {
+          "flag": "commit -m MESSAGE",
+          "description": "Record staged changes with a message."
+        },
+        {
+          "flag": "log --oneline",
+          "description": "Show a compact commit history."
+        },
+        {
+          "flag": "-C DIR",
+          "description": "Run Git as though started inside DIR."
+        }
+      ],
+      "examples": [
+        {
+          "command": "git status",
+          "description": "Show the repository's current status."
+        },
+        {
+          "command": "git log --oneline -5",
+          "description": "Show the five latest commits."
+        },
+        {
+          "command": "git add README.md",
+          "description": "Stage changes to README.md."
+        }
+      ],
+      "keywords": [
+        "version control",
+        "repository",
+        "commit",
+        "branch",
+        "developer"
+      ],
+      "note": "Git commands may modify repository history. Review staged changes before committing.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Git is the name of the version-control system, not a descriptive acronym."
+      }
+    },
+    {
+      "id": "sudo",
+      "name": "sudo",
+      "category": "System",
+      "summary": "Run commands with elevated privileges",
+      "description": "Runs an authorized command as another user, typically root.",
+      "syntax": "sudo [options] command [args...]",
+      "options": [
+        {
+          "flag": "-u USER",
+          "description": "Run as the specified user."
+        },
+        {
+          "flag": "-v",
+          "description": "Refresh cached credentials without running a command."
+        },
+        {
+          "flag": "-k",
+          "description": "Invalidate the current cached authentication timestamp."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sudo apt update",
+          "description": "Update APT package lists where permitted."
+        },
+        {
+          "command": "sudo -u nobody whoami",
+          "description": "Run whoami as the nobody user if allowed."
+        }
+      ],
+      "keywords": [
+        "admin",
+        "root",
+        "permissions",
+        "elevated"
+      ],
+      "note": "Elevated privileges can affect the entire system. Read the command carefully before using sudo.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Historically 'superuser do'; today it can execute as another authorized user."
+      }
+    },
+    {
+      "id": "apt",
+      "name": "apt",
+      "category": "System",
+      "summary": "Manage packages on Debian and Ubuntu",
+      "description": "Searches for, installs, removes, or updates packages using APT.",
+      "syntax": "apt [options] command [package...]",
+      "options": [
+        {
+          "flag": "update",
+          "description": "Refresh available package metadata."
+        },
+        {
+          "flag": "install PACKAGE",
+          "description": "Install the specified package."
+        },
+        {
+          "flag": "search QUERY",
+          "description": "Search the package index."
+        },
+        {
+          "flag": "show PACKAGE",
+          "description": "Display package details."
+        },
+        {
+          "flag": "remove PACKAGE",
+          "description": "Uninstall a package."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sudo apt update",
+          "description": "Refresh package lists."
+        },
+        {
+          "command": "apt search wget",
+          "description": "Find packages matching wget."
+        },
+        {
+          "command": "sudo apt install wget",
+          "description": "Install wget on an APT-based system."
+        }
+      ],
+      "keywords": [
+        "ubuntu",
+        "debian",
+        "install",
+        "packages",
+        "linux"
+      ],
+      "note": "apt is specific to Debian-based distributions. Review install and removal prompts.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Advanced Package Tool: manages software packages on Debian-based systems."
+      }
+    },
+    {
+      "id": "apt-get",
+      "name": "apt-get",
+      "category": "System",
+      "summary": "Script-friendly APT package manager",
+      "description": "Installs, removes, and updates packages on Debian-based Linux systems.",
+      "syntax": "apt-get [options] command [package...]",
+      "options": [
+        {
+          "flag": "update",
+          "description": "Refresh package metadata."
+        },
+        {
+          "flag": "install PACKAGE",
+          "description": "Install a named package."
+        },
+        {
+          "flag": "remove PACKAGE",
+          "description": "Remove a named package."
+        },
+        {
+          "flag": "-y",
+          "description": "Automatically answer yes to prompts; use cautiously."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sudo apt-get update",
+          "description": "Refresh package indexes."
+        },
+        {
+          "command": "sudo apt-get install curl",
+          "description": "Install curl using apt-get."
+        }
+      ],
+      "keywords": [
+        "ubuntu",
+        "debian",
+        "package",
+        "install",
+        "script"
+      ],
+      "note": "apt-get is widely used in scripts. Avoid -y until you understand what changes are proposed.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "APT + get: performs package-management operations through APT."
+      }
+    },
+    {
+      "id": "systemctl",
+      "name": "systemctl",
+      "category": "System",
+      "summary": "Control systemd services",
+      "description": "Inspects and manages systemd services and other units on Linux.",
+      "syntax": "systemctl [options] command [unit]",
+      "options": [
+        {
+          "flag": "status UNIT",
+          "description": "Show a service's current state and recent information."
+        },
+        {
+          "flag": "start UNIT",
+          "description": "Start a unit."
+        },
+        {
+          "flag": "stop UNIT",
+          "description": "Stop a unit."
+        },
+        {
+          "flag": "restart UNIT",
+          "description": "Restart a unit."
+        },
+        {
+          "flag": "enable UNIT",
+          "description": "Enable automatic startup of a unit."
+        }
+      ],
+      "examples": [
+        {
+          "command": "systemctl status ssh",
+          "description": "Check the SSH service (unit name varies)."
+        },
+        {
+          "command": "sudo systemctl restart ssh",
+          "description": "Restart SSH on systems that use the ssh unit."
+        }
+      ],
+      "keywords": [
+        "systemd",
+        "service",
+        "daemon",
+        "start",
+        "stop",
+        "linux"
+      ],
+      "note": "Restarting network or SSH services can disconnect a remote session. Service unit names vary by distribution.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "System Control: manages systemd units and services."
+      }
+    },
+    {
+      "id": "journalctl",
+      "name": "journalctl",
+      "category": "System",
+      "summary": "Read systemd logs",
+      "description": "Queries log messages managed by systemd-journald.",
+      "syntax": "journalctl [options]",
+      "options": [
+        {
+          "flag": "-u UNIT",
+          "description": "Show messages for a selected systemd unit."
+        },
+        {
+          "flag": "-f",
+          "description": "Follow new log entries as they arrive."
+        },
+        {
+          "flag": "-n N",
+          "description": "Show the last N entries."
+        },
+        {
+          "flag": "--since DATE",
+          "description": "Only show logs since a given date or time."
+        }
+      ],
+      "examples": [
+        {
+          "command": "journalctl -n 30",
+          "description": "Show the 30 most recent journal messages."
+        },
+        {
+          "command": "journalctl -u ssh -n 20",
+          "description": "Show recent SSH unit messages."
+        }
+      ],
+      "keywords": [
+        "logs",
+        "journal",
+        "systemd",
+        "services",
+        "diagnostics"
+      ],
+      "note": "Some messages require elevated permissions, and journalctl is only useful on systems running systemd-journald.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Journal Control: reads logs from the systemd journal."
+      }
+    },
+    {
+      "id": "kill",
+      "name": "kill",
+      "category": "System",
+      "summary": "Send a signal to a process",
+      "description": "Sends a signal to a process by its PID; the default signal requests termination.",
+      "syntax": "kill [options] PID...",
+      "options": [
+        {
+          "flag": "-TERM",
+          "description": "Send SIGTERM, requesting graceful termination."
+        },
+        {
+          "flag": "-KILL",
+          "description": "Send SIGKILL, forcing the process to stop."
+        },
+        {
+          "flag": "-l",
+          "description": "List available signals."
+        }
+      ],
+      "examples": [
+        {
+          "command": "kill 1234",
+          "description": "Request that process 1234 terminate."
+        },
+        {
+          "command": "kill -l",
+          "description": "Display supported signal names."
+        }
+      ],
+      "keywords": [
+        "process",
+        "pid",
+        "signal",
+        "terminate",
+        "stop"
+      ],
+      "note": "Prefer SIGTERM before SIGKILL. Check the PID to avoid stopping the wrong process.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Sends a signal to a process; it does not necessarily force it to stop."
+      }
+    },
+    {
+      "id": "pkill",
+      "name": "pkill",
+      "category": "System",
+      "summary": "Signal processes by name",
+      "description": "Sends signals to processes matching a name or other process attributes.",
+      "syntax": "pkill [options] pattern",
+      "options": [
+        {
+          "flag": "-f",
+          "description": "Match the full command line rather than only the process name."
+        },
+        {
+          "flag": "-u USER",
+          "description": "Only match processes owned by the specified user."
+        },
+        {
+          "flag": "-TERM",
+          "description": "Send SIGTERM explicitly."
+        }
+      ],
+      "examples": [
+        {
+          "command": "pkill -TERM -f 'my_worker.py'",
+          "description": "Request termination of processes with the matching command line."
+        },
+        {
+          "command": "pkill -u alice example-worker",
+          "description": "Target matching processes owned by alice."
+        }
+      ],
+      "keywords": [
+        "process",
+        "signal",
+        "terminate",
+        "name",
+        "kill"
+      ],
+      "note": "Patterns can match multiple processes. Check matches first with pgrep when available.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Process Kill: sends a signal to processes matched by a name or pattern."
+      }
+    },
+    {
+      "id": "top",
+      "name": "top",
+      "category": "System",
+      "summary": "Monitor running processes",
+      "description": "Shows an updating view of system CPU usage, memory, and processes.",
+      "syntax": "top [options]",
+      "options": [
+        {
+          "flag": "-p PID",
+          "description": "Monitor a particular process ID on supported implementations."
+        },
+        {
+          "flag": "-d SECONDS",
+          "description": "Set the refresh delay on Linux; syntax differs across systems."
+        },
+        {
+          "flag": "-b",
+          "description": "Use batch output mode on Linux."
+        }
+      ],
+      "examples": [
+        {
+          "command": "top",
+          "description": "Open the interactive process monitor."
+        },
+        {
+          "command": "top -p 1234",
+          "description": "Watch a specific process on Linux."
+        }
+      ],
+      "keywords": [
+        "process",
+        "cpu",
+        "memory",
+        "monitor",
+        "performance"
+      ],
+      "note": "Press q to quit. top options and interactive keys differ between Linux and macOS.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Shows the top resource-consuming processes in a live view."
+      }
+    },
+    {
+      "id": "free",
+      "name": "free",
+      "category": "System",
+      "summary": "Show available system memory",
+      "description": "Displays used, free, and available RAM and swap space on Linux.",
+      "syntax": "free [options]",
+      "options": [
+        {
+          "flag": "-h",
+          "description": "Use human-readable units."
+        },
+        {
+          "flag": "-m",
+          "description": "Show values in mebibytes."
+        },
+        {
+          "flag": "-s N",
+          "description": "Refresh every N seconds."
+        }
+      ],
+      "examples": [
+        {
+          "command": "free -h",
+          "description": "Show RAM and swap in readable units."
+        },
+        {
+          "command": "free -m",
+          "description": "Show memory statistics in MiB."
+        }
+      ],
+      "keywords": [
+        "ram",
+        "memory",
+        "swap",
+        "linux",
+        "performance"
+      ],
+      "note": "Linux includes reclaimable cache in memory accounting; the available column can be more useful than free.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Displays free and available memory."
+      }
+    },
+    {
+      "id": "uptime",
+      "name": "uptime",
+      "category": "System",
+      "summary": "Show system uptime and load",
+      "description": "Displays how long the system has been running and its load averages.",
+      "syntax": "uptime [options]",
+      "options": [
+        {
+          "flag": "-p",
+          "description": "Show a concise, friendly uptime on Linux."
+        },
+        {
+          "flag": "-s",
+          "description": "Show the system startup time on Linux."
+        }
+      ],
+      "examples": [
+        {
+          "command": "uptime",
+          "description": "Show uptime and load averages."
+        },
+        {
+          "command": "uptime -p",
+          "description": "Print a shorter uptime on GNU/Linux."
+        }
+      ],
+      "keywords": [
+        "system",
+        "load",
+        "performance",
+        "running"
+      ],
+      "note": "Load averages are not the same thing as CPU utilization.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "How long the system has been up and running."
+      }
+    },
+    {
+      "id": "id",
+      "name": "id",
+      "category": "System",
+      "summary": "Display user and group IDs",
+      "description": "Reports the current or specified user's numeric identity and group membership.",
+      "syntax": "id [options] [user]",
+      "options": [
+        {
+          "flag": "-u",
+          "description": "Show only the user ID."
+        },
+        {
+          "flag": "-g",
+          "description": "Show only the primary group ID."
+        },
+        {
+          "flag": "-G",
+          "description": "Show the numeric IDs of all groups."
+        },
+        {
+          "flag": "-n",
+          "description": "Use names instead of numeric IDs with another selection flag."
+        }
+      ],
+      "examples": [
+        {
+          "command": "id",
+          "description": "Show user ID and groups."
+        },
+        {
+          "command": "id -un",
+          "description": "Print the current username."
+        }
+      ],
+      "keywords": [
+        "user",
+        "uid",
+        "gid",
+        "group",
+        "permissions"
+      ],
+      "note": "The id command is useful when troubleshooting file ownership and access.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Identity: prints user and group identifiers."
+      }
+    },
+    {
+      "id": "groups",
+      "name": "groups",
+      "category": "System",
+      "summary": "List group memberships",
+      "description": "Prints the groups associated with a user.",
+      "syntax": "groups [user]",
+      "options": [],
+      "examples": [
+        {
+          "command": "groups",
+          "description": "Show your group memberships."
+        },
+        {
+          "command": "groups alice",
+          "description": "Show groups associated with alice."
+        }
+      ],
+      "keywords": [
+        "user",
+        "group",
+        "membership",
+        "permissions"
+      ],
+      "note": "Supplementary group membership can affect access to files and devices.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Lists group memberships."
+      }
+    },
+    {
+      "id": "which",
+      "name": "which",
+      "category": "System",
+      "summary": "Find an executable in PATH",
+      "description": "Displays the executable path chosen for a command name according to PATH.",
+      "syntax": "which command...",
+      "options": [
+        {
+          "flag": "-a",
+          "description": "Show every matching path when supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "which python3",
+          "description": "Find an executable named python3."
+        },
+        {
+          "command": "which -a bash",
+          "description": "Show matching Bash executables where supported."
+        }
+      ],
+      "keywords": [
+        "path",
+        "executable",
+        "location",
+        "installed"
+      ],
+      "note": "which may miss Bash aliases and functions. The Bash builtin type or command -v is often more reliable.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Answers 'which executable would run?' using command paths."
+      }
+    },
+    {
+      "id": "whereis",
+      "name": "whereis",
+      "category": "System",
+      "summary": "Find command binaries and manuals",
+      "description": "Searches standard system locations for a command's binary and documentation.",
+      "syntax": "whereis [options] command...",
+      "options": [
+        {
+          "flag": "-b",
+          "description": "Search only for binaries."
+        },
+        {
+          "flag": "-m",
+          "description": "Search only for manual pages."
+        },
+        {
+          "flag": "-s",
+          "description": "Search only for source files when known."
+        }
+      ],
+      "examples": [
+        {
+          "command": "whereis bash",
+          "description": "Look for Bash's binary and manual."
+        },
+        {
+          "command": "whereis -b python3",
+          "description": "Look for Python executable files."
+        }
+      ],
+      "keywords": [
+        "binary",
+        "manual",
+        "location",
+        "executable"
+      ],
+      "note": "whereis checks known paths rather than reproducing Bash's command lookup exactly.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Asks 'where is this program or its manual?'"
+      }
+    },
+    {
+      "id": "alias",
+      "name": "alias",
+      "category": "System",
+      "summary": "Define command shortcuts",
+      "description": "Lists or creates aliases that expand short names into shell commands.",
+      "syntax": "alias [name[=value] ...]",
+      "options": [
+        {
+          "flag": "alias",
+          "description": "List currently defined aliases."
+        },
+        {
+          "flag": "name='command'",
+          "description": "Define a persistent-in-session alias (assignment syntax, not a flag)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "alias",
+          "description": "Display configured aliases."
+        },
+        {
+          "command": "alias ll='ls -lah'",
+          "description": "Define ll as a shortcut for ls -lah."
+        }
+      ],
+      "keywords": [
+        "shortcut",
+        "shell",
+        "command",
+        "customize"
+      ],
+      "note": "Aliases usually affect only the current shell unless placed in a shell startup file.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "An alias is another name or shortcut for a shell command."
+      }
+    },
+    {
+      "id": "unalias",
+      "name": "unalias",
+      "category": "System",
+      "summary": "Remove command aliases",
+      "description": "Removes aliases defined in the current shell session.",
+      "syntax": "unalias [options] name...",
+      "options": [
+        {
+          "flag": "-a",
+          "description": "Remove all aliases in the current shell."
+        }
+      ],
+      "examples": [
+        {
+          "command": "unalias ll",
+          "description": "Remove an alias named ll."
+        },
+        {
+          "command": "unalias -a",
+          "description": "Clear all aliases in the current shell."
+        }
+      ],
+      "keywords": [
+        "alias",
+        "shortcut",
+        "remove",
+        "shell"
+      ],
+      "note": "Deleting aliases does not remove the commands they previously represented.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Removes a command alias from the current shell."
+      }
+    },
+    {
+      "id": "source",
+      "name": "source",
+      "category": "System",
+      "summary": "Run a script in the current shell",
+      "description": "Executes a shell file in the current Bash process so changes to variables and functions persist.",
+      "syntax": "source filename [arguments...]",
+      "options": [
+        {
+          "flag": ". filename",
+          "description": "POSIX-style dot syntax for sourcing a script."
+        },
+        {
+          "flag": "filename",
+          "description": "Path to the script to execute in the current shell."
+        }
+      ],
+      "examples": [
+        {
+          "command": "source ~/.bashrc",
+          "description": "Reload Bash startup configuration."
+        },
+        {
+          "command": "source ./env.sh",
+          "description": "Load environment definitions from a trusted file."
+        }
+      ],
+      "keywords": [
+        "bash",
+        "script",
+        "shell",
+        "environment",
+        "load"
+      ],
+      "note": "Sourced scripts can change your current shell and execute arbitrary code. Only source files you trust.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Loads a shell script into the current shell rather than starting a new one."
+      }
+    },
+    {
+      "id": "bash",
+      "name": "bash",
+      "category": "System",
+      "summary": "Start Bash or run a Bash script",
+      "description": "Starts another Bash shell, executes a script, or runs a shell command.",
+      "syntax": "bash [options] [script [arguments...]]",
+      "options": [
+        {
+          "flag": "-c STRING",
+          "description": "Run commands supplied as a string."
+        },
+        {
+          "flag": "-n",
+          "description": "Check script syntax without executing it."
+        },
+        {
+          "flag": "-x",
+          "description": "Print commands as they execute for debugging."
+        },
+        {
+          "flag": "--version",
+          "description": "Show the Bash version."
+        }
+      ],
+      "examples": [
+        {
+          "command": "bash --version",
+          "description": "Display the Bash version."
+        },
+        {
+          "command": "bash -n script.sh",
+          "description": "Check a script for syntax errors."
+        },
+        {
+          "command": "bash script.sh",
+          "description": "Run a Bash script in a new process."
+        }
+      ],
+      "keywords": [
+        "shell",
+        "script",
+        "interpreter",
+        "debug",
+        "syntax"
+      ],
+      "note": "bash -n checks syntax, not whether commands are logically safe or correct.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Bourne Again SHell: a successor to the Bourne shell (sh)."
+      }
+    },
+    {
+      "id": "nano",
+      "name": "nano",
+      "category": "Text & Search",
+      "summary": "Edit text files in the terminal",
+      "description": "Opens a beginner-friendly terminal text editor.",
+      "syntax": "nano [options] [file]",
+      "options": [
+        {
+          "flag": "-l",
+          "description": "Show line numbers."
+        },
+        {
+          "flag": "-B",
+          "description": "Make a backup when saving files, where supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "nano notes.txt",
+          "description": "Create or edit notes.txt."
+        },
+        {
+          "command": "nano -l script.sh",
+          "description": "Edit a script with line numbers."
+        }
+      ],
+      "keywords": [
+        "editor",
+        "text",
+        "terminal",
+        "file"
+      ],
+      "note": "In nano, Ctrl+O saves and Ctrl+X exits. It may not be installed by default.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "A small and simple editor; 'nano' is a name, not an acronym."
+      }
+    },
+    {
+      "id": "vim",
+      "name": "vim",
+      "category": "Text & Search",
+      "summary": "Edit text with Vim",
+      "description": "Opens a keyboard-driven terminal editor with separate command and insert modes.",
+      "syntax": "vim [options] [file]",
+      "options": [
+        {
+          "flag": "-R",
+          "description": "Open in read-only mode."
+        },
+        {
+          "flag": "+N",
+          "description": "Open at line N (substitute a number)."
+        },
+        {
+          "flag": "-u NONE",
+          "description": "Skip loading user configuration files."
+        }
+      ],
+      "examples": [
+        {
+          "command": "vim notes.txt",
+          "description": "Open a file for editing."
+        },
+        {
+          "command": "vim +10 script.sh",
+          "description": "Open a script near line 10."
+        }
+      ],
+      "keywords": [
+        "editor",
+        "text",
+        "terminal",
+        "keyboard"
+      ],
+      "note": "Press i to enter insert mode; press Esc, then type :wq to save and quit or :q! to quit without saving.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Vi IMproved: an enhanced version of the vi text editor."
+      }
+    },
+    {
+      "id": "jobs",
+      "name": "jobs",
+      "category": "System",
+      "summary": "Show background shell jobs",
+      "description": "Lists jobs managed by the current interactive Bash shell.",
+      "syntax": "jobs [options]",
+      "options": [
+        {
+          "flag": "-l",
+          "description": "Include process IDs."
+        },
+        {
+          "flag": "-p",
+          "description": "Show process group IDs only."
+        },
+        {
+          "flag": "-r",
+          "description": "Show running jobs only."
+        }
+      ],
+      "examples": [
+        {
+          "command": "jobs",
+          "description": "List shell jobs."
+        },
+        {
+          "command": "jobs -l",
+          "description": "List jobs with process IDs."
+        }
+      ],
+      "keywords": [
+        "background",
+        "job control",
+        "shell",
+        "process"
+      ],
+      "note": "Jobs refer to the current shell's job table, not every process on the system.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Lists jobs associated with the current shell."
+      }
+    },
+    {
+      "id": "fg",
+      "name": "fg",
+      "category": "System",
+      "summary": "Bring a job to the foreground",
+      "description": "Resumes or brings a shell job into the foreground.",
+      "syntax": "fg [%job]",
+      "options": [
+        {
+          "flag": "%1",
+          "description": "Choose job number 1 (argument, not a flag)."
+        },
+        {
+          "flag": "%job",
+          "description": "Select a job from the output of jobs."
+        }
+      ],
+      "examples": [
+        {
+          "command": "fg",
+          "description": "Bring the current job to the foreground."
+        },
+        {
+          "command": "fg %1",
+          "description": "Bring job 1 to the foreground."
+        }
+      ],
+      "keywords": [
+        "background",
+        "foreground",
+        "job",
+        "shell"
+      ],
+      "note": "Use Ctrl+Z to suspend a foreground job when job control is enabled.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Foreground: brings a shell job to the foreground."
+      }
+    },
+    {
+      "id": "bg",
+      "name": "bg",
+      "category": "System",
+      "summary": "Resume a job in the background",
+      "description": "Resumes a stopped shell job without putting it in the foreground.",
+      "syntax": "bg [%job]",
+      "options": [
+        {
+          "flag": "%1",
+          "description": "Choose job number 1 (argument, not a flag)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "bg",
+          "description": "Resume the current stopped job in the background."
+        },
+        {
+          "command": "bg %1",
+          "description": "Resume job 1 in the background."
+        }
+      ],
+      "keywords": [
+        "background",
+        "job",
+        "process",
+        "shell"
+      ],
+      "note": "Job control must be enabled. A program writing to the terminal may still affect your session.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Background: resumes a stopped shell job in the background."
+      }
+    },
+    {
+      "id": "nohup",
+      "name": "nohup",
+      "category": "System",
+      "summary": "Keep a command running after logout",
+      "description": "Starts a command that ignores hangup signals and can survive closing the terminal.",
+      "syntax": "nohup command [arguments...]",
+      "options": [
+        {
+          "flag": "nohup.out",
+          "description": "Default file for output when output is not redirected; not a flag."
+        }
+      ],
+      "examples": [
+        {
+          "command": "nohup sleep 60 > run.log 2>&1 &",
+          "description": "Start a background wait with redirected output."
+        },
+        {
+          "command": "nohup ./worker.sh > worker.log 2>&1 &",
+          "description": "Run a trusted worker without tying it to the terminal."
+        }
+      ],
+      "keywords": [
+        "background",
+        "daemon",
+        "logout",
+        "process",
+        "shell"
+      ],
+      "note": "nohup does not manage automatic restarts and may still require explicit input/output redirection.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "No Hangup: runs a command while ignoring hangup signals."
+      }
+    },
+    {
+      "id": "timeout",
+      "name": "timeout",
+      "category": "System",
+      "summary": "Stop a command after a time limit",
+      "description": "Runs a command with a maximum allowed duration (GNU coreutils).",
+      "syntax": "timeout [options] duration command [args...]",
+      "options": [
+        {
+          "flag": "-s SIGNAL",
+          "description": "Use the specified signal when time expires."
+        },
+        {
+          "flag": "-k DURATION",
+          "description": "After an initial signal, send SIGKILL if the command is still running."
+        },
+        {
+          "flag": "--preserve-status",
+          "description": "Return the command's exit status when possible."
+        }
+      ],
+      "examples": [
+        {
+          "command": "timeout 5s sleep 30",
+          "description": "End a wait command after five seconds."
+        },
+        {
+          "command": "timeout 2m ./job.sh",
+          "description": "Give a local script up to two minutes."
+        }
+      ],
+      "keywords": [
+        "time limit",
+        "process",
+        "stop",
+        "linux"
+      ],
+      "note": "GNU timeout is common on Linux, but may be absent from macOS.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Gives a command a time limit."
+      }
+    },
+    {
+      "id": "watch",
+      "name": "watch",
+      "category": "System",
+      "summary": "Repeat a command periodically",
+      "description": "Runs a command repeatedly and updates the terminal display (common on Linux).",
+      "syntax": "watch [options] command",
+      "options": [
+        {
+          "flag": "-n SECONDS",
+          "description": "Set the refresh interval."
+        },
+        {
+          "flag": "-d",
+          "description": "Highlight changes between updates."
+        },
+        {
+          "flag": "-t",
+          "description": "Hide the header line."
+        }
+      ],
+      "examples": [
+        {
+          "command": "watch -n 2 'df -h'",
+          "description": "Refresh disk usage every two seconds."
+        },
+        {
+          "command": "watch -d 'date'",
+          "description": "Highlight changes to the displayed time."
+        }
+      ],
+      "keywords": [
+        "refresh",
+        "monitor",
+        "repeat",
+        "terminal"
+      ],
+      "note": "Press Ctrl+C to stop. watch may not be installed on some systems.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Watch the output of a command change over time."
+      }
+    },
+    {
+      "id": "seq",
+      "name": "seq",
+      "category": "Text & Search",
+      "summary": "Generate a sequence of numbers",
+      "description": "Prints evenly spaced numbers, one per line by default.",
+      "syntax": "seq [options] [first [step]] last",
+      "options": [
+        {
+          "flag": "-s TEXT",
+          "description": "Choose the separator between output numbers on GNU seq."
+        },
+        {
+          "flag": "-w",
+          "description": "Pad numbers to equal width when supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "seq 1 5",
+          "description": "Print numbers from 1 through 5."
+        },
+        {
+          "command": "seq 0 2 10",
+          "description": "Print even numbers from 0 to 10."
+        }
+      ],
+      "keywords": [
+        "numbers",
+        "range",
+        "sequence",
+        "loop"
+      ],
+      "note": "For Bash scripts, arithmetic loops are often preferable to parsing seq output.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Sequence: prints a progression of numbers."
+      }
+    },
+    {
+      "id": "sha256sum",
+      "name": "sha256sum",
+      "category": "Files & Directories",
+      "summary": "Calculate SHA-256 checksums",
+      "description": "Calculates a SHA-256 hash for files or checks a checksum list (GNU coreutils).",
+      "syntax": "sha256sum [options] [file...]",
+      "options": [
+        {
+          "flag": "-c FILE",
+          "description": "Verify files against the checksums listed in FILE."
+        },
+        {
+          "flag": "-b",
+          "description": "Read files in binary mode (default on many systems)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sha256sum archive.zip",
+          "description": "Print a file's SHA-256 checksum."
+        },
+        {
+          "command": "sha256sum -c SHA256SUMS",
+          "description": "Verify checksums from a trusted list."
+        }
+      ],
+      "keywords": [
+        "hash",
+        "checksum",
+        "integrity",
+        "verify",
+        "download"
+      ],
+      "note": "A checksum detects differences but only establishes trust if the expected hash comes from a trusted source.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "SHA-256 checksum: computes a hash using the 256-bit Secure Hash Algorithm."
+      }
+    },
+    {
+      "id": "command",
+      "name": "command",
+      "category": "System",
+      "summary": "Run or inspect a command without shell aliases",
+      "description": "Bash builtin that executes a command or looks it up while bypassing shell function lookup.",
+      "syntax": "command [options] name [args...]",
+      "options": [
+        {
+          "flag": "-v",
+          "description": "Print a short description or path for a command."
+        },
+        {
+          "flag": "-V",
+          "description": "Show a verbose description of command lookup."
+        },
+        {
+          "flag": "-p",
+          "description": "Use a default executable search path."
+        }
+      ],
+      "examples": [
+        {
+          "command": "command -v wget",
+          "description": "Check whether wget can be found."
+        },
+        {
+          "command": "command ls -a",
+          "description": "Run ls without applying an alias named ls."
+        }
+      ],
+      "keywords": [
+        "builtin",
+        "path",
+        "locate",
+        "executable",
+        "alias"
+      ],
+      "note": "command -v is often preferable to which in portable shell scripts.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Runs a command or checks how the shell would find it."
+      }
+    }
+  ],
+  "topics": [
+    {
+      "id": "guide-regex",
+      "name": "regex",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Match text with patterns",
+      "description": "Regex is a pattern language, not a shell command. Tools such as grep, sed, and awk use related but sometimes different regex dialects.",
+      "keywords": [
+        "regular expression",
+        "regular expressions",
+        "regexp",
+        "ERE",
+        "BRE",
+        "pattern",
+        "grep",
+        "regex symbols",
+        "regex tester"
+      ],
+      "sections": [
+        {
+          "title": "In grep",
+          "body": "grep uses Basic Regex (BRE) by default. Use grep -E for Extended Regex (ERE), which supports familiar +, ?, |, and grouping (...) without extra backslashes. Use grep -o to print only matched substrings. Prefer single quotes around the pattern so Bash does not expand it.",
+          "items": []
+        },
+        {
+          "title": "Core regex symbols",
+          "body": "In regex, punctuation can have special meanings:",
+          "items": [
+            {
+              "term": ".",
+              "definition": "Matches one character (except a newline in common implementations)."
+            },
+            {
+              "term": "\\.",
+              "definition": "Matches a literal dot; important for website domains."
+            },
+            {
+              "term": "[A-Za-z0-9]",
+              "definition": "Matches one ASCII letter or digit."
+            },
+            {
+              "term": "+",
+              "definition": "Repeats the preceding element one or more times with grep -E."
+            },
+            {
+              "term": "*",
+              "definition": "Repeats the preceding element zero or more times."
+            },
+            {
+              "term": "?",
+              "definition": "Makes the preceding element optional with grep -E."
+            },
+            {
+              "term": "(a|b)",
+              "definition": "Groups alternatives: either a or b with grep -E."
+            },
+            {
+              "term": "^ / $",
+              "definition": "Match the start / end of a line."
+            },
+            {
+              "term": "[[:digit:]]",
+              "definition": "POSIX character class for a digit (portable to POSIX regex)."
+            }
+          ]
+        },
+        {
+          "title": "Literal dots in URLs",
+          "body": "A plain dot in regex matches any single character, so ynetnews.com would also match ynetnewsXcom. Write ynetnews\\.com when you need an actual dot. A URL is just text being matched; grep does not open the URL.",
+          "items": []
+        },
+        {
+          "title": "Which regex tester?",
+          "body": "The MDN cheat sheet documents JavaScript regex, not precisely grep's POSIX dialect. For grep -E, choose POSIX ERE in regex101 if available. Some JavaScript and PCRE-only features do not work in standard grep -E.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'cat\\ncot\\ncut\\n' | grep -E 'c[ao]t'",
+          "description": "Print lines containing cat or cot.",
+          "output": "cat\ncot"
+        },
+        {
+          "command": "printf 'catapult\\ncat\\n' | grep -oE 'cat'",
+          "description": "Print only the matching substring instead of entire lines.",
+          "output": "cat\ncat"
+        },
+        {
+          "command": "grep -oE 'https://www\\.ynetnews\\.com/article/[[:alnum:]]+' <<< \"$page_data\"",
+          "description": "Extract matching article URLs from HTML stored in page_data (if those URLs exist)."
+        }
+      ],
+      "practice": [
+        "Quote regex patterns with single quotes whenever you do not need shell expansion.",
+        "Use -E for extended regex, and -o when you only want the matching text.",
+        "Test patterns against real samples; regex flavors differ."
+      ],
+      "links": [
+        {
+          "title": "MDN: JavaScript regex cheat sheet",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet",
+          "note": "Syntax reference for JavaScript regex; not identical to grep."
+        },
+        {
+          "title": "Coddy: Regex Tester",
+          "url": "https://coddy.tech/tools/regex-tester",
+          "note": "Interactive matching and highlighting."
+        },
+        {
+          "title": "regex101",
+          "url": "https://regex101.com/",
+          "note": "Interactive tester; select the appropriate regex flavor."
+        }
+      ],
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "Regex is short for regular expression."
+      }
+    },
+    {
+      "id": "guide-assignment",
+      "name": "=",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Assign variables in Bash",
+      "description": "The equals sign is used for variable assignments, but its meaning depends on context. Assignment is shell syntax, not a standalone command.",
+      "keywords": [
+        "variable assignment",
+        "assignment",
+        "no spaces",
+        "equals",
+        "set variable",
+        "comparison",
+        "bash syntax"
+      ],
+      "sections": [
+        {
+          "title": "Variable assignment",
+          "body": "For a simple assignment, write name=value with NO spaces on either side of =. Spaces split words into separate shell arguments. Do not place $ before the variable name when assigning it.",
+          "items": []
+        },
+        {
+          "title": "Reading a value",
+          "body": "Use $name or, more safely inside other text, ${name} to expand an existing variable. Use quotes around expansions to prevent unwanted word splitting and globbing.",
+          "items": []
+        },
+        {
+          "title": "Not every equals sign is an assignment",
+          "body": "Inside [[ ... ]], = or == compares strings; inside (( ... )), = can assign arithmetic values. The spaces allowed in these constructs are different from ordinary variable assignments.",
+          "items": []
+        },
+        {
+          "title": "Keep in mind",
+          "body": "Variables can store text, including the stdout of a command through $(...). Bash variables cannot hold NUL bytes; command substitution also removes trailing newline characters.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "name='Ada Lovelace'",
+          "description": "Assign text, including a space, to name."
+        },
+        {
+          "command": "printf '%s\\n' \"$name\"",
+          "description": "Print the value stored in name."
+        },
+        {
+          "command": "page_data=$(wget -O - 'https://example.com/')",
+          "description": "Store the response body sent to stdout in page_data."
+        },
+        {
+          "command": "[[ \"$name\" == 'Ada Lovelace' ]]",
+          "description": "Compare strings using a Bash conditional expression."
+        }
+      ],
+      "practice": [
+        "No spaces around = for a plain assignment.",
+        "Write variable names without $ on the left side, and quote variable expansions when appropriate."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "The equals sign = assigns a value to a variable in Bash, with no surrounding spaces."
+      }
+    },
+    {
+      "id": "guide-quoting",
+      "name": "quoting",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Control how Bash interprets text",
+      "description": "Quoting protects text from shell interpretation. Single and double quotes are useful for different reasons.",
+      "keywords": [
+        "quotes",
+        "single quotes",
+        "double quotes",
+        "url",
+        "spaces",
+        "escaping",
+        "best practice"
+      ],
+      "sections": [
+        {
+          "title": "Single quotes",
+          "body": "'text' treats nearly everything inside literally. Even $HOME remains the characters $HOME. A single quote cannot be placed directly inside a single-quoted string.",
+          "items": []
+        },
+        {
+          "title": "Double quotes",
+          "body": "\"text\" protects spaces and most shell metacharacters but still permits variable and command substitution, such as \"$HOME\" and \"$(date)\".",
+          "items": []
+        },
+        {
+          "title": "Why quote URLs?",
+          "body": "An unquoted URL containing &, ?, * or spaces can be split or interpreted by Bash. Quoting URLs prevents these surprises. A simple URL may happen to work unquoted, but quoting is a reliable habit.",
+          "items": []
+        },
+        {
+          "title": "Regex patterns",
+          "body": "Use single quotes for static regex patterns such as 'https://example\\.com/[0-9]+'. The quotes are for Bash, not for enabling regex in grep.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "wget -O - 'https://example.com/page?x=1&y=2'",
+          "description": "Keep the complete URL as one argument."
+        },
+        {
+          "command": "printf '%s\\n' \"$HOME\"",
+          "description": "Safely print a variable that may contain spaces."
+        },
+        {
+          "command": "grep -E 'a+b' sample.txt",
+          "description": "Pass the regex pattern to grep without shell expansion."
+        }
+      ],
+      "practice": [
+        "Quote URLs and variable expansions by default.",
+        "Prefer single quotes for static regex; use double quotes when shell variables should expand."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Quotes control how Bash interprets spaces, symbols, and variable expansions."
+      }
+    },
+    {
+      "id": "guide-streams",
+      "name": "stdin / stdout / stderr",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Understand where program input and output go",
+      "description": "Unix programs commonly use three standard streams: input (stdin), normal output (stdout), and error output (stderr).",
+      "keywords": [
+        "stdin",
+        "stdout",
+        "stderr",
+        "standard input",
+        "standard output",
+        "standard error",
+        "file descriptors",
+        "0",
+        "1",
+        "2"
+      ],
+      "sections": [
+        {
+          "title": "The three streams",
+          "body": "They are connections, not Bash variables. By default stdin reads from the terminal, while stdout and stderr are displayed in the terminal. A command may instead read from a file or another process.",
+          "items": [
+            {
+              "term": "stdin (0)",
+              "definition": "Normal program input; often supplied by typing or a pipe."
+            },
+            {
+              "term": "stdout (1)",
+              "definition": "Normal output intended for data or results."
+            },
+            {
+              "term": "stderr (2)",
+              "definition": "Diagnostics, warnings, and error messages."
+            }
+          ]
+        },
+        {
+          "title": "Redirection",
+          "body": "Use > for stdout to a file, 2> for stderr to a file, and < to read stdin from a file. A pipe connects one process's stdout to another process's stdin.",
+          "items": []
+        },
+        {
+          "title": "Exit status is separate",
+          "body": "After a command finishes, Bash receives an exit status. Status 0 typically means success; a nonzero status signals a condition such as an error or no match. Exit status is not the text on stdout.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'hello\\n'",
+          "description": "Write hello to stdout.",
+          "output": "hello"
+        },
+        {
+          "command": "grep 'apple' fruits.txt 2> errors.txt",
+          "description": "Send grep error messages to a file while keeping normal output separate."
+        },
+        {
+          "command": "printf 'hello\\n' | wc -l",
+          "description": "Pass stdout to wc as stdin.",
+          "output": "1"
+        }
+      ],
+      "practice": [
+        "Do not assume everything displayed on screen is stdout.",
+        "Use 2> separately when you need error messages."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "stdin = standard input; stdout = standard output; stderr = standard error."
+      }
+    },
+    {
+      "id": "guide-redirection",
+      "name": "pipes & redirection",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Connect commands and redirect streams",
+      "description": "Bash operators route data between files, variables, and commands. They are shell syntax, not separate executables.",
+      "keywords": [
+        "pipe",
+        "redirect",
+        "redirection",
+        "stdin",
+        "stdout",
+        "stderr",
+        "here string",
+        "|",
+        ">",
+        ">>",
+        "2>",
+        "<",
+        "<<<"
+      ],
+      "sections": [
+        {
+          "title": "Common operators",
+          "body": "Each operator has a different role:",
+          "items": [
+            {
+              "term": "|",
+              "definition": "Connect the stdout of the command on the left to the stdin of the command on the right."
+            },
+            {
+              "term": ">",
+              "definition": "Write stdout to a file, overwriting it."
+            },
+            {
+              "term": ">>",
+              "definition": "Append stdout to a file."
+            },
+            {
+              "term": "2>",
+              "definition": "Write stderr to a file."
+            },
+            {
+              "term": "<",
+              "definition": "Read stdin from a file."
+            },
+            {
+              "term": "<<<",
+              "definition": "Bash here-string: send a string plus a newline to stdin."
+            },
+            {
+              "term": "2>&1",
+              "definition": "Make stderr go to the same destination as stdout at that point in the command."
+            }
+          ]
+        },
+        {
+          "title": "Passing a variable to grep",
+          "body": "Writing grep PATTERN page_data means open a FILE named page_data. To search the CONTENTS of the variable, use grep PATTERN <<< \"$page_data\" instead.",
+          "items": []
+        },
+        {
+          "title": "Order matters",
+          "body": "For example, command >out 2>&1 routes both streams to out. Reversing redirections can change their destinations.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'one\\ntwo\\n' | grep 'two'",
+          "description": "Send printf output to grep.",
+          "output": "two"
+        },
+        {
+          "command": "grep -oE '[[:digit:]]+' <<< \"$page_data\"",
+          "description": "Search for digits in the text stored in a Bash variable."
+        },
+        {
+          "command": "echo 'hello' >> notes.txt",
+          "description": "Append text to a file."
+        },
+        {
+          "command": "command_that_may_fail > output.txt 2> errors.txt",
+          "description": "Separate normal output and errors."
+        }
+      ],
+      "practice": [
+        "Use > carefully because it overwrites existing files.",
+        "Quote variables passed through here-strings."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Arrows and the | pipe route data between files, commands, and streams."
+      }
+    },
+    {
+      "id": "guide-substitution",
+      "name": "$(...)",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Capture command output in a variable",
+      "description": "Command substitution runs a command and replaces $(...) with its stdout. This differs from simply expanding $variable.",
+      "keywords": [
+        "command substitution",
+        "capture stdout",
+        "assignment",
+        "dollar",
+        "parentheses",
+        "shell",
+        "page_data"
+      ],
+      "sections": [
+        {
+          "title": "How it works",
+          "body": "The shell executes the command inside $(...), captures stdout as text, removes trailing newlines, and substitutes the result into the surrounding expression.",
+          "items": []
+        },
+        {
+          "title": "What it does not capture",
+          "body": "stderr is not captured unless you explicitly redirect it. A program that writes downloaded data only to a file gives you no response body through $(...).",
+          "items": []
+        },
+        {
+          "title": "wget example",
+          "body": "wget normally downloads into a file. The argument -O - means 'write downloaded data to stdout'; it is the two-part form of -O-. The -q flag is optional and only controls progress and diagnostics.",
+          "items": []
+        },
+        {
+          "title": "Memory and size",
+          "body": "Avoid storing very large downloaded files in a shell variable. A file is often a better choice, especially for binary data.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "now=$(date '+%Y-%m-%d')",
+          "description": "Capture the formatted date."
+        },
+        {
+          "command": "page_data=$(wget -O - 'https://example.com/')",
+          "description": "Capture the HTTP response body rather than the wget progress messages."
+        },
+        {
+          "command": "printf '%s\\n' \"$page_data\"",
+          "description": "Print the captured text."
+        }
+      ],
+      "practice": [
+        "Use $(...) instead of legacy backticks for readability.",
+        "Quote the URL and the variable expansion."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "$(...) captures the standard output of a command."
+      }
+    },
+    {
+      "id": "guide-quantifiers",
+      "name": "regex + * ?",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Understand regex repetition operators",
+      "description": "In Extended Regex, quantifiers act on the preceding character, class, or group. Their meaning is different from Bash arithmetic operators.",
+      "keywords": [
+        "regex",
+        "plus",
+        "quantifier",
+        "repetition",
+        "star",
+        "asterisk",
+        "question mark",
+        "+",
+        "*",
+        "?"
+      ],
+      "sections": [
+        {
+          "title": "Extended Regex quantifiers",
+          "body": "The operator affects the PRECEDING element:",
+          "items": [
+            {
+              "term": "a+",
+              "definition": "One or more a characters: a, aa, aaa, etc."
+            },
+            {
+              "term": "a*",
+              "definition": "Zero or more a characters: empty text, a, aa, etc."
+            },
+            {
+              "term": "a?",
+              "definition": "Zero or one a character."
+            },
+            {
+              "term": "a{2,4}",
+              "definition": "Between two and four a characters."
+            },
+            {
+              "term": "[0-9]+",
+              "definition": "One or more digits."
+            },
+            {
+              "term": "(ab)+",
+              "definition": "One or more occurrences of the group ab."
+            }
+          ]
+        },
+        {
+          "title": "Bash arithmetic is different",
+          "body": "Bash's + inside $((...)) means arithmetic addition. += can update a variable in an arithmetic context. This has nothing to do with regex repetition.",
+          "items": []
+        },
+        {
+          "title": "Use the correct regex flavor",
+          "body": "Use grep -E for the ERE syntax shown here. Plain grep uses BRE, where + and ? are not special unless the implementation supports extensions or escaping.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'a\\naa\\nb\\n' | grep -E '^a+$'",
+          "description": "Match lines made of one or more a characters.",
+          "output": "a\naa"
+        },
+        {
+          "command": "printf 'abc123\\n' | grep -oE '[0-9]+'",
+          "description": "Extract a sequence of digits.",
+          "output": "123"
+        },
+        {
+          "command": "result=$((3 + 4))",
+          "description": "Arithmetic + adds numbers rather than matching text."
+        }
+      ],
+      "practice": [
+        "Check the regex flavor before assuming a symbol has the same behavior."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "In extended regex, + means one or more, * zero or more, and ? zero or one."
+      }
+    },
+    {
+      "id": "guide-globs",
+      "name": "globs vs regex",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Understand filename patterns versus regex",
+      "description": "Bash glob patterns and regex both match text, but use different syntax and operate in different places.",
+      "keywords": [
+        "globbing",
+        "wildcard",
+        "pattern",
+        "regex",
+        "*",
+        "?",
+        "file expansion",
+        "filename"
+      ],
+      "sections": [
+        {
+          "title": "Bash globs",
+          "body": "Filename globs are expanded by Bash before running a command. The pattern *.txt matches filenames ending in .txt; the * stands for any sequence of characters.",
+          "items": []
+        },
+        {
+          "title": "Regex",
+          "body": "In regex, * repeats the PRECEDING element. The regex .* means any number of arbitrary characters. Unlike a glob, a regex used by grep matches text inside files.",
+          "items": []
+        },
+        {
+          "title": "Why quoting changes behavior",
+          "body": "Quoting '*.txt' prevents Bash from expanding the glob, which is correct when you want a program such as find -name to receive the pattern itself.",
+          "items": []
+        },
+        {
+          "title": "An easy distinction",
+          "body": "ls *.txt lets Bash expand filenames first. find . -name '*.txt' lets find interpret its own filename pattern. grep -E '\\.txt$' searches text for a .txt suffix.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "ls *.txt",
+          "description": "Let Bash expand matching filenames."
+        },
+        {
+          "command": "find . -name '*.txt'",
+          "description": "Pass a literal glob pattern to find."
+        },
+        {
+          "command": "grep -E '\\.txt$' files.txt",
+          "description": "Match text lines ending in .txt."
+        }
+      ],
+      "practice": [
+        "Do not interchange regex and glob syntax; they are different pattern languages."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "A glob matches filenames in Bash; regex matches text through tools such as grep."
+      }
+    }
+  ]
+}

@@ -89,6 +89,24 @@
   const syntaxLegend = `<div class="syntax-legend" aria-label="Syntax color legend"><span><i class="leg-command"></i>Command</span><span><i class="leg-flag"></i>Option / flag</span><span><i class="leg-arg"></i>Argument</span><span><i class="leg-path"></i>Path or file</span></div>`;
 
   const shareButton='<button class="btn tiny" id="shareBtn" type="button" title="Copy a link to this entry">Link</button>';
+  function infoControls(c){
+    const info=c.nameInfo;
+    if(!info)return '<div class="detail-actions">'+shareButton+'</div>';
+    return `<div class="detail-actions" id="nameInfoControl">${shareButton}<button class="nameinfo-button" id="nameInfoBtn" type="button" aria-label="What does ${esc(c.name)} mean?" aria-controls="nameInfoPopup" aria-expanded="false" title="What does the name mean?">i</button><div class="nameinfo-popover" id="nameInfoPopup" role="note" hidden><strong>${esc(info.kind)}</strong><p>${esc(info.text)}</p></div></div>`;
+  }
+  function closeNameInfo(){
+    const popup=$('nameInfoPopup'),button=$('nameInfoBtn');
+    if(popup&&!popup.hidden){popup.hidden=true;if(button)button.setAttribute('aria-expanded','false');}
+  }
+  function setupNameInfo(){
+    const button=$('nameInfoBtn'),popup=$('nameInfoPopup');
+    if(!button||!popup)return;
+    button.addEventListener('click',()=>{
+      const willOpen=popup.hidden;
+      popup.hidden=!willOpen;
+      button.setAttribute('aria-expanded',String(willOpen));
+    });
+  }
   function exampleHTML(e){
     return `<div class="example"><div class="example-head"><span class="example-desc">${esc(e.description)}</span><button class="btn tiny" type="button" data-copy="${esc(e.command)}" aria-label="Copy example">Copy</button></div><pre><code>${colorCode(e.command)}</code></pre>${e.output!==undefined?`<div class="sample-label">Example output</div><pre class="sample-output"><code>${esc(e.output)}</code></pre>`:''}</div>`;
   }
@@ -99,14 +117,15 @@
     if(c.type==='guide'){
       const sections=(c.sections||[]).map(s=>`<section class="guide-section"><h3>${esc(s.title)}</h3><p>${esc(s.body)}</p>${(s.items||[]).length?`<div class="guide-table">${s.items.map(x=>`<div class="guide-row"><code>${esc(x.term)}</code><span>${esc(x.definition)}</span></div>`).join('')}</div>`:''}</section>`).join('');
       const links=(c.links||[]).filter(l=>/^https:\/\/[^\s]+$/i.test(l.url)).map(l=>`<a class="resource-link" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer"><strong>${esc(l.title)}</strong><small>${esc(l.note||'Open external resource')}</small></a>`).join('');
-      $('mainContent').innerHTML=`<article class="detail guide-detail"><div class="detail-header"><div><div class="eyebrow">Concepts &amp; Syntax${state.historical?' · historical version':''}</div><h2>${esc(c.name)}</h2><p class="detail-description">${esc(c.summary)}</p><span class="tag">Reference guide · not a command</span></div>${shareButton}</div><p class="guide-intro">${esc(c.description)}</p>${sections}${practices}<h3>Examples</h3>${examples}${links?`<section class="guide-section"><h3>Further resources</h3><div class="guide-resources">${links}</div></section>`:''}</article>`;
+      $('mainContent').innerHTML=`<article class="detail guide-detail"><div class="detail-header"><div><div class="eyebrow">Concepts &amp; Syntax${state.historical?' · historical version':''}</div><h2>${esc(c.name)}</h2><p class="detail-description">${esc(c.summary)}</p><span class="tag">Reference guide · not a command</span></div>${infoControls(c)}</div><p class="guide-intro">${esc(c.description)}</p>${sections}${practices}<h3>Examples</h3>${examples}${links?`<section class="guide-section"><h3>Further resources</h3><div class="guide-resources">${links}</div></section>`:''}</article>`;
     }else{
       const options=(c.options||[]).map(o=>`<div class="option-card"><code dir="ltr">${esc(o.flag)}</code><span>${esc(o.description)}</span></div>`).join('');
       const output=c.output?`<section class="output-section"><h3>Output &amp; behavior</h3><div class="behavior-grid">${Object.entries({stdout:c.output.stdout,stderr:c.output.stderr,'Exit status':c.output.exitStatus,'Side effects':c.output.sideEffects}).filter(([,v])=>v).map(([k,v])=>`<div><strong>${esc(k)}</strong><span>${esc(v)}</span></div>`).join('')}</div></section>`:'';
-      $('mainContent').innerHTML=`<article class="detail"><div class="detail-header"><div><div class="eyebrow">${esc(c.category)}${state.historical?' · historical version':''}</div><h2 dir="ltr">${esc(c.name)}</h2><p class="detail-description">${esc(c.summary)}</p><span class="tag">${c.type==='builtin'?'Bash builtin':'Command-line utility'}</span></div>${shareButton}</div><h3>Syntax</h3><div class="codebar"><code>${colorCode(c.syntax,true)}</code><button class="copy-code" type="button" data-copy="${esc(c.syntax)}">Copy</button></div>${syntaxLegend}<h3>Options and parameters</h3><div class="option-grid">${options||'<p>No additional options are listed for this command.</p>'}</div>${output}<section class="command-explanation"><h3>Overview</h3><p>${esc(c.description)}</p></section>${practices}<h3>Examples</h3>${examples}${c.note?`<div class="note"><strong>Good to know:</strong> ${esc(c.note)}</div>`:''}</article>`;
+      $('mainContent').innerHTML=`<article class="detail"><div class="detail-header"><div><div class="eyebrow">${esc(c.category)}${state.historical?' · historical version':''}</div><h2 dir="ltr">${esc(c.name)}</h2><p class="detail-description">${esc(c.summary)}</p><span class="tag">${c.type==='builtin'?'Bash builtin':'Command-line utility'}</span></div>${infoControls(c)}</div><h3>Syntax</h3><div class="codebar"><code>${colorCode(c.syntax,true)}</code><button class="copy-code" type="button" data-copy="${esc(c.syntax)}">Copy</button></div>${syntaxLegend}<h3>Options and parameters</h3><div class="option-grid">${options||'<p>No additional options are listed for this command.</p>'}</div>${output}<section class="command-explanation"><h3>Overview</h3><p>${esc(c.description)}</p></section>${practices}<h3>Examples</h3>${examples}${c.note?`<div class="note"><strong>Good to know:</strong> ${esc(c.note)}</div>`:''}</article>`;
     }
     $('mainContent').querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(b.dataset.copy)));
     $('shareBtn').addEventListener('click',()=>{const url=new URL(location.href);url.hash='cmd='+encodeURIComponent(c.id);copy(url.href);});
+    setupNameInfo();
   }
   async function copy(value){try{await navigator.clipboard.writeText(value);toast('Copied to clipboard');}catch{try{const t=document.createElement('textarea');t.value=value;t.style.position='fixed';t.style.left='-9999px';document.body.append(t);t.select();document.execCommand('copy');t.remove();toast('Copied to clipboard');}catch{toast('Could not copy automatically');}}}
   async function getJSON(path){const response=await fetch(path,{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);return response.json();}
@@ -149,6 +168,10 @@
       setData(data,version!==state.versions.latestVersion);closeModal();toast('Loaded version '+version);
     }catch{const current=readStorage(CACHE_KEYS.commands);if(current?.version===version){setData(current,false);closeModal();toast('Loaded cached version');}else toast('This version is unavailable offline. Try again with an internet connection.');}
   }
+  document.addEventListener('click',event=>{
+    const wrapper=$('nameInfoControl');
+    if(wrapper && !wrapper.contains(event.target))closeNameInfo();
+  });
   $('searchInput').addEventListener('input',e=>{state.query=e.target.value;state.selected=null;render();});
   $('searchInput').addEventListener('keydown',e=>{
     const arr=filtered();
@@ -161,7 +184,7 @@
     }
     if(e.key==='Enter'){const first=arr.find(c=>c.id===state.selected)||arr[0];if(first)select(first.id);e.preventDefault();}
   });
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();$('searchInput').blur();}if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)&&$('modalBackdrop').classList.contains('hidden')){e.preventDefault();$('searchInput').focus();$('searchInput').select();}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeNameInfo();$('searchInput').blur();}if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)&&$('modalBackdrop').classList.contains('hidden')){e.preventDefault();$('searchInput').focus();$('searchInput').select();}});
   $('themeBtn').addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem(CACHE_KEYS.theme,next);}catch{}});
   $('historyBtn').addEventListener('click',renderVersionModal);
   $('helpBtn').addEventListener('click',showHelp);
