@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.5.1",
+  "version": "1.6.0",
   "updatedAt": "2026-11-14",
   "commands": [
     {
@@ -530,6 +530,10 @@
         {
           "flag": "-q",
           "description": "Quiet mode: print nothing; signal whether a match was found through the exit status."
+        },
+        {
+          "flag": "-w",
+          "description": "Require whole-word matches (word boundaries), rather than matching substrings inside larger words."
         }
       ],
       "examples": [
@@ -557,6 +561,11 @@
         {
           "command": "printf 'Netanyahu Netanyahu\\n' | grep -oF 'Netanyahu' | wc -l",
           "description": "Count literal occurrences instead of matching lines.",
+          "output": "2"
+        },
+        {
+          "command": "printf 'Netanyahu Netanyahu\\n' | grep -owF 'Netanyahu' | wc -l",
+          "description": "Count whole-word occurrences, including repeated words on one line.",
           "output": "2"
         }
       ],
@@ -775,6 +784,11 @@
           "command": "printf 'Netanyahu Netanyahu\\n' | grep -oF 'Netanyahu' | wc -l",
           "description": "Count two matching occurrences even when both appear on one line.",
           "output": "2"
+        },
+        {
+          "command": "printf 'Netanyahu Netanyahu\\n' | wc -w",
+          "description": "Count all words rather than choosing a specific search term.",
+          "output": "2"
         }
       ],
       "keywords": [
@@ -876,6 +890,10 @@
         {
           "command": "echo \"$HOME\"",
           "description": "Print your home directory path."
+        },
+        {
+          "command": "echo \"$article,\" \\\n  \"Netanyahu: $Netanyahu_count,\" \\\n  \"Gantz: $Gantz_count\"",
+          "description": "Break a long echo into separate quoted arguments without adding indentation spaces to the output."
         }
       ],
       "keywords": [
@@ -989,6 +1007,10 @@
         {
           "command": "printf '%s: %d\\n' apples 3",
           "description": "Print a label and a number."
+        },
+        {
+          "command": "printf '%s, Netanyahu: %s\\n' \\\n  \"$article\" \"$Netanyahu_count\"",
+          "description": "Format output predictably across multiple source lines."
         }
       ],
       "keywords": [
@@ -1388,6 +1410,10 @@
         {
           "command": "chmod u-w notes.txt",
           "description": "Disable writing for the owner."
+        },
+        {
+          "command": "chmod +x ./hw_1.sh",
+          "description": "Allow the script to run directly as ./hw_1.sh."
         }
       ],
       "keywords": [
@@ -1949,6 +1975,10 @@
         {
           "command": "read -r -p 'Name: ' name",
           "description": "Prompt for a name and save the answer."
+        },
+        {
+          "command": "while IFS= read -r article; do printf '%s\\n' \"$article\"; done < articles.txt",
+          "description": "Read lines from a file while preserving original spaces and backslashes."
         }
       ],
       "keywords": [
@@ -2216,6 +2246,10 @@
         {
           "flag": "--spider",
           "description": "Check whether a URL is accessible without downloading its contents."
+        },
+        {
+          "flag": "-nv",
+          "description": "No verbose: suppress normal progress chatter while still showing basic status and errors."
         }
       ],
       "examples": [
@@ -2238,6 +2272,10 @@
         {
           "command": "wget -c https://example.com/archive.zip",
           "description": "Resume a download if the server permits it."
+        },
+        {
+          "command": "article_data=$(wget -nv -O - \"$article\" 2>> \"$log_file\")",
+          "description": "Download once into a variable, appending diagnostics to a log file."
         }
       ],
       "keywords": [
@@ -2260,7 +2298,8 @@
         "Quote URLs, especially those containing '&', '?', or shell metacharacters.",
         "Uppercase -O controls the downloaded data; lowercase -o controls the log. They are different.",
         "Use -O - to print the response body to stdout. The second '-' is the destination value.",
-        "-q is optional, and during troubleshooting it is useful to keep diagnostics visible."
+        "-q is optional, and during troubleshooting it is useful to keep diagnostics visible.",
+        "HTTP status 200 is success, not an error. -nv reduces logging; -q suppresses it, including errors."
       ],
       "nameInfo": {
         "kind": "Name meaning",
@@ -4105,6 +4144,10 @@
         {
           "command": "bash script.sh",
           "description": "Run a Bash script in a new process."
+        },
+        {
+          "command": "bash -n ./hw_1.sh",
+          "description": "Check Bash syntax without executing the script."
         }
       ],
       "keywords": [
@@ -4560,6 +4603,10 @@
         {
           "command": "command ls -a",
           "description": "Run ls without applying an alias named ls."
+        },
+        {
+          "command": "command -v wget",
+          "description": "Check whether wget can be found before using it."
         }
       ],
       "keywords": [
@@ -4574,6 +4621,743 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "Runs a command or checks how the shell would find it."
+      }
+    },
+    {
+      "id": "if",
+      "name": "if",
+      "category": "Control Flow & Loops",
+      "summary": "Run commands only when a condition succeeds",
+      "description": "Bash executes the then branch when the test command returns exit status 0. Optional elif and else handle alternatives. End with fi.",
+      "syntax": "if condition; then commands; [elif condition; then commands;] [else commands;] fi",
+      "options": [
+        {
+          "flag": "then",
+          "description": "Starts the commands for a successful condition."
+        },
+        {
+          "flag": "elif",
+          "description": "Else if: check another condition when earlier tests fail."
+        },
+        {
+          "flag": "else",
+          "description": "Fallback commands when earlier conditions fail."
+        },
+        {
+          "flag": "fi",
+          "description": "Ends the if construct (if spelled backward)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "if (( count == 0 )); then echo 'No matches'; else echo 'Matches found'; fi",
+          "description": "Test a numeric count and run one branch."
+        },
+        {
+          "command": "if [[ -f 'report.txt' ]]; then echo 'Found file'; fi",
+          "description": "Run a file-existence check."
+        },
+        {
+          "command": "if grep -qF 'hello' notes.txt; then echo 'Found'; fi",
+          "description": "Use a command's exit status directly as the condition."
+        }
+      ],
+      "keywords": [
+        "if",
+        "then",
+        "elif",
+        "else",
+        "fi",
+        "conditional",
+        "branch",
+        "exit status",
+        "numbers",
+        "strings"
+      ],
+      "note": "A condition is a command or compound command; exit status 0 means true. Use ((...)) for arithmetic and [[...]] for Bash string/file tests.",
+      "type": "keyword",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "if / then / elif (else if) / else / fi: the shell's conditional keywords."
+      }
+    },
+    {
+      "id": "for",
+      "name": "for",
+      "category": "Control Flow & Loops",
+      "summary": "Repeat commands for a set of values",
+      "description": "A Bash for loop iterates over a list, including filenames and arguments; Bash also supports a C-style arithmetic loop.",
+      "syntax": "for variable in list; do commands; done",
+      "options": [
+        {
+          "flag": "in list",
+          "description": "Choose the values to iterate over. Without 'in', for iterates over the positional arguments."
+        },
+        {
+          "flag": "do",
+          "description": "Begins the commands run on each iteration."
+        },
+        {
+          "flag": "done",
+          "description": "Ends the loop body."
+        },
+        {
+          "flag": "for ((init; test; update))",
+          "description": "C-style arithmetic for loop; Bash syntax."
+        }
+      ],
+      "examples": [
+        {
+          "command": "for item in apple banana pear; do printf '%s\\n' \"$item\"; done",
+          "description": "Print each item on its own line.",
+          "output": "apple\nbanana\npear"
+        },
+        {
+          "command": "for (( i=0; i<3; i++ )); do echo \"$i\"; done",
+          "description": "Count from zero to two.",
+          "output": "0\n1\n2"
+        },
+        {
+          "command": "for file in *.txt; do printf '%s\\n' \"$file\"; done",
+          "description": "Iterate over matching filenames (globbing)."
+        }
+      ],
+      "keywords": [
+        "for",
+        "loop",
+        "iterate",
+        "do",
+        "done",
+        "in",
+        "C style",
+        "counter"
+      ],
+      "note": "Quote variable expansions in the body. Shell globs expand to filenames, unlike regex patterns.",
+      "type": "keyword",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "for ... in ...; do ...; done: perform an action for each item."
+      }
+    },
+    {
+      "id": "while",
+      "name": "while",
+      "category": "Control Flow & Loops",
+      "summary": "Repeat while a command succeeds",
+      "description": "Runs its body while the condition command returns exit status 0. A common form reads one line per iteration.",
+      "syntax": "while condition; do commands; done",
+      "options": [
+        {
+          "flag": "condition",
+          "description": "A command or test; the loop continues while its exit status is 0."
+        },
+        {
+          "flag": "do",
+          "description": "Begins the body."
+        },
+        {
+          "flag": "done",
+          "description": "Ends the body."
+        }
+      ],
+      "examples": [
+        {
+          "command": "i=0; while (( i < 3 )); do echo \"$i\"; ((i++)); done",
+          "description": "Count from zero to two.",
+          "output": "0\n1\n2"
+        },
+        {
+          "command": "while IFS= read -r line; do printf '%s\\n' \"$line\"; done < input.txt",
+          "description": "Read lines from a file while preserving backslashes and whitespace."
+        },
+        {
+          "command": "printf 'one\\ntwo\\n' | while IFS= read -r line; do echo \"$line\"; done",
+          "description": "Read from piped input one line at a time.",
+          "output": "one\ntwo"
+        }
+      ],
+      "keywords": [
+        "while",
+        "loop",
+        "do",
+        "done",
+        "read",
+        "stdin",
+        "exit status",
+        "pipe"
+      ],
+      "note": "In Bash, a loop fed by a pipeline often runs in a subshell: variables changed in its body may not survive outside. Prefer input redirection if you need to preserve changes.",
+      "type": "keyword",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "While the test command succeeds (exit status 0), keep executing the loop."
+      }
+    },
+    {
+      "id": "until",
+      "name": "until",
+      "category": "Control Flow & Loops",
+      "summary": "Repeat until a command succeeds",
+      "description": "The opposite of while: keep running while the condition returns a nonzero exit status, stopping once it succeeds.",
+      "syntax": "until condition; do commands; done",
+      "options": [
+        {
+          "flag": "condition",
+          "description": "The loop continues while this command fails (nonzero exit status)."
+        },
+        {
+          "flag": "do",
+          "description": "Begins the loop body."
+        },
+        {
+          "flag": "done",
+          "description": "Ends the loop body."
+        }
+      ],
+      "examples": [
+        {
+          "command": "i=0; until (( i >= 3 )); do echo \"$i\"; ((i++)); done",
+          "description": "Continue until i reaches three.",
+          "output": "0\n1\n2"
+        }
+      ],
+      "keywords": [
+        "until",
+        "loop",
+        "while",
+        "reverse condition",
+        "do",
+        "done"
+      ],
+      "note": "Guard loops against conditions that can never change; otherwise they can run indefinitely.",
+      "type": "keyword",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Until the condition becomes true, keep trying."
+      }
+    },
+    {
+      "id": "case",
+      "name": "case",
+      "category": "Control Flow & Loops",
+      "summary": "Choose a branch based on a pattern",
+      "description": "Matches a shell word against glob-style patterns in order. case patterns are shell patterns, not grep regex.",
+      "syntax": "case word in pattern) commands ;; [pattern) commands ;;] esac",
+      "options": [
+        {
+          "flag": ")",
+          "description": "Ends a branch pattern."
+        },
+        {
+          "flag": ";;",
+          "description": "Stops the current branch so no further branches are considered."
+        },
+        {
+          "flag": "*",
+          "description": "Default wildcard pattern; usually placed last."
+        },
+        {
+          "flag": "esac",
+          "description": "Ends the case construct (case spelled backward)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "case \"$answer\" in yes|y) echo 'Approved' ;; no|n) echo 'Declined' ;; *) echo 'Unknown' ;; esac",
+          "description": "Handle several possible responses."
+        },
+        {
+          "command": "case \"$file\" in *.txt) echo 'Text file' ;; *) echo 'Other file' ;; esac",
+          "description": "Match a filename using glob patterns."
+        }
+      ],
+      "keywords": [
+        "case",
+        "switch",
+        "esac",
+        "patterns",
+        "branches",
+        "glob",
+        "control flow"
+      ],
+      "note": "Use shell glob patterns, not regex. Place the catch-all * pattern last.",
+      "type": "keyword",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "case selects one branch. esac is 'case' reversed; ;; ends a branch."
+      }
+    },
+    {
+      "id": "break",
+      "name": "break",
+      "category": "Control Flow & Loops",
+      "summary": "Leave the current loop early",
+      "description": "Exits the innermost for, while, or until loop. An optional count exits several nested loops.",
+      "syntax": "break [n]",
+      "options": [
+        {
+          "flag": "n",
+          "description": "Optional number of nested loops to exit; default is 1."
+        }
+      ],
+      "examples": [
+        {
+          "command": "for x in a b c; do [[ \"$x\" == b ]] && break; echo \"$x\"; done",
+          "description": "Stop the loop before printing b.",
+          "output": "a"
+        }
+      ],
+      "keywords": [
+        "break",
+        "loop",
+        "stop",
+        "exit",
+        "while",
+        "for",
+        "until"
+      ],
+      "note": "Break exits loops, not a whole shell script. Use exit to stop a script.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "break breaks out of a loop."
+      }
+    },
+    {
+      "id": "continue",
+      "name": "continue",
+      "category": "Control Flow & Loops",
+      "summary": "Skip to the next loop iteration",
+      "description": "Skips the rest of the current iteration and resumes the next one in a for, while, or until loop.",
+      "syntax": "continue [n]",
+      "options": [
+        {
+          "flag": "n",
+          "description": "Optional number of nested loops whose iteration is continued; default is 1."
+        }
+      ],
+      "examples": [
+        {
+          "command": "for x in 1 2 3; do [[ \"$x\" == 2 ]] && continue; echo \"$x\"; done",
+          "description": "Skip the second value.",
+          "output": "1\n3"
+        }
+      ],
+      "keywords": [
+        "continue",
+        "loop",
+        "skip",
+        "next",
+        "for",
+        "while",
+        "until"
+      ],
+      "note": "Continue skips the remaining body; it does not terminate the loop.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "continue continues with the next iteration."
+      }
+    },
+    {
+      "id": "write",
+      "name": "write",
+      "category": "System",
+      "summary": "Send text to another logged-in user's terminal",
+      "description": "Writes messages from stdin to a specific logged-in user's terminal, provided messages are allowed.",
+      "syntax": "write user [tty]",
+      "options": [
+        {
+          "flag": "user",
+          "description": "Destination username of a logged-in user."
+        },
+        {
+          "flag": "tty",
+          "description": "Optional particular terminal when the user has several sessions."
+        }
+      ],
+      "examples": [
+        {
+          "command": "write alice",
+          "description": "Start typing a message to alice; finish with Ctrl+D."
+        },
+        {
+          "command": "printf 'Hello Alice!\\n' | write alice",
+          "description": "Send one line through stdin to alice's terminal."
+        }
+      ],
+      "keywords": [
+        "write",
+        "message",
+        "user",
+        "terminal",
+        "stdin",
+        "communication"
+      ],
+      "note": "write is not for writing files. Users can block terminal messages with mesg; availability varies on desktop terminals.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Write a message to a logged-in user's terminal, not to a file."
+      }
+    },
+    {
+      "id": "who",
+      "name": "who",
+      "category": "System",
+      "summary": "List users logged in to this system",
+      "description": "Displays the active login sessions recorded by the system.",
+      "syntax": "who [options]",
+      "options": [
+        {
+          "flag": "-u",
+          "description": "Show additional information about users and session activity where supported."
+        },
+        {
+          "flag": "-H",
+          "description": "Print a heading line."
+        },
+        {
+          "flag": "-b",
+          "description": "Display the last system boot time when supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "who",
+          "description": "Display active login sessions."
+        },
+        {
+          "command": "who -H",
+          "description": "Show logged-in users with a heading."
+        }
+      ],
+      "keywords": [
+        "who",
+        "users",
+        "logged in",
+        "sessions",
+        "tty"
+      ],
+      "note": "Not every graphical or remote session appears in who; it depends on the login accounting system.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "who asks: who is logged in?"
+      }
+    },
+    {
+      "id": "tty",
+      "name": "tty",
+      "category": "System",
+      "summary": "Show the current terminal device name",
+      "description": "Prints the filename of the terminal attached to standard input.",
+      "syntax": "tty [options]",
+      "options": [
+        {
+          "flag": "-s",
+          "description": "Silent: report terminal attachment through the exit status only."
+        }
+      ],
+      "examples": [
+        {
+          "command": "tty",
+          "description": "Print the current terminal's device path, if attached."
+        },
+        {
+          "command": "if tty -s; then echo 'Interactive terminal'; fi",
+          "description": "Test whether standard input is a terminal."
+        }
+      ],
+      "keywords": [
+        "tty",
+        "terminal",
+        "device",
+        "stdin",
+        "console"
+      ],
+      "note": "Non-interactive shells or pipelines may not have a terminal connected to stdin.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "TTY is short for teletypewriter, the historical name for text terminals."
+      }
+    },
+    {
+      "id": "mesg",
+      "name": "mesg",
+      "category": "System",
+      "summary": "Allow or block terminal messages",
+      "description": "Controls whether other users may write messages to your terminal via tools such as write.",
+      "syntax": "mesg [y|n]",
+      "options": [
+        {
+          "flag": "y",
+          "description": "Allow other users to write to this terminal (subject to system policy)."
+        },
+        {
+          "flag": "n",
+          "description": "Disallow other users from writing to this terminal."
+        }
+      ],
+      "examples": [
+        {
+          "command": "mesg",
+          "description": "Show the current message permission."
+        },
+        {
+          "command": "mesg n",
+          "description": "Disable incoming write messages to the terminal."
+        },
+        {
+          "command": "mesg y",
+          "description": "Allow incoming messages."
+        }
+      ],
+      "keywords": [
+        "message",
+        "write",
+        "permission",
+        "terminal",
+        "communication"
+      ],
+      "note": "mesg may not be available or supported in every terminal session.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "mesg stands for message; it controls whether terminal messages are allowed."
+      }
+    },
+    {
+      "id": "wall",
+      "name": "wall",
+      "category": "System",
+      "summary": "Broadcast a message to logged-in users",
+      "description": "Sends a short text message to logged-in users' terminals, where permitted.",
+      "syntax": "wall [options] [message]",
+      "options": [
+        {
+          "flag": "-n",
+          "description": "Do not display the usual banner where supported (may require privileges)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf 'Maintenance soon\\n' | wall",
+          "description": "Broadcast one message from stdin."
+        },
+        {
+          "command": "wall 'Server maintenance starts soon'",
+          "description": "Broadcast the supplied message when permitted."
+        }
+      ],
+      "keywords": [
+        "wall",
+        "broadcast",
+        "users",
+        "terminals",
+        "message",
+        "write"
+      ],
+      "note": "Use only when authorized. Broadcasting may reach many sessions and may require elevated privileges.",
+      "type": "utility",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": "wall comes from write all: send a message to all logged-in users."
+      }
+    },
+    {
+      "id": "test",
+      "name": "test",
+      "category": "Control Flow & Loops",
+      "summary": "Check a string, number, or file condition",
+      "description": "Returns exit status 0 when a given condition is true and nonzero when it is false. Bash also supports [ ... ] and [[ ... ]] forms.",
+      "syntax": "test expression",
+      "options": [
+        {
+          "flag": "-f FILE",
+          "description": "True if FILE exists and is a regular file."
+        },
+        {
+          "flag": "-d DIR",
+          "description": "True if DIR exists and is a directory."
+        },
+        {
+          "flag": "-z STRING",
+          "description": "True if STRING is empty."
+        },
+        {
+          "flag": "-eq",
+          "description": "Numeric equality between operands."
+        }
+      ],
+      "examples": [
+        {
+          "command": "if test -f notes.txt; then echo 'File exists'; fi",
+          "description": "Check file existence."
+        },
+        {
+          "command": "test 3 -eq 3; echo \"$?\"",
+          "description": "Check number equality and print the exit status.",
+          "output": "0"
+        }
+      ],
+      "keywords": [
+        "test",
+        "conditional",
+        "if",
+        "file",
+        "string",
+        "number",
+        "exit status"
+      ],
+      "note": "Unlike ((...)), test uses operators like -eq for numeric comparisons.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "test checks a condition and returns its truth as an exit status."
+      }
+    },
+    {
+      "id": "[",
+      "name": "[",
+      "category": "Control Flow & Loops",
+      "summary": "Run a portable bracket-style test",
+      "description": "The [ command performs tests like test, but requires a separate closing ] argument. Spaces around the brackets are mandatory.",
+      "syntax": "[ expression ]",
+      "options": [
+        {
+          "flag": "]",
+          "description": "Required final argument ending the test."
+        },
+        {
+          "flag": "-eq",
+          "description": "Compare numbers for equality."
+        },
+        {
+          "flag": "=",
+          "description": "Compare strings for equality."
+        },
+        {
+          "flag": "-s FILE",
+          "description": "Test whether a file exists and has nonzero size."
+        }
+      ],
+      "examples": [
+        {
+          "command": "if [ \"$count\" -eq 0 ]; then echo 'Zero'; fi",
+          "description": "Compare a numeric value."
+        },
+        {
+          "command": "if [ -s \"$log_file\" ]; then cat \"$log_file\"; fi",
+          "description": "Print a log when it is not empty."
+        }
+      ],
+      "keywords": [
+        "brackets",
+        "test",
+        "conditions",
+        "comparison",
+        "spaces",
+        "if"
+      ],
+      "note": "[ is a command, so spaces after [ and before ] are essential. Bash [[...]] supports additional string tests.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "[ is the test command with a closing ] argument; write spaces around each bracket."
+      }
+    },
+    {
+      "id": "true",
+      "name": "true",
+      "category": "Control Flow & Loops",
+      "summary": "Return a successful exit status",
+      "description": "A command that always returns exit status 0 and prints nothing.",
+      "syntax": "true",
+      "options": [],
+      "examples": [
+        {
+          "command": "if true; then echo 'Runs'; fi",
+          "description": "The branch runs because true succeeds.",
+          "output": "Runs"
+        }
+      ],
+      "keywords": [
+        "true",
+        "exit status",
+        "success",
+        "condition",
+        "if"
+      ],
+      "note": "Useful in shell control flow or when an unconditional successful status is needed.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "true returns success (exit status 0), even though zero means false in C arithmetic."
+      }
+    },
+    {
+      "id": "false",
+      "name": "false",
+      "category": "Control Flow & Loops",
+      "summary": "Return a failing exit status",
+      "description": "A command that always returns a nonzero exit status (normally 1) and prints nothing.",
+      "syntax": "false",
+      "options": [],
+      "examples": [
+        {
+          "command": "if false; then echo 'No'; else echo 'Fallback'; fi",
+          "description": "Take the else branch because false fails.",
+          "output": "Fallback"
+        }
+      ],
+      "keywords": [
+        "false",
+        "exit status",
+        "failure",
+        "condition",
+        "if"
+      ],
+      "note": "False returns status 1, not a string. Command success uses 0 for true in shell tests.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "false returns failure (exit status 1), so an if condition does not succeed."
+      }
+    },
+    {
+      "id": ":",
+      "name": ":",
+      "category": "Control Flow & Loops",
+      "summary": "Do nothing while returning success",
+      "description": "The Bash colon builtin is a no-op. It returns success and is useful with redirections to create or truncate a file.",
+      "syntax": ": [arguments]",
+      "options": [],
+      "examples": [
+        {
+          "command": ": > \"$log_file\"",
+          "description": "Create or empty the log file (WARNING: deletes previous content)."
+        },
+        {
+          "command": "if true; then :; fi",
+          "description": "Provide a do-nothing command where a command is required."
+        }
+      ],
+      "keywords": [
+        "colon",
+        "no op",
+        "empty file",
+        "redirection",
+        "truncate",
+        "log",
+        "null command"
+      ],
+      "note": "Although : does nothing itself, attached redirections like > FILE still take effect and may erase file contents.",
+      "type": "builtin",
+      "nameInfo": {
+        "kind": "Name meaning",
+        "text": ": is the shell's null command: do nothing, but perform any attached redirections."
       }
     }
   ],
@@ -5206,6 +5990,789 @@
       "nameInfo": {
         "kind": "Memory tip",
         "text": "A glob matches filenames in Bash; regex matches text through tools such as grep."
+      }
+    },
+    {
+      "id": "guide-arithmetic",
+      "name": "(( ... )) and $(( ... ))",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Arithmetic tests and numeric calculations",
+      "description": "Bash has two closely related arithmetic syntaxes, but they serve different purposes. They are different from [[ ... ]] and [ ... ].",
+      "keywords": [
+        "arithmetic",
+        "parentheses",
+        "dollar",
+        "((",
+        "count",
+        "integer",
+        "comparison",
+        "operators"
+      ],
+      "sections": [
+        {
+          "title": "(( expression ))",
+          "body": "Evaluates arithmetic as a command: returns exit status 0 if the result is NONZERO, and 1 if zero. Commonly used with if and while. Inside this context, numeric variable names can normally be written without $ or quotes.",
+          "items": []
+        },
+        {
+          "title": "$(( expression ))",
+          "body": "Expands to the numerical result as text. Use it inside an assignment or a command argument. This is not itself an if-style test.",
+          "items": []
+        },
+        {
+          "title": "Logical and comparison operators",
+          "body": "Arithmetic operators are similar to C:",
+          "items": [
+            {
+              "term": "== / !=",
+              "definition": "Equal / not equal."
+            },
+            {
+              "term": ">, <, >=, <=",
+              "definition": "Numeric comparisons."
+            },
+            {
+              "term": "&& / ||",
+              "definition": "Logical AND / OR."
+            },
+            {
+              "term": "!",
+              "definition": "Logical NOT."
+            },
+            {
+              "term": "++, --, +=, -=",
+              "definition": "Numeric update operators."
+            }
+          ]
+        },
+        {
+          "title": "Quotes and dollar signs",
+          "body": "For a variable that contains a valid integer, (( count == 0 )), (( $count == 0 )) and (( \"$count\" == 0 )) often have the same result; the first is cleaner and avoids injecting expanded text into arithmetic. This equivalence is not guaranteed for arbitrary strings or unset variables.",
+          "items": []
+        },
+        {
+          "title": "Important distinction",
+          "body": "In arithmetic, value 0 is a false result, so (( 0 )) returns status 1; in Bash command conditions, exit status 0 means success. These are not contradictory: (( ... )) converts its numeric result to a command status.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "count=0; if (( count == 0 )); then echo 'Zero'; fi",
+          "description": "Compare without $ inside arithmetic.",
+          "output": "Zero"
+        },
+        {
+          "command": "count=3; total=$(( count + 2 )); printf '%s\\n' \"$total\"",
+          "description": "Calculate a value to store or print.",
+          "output": "5"
+        },
+        {
+          "command": "if (( Netanyahu_count == 0 && Gantz_count == 0 )); then echo 'None'; fi",
+          "description": "Combine two numeric conditions."
+        }
+      ],
+      "practice": [
+        "Prefer numeric variable names without $ inside ((...)).",
+        "Use $((...)) when you need a numeric value, and ((...)) when you need an arithmetic command.",
+        "Always validate arithmetic input when it comes from untrusted text."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Arithmetic tests and numeric calculations"
+      }
+    },
+    {
+      "id": "guide-conditions",
+      "name": "[[ ... ]] vs [ ... ]",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Choose the right test syntax",
+      "description": "Bash supports arithmetic ((...)), extended [[...]], and traditional test/[...] expressions. Know when quotes and numeric operators differ.",
+      "keywords": [
+        "if",
+        "conditional",
+        "[[",
+        "[",
+        "test",
+        "comparison",
+        "-eq",
+        "-f",
+        "-s",
+        "string",
+        "numbers"
+      ],
+      "sections": [
+        {
+          "title": "Three kinds of conditions",
+          "body": "Use ((...)) for arithmetic. Use [[ ... ]] for Bash string/file checks. Use [ ... ] or test for broadly portable POSIX shell checks.",
+          "items": []
+        },
+        {
+          "title": "Numeric vs string operators",
+          "body": "Inside [[ ... ]] or [ ... ], -eq compares integers and == compares strings. Inside (( ... )), == compares numeric values.",
+          "items": [
+            {
+              "term": "-eq",
+              "definition": "Numeric equal for test, [ ] and [[ ]]."
+            },
+            {
+              "term": "==",
+              "definition": "String equal in [[ ]] and [ ], numeric equal in (( ))."
+            },
+            {
+              "term": "-f",
+              "definition": "True for an existing regular file."
+            },
+            {
+              "term": "-d",
+              "definition": "True for an existing directory."
+            },
+            {
+              "term": "-s",
+              "definition": "True for an existing nonempty file."
+            },
+            {
+              "term": "-z",
+              "definition": "True for an empty string."
+            }
+          ]
+        },
+        {
+          "title": "Quotes and spaces",
+          "body": "Use \"$name\" when passing variables to ordinary commands. In [[ ... ]], unquoted variable expansions are not word-split, but quoting is often clearer. [ ... ] is an ordinary command, so spaces around the brackets and quoted variables matter.",
+          "items": []
+        },
+        {
+          "title": "Using command status directly",
+          "body": "if grep -qF 'word' file; then ... uses grep's exit status as the condition. A command succeeds at exit status 0.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "if [[ -s \"$log_file\" ]]; then cat \"$log_file\"; fi",
+          "description": "Print log messages only when the file is nonempty."
+        },
+        {
+          "command": "if [ \"$count\" -eq 0 ]; then echo 'Zero'; fi",
+          "description": "Use the portable bracket test."
+        },
+        {
+          "command": "if (( count == 0 )); then echo 'Zero'; fi",
+          "description": "Prefer arithmetic context for numeric variables."
+        }
+      ],
+      "practice": [
+        "Always place spaces around [[ ... ]] and [ ... ].",
+        "Do not use a bare expanded number as the if command: if \"$count\" == 0 is not a numeric test."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Choose the right test syntax"
+      }
+    },
+    {
+      "id": "guide-flag-order",
+      "name": "flags, arguments & order",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Understand which option order matters",
+      "description": "Independent short flags can often be reordered or combined, but flags that take values, positional arguments and command-specific order rules need attention.",
+      "keywords": [
+        "options",
+        "flags",
+        "order",
+        "-E",
+        "-o",
+        "-O",
+        "arguments",
+        "combine",
+        "short",
+        "dash"
+      ],
+      "sections": [
+        {
+          "title": "Independent flags",
+          "body": "For grep, -oE, -Eo, -o -E and -E -o mean the same thing. They enable only-matching output and extended regex.",
+          "items": []
+        },
+        {
+          "title": "Options with a value",
+          "body": "wget -O page.html URL means -O takes page.html as its argument. wget -O - URL means the argument is the special value '-' for stdout; -O- is equivalent.",
+          "items": []
+        },
+        {
+          "title": "Case matters",
+          "body": "wget -O FILE selects downloaded content output; wget -o FILE selects the log destination. Uppercase and lowercase flags are different.",
+          "items": []
+        },
+        {
+          "title": "Order is not universal",
+          "body": "Options can override one another, and many commands have order-dependent expressions or positional parameters (such as find). Never assume every argument can be moved freely.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "grep -oE 'a+' sample.txt",
+          "description": "Combined independent flags."
+        },
+        {
+          "command": "grep -E -o 'a+' sample.txt",
+          "description": "The same flags written separately."
+        },
+        {
+          "command": "wget -O - 'https://example.com/'",
+          "description": "Send downloaded data to stdout."
+        },
+        {
+          "command": "wget -o wget.log 'https://example.com/'",
+          "description": "Save wget diagnostics to a log; downloads still go to their normal destination."
+        }
+      ],
+      "practice": [
+        "Read the help page to identify which options accept values.",
+        "Do not assume that upper/lowercase letters are interchangeable."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Understand which option order matters"
+      }
+    },
+    {
+      "id": "guide-script-basics",
+      "name": "scripts, comments & execution",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Run .sh files and write comments",
+      "description": "A Bash script is a text file interpreted by Bash. A shebang controls direct execution, and chmod +x makes the script executable.",
+      "keywords": [
+        "sh",
+        "bash",
+        "comments",
+        "shebang",
+        "#!",
+        "chmod",
+        "+x",
+        "terminal",
+        "execution"
+      ],
+      "sections": [
+        {
+          "title": "Shebang",
+          "body": "#!/bin/bash or #!/usr/bin/env bash is usually the first line. It selects the interpreter when you run the file directly.",
+          "items": []
+        },
+        {
+          "title": "Comments",
+          "body": "A # outside quotes starts a comment where Bash recognizes a new word. Inline comments should be separated from code. A # inside quotes is ordinary text.",
+          "items": []
+        },
+        {
+          "title": "Grant execution permission",
+          "body": "Run chmod +x ./hw_1.sh in the terminal, not inside your script. Then run ./hw_1.sh. Alternatively, bash hw_1.sh executes it with Bash even without the executable bit.",
+          "items": []
+        },
+        {
+          "title": "Don't type the prompt",
+          "body": "The $ often shown at the start of documentation examples is a shell prompt marker, not part of the command.",
+          "items": []
+        },
+        {
+          "title": "Code style",
+          "body": "Prefer descriptive variable names, comments that explain *why*, consistent indentation and readable steps. Avoid unnecessary complexity.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#!/usr/bin/env bash",
+          "description": "Common script header (as the first line of a file)."
+        },
+        {
+          "command": "chmod +x ./hw_1.sh",
+          "description": "Grant executable permissions once."
+        },
+        {
+          "command": "./hw_1.sh",
+          "description": "Execute the script from the current directory."
+        },
+        {
+          "command": "bash -n hw_1.sh",
+          "description": "Check Bash syntax without running the script."
+        }
+      ],
+      "practice": [
+        "Keep comments accurate and useful, not just restatements of obvious code.",
+        "Remember to run chmod in a terminal, not as part of the script."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Run .sh files and write comments"
+      }
+    },
+    {
+      "id": "guide-line-continuation",
+      "name": "line continuation & echo",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Wrap long Bash code without adding spaces",
+      "description": "Break long commands across lines safely and know how indentation interacts with quoted strings.",
+      "keywords": [
+        "backslash",
+        "newline",
+        "80 columns",
+        "echo",
+        "printf",
+        "line break",
+        "line wrap",
+        "spaces",
+        "quotes"
+      ],
+      "sections": [
+        {
+          "title": "Backslash-newline",
+          "body": "A backslash immediately followed by a newline continues the same command. There must be no trailing spaces or comments after the backslash.",
+          "items": []
+        },
+        {
+          "title": "Pipelines",
+          "body": "A newline after the | operator is allowed because Bash expects another command. Extra backslashes usually are not needed.",
+          "items": []
+        },
+        {
+          "title": "Inside double quotes",
+          "body": "Backslash-newline removes the newline but NOT indentation on the next line. That indentation becomes literal spaces inside the string.",
+          "items": []
+        },
+        {
+          "title": "Split echo arguments",
+          "body": "Instead of breaking a single quoted string across indented lines, close the quote and pass separate arguments to echo; echo adds one space between arguments.",
+          "items": []
+        },
+        {
+          "title": "Prefer printf for fixed formats",
+          "body": "printf uses a format string. It does not automatically insert spaces between arguments and behaves more predictably than echo for unusual input.",
+          "items": []
+        },
+        {
+          "title": "80-column style",
+          "body": "An editor ruler at column 80 is a visual aid, not a Bash syntax requirement. Wrapping lines improves readability.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf '%s\\n' \"$article\" |\\n  grep -oF 'Netanyahu' |\\n  wc -l",
+          "description": "Pipeline split after |; no backslash needed."
+        },
+        {
+          "command": "echo \"$article,\" \\\n  \"Netanyahu: $Netanyahu_count,\" \\\n  \"Gantz: $Gantz_count\"",
+          "description": "Each quoted argument is separate; the indentation is not printed."
+        },
+        {
+          "command": "printf '%s, Netanyahu: %s\\n' \\\n  \"$article\" \"$Netanyahu_count\"",
+          "description": "Format output explicitly using printf."
+        },
+        {
+          "command": "echo \"Hello, \\\n    world\"",
+          "description": "Indentation becomes part of the quoted string, producing extra spaces."
+        }
+      ],
+      "practice": [
+        "Never put whitespace after a line-continuation backslash.",
+        "Prefer printf for controlled output.",
+        "Wrap after pipes rather than introducing additional syntax."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Wrap long Bash code without adding spaces"
+      }
+    },
+    {
+      "id": "guide-logging",
+      "name": "wget logs & HTTP status",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Keep downloads separate from diagnostics",
+      "description": "Use wget -O - to place downloaded HTML on stdout and route diagnostic messages to a log file via stderr redirection.",
+      "keywords": [
+        "wget",
+        "log",
+        "stderr",
+        "stdout",
+        "200",
+        "http",
+        "2>>",
+        "-nv",
+        "-q",
+        "-O",
+        "location",
+        "empty file"
+      ],
+      "sections": [
+        {
+          "title": "One download, many searches",
+          "body": "Store one downloaded page in article_data, then run any number of grep searches on that variable using printf '%s\\n' \"$article_data\" | grep ... . This avoids downloading the same article once per searched word.",
+          "items": []
+        },
+        {
+          "title": "Separate streams",
+          "body": "wget -nv -O - \"$article\" 2>> \"$log_file\" sends HTML to stdout while appending diagnostics (stderr, descriptor 2) to the log. -nv is no-verbose, not no-errors.",
+          "items": []
+        },
+        {
+          "title": "Choose the log path",
+          "body": "log_file=\"$(dirname \"$(realpath \"$0\")\")/wget.log\" puts the log beside the resolved script path when realpath is available. log_file='./wget.log' is relative to the CURRENT working directory, which can differ.",
+          "items": []
+        },
+        {
+          "title": "Create vs append",
+          "body": "2> FILE overwrites diagnostics, 2>> FILE appends them. : > \"$log_file\" creates or truncates the log at the start of a run; be careful because it removes old content.",
+          "items": []
+        },
+        {
+          "title": "Interpret HTTP status",
+          "body": "HTTP 200 is a success status, not an error. 403, 404 and 429 represent different failures. Redirecting diagnostic output does not prove the request succeeded.",
+          "items": []
+        },
+        {
+          "title": "Report at the end",
+          "body": "if [[ -s \"$log_file\" ]]; then cat \"$log_file\"; fi displays messages only when the file is nonempty. The log can include successful status lines as well as errors.",
+          "items": []
+        },
+        {
+          "title": "Check failures",
+          "body": "Use if article_data=$(wget -nv -O - \"$article\" 2>> \"$log_file\"); then ... to decide whether the download succeeded; avoid treating an empty response as a successful page.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "log_file=\"$(dirname \"$(realpath \"$0\")\")/wget.log\"",
+          "description": "Store the log beside the script (on systems with realpath)."
+        },
+        {
+          "command": ": > \"$log_file\"",
+          "description": "Start a fresh log (erases any previous log contents)."
+        },
+        {
+          "command": "article_data=$(wget -nv -O - \"$article\" 2>> \"$log_file\")",
+          "description": "Capture HTML; append diagnostics to a log."
+        },
+        {
+          "command": "printf '%s\\n' \"$article_data\" | grep -oF 'Netanyahu' | wc -l",
+          "description": "Count occurrences from the captured HTML without another download."
+        },
+        {
+          "command": "if [[ -s \"$log_file\" ]]; then cat \"$log_file\"; fi",
+          "description": "Show collected messages at the end of the script."
+        }
+      ],
+      "practice": [
+        "Use -nv when you want diagnostic information without constant progress noise.",
+        "Keep stdout and stderr separate.",
+        "Consider checking wget's exit status rather than just counting matches."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Keep downloads separate from diagnostics"
+      }
+    },
+    {
+      "id": "guide-piping",
+      "name": "pipes vs <<<",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Feed data to commands in different ways",
+      "description": "A pipe connects the stdout of one command to another command's stdin, while a here-string provides a string directly as stdin.",
+      "keywords": [
+        "pipe",
+        "|",
+        "here string",
+        "<<<",
+        "echo",
+        "printf",
+        "stdin",
+        "stdout",
+        "capture",
+        "variable"
+      ],
+      "sections": [
+        {
+          "title": "Pipe",
+          "body": "command1 | command2 connects stdout of command1 to stdin of command2. The commands generally run as part of the same pipeline and may run in subshells.",
+          "items": []
+        },
+        {
+          "title": "Here-string",
+          "body": "grep PATTERN <<< \"$text\" passes the expanded text with a newline to stdin without starting echo or printf.",
+          "items": []
+        },
+        {
+          "title": "Which form to choose?",
+          "body": "printf '%s\\n' \"$article_data\" | grep PATTERN and grep PATTERN <<< \"$article_data\" normally search the same text. If you prefer pipes, printf is an excellent choice.",
+          "items": []
+        },
+        {
+          "title": "Why printf instead of echo?",
+          "body": "printf has predictable handling of strings, especially those beginning with -n or containing backslashes. echo behavior varies by platform and shell settings.",
+          "items": []
+        },
+        {
+          "title": "Command substitution",
+          "body": "$(command) captures stdout from a command. By itself it does not capture stderr. Trailing newlines are removed from the captured value.",
+          "items": []
+        },
+        {
+          "title": "Loop input",
+          "body": "A pipeline into while read may execute the loop in a subshell. If you need to retain variables set inside the loop, redirect from a file or use process substitution where appropriate.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "printf '%s\\n' \"$article_data\" | grep -oF 'Netanyahu'",
+          "description": "Pass an existing variable through stdout to grep."
+        },
+        {
+          "command": "grep -oF 'Netanyahu' <<< \"$article_data\"",
+          "description": "Pass the string directly to grep; similar result."
+        },
+        {
+          "command": "printf 'one\\ntwo\\n' | while IFS= read -r line; do echo \"$line\"; done",
+          "description": "Read each pipeline line."
+        }
+      ],
+      "practice": [
+        "Use printf '%s\\n' with variables for predictable pipelines.",
+        "For line-reading loops, IFS= read -r avoids unwanted whitespace and backslash processing."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Feed data to commands in different ways"
+      }
+    },
+    {
+      "id": "guide-shell-paths",
+      "name": "script paths & variables",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Find a script's folder and expand variables safely",
+      "description": "A script's location can differ from the shell's working directory. Variables and path expansion have different rules in different contexts.",
+      "keywords": [
+        "realpath",
+        "dirname",
+        "$0",
+        "log_file",
+        "cwd",
+        "pwd",
+        "path",
+        "quote",
+        "assignment",
+        "=",
+        "spaces"
+      ],
+      "sections": [
+        {
+          "title": "$0",
+          "body": "In a directly executed script, $0 is the path used to invoke it. Its meaning can change if a file is sourced or executed through a different entry point.",
+          "items": []
+        },
+        {
+          "title": "dirname and realpath",
+          "body": "dirname \"$(realpath \"$0\")\" obtains the directory containing the resolved script path on systems with GNU realpath.",
+          "items": []
+        },
+        {
+          "title": "Current directory",
+          "body": "./wget.log writes into the process's current working directory, not necessarily beside the script.",
+          "items": []
+        },
+        {
+          "title": "Assignment spacing",
+          "body": "Use log_file=value with no spaces surrounding the = sign. Then reference \"$log_file\" when passing the path to a command or redirection.",
+          "items": []
+        },
+        {
+          "title": "Quote paths",
+          "body": "Spaces are allowed in paths. Quoting expansions preserves them as a single argument. The directory must exist and be writable before a log file can be created.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "log_file=\"$(dirname \"$(realpath \"$0\")\")/wget.log\"",
+          "description": "Place the log file beside the script."
+        },
+        {
+          "command": "printf '%s\\n' \"$log_file\"",
+          "description": "Print the resolved destination path."
+        },
+        {
+          "command": "log_file=\"$HOME/wget.log\"",
+          "description": "Put the log in your home directory."
+        }
+      ],
+      "practice": [
+        "Be careful with names containing spaces.",
+        "Use an absolute path to avoid surprises when launching scripts from a different directory."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Find a script's folder and expand variables safely"
+      }
+    },
+    {
+      "id": "guide-shell-ide",
+      "name": "VS Code & 80-column style",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Configure editor rulers and formatting",
+      "description": "VS Code can show a vertical guide at column 80. Bash shell formatting and Google C/C++ formatting are different concerns.",
+      "keywords": [
+        "vscode",
+        "editor",
+        "ruler",
+        "80",
+        "format",
+        "google",
+        "clang-format",
+        "doxygen",
+        "comments",
+        "line length"
+      ],
+      "sections": [
+        {
+          "title": "Ruler for all languages",
+          "body": "In VS Code settings.json, set \"editor.rulers\": [80] at the top level. This draws a vertical guideline across all languages; it does not reject longer lines.",
+          "items": []
+        },
+        {
+          "title": "Language-specific formatting",
+          "body": "For C and C++, configure editor.tabSize: 2, editor.insertSpaces: true and a formatter. In the C/C++ project root, .clang-format can specify BasedOnStyle: Google, ColumnLimit: 80, and IndentWidth: 2.",
+          "items": []
+        },
+        {
+          "title": "Bash is a separate language",
+          "body": "Google's C/C++ style rules do not automatically apply to Bash. For Bash, use a shell-specific formatter or keep consistent indentation and wrapping.",
+          "items": []
+        },
+        {
+          "title": "Helpful comments",
+          "body": "Doxygen comments describe C/C++ functions; ordinary # comments document Bash scripts. Avoid comments that only repeat what the code obviously says.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "\"editor.rulers\": [80]",
+          "description": "Place this property inside the single VS Code settings.json object."
+        },
+        {
+          "command": "BasedOnStyle: Google\\nColumnLimit: 80\\nIndentWidth: 2",
+          "description": "A .clang-format example for C/C++, not for Bash."
+        },
+        {
+          "command": "printf '%s\\n' \"$article\" |\\n  grep -oF 'Netanyahu' | wc -l",
+          "description": "A Bash pipeline wrapped to stay readable."
+        }
+      ],
+      "practice": [
+        "Keep formatter settings scoped by language so C formatting does not change Bash syntax.",
+        "Use the ruler as guidance, not an automatic correctness check."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Configure editor rulers and formatting"
+      }
+    },
+    {
+      "id": "guide-article-search",
+      "name": "web scraping with wget & grep",
+      "type": "guide",
+      "category": "Concepts & Syntax",
+      "summary": "Understand a multi-stage HTML search script",
+      "description": "Fetch a page, extract article URLs, download each article once, count matched strings, and report results. This example is for text returned by a web server, not browser-rendered content.",
+      "keywords": [
+        "wget",
+        "grep",
+        "wc",
+        "URL",
+        "article",
+        "count",
+        "status",
+        "HTML",
+        "pipeline",
+        "sort",
+        "read"
+      ],
+      "sections": [
+        {
+          "title": "Fetch the index",
+          "body": "page_data=$(wget -O - 'https://example.com/') stores the HTML on stdout in a variable. This is not browser-rendered text and may omit dynamically loaded links.",
+          "items": []
+        },
+        {
+          "title": "Find article URLs",
+          "body": "grep -oE extracts matching substrings, while sort -u removes duplicates. Dots in regex domains must be escaped with \\. to match literal dots.",
+          "items": []
+        },
+        {
+          "title": "Avoid empty records",
+          "body": "If all_articles is empty, echo \"$all_articles\" | while read article can still process an empty line, causing wget to receive an empty URL. Test for empty input or skip empty lines.",
+          "items": []
+        },
+        {
+          "title": "Download each article once",
+          "body": "article_data=$(wget -O - \"$article\") stores the entire response once. Use printf '%s\\n' \"$article_data\" | grep -oF 'NAME' | wc -l for each wanted name.",
+          "items": []
+        },
+        {
+          "title": "Count occurrences, not matching lines",
+          "body": "grep -oF emits each substring match on a separate line. wc -l counts them. wc -w counts ALL words in the input; it does not count chosen words. grep -w requires word boundaries.",
+          "items": []
+        },
+        {
+          "title": "Use status as a test",
+          "body": "if (( Netanyahu_count == 0 && Gantz_count == 0 )); then ... is an arithmetic test. if \"$Netanyahu_count\" == 0 is not valid numeric comparison syntax.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "page_data=$(wget -O - 'https://www.ynetnews.com/category/3082')",
+          "description": "Download a category page's HTML."
+        },
+        {
+          "command": "articles=$(printf '%s\\n' \"$page_data\" | grep -oE 'https://www\\.ynetnews\\.com/article/[A-Za-z0-9]+' | sort -u)",
+          "description": "Extract unique matching article URLs if they appear as full URLs."
+        },
+        {
+          "command": "count=$(printf '%s\\n' \"$article_data\" | grep -oF 'Netanyahu' | wc -l)",
+          "description": "Count literal string occurrences in previously downloaded HTML."
+        }
+      ],
+      "practice": [
+        "Use quotes around URLs and shell variable expansions.",
+        "Avoid repeated network requests for the same page.",
+        "Expect HTML to include navigation, scripts and unrelated page text; not every match is a visible article mention."
+      ],
+      "links": [],
+      "nameInfo": {
+        "kind": "Memory tip",
+        "text": "Understand a multi-stage HTML search script"
       }
     }
   ]

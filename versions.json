@@ -1,7 +1,16 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "1.5.1",
+  "latestVersion": "1.6.0",
   "releases": [
+    {
+      "version": "1.6.0",
+      "date": "2026-11-14",
+      "title": "Shell scripting essentials and contextual discovery",
+      "summary": "17 new command and control-flow references, 10 new guides on conditions, pipes, scripts, logging, formatting and web scraping, flag mnemonics, and explainable highlighted search",
+      "commandCount": 117,
+      "topicCount": 18,
+      "snapshot": "history/1.6.0.json"
+    },
     {
       "version": "1.5.1",
       "date": "2026-11-14",
