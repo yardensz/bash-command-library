@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "latestVersion": "0.1.0",
+  "releases": [
+    {
+      "version": "0.1.0",
+      "date": "2026-11-15",
+      "title": "C / C++ library scaffold",
+      "summary": "Created an empty, independent C / C++ reference with its own version history.",
+      "commandCount": 0,
+      "topicCount": 0,
+      "snapshot": "libraries/history/c-cpp/0.1.0.json"
+    }
+  ]
+}
