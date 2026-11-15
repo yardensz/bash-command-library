@@ -1,7 +1,16 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "0.1.0",
+  "latestVersion": "1.0.0",
   "releases": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-15",
+      "title": "Comprehensive C99 foundations and standard library",
+      "summary": "Introduced an extensive, searchable C99 reference covering syntax, types, functions, pointers, arrays, strings, memory, files, standard library utilities, builds and debugging; includes C11 notes and detailed guides.",
+      "commandCount": 144,
+      "topicCount": 23,
+      "snapshot": "libraries/history/c-cpp/1.0.0.json"
+    },
     {
       "version": "0.1.0",
       "date": "2026-11-15",

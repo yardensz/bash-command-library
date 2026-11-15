@@ -1,0 +1,4240 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "updatedAt": "2026-11-15",
+  "commands": [
+    {
+      "id": "c-c-program-structure",
+      "name": "C program structure",
+      "category": "Fundamentals",
+      "type": "concept",
+      "summary": "Headers, declarations, functions, and the program entry point.",
+      "description": "A hosted C program normally enters through main. Headers declare library interfaces; declarations make types and functions known. Each statement usually ends with a semicolon. A successful main can return 0.",
+      "syntax": "#include <stdio.h>\nint main(void) { puts(\"Hello\"); return 0; }",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    puts(\"Hello, C!\");\n    return 0;\n}\n",
+          "description": "A complete C99 program using a standard library function."
+        }
+      ],
+      "keywords": [
+        "main",
+        "headers",
+        "source",
+        "entry point"
+      ],
+      "note": "C programs are compiled; Bash scripts are interpreted by a shell."
+    },
+    {
+      "id": "c-comments-and",
+      "name": "Comments (// and /* */)",
+      "category": "Fundamentals",
+      "type": "concept",
+      "summary": "Annotate source without executing the text.",
+      "description": "C99 supports // line comments and /* ... */ block comments. Block comments cannot be nested. Comment intent, assumptions, and non-obvious behavior rather than restating every statement.",
+      "syntax": "// one-line comment\n/* block comment */",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    // Explain why a value is chosen.\n    int retries = 3;\n    /* This comment spans one source line. */\n    printf(\"%d\\n\", retries);\n    return 0;\n}\n",
+          "description": "Both comment forms are ignored by the compiler."
+        }
+      ],
+      "keywords": [
+        "documentation",
+        "C99"
+      ]
+    },
+    {
+      "id": "c-include",
+      "name": "#include",
+      "category": "Fundamentals",
+      "type": "keyword",
+      "summary": "Include declarations from a header.",
+      "description": "The preprocessor replaces an include directive with a header's contents. Angle brackets select an implementation's header search; quotes usually search locally first. Prefer standard headers for standard library declarations.",
+      "syntax": "#include <stdio.h>\n#include \"my_header.h\"",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    puts(\"stdio.h declares puts\");\n    return 0;\n}\n",
+          "description": "The standard header makes puts available."
+        }
+      ],
+      "keywords": [
+        "preprocessor",
+        "header",
+        "angle brackets"
+      ],
+      "note": "Include guards or #pragma once can prevent repeated custom-header definitions."
+    },
+    {
+      "id": "c-define",
+      "name": "#define",
+      "category": "Fundamentals",
+      "type": "keyword",
+      "summary": "Define a macro or symbolic constant.",
+      "description": "Object-like macros substitute tokens before compilation; function-like macros also substitute arguments. Macro arguments can be evaluated more than once, so use functions for operations with side effects. Parenthesize macro parameters.",
+      "syntax": "#define SIZE 8\n#define SQUARE(x) ((x) * (x))",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#define SIZE 8\n#define SQUARE(x) ((x) * (x))\nint main(void) {\n    printf(\"%d %d\\n\", SIZE, SQUARE(3));\n    return 0;\n}\n",
+          "description": "Defines a constant-like macro and a guarded expression macro."
+        }
+      ],
+      "keywords": [
+        "macro",
+        "preprocessor"
+      ],
+      "note": "Avoid SQUARE(i++) because the argument is used twice."
+    },
+    {
+      "id": "c-if-ifdef-ifndef",
+      "name": "#if / #ifdef / #ifndef",
+      "category": "Fundamentals",
+      "type": "keyword",
+      "summary": "Compile selected source based on macros.",
+      "description": "Conditional preprocessing evaluates constant integer preprocessor expressions. #ifdef tests whether a macro exists, while #ifndef tests its absence. This is often used for conditional builds and header guards.",
+      "syntax": "#if CONDITION\n...\n#endif",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#define FEATURE 1\nint main(void) {\n#if FEATURE\n    puts(\"enabled\");\n#else\n    puts(\"disabled\");\n#endif\n    return 0;\n}\n",
+          "description": "Only one branch survives preprocessing."
+        }
+      ],
+      "keywords": [
+        "conditional compilation",
+        "header guard",
+        "else",
+        "endif"
+      ]
+    },
+    {
+      "id": "c-undef",
+      "name": "#undef",
+      "category": "Fundamentals",
+      "type": "keyword",
+      "summary": "Remove an existing macro definition.",
+      "description": "#undef makes a macro name undefined for subsequent preprocessing. It does not change C variables or runtime storage.",
+      "syntax": "#undef MACRO",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#define MODE 1\n#undef MODE\nint main(void) {\n#ifdef MODE\n    puts(\"defined\");\n#else\n    puts(\"undefined\");\n#endif\n    return 0;\n}\n",
+          "description": "The conditional sees MODE as undefined."
+        }
+      ],
+      "keywords": [
+        "preprocessor",
+        "macro"
+      ]
+    },
+    {
+      "id": "c-identifiers-and-scope",
+      "name": "Identifiers and scope",
+      "category": "Fundamentals",
+      "type": "concept",
+      "summary": "Names obey declaration, scope, and linkage rules.",
+      "description": "Local variables declared inside a block have block scope. File-scope declarations are visible from their declaration to the end of the translation unit. Scope is not the same as lifetime or linkage.",
+      "syntax": "int count = 0;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int n = 10;\n    {\n        int n = 20;\n        printf(\"%d\\n\", n);\n    }\n    printf(\"%d\\n\", n);\n    return 0;\n}\n",
+          "description": "An inner block can hide an outer declaration."
+        }
+      ],
+      "keywords": [
+        "scope",
+        "shadowing",
+        "identifier"
+      ]
+    },
+    {
+      "id": "c-c-language-versions",
+      "name": "C language versions",
+      "category": "Fundamentals",
+      "type": "concept",
+      "summary": "C99, C11, C17, and C23 are different standards.",
+      "description": "C99 introduced mixed declarations and statements, // comments, and other facilities. C11 added features such as _Static_assert and _Generic. C17 largely fixes C11 defects. C23 adds further language and library changes; support varies by compiler.",
+      "syntax": "gcc -std=c99 -Wall -Wextra main.c -o main",
+      "examples": [
+        {
+          "command": "/* Compile with gcc -std=c99 -Wall -Wextra main.c -o main */\n#include <stdio.h>\nint main(void) {\n    puts(\"This example is valid C99\");\n    return 0;\n}\n",
+          "description": "An explicitly selected standard avoids depending on the compiler default."
+        }
+      ],
+      "keywords": [
+        "standard",
+        "C99",
+        "C11",
+        "C17",
+        "C23"
+      ],
+      "note": "This reference mainly targets ISO C99 unless an entry says otherwise."
+    },
+    {
+      "id": "c-const",
+      "name": "const",
+      "category": "Types & Variables",
+      "type": "keyword",
+      "summary": "Prevent modification through a declared object or access path.",
+      "description": "A const-qualified object cannot be modified through an lvalue of const-qualified type. For pointers, const can apply to the pointed-to object, the pointer itself, or both. const does not imply a compile-time integer constant in C.",
+      "syntax": "const int x = 3;\nconst int *p = &x;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int x = 4;\n    const int *p = &x;\n    // *p = 5; // invalid: cannot modify through p\n    printf(\"%d\\n\", *p);\n    return 0;\n}\n",
+          "description": "The value can be read through a pointer to const."
+        }
+      ],
+      "keywords": [
+        "qualification",
+        "pointer to const"
+      ],
+      "note": "Casting away const and modifying an object originally declared const is undefined behavior."
+    },
+    {
+      "id": "c-volatile",
+      "name": "volatile",
+      "category": "Types & Variables",
+      "type": "keyword",
+      "summary": "Tell the compiler an object's value may change unexpectedly.",
+      "description": "volatile-qualified accesses are observable for the abstract machine and are useful for some memory-mapped I/O situations. volatile does not make access atomic or synchronize threads.",
+      "syntax": "volatile int status;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    volatile int status = 1;\n    if (status) puts(\"ready\");\n    return 0;\n}\n",
+          "description": "Shows syntax; volatile is typically motivated by hardware or signal contexts."
+        }
+      ],
+      "keywords": [
+        "hardware",
+        "memory mapped"
+      ],
+      "note": "Use atomics for inter-thread synchronization; volatile is not a substitute."
+    },
+    {
+      "id": "c-typedef",
+      "name": "typedef",
+      "category": "Types & Variables",
+      "type": "keyword",
+      "summary": "Give an existing type an alias.",
+      "description": "A typedef creates a type name, not a new distinct type. It can simplify complex pointer or function pointer declarations, but avoid hiding important pointer semantics.",
+      "syntax": "typedef unsigned long counter_t;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    typedef unsigned long counter_t;\n    counter_t count = 5UL;\n    printf(\"%lu\\n\", count);\n    return 0;\n}\n",
+          "description": "Defines and uses a convenient alias."
+        }
+      ],
+      "keywords": [
+        "type alias"
+      ]
+    },
+    {
+      "id": "c-sizeof",
+      "name": "sizeof",
+      "category": "Operators & Expressions",
+      "type": "operator",
+      "summary": "Get the size of a type or object in bytes.",
+      "description": "sizeof evaluates to a value of type size_t. Except for variable-length array operands, its operand expression is not evaluated. For arrays in their declared scope, sizeof yields the whole array's byte size; after array-to-pointer conversion it yields pointer size.",
+      "syntax": "sizeof(int)\nsizeof array",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int numbers[5] = {0};\n    size_t count = sizeof numbers / sizeof numbers[0];\n    printf(\"%zu\\n\", count);\n    return 0;\n}\n",
+          "description": "Calculates element count while numbers is an array."
+        }
+      ],
+      "keywords": [
+        "array length",
+        "bytes",
+        "size_t"
+      ],
+      "note": "sizeof(char) is exactly 1; the number of bits per byte is CHAR_BIT."
+    },
+    {
+      "id": "c-static-assert",
+      "name": "_Static_assert",
+      "category": "Fundamentals",
+      "type": "keyword",
+      "summary": "Check a constant condition at compile time (C11).",
+      "description": "_Static_assert requires a constant expression and a diagnostic string in C11/C17. It is useful for validating representation assumptions during compilation.",
+      "syntax": "_Static_assert(sizeof(int) >= 2, \"int must be at least 16 bits\");",
+      "examples": [
+        {
+          "command": "#include <limits.h>\n_Static_assert(CHAR_BIT >= 8, \"byte width\");\nint main(void) { return 0; }\n",
+          "description": "A C11 compile-time check; compile with -std=c11."
+        }
+      ],
+      "keywords": [
+        "compile-time check",
+        "C11"
+      ],
+      "note": "For a C99-only course, use another technique or omit this feature."
+    },
+    {
+      "id": "c-int",
+      "name": "int",
+      "category": "Types & Variables",
+      "type": "type",
+      "summary": "Store an integer within an implementation-defined range.",
+      "description": "int is a signed integer type. Its minimum required range is at least -32767 through 32767, although many platforms provide 32-bit int. Use limits.h for actual ranges; do not assume all int values are 32 bits.",
+      "syntax": "int score = 42;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int score = 42;\n    printf(\"%d\\n\", score);\n    return 0;\n}\n",
+          "description": "Declares and prints an int using %d."
+        }
+      ],
+      "keywords": [
+        "integer",
+        "signed",
+        "limits.h"
+      ]
+    },
+    {
+      "id": "c-unsigned-int",
+      "name": "unsigned int",
+      "category": "Types & Variables",
+      "type": "type",
+      "summary": "Store nonnegative integers with modulo arithmetic.",
+      "description": "Unsigned arithmetic wraps modulo 2^N, where N is the number of value bits. Mixing signed and unsigned types may produce unexpected comparisons or conversions.",
+      "syntax": "unsigned int flags = 3U;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    unsigned int n = 3U;\n    printf(\"%u\\n\", n);\n    return 0;\n}\n",
+          "description": "Prints an unsigned int with %u."
+        }
+      ],
+      "keywords": [
+        "wraparound",
+        "signed unsigned"
+      ],
+      "note": "Do not rely on unsigned wraparound to detect signed overflow."
+    },
+    {
+      "id": "c-char",
+      "name": "char",
+      "category": "Types & Variables",
+      "type": "type",
+      "summary": "Store one byte of character or numeric data.",
+      "description": "char, signed char, and unsigned char are three distinct types. Plain char may be signed or unsigned depending on the implementation. Character literals such as 'A' have type int in C.",
+      "syntax": "char letter = 'A';",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    char letter = 'A';\n    printf(\"%c %d\\n\", letter, (int)letter);\n    return 0;\n}\n",
+          "description": "Prints a character and its numeric value."
+        }
+      ],
+      "keywords": [
+        "ASCII",
+        "byte",
+        "character"
+      ],
+      "note": "Portable code should not assume the execution character set is ASCII."
+    },
+    {
+      "id": "c-short-long-long-long",
+      "name": "short / long / long long",
+      "category": "Types & Variables",
+      "type": "type",
+      "summary": "Choose integer ranks and minimum guaranteed ranges.",
+      "description": "short is at least 16 bits, long at least 32 bits, and long long at least 64 bits. Exact widths are implementation-defined. Add U or L/LL suffixes to literals when appropriate.",
+      "syntax": "short a = 1;\nlong b = 2L;\nlong long c = 3LL;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    long long big = 9000000000LL;\n    printf(\"%lld\\n\", big);\n    return 0;\n}\n",
+          "description": "Uses the C99 long long type and matching format specifier."
+        }
+      ],
+      "keywords": [
+        "integer widths",
+        "LL",
+        "limits"
+      ]
+    },
+    {
+      "id": "c-float-double-long-double",
+      "name": "float / double / long double",
+      "category": "Types & Variables",
+      "type": "type",
+      "summary": "Represent floating-point values with differing precision/range.",
+      "description": "Floating-point arithmetic is typically approximate; decimal fractions often cannot be stored exactly. Use %f for double with printf (float promotes), and %Lf for long double. scanf requires %f for float and %lf for double.",
+      "syntax": "double x = 0.1;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    double x = 0.1;\n    printf(\"%.2f\\n\", x);\n    return 0;\n}\n",
+          "description": "Formats a floating-point value to two decimal places."
+        }
+      ],
+      "keywords": [
+        "floating point",
+        "precision",
+        "rounding"
+      ],
+      "note": "Avoid comparing computed floating-point results for exact equality when rounding matters."
+    },
+    {
+      "id": "c-bool-bool",
+      "name": "_Bool / bool",
+      "category": "Types & Variables",
+      "type": "type",
+      "summary": "Represent logical truth as 0 or 1.",
+      "description": "C99 defines _Bool. Include stdbool.h to use bool, true, and false macros in C99/C17. Conversion to _Bool stores 0 for zero and 1 for any nonzero scalar.",
+      "syntax": "#include <stdbool.h>\nbool ready = true;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdbool.h>\nint main(void) {\n    bool ready = true;\n    printf(\"%d\\n\", ready);\n    return 0;\n}\n",
+          "description": "Uses C99 stdbool.h for readable Boolean declarations."
+        }
+      ],
+      "keywords": [
+        "boolean",
+        "stdbool.h",
+        "C99"
+      ],
+      "note": "C and C++ differ in Boolean keyword details; do not assume they are identical."
+    },
+    {
+      "id": "c-size-t",
+      "name": "size_t",
+      "category": "Types & Variables",
+      "type": "type",
+      "summary": "Represent sizes and counts returned by sizeof.",
+      "description": "size_t is an unsigned integer type defined by several standard headers, including stddef.h and stdio.h. Use %zu for printf in C99. Subtracting from zero wraps, so be careful with reverse loops.",
+      "syntax": "size_t count = sizeof array / sizeof array[0];",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a[4] = {0};\n    size_t n = sizeof a / sizeof a[0];\n    printf(\"%zu\\n\", n);\n    return 0;\n}\n",
+          "description": "Prints an object count portably."
+        }
+      ],
+      "keywords": [
+        "sizeof",
+        "index",
+        "stddef.h"
+      ]
+    },
+    {
+      "id": "c-ptrdiff-t",
+      "name": "ptrdiff_t",
+      "category": "Types & Variables",
+      "type": "type",
+      "summary": "Store differences between pointers into the same array.",
+      "description": "ptrdiff_t is a signed integer type defined in stddef.h. Subtracting pointers to elements of the same array (or one-past) yields an element difference, provided it is representable.",
+      "syntax": "ptrdiff_t distance = last - first;",
+      "examples": [
+        {
+          "command": "#include <stddef.h>\n#include <stdio.h>\nint main(void) {\n    int a[5] = {0};\n    ptrdiff_t d = &a[4] - &a[1];\n    printf(\"%td\\n\", d);\n    return 0;\n}\n",
+          "description": "Shows subtraction of pointers within a single array."
+        }
+      ],
+      "keywords": [
+        "pointer subtraction",
+        "stddef.h"
+      ]
+    },
+    {
+      "id": "c-stdint-h-fixed-width-types",
+      "name": "stdint.h fixed-width types",
+      "category": "Types & Variables",
+      "type": "type",
+      "summary": "Request integer types with explicit widths when available.",
+      "description": "stdint.h defines types such as int32_t and uint64_t if those exact-width types are supported, plus guaranteed minimum-width types such as int_least32_t. inttypes.h provides PRI... macros for portable printf formats.",
+      "syntax": "uint32_t word = 123U;",
+      "examples": [
+        {
+          "command": "#include <stdint.h>\n#include <inttypes.h>\n#include <stdio.h>\nint main(void) {\n    uint_least32_t x = 123;\n    printf(\"%\" PRIuLEAST32 \"\\n\", x);\n    return 0;\n}\n",
+          "description": "Uses a minimum-width integer and its matching print macro."
+        }
+      ],
+      "keywords": [
+        "uint32_t",
+        "int64_t",
+        "portable",
+        "C99"
+      ]
+    },
+    {
+      "id": "c-enum",
+      "name": "enum",
+      "category": "Structures & Classes",
+      "type": "type",
+      "summary": "Define named integer constants as an enumeration.",
+      "description": "An enum declares a set of integer constants. In C99 the compatible integer type of an enum is implementation-defined; an enumerator is an int constant when its value is representable. Use enum for states and choices.",
+      "syntax": "enum Color { RED, GREEN, BLUE };",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    enum Color { RED, GREEN, BLUE };\n    enum Color color = GREEN;\n    printf(\"%d\\n\", (int)color);\n    return 0;\n}\n",
+          "description": "Defines a small, named set of integer values."
+        }
+      ],
+      "keywords": [
+        "enumeration",
+        "state machine"
+      ]
+    },
+    {
+      "id": "c-struct",
+      "name": "struct",
+      "category": "Structures & Classes",
+      "type": "type",
+      "summary": "Group related members into one object.",
+      "description": "A structure's members are accessed with .; a pointer to a structure uses ->. Member layout may contain padding. Assignment copies a whole struct value, including array members.",
+      "syntax": "struct Point { int x; int y; };",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    struct Point { int x; int y; };\n    struct Point point = {2, 3};\n    printf(\"%d %d\\n\", point.x, point.y);\n    return 0;\n}\n",
+          "description": "Defines, initializes, and accesses structure members."
+        }
+      ],
+      "keywords": [
+        "record",
+        "members",
+        "padding"
+      ]
+    },
+    {
+      "id": "c-union",
+      "name": "union",
+      "category": "Structures & Classes",
+      "type": "type",
+      "summary": "Allow several members to share storage.",
+      "description": "A union has overlapping members: its size is sufficient for its largest member, possibly plus padding. The interpretation of a stored member must follow the language's effective-type and union-access rules.",
+      "syntax": "union Number { int i; double d; };",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    union Number { int i; double d; };\n    union Number n;\n    n.d = 2.5;\n    printf(\"%.1f\\n\", n.d);\n    return 0;\n}\n",
+          "description": "Writes and reads the same active union member."
+        }
+      ],
+      "keywords": [
+        "shared storage",
+        "variant"
+      ],
+      "note": "Do not assume reading a different member is a portable numeric conversion."
+    },
+    {
+      "id": "c-storage-duration-auto-static-extern",
+      "name": "storage duration: auto / static / extern",
+      "category": "Types & Variables",
+      "type": "concept",
+      "summary": "Distinguish lifetime, visibility, and cross-file linkage.",
+      "description": "Automatic local objects typically exist during block execution. Static storage-duration objects exist for the program lifetime and are initialized once. At file scope, static also gives internal linkage; extern commonly declares an object defined elsewhere.",
+      "syntax": "static int calls = 0;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    static int calls = 0;\n    ++calls;\n    printf(\"%d\\n\", calls);\n    return 0;\n}\n",
+          "description": "Shows a variable with static storage duration."
+        }
+      ],
+      "keywords": [
+        "lifetime",
+        "linkage",
+        "global"
+      ],
+      "note": "static has different linkage effects at file scope versus function scope."
+    },
+    {
+      "id": "c-integer-literals",
+      "name": "integer literals",
+      "category": "Types & Variables",
+      "type": "concept",
+      "summary": "Write integer constants in decimal, octal, or hexadecimal.",
+      "description": "A leading 0 denotes octal in C99, while 0x denotes hexadecimal. Suffixes U, L, and LL affect candidate types. Integer literal types are chosen by value, base, suffix, and standard rules.",
+      "syntax": "42\n052\n0x2A\n42U\n42LL",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int decimal = 42;\n    int hex = 0x2A;\n    printf(\"%d\\n\", decimal == hex);\n    return 0;\n}\n",
+          "description": "Decimal 42 and hexadecimal 0x2A represent the same integer."
+        }
+      ],
+      "keywords": [
+        "base",
+        "hex",
+        "octal",
+        "suffix"
+      ]
+    },
+    {
+      "id": "c-character-and-string-literals",
+      "name": "character and string literals",
+      "category": "Arrays & Strings",
+      "type": "concept",
+      "summary": "Write characters, escape sequences, and null-terminated text.",
+      "description": "'A' is a character constant (type int in C), whereas \"A\" is an array of two char elements including '\\0'. Common escapes include '\\n', '\\t', '\\\\', and '\\\"'.",
+      "syntax": "'A'\n\"A\"\n\"line\\n\"",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    char letter = 'A';\n    const char *message = \"Hello\\n\";\n    printf(\"%c: %s\", letter, message);\n    return 0;\n}\n",
+          "description": "Contrasts a character value with a string literal."
+        }
+      ],
+      "keywords": [
+        "escaping",
+        "null terminator",
+        "literals"
+      ],
+      "note": "Modifying a string literal has undefined behavior in C."
+    },
+    {
+      "id": "c-initialization-and-assignment",
+      "name": "initialization and = assignment",
+      "category": "Operators & Expressions",
+      "type": "operator",
+      "summary": "Set initial values or update existing objects.",
+      "description": "Initialization occurs when an object is created; assignment changes an already-existing modifiable object. An uninitialized automatic scalar usually has an indeterminate value and must not be read.",
+      "syntax": "int n = 4;\nn = 7;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int n = 4;\n    n = n + 3;\n    printf(\"%d\\n\", n);\n    return 0;\n}\n",
+          "description": "Updates a previously initialized integer."
+        }
+      ],
+      "keywords": [
+        "uninitialized",
+        "declaration",
+        "assignment"
+      ]
+    },
+    {
+      "id": "c-explicit-cast",
+      "name": "explicit cast",
+      "category": "Operators & Expressions",
+      "type": "operator",
+      "summary": "Request a conversion to a chosen type.",
+      "description": "A C cast uses (type)expression. Casting integers to floating point before division changes the operation performed. A cast cannot make an invalid pointer conversion safe by itself.",
+      "syntax": "(double)numerator / denominator",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a = 5, b = 2;\n    printf(\"%.2f\\n\", (double)a / b);\n    return 0;\n}\n",
+          "description": "Converts one operand before division to avoid integer division."
+        }
+      ],
+      "keywords": [
+        "type conversion",
+        "coercion"
+      ],
+      "note": "Casting away type incompatibilities does not remove undefined behavior."
+    },
+    {
+      "id": "c-arithmetic",
+      "name": "arithmetic + - * / %",
+      "category": "Operators & Expressions",
+      "type": "operator",
+      "summary": "Add, subtract, multiply, divide, or take remainder.",
+      "description": "Integer division truncates toward zero in C99 and later. % applies to integers and yields the remainder with sign related to the left operand. Signed overflow is undefined behavior; division by zero is undefined.",
+      "syntax": "a + b; a - b; a * b; a / b; a % b;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a = 7, b = 3;\n    printf(\"%d %d\\n\", a / b, a % b);\n    return 0;\n}\n",
+          "description": "Integer division gives quotient 2 and remainder 1."
+        }
+      ],
+      "keywords": [
+        "integer division",
+        "remainder",
+        "modulo"
+      ],
+      "note": "For negative operands, C remainder is not always mathematical modulo."
+    },
+    {
+      "id": "c-comparison",
+      "name": "comparison == != < <= > >=",
+      "category": "Operators & Expressions",
+      "type": "operator",
+      "summary": "Compare values to produce 0 or 1.",
+      "description": "== checks equality and = assigns; they are not interchangeable. Results of relational and equality operators have type int. For floating values, exact equality can be surprising due to rounding.",
+      "syntax": "a == b; a != b; a < b;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a = 4, b = 5;\n    printf(\"%d %d\\n\", a < b, a == b);\n    return 0;\n}\n",
+          "description": "Comparisons evaluate to 1 (true) or 0 (false)."
+        }
+      ],
+      "keywords": [
+        "relational",
+        "equality"
+      ]
+    },
+    {
+      "id": "c-logical",
+      "name": "logical && || !",
+      "category": "Operators & Expressions",
+      "type": "operator",
+      "summary": "Combine truth values with short-circuit evaluation.",
+      "description": "&& evaluates the right operand only if the left is true; || evaluates the right only if the left is false. ! reverses truth. Results are int 0 or 1. Short-circuiting is often used to check a pointer before dereferencing it.",
+      "syntax": "a && b; a || b; !a;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a = 1, b = 0;\n    printf(\"%d %d %d\\n\", a && b, a || b, !a);\n    return 0;\n}\n",
+          "description": "Demonstrates conjunction, disjunction, and negation."
+        }
+      ],
+      "keywords": [
+        "short circuit",
+        "boolean"
+      ]
+    },
+    {
+      "id": "c-bitwise",
+      "name": "bitwise & | ^ ~",
+      "category": "Operators & Expressions",
+      "type": "operator",
+      "summary": "Operate on individual integer bits.",
+      "description": "&, |, ^, and ~ perform bitwise AND, OR, XOR, and complement. Unlike && and ||, bitwise binary operators do not short-circuit. Prefer unsigned operands for predictable bit manipulation.",
+      "syntax": "mask & flag; mask | flag; a ^ b; ~a;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    unsigned a = 6U, b = 3U;\n    printf(\"%u %u\\n\", a & b, a | b);\n    return 0;\n}\n",
+          "description": "Bitwise operations on 6 (110) and 3 (011)."
+        }
+      ],
+      "keywords": [
+        "mask",
+        "flags",
+        "binary"
+      ]
+    },
+    {
+      "id": "c-shifts",
+      "name": "shifts << >>",
+      "category": "Operators & Expressions",
+      "type": "operator",
+      "summary": "Shift integer bit patterns left or right.",
+      "description": "For unsigned left shift, the result is reduced modulo the unsigned type's range. The shift count must be nonnegative and smaller than the width of the promoted left operand. Right shift of negative signed values is implementation-defined in C99.",
+      "syntax": "bits << count; bits >> count;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    unsigned bits = 1U;\n    printf(\"%u\\n\", bits << 3);\n    return 0;\n}\n",
+          "description": "Shifting 1U left by 3 produces 8."
+        }
+      ],
+      "keywords": [
+        "bitshift",
+        "unsigned"
+      ],
+      "note": "Left shifting a signed negative value is undefined behavior."
+    },
+    {
+      "id": "c-increment-and-decrement",
+      "name": "increment ++ and decrement --",
+      "category": "Operators & Expressions",
+      "type": "operator",
+      "summary": "Increase or decrease a modifiable arithmetic value by one.",
+      "description": "Prefix ++i updates before producing the new value; postfix i++ produces the old value and updates the object. Both change the object; avoid unsequenced multiple modifications of the same variable.",
+      "syntax": "++i; i++; --i; i--;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int i = 3;\n    int before = i++;\n    printf(\"%d %d\\n\", before, i);\n    return 0;\n}\n",
+          "description": "Postfix returns the previous value while incrementing i."
+        }
+      ],
+      "keywords": [
+        "prefix",
+        "postfix",
+        "side effects"
+      ],
+      "note": "Expressions like i = i++ + 1 have undefined behavior."
+    },
+    {
+      "id": "c-compound-assignments",
+      "name": "compound assignments += -= *= /= %=",
+      "category": "Operators & Expressions",
+      "type": "operator",
+      "summary": "Update a value using an arithmetic operation.",
+      "description": "a += b is similar to a = a + b, except the left operand is evaluated only once. Other compound assignments include &=, |=, ^=, <<=, and >>=.",
+      "syntax": "x += 2; x *= 3;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int x = 4;\n    x += 3;\n    printf(\"%d\\n\", x);\n    return 0;\n}\n",
+          "description": "Updates x without repeating its name."
+        }
+      ],
+      "keywords": [
+        "assignment operator"
+      ]
+    },
+    {
+      "id": "c-conditional",
+      "name": "conditional ?:",
+      "category": "Operators & Expressions",
+      "type": "operator",
+      "summary": "Select one of two expressions based on a condition.",
+      "description": "The conditional operator evaluates only one of its second or third operands. It is an expression and can be used for short value selections; use if/else for more involved branches.",
+      "syntax": "condition ? when_true : when_false;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int x = 9;\n    int result = x > 5 ? 1 : 0;\n    printf(\"%d\\n\", result);\n    return 0;\n}\n",
+          "description": "Chooses the expression based on x > 5."
+        }
+      ],
+      "keywords": [
+        "ternary",
+        "conditional"
+      ]
+    },
+    {
+      "id": "c-comma-operator",
+      "name": "comma operator",
+      "category": "Operators & Expressions",
+      "type": "operator",
+      "summary": "Evaluate two expressions in order and yield the second.",
+      "description": "The comma operator sequences its left operand before its right operand. It is different from commas separating function arguments or declarations, which are not the comma operator.",
+      "syntax": "(first_expression, second_expression)",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int x = 0;\n    int y = (x = 2, x + 3);\n    printf(\"%d %d\\n\", x, y);\n    return 0;\n}\n",
+          "description": "The left expression executes before the right one."
+        }
+      ],
+      "keywords": [
+        "sequence",
+        "expression"
+      ]
+    },
+    {
+      "id": "c-address-of-and-dereference",
+      "name": "address-of & and dereference *",
+      "category": "Pointers & Memory",
+      "type": "operator",
+      "summary": "Obtain an object's address or access the object it points to.",
+      "description": "& usually creates a pointer to an object, while unary * accesses the pointed-to object. Dereferencing NULL, an invalid pointer, or one-past-the-end is undefined behavior.",
+      "syntax": "int *p = &x;\nint y = *p;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int x = 7;\n    int *p = &x;\n    *p = 9;\n    printf(\"%d\\n\", x);\n    return 0;\n}\n",
+          "description": "Writing through p changes the original x."
+        }
+      ],
+      "keywords": [
+        "pointer",
+        "reference",
+        "indirection"
+      ]
+    },
+    {
+      "id": "c-array-subscript",
+      "name": "array subscript []",
+      "category": "Arrays & Strings",
+      "type": "operator",
+      "summary": "Access an element through a pointer plus index.",
+      "description": "a[i] is defined in terms of *(a + i). The index must identify a valid element for dereference. C does not check bounds automatically.",
+      "syntax": "array[index]",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a[3] = {10, 20, 30};\n    printf(\"%d\\n\", a[1]);\n    return 0;\n}\n",
+          "description": "Reads the second element, because indices start at zero."
+        }
+      ],
+      "keywords": [
+        "index",
+        "out of bounds"
+      ]
+    },
+    {
+      "id": "c-member-access-and",
+      "name": "member access . and ->",
+      "category": "Structures & Classes",
+      "type": "operator",
+      "summary": "Read a struct or union member directly or through a pointer.",
+      "description": "Use object.member for an object; use pointer->member for a pointer to a struct or union. p->x means (*p).x.",
+      "syntax": "object.member\npointer->member",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    struct P { int x; } point = {7};\n    struct P *p = &point;\n    printf(\"%d %d\\n\", point.x, p->x);\n    return 0;\n}\n",
+          "description": "Shows equivalent direct and pointer member access."
+        }
+      ],
+      "keywords": [
+        "struct pointer",
+        "arrow"
+      ]
+    },
+    {
+      "id": "c-operator-precedence",
+      "name": "operator precedence",
+      "category": "Operators & Expressions",
+      "type": "concept",
+      "summary": "Know how expressions group before evaluation.",
+      "description": "Precedence determines parsing; associativity breaks grouping ties. Neither determines the runtime evaluation order of all operands. Parentheses improve clarity for mixed logical and arithmetic expressions.",
+      "syntax": "(a + b) * c",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a = 2, b = 3, c = 4;\n    printf(\"%d %d\\n\", a + b * c, (a + b) * c);\n    return 0;\n}\n",
+          "description": "Multiplication binds more tightly than addition."
+        }
+      ],
+      "keywords": [
+        "associativity",
+        "evaluation order"
+      ]
+    },
+    {
+      "id": "c-type-conversions-and-promotions",
+      "name": "type conversions and promotions",
+      "category": "Operators & Expressions",
+      "type": "concept",
+      "summary": "Understand integer promotions and usual arithmetic conversions.",
+      "description": "Small integer types generally promote to int or unsigned int before many operations. Mixed signed/unsigned expressions follow conversion rules that can affect comparisons. Cast explicitly when a conversion is intentional.",
+      "syntax": "(double)total / count",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a = 5, b = 2;\n    printf(\"%d %.1f\\n\", a / b, (double)a / b);\n    return 0;\n}\n",
+          "description": "Illustrates integer division versus floating division."
+        }
+      ],
+      "keywords": [
+        "integer promotions",
+        "usual arithmetic conversions"
+      ]
+    },
+    {
+      "id": "c-sequence-and-undefined-behavior",
+      "name": "sequence and undefined behavior",
+      "category": "Operators & Expressions",
+      "type": "concept",
+      "summary": "Avoid unsequenced reads and writes to one scalar object.",
+      "description": "C evaluates some subexpressions in unspecified order. If two unsequenced side effects modify the same scalar, or a modification is unsequenced relative to a value computation of that object, behavior is undefined.",
+      "syntax": "i++; int value = i;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int i = 0;\n    int first = i++;\n    int second = i;\n    printf(\"%d %d\\n\", first, second);\n    return 0;\n}\n",
+          "description": "Separate statements establish a clear order."
+        }
+      ],
+      "keywords": [
+        "sequence point",
+        "unsequenced",
+        "i++"
+      ],
+      "note": "Do not write printf(\"%d %d\", i++, i++) or similar unsequenced modifications."
+    },
+    {
+      "id": "c-if-else",
+      "name": "if / else",
+      "category": "Control Flow",
+      "type": "keyword",
+      "summary": "Execute blocks depending on an expression's truth value.",
+      "description": "In C, zero is false and any nonzero scalar is true. Braces prevent accidental attachment of a later statement to the wrong branch.",
+      "syntax": "if (condition) { ... } else { ... }",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int score = 72;\n    if (score >= 60) puts(\"pass\");\n    else puts(\"retry\");\n    return 0;\n}\n",
+          "description": "Selects one branch using an integer comparison."
+        }
+      ],
+      "keywords": [
+        "branch",
+        "condition"
+      ]
+    },
+    {
+      "id": "c-switch-case-default",
+      "name": "switch / case / default",
+      "category": "Control Flow",
+      "type": "keyword",
+      "summary": "Dispatch among integral constant labels.",
+      "description": "switch evaluates its controlling expression once and transfers to a matching case or default. Cases fall through unless execution exits, often via break. Case labels must be integer constant expressions.",
+      "syntax": "switch (choice) { case 1: ...; break; default: ...; }",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int choice = 2;\n    switch (choice) {\n    case 1: puts(\"one\"); break;\n    case 2: puts(\"two\"); break;\n    default: puts(\"other\");\n    }\n    return 0;\n}\n",
+          "description": "Shows explicit break statements to prevent fallthrough."
+        }
+      ],
+      "keywords": [
+        "fallthrough",
+        "case"
+      ]
+    },
+    {
+      "id": "c-for-loop",
+      "name": "for loop",
+      "category": "Control Flow",
+      "type": "keyword",
+      "summary": "Repeat initialization, condition check, and iteration expression.",
+      "description": "A for loop first runs initialization, then tests the condition before each iteration and executes the update afterward. In C99, loop-local declarations in for are supported.",
+      "syntax": "for (int i = 0; i < n; ++i) { ... }",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    for (int i = 0; i < 4; ++i) printf(\"%d \", i);\n    puts(\"\");\n    return 0;\n}\n",
+          "description": "Prints indices 0 through 3."
+        }
+      ],
+      "keywords": [
+        "iteration",
+        "C99"
+      ]
+    },
+    {
+      "id": "c-while-loop",
+      "name": "while loop",
+      "category": "Control Flow",
+      "type": "keyword",
+      "summary": "Repeat while a condition is true.",
+      "description": "A while loop checks its condition before each iteration, so the body may execute zero times. Update state or read new input so that a loop can terminate.",
+      "syntax": "while (condition) { ... }",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int n = 3;\n    while (n > 0) {\n        printf(\"%d \", n);\n        --n;\n    }\n    puts(\"\");\n    return 0;\n}\n",
+          "description": "Counts down until the condition becomes false."
+        }
+      ],
+      "keywords": [
+        "loop",
+        "condition"
+      ]
+    },
+    {
+      "id": "c-do-while-loop",
+      "name": "do / while loop",
+      "category": "Control Flow",
+      "type": "keyword",
+      "summary": "Execute a loop body at least once.",
+      "description": "A do/while loop checks the condition after the body. The trailing semicolon is required.",
+      "syntax": "do { ... } while (condition);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int n = 0;\n    do {\n        puts(\"runs once\");\n    } while (n != 0);\n    return 0;\n}\n",
+          "description": "The body executes before the false condition is checked."
+        }
+      ],
+      "keywords": [
+        "post-test loop"
+      ]
+    },
+    {
+      "id": "c-break-continue",
+      "name": "break / continue",
+      "category": "Control Flow",
+      "type": "keyword",
+      "summary": "Leave a loop or skip to its next iteration.",
+      "description": "break exits the nearest enclosing loop or switch. continue skips to the next iteration of the nearest enclosing loop; in a for loop the iteration expression runs before the next condition check.",
+      "syntax": "break;\ncontinue;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    for (int i = 0; i < 6; ++i) {\n        if (i == 2) continue;\n        if (i == 5) break;\n        printf(\"%d \", i);\n    }\n    puts(\"\");\n    return 0;\n}\n",
+          "description": "Skips 2 and exits before printing 5."
+        }
+      ],
+      "keywords": [
+        "loop control",
+        "switch"
+      ]
+    },
+    {
+      "id": "c-return",
+      "name": "return",
+      "category": "Functions",
+      "type": "keyword",
+      "summary": "Finish a function and optionally supply its result.",
+      "description": "return expression ends the current function and returns a value that is converted to the function's return type. In a void function use return; or reach the closing brace. main returning 0 conventionally signals success.",
+      "syntax": "return value;\nreturn;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    puts(\"done\");\n    return 0;\n}\n",
+          "description": "Returns successful status from main."
+        }
+      ],
+      "keywords": [
+        "function result",
+        "exit status"
+      ]
+    },
+    {
+      "id": "c-goto-labels",
+      "name": "goto / labels",
+      "category": "Control Flow",
+      "type": "keyword",
+      "summary": "Jump to a labeled statement in the same function.",
+      "description": "goto can be used to centralize cleanup in C when several resources need release, but most ordinary control flow is clearer with loops and functions. It cannot jump between functions.",
+      "syntax": "goto cleanup;\ncleanup: ;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int ok = 1;\n    if (!ok) goto cleanup;\n    puts(\"work completed\");\n    cleanup:\n    return 0;\n}\n",
+          "description": "Demonstrates a local jump target."
+        }
+      ],
+      "keywords": [
+        "cleanup",
+        "label"
+      ]
+    },
+    {
+      "id": "c-function-definition",
+      "name": "function definition",
+      "category": "Functions",
+      "type": "concept",
+      "summary": "Declare parameters, a return type, and a function body.",
+      "description": "A function definition includes executable statements. In C99, all called functions should have declarations in scope; implicit function declarations are not permitted.",
+      "syntax": "int add(int a, int b) { return a + b; }",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint add(int a, int b) { return a + b; }\nint main(void) {\n    printf(\"%d\\n\", add(2, 3));\n    return 0;\n}\n",
+          "description": "Defines a reusable function and calls it."
+        }
+      ],
+      "keywords": [
+        "parameters",
+        "return type"
+      ]
+    },
+    {
+      "id": "c-function-prototype",
+      "name": "function prototype",
+      "category": "Functions",
+      "type": "concept",
+      "summary": "Declare a function's interface before defining it.",
+      "description": "A prototype tells the compiler the parameter types and result type, allowing calls before the definition. int f(void) declares no parameters; int f() in C99 is not a prototype and should usually be avoided.",
+      "syntax": "int square(int x);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint square(int x);\nint main(void) { printf(\"%d\\n\", square(4)); return 0; }\nint square(int x) { return x * x; }\n",
+          "description": "The definition appears after main because the prototype came first."
+        }
+      ],
+      "keywords": [
+        "declaration",
+        "header"
+      ]
+    },
+    {
+      "id": "c-pass-by-value",
+      "name": "pass by value",
+      "category": "Functions",
+      "type": "concept",
+      "summary": "Function parameters are independent local objects.",
+      "description": "In C, arguments are passed by value. To update an object in the caller, pass a pointer to it. Passing a struct copies the struct; passing an array argument converts it to a pointer.",
+      "syntax": "void change(int x);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nvoid change(int x) { x = 99; (void)x; }\nint main(void) {\n    int n = 5;\n    change(n);\n    printf(\"%d\\n\", n);\n    return 0;\n}\n",
+          "description": "The caller's integer remains unchanged."
+        }
+      ],
+      "keywords": [
+        "argument",
+        "call by value"
+      ]
+    },
+    {
+      "id": "c-recursion",
+      "name": "recursion",
+      "category": "Functions",
+      "type": "concept",
+      "summary": "Let a function call itself with a smaller subproblem.",
+      "description": "Correct recursion needs a base case and progress toward it. Each call consumes stack resources, so deep recursion may exhaust available stack space. Iteration is often preferable for simple long-running traversals.",
+      "syntax": "int f(int n) { return n <= 1 ? 1 : n * f(n - 1); }",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint fact(int n) {\n    if (n <= 1) return 1;\n    return n * fact(n - 1);\n}\nint main(void) { printf(\"%d\\n\", fact(5)); return 0; }\n",
+          "description": "A small factorial example with a base case."
+        }
+      ],
+      "keywords": [
+        "call stack",
+        "base case"
+      ],
+      "note": "The example assumes nonnegative small n; int factorial overflows for larger inputs."
+    },
+    {
+      "id": "c-static-local-variable",
+      "name": "static local variable",
+      "category": "Functions",
+      "type": "concept",
+      "summary": "Retain a local variable's value across function calls.",
+      "description": "A static local variable has block scope but static storage duration. It is initialized once (and zero-initialized when no initializer is supplied), not on each call.",
+      "syntax": "static int count = 0;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint next(void) { static int count = 0; return ++count; }\nint main(void) {\n    printf(\"%d %d\\n\", next(), next());\n    return 0;\n}\n",
+          "description": "Two calls update one static local object; argument evaluation order is unspecified."
+        }
+      ],
+      "keywords": [
+        "state",
+        "lifetime"
+      ],
+      "note": "The two printf arguments are evaluated in unspecified order; use separate statements when order matters."
+    },
+    {
+      "id": "c-inline-function",
+      "name": "inline function",
+      "category": "Functions",
+      "type": "keyword",
+      "summary": "Suggest that a function definition is suitable for inline substitution.",
+      "description": "inline is a language linkage/inlining facility, not a promise that the compiler inserts code at the call site. C99 external-linkage rules differ from C++; static inline in a header is a common simple pattern.",
+      "syntax": "static inline int max2(int a, int b) { return a > b ? a : b; }",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nstatic inline int max2(int a, int b) { return a > b ? a : b; }\nint main(void) { printf(\"%d\\n\", max2(3, 8)); return 0; }\n",
+          "description": "Uses a small internal-linkage inline helper."
+        }
+      ],
+      "keywords": [
+        "optimization",
+        "C99"
+      ],
+      "note": "Do not assume inline eliminates a call or changes observable semantics."
+    },
+    {
+      "id": "c-function-pointers",
+      "name": "function pointers",
+      "category": "Functions",
+      "type": "concept",
+      "summary": "Store the address of a callable function.",
+      "description": "A function pointer's type includes parameter and return types. Parentheses around (*name) distinguish a pointer from a function returning a pointer.",
+      "syntax": "int (*operation)(int, int);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint add(int a, int b) { return a + b; }\nint main(void) {\n    int (*operation)(int, int) = add;\n    printf(\"%d\\n\", operation(4, 5));\n    return 0;\n}\n",
+          "description": "Calls a function through a pointer with a matching signature."
+        }
+      ],
+      "keywords": [
+        "callback",
+        "qsort",
+        "declarator"
+      ]
+    },
+    {
+      "id": "c-variadic-functions",
+      "name": "variadic functions",
+      "category": "Functions",
+      "type": "concept",
+      "summary": "Accept a variable number of arguments through stdarg.h.",
+      "description": "Use va_list, va_start, va_arg, and va_end to traverse unnamed arguments. The caller and callee must agree on count/types; default argument promotions apply.",
+      "syntax": "int total(int count, ...);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdarg.h>\nint sum(int count, ...) {\n    va_list ap;\n    va_start(ap, count);\n    int result = 0;\n    for (int i = 0; i < count; ++i) result += va_arg(ap, int);\n    va_end(ap);\n    return result;\n}\nint main(void) { printf(\"%d\\n\", sum(3, 1, 2, 3)); return 0; }\n",
+          "description": "Adds three int arguments using C99 variable-argument facilities."
+        }
+      ],
+      "keywords": [
+        "stdarg.h",
+        "va_list"
+      ],
+      "note": "Using va_arg with the wrong promoted type is undefined behavior."
+    },
+    {
+      "id": "c-pointer-declaration",
+      "name": "pointer declaration",
+      "category": "Pointers & Memory",
+      "type": "concept",
+      "summary": "Declare a variable that holds an address.",
+      "description": "int *p means p points to int. The asterisk belongs to the declarator; in int *p, x; only p is a pointer. Pointers must be initialized before dereference.",
+      "syntax": "int *p = &value;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int value = 10;\n    int *p = &value;\n    printf(\"%d\\n\", *p);\n    return 0;\n}\n",
+          "description": "Creates a pointer to a local integer."
+        }
+      ],
+      "keywords": [
+        "indirection",
+        "declaration"
+      ]
+    },
+    {
+      "id": "c-null-pointer",
+      "name": "NULL pointer",
+      "category": "Pointers & Memory",
+      "type": "concept",
+      "summary": "Represent a pointer not pointing at any object or function.",
+      "description": "NULL is a null pointer constant macro from headers including stddef.h and stdio.h. Test a pointer before dereferencing when a null value is possible. A null pointer is not necessarily represented by all-zero bytes.",
+      "syntax": "if (p == NULL) { ... }",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\nint main(void) {\n    int *p = malloc(sizeof *p);\n    if (p == NULL) return 1;\n    *p = 17;\n    printf(\"%d\\n\", *p);\n    free(p);\n    return 0;\n}\n",
+          "description": "Tests allocation before using a pointer."
+        }
+      ],
+      "keywords": [
+        "null",
+        "allocation"
+      ]
+    },
+    {
+      "id": "c-pointer-arithmetic",
+      "name": "pointer arithmetic",
+      "category": "Pointers & Memory",
+      "type": "operator",
+      "summary": "Advance pointers by elements, not bytes.",
+      "description": "Adding n to a pointer into an array moves n elements. Results may point within the same array or one past its last element; a one-past pointer must not be dereferenced. Subtraction is defined only within one array (subject to representability).",
+      "syntax": "p + n\np - n",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a[] = {10, 20, 30};\n    int *p = a;\n    printf(\"%d\\n\", *(p + 2));\n    return 0;\n}\n",
+          "description": "Moves two int elements from the first position."
+        }
+      ],
+      "keywords": [
+        "one-past-end",
+        "array"
+      ],
+      "note": "Arithmetic on an unrelated pointer is not made valid by casting."
+    },
+    {
+      "id": "c-pointer-to-const-vs-const-pointer",
+      "name": "pointer to const vs const pointer",
+      "category": "Pointers & Memory",
+      "type": "concept",
+      "summary": "Understand which part of a declaration is immutable.",
+      "description": "const int *p: the pointed-to int cannot be changed through p, but p can change. int *const p: p cannot be reassigned, but *p can change. const int *const p applies both restrictions.",
+      "syntax": "const int *a;\nint *const b = &x;\nconst int *const c = &x;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int x = 3, y = 4;\n    const int *read_only = &x;\n    read_only = &y;\n    int *const fixed = &x;\n    *fixed = 9;\n    printf(\"%d %d\\n\", *read_only, *fixed);\n    return 0;\n}\n",
+          "description": "Shows the difference between fixed pointer and read-only access."
+        }
+      ],
+      "keywords": [
+        "const pointer",
+        "pointer const",
+        "int *const *"
+      ]
+    },
+    {
+      "id": "c-pointer-to-pointer",
+      "name": "pointer to pointer",
+      "category": "Pointers & Memory",
+      "type": "concept",
+      "summary": "Store the address of another pointer.",
+      "description": "int **pp points to an int* object; *pp is the inner pointer and **pp is the int it designates. This is useful for updating caller pointers or handling arrays of pointers.",
+      "syntax": "int **pp = &p;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int value = 8;\n    int *p = &value;\n    int **pp = &p;\n    **pp = 12;\n    printf(\"%d\\n\", value);\n    return 0;\n}\n",
+          "description": "Two dereferences reach the original integer."
+        }
+      ],
+      "keywords": [
+        "double pointer",
+        "indirection"
+      ]
+    },
+    {
+      "id": "c-void",
+      "name": "void *",
+      "category": "Pointers & Memory",
+      "type": "type",
+      "summary": "Hold a generic object pointer.",
+      "description": "A void* can receive pointers to object types and convert back. C permits implicit conversion between void* and object pointers. Standard C does not allow dereferencing a void* or doing arithmetic on it directly.",
+      "syntax": "void *generic = &value;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int value = 12;\n    void *generic = &value;\n    int *typed = generic;\n    printf(\"%d\\n\", *typed);\n    return 0;\n}\n",
+          "description": "Converts a generic object pointer back to its original type."
+        }
+      ],
+      "keywords": [
+        "generic pointer",
+        "malloc"
+      ],
+      "note": "Function pointers are not generally interchangeable with void* under ISO C."
+    },
+    {
+      "id": "c-malloc",
+      "name": "malloc",
+      "category": "Pointers & Memory",
+      "type": "function",
+      "summary": "Allocate uninitialized dynamic storage.",
+      "description": "malloc(size) obtains size bytes of suitably aligned storage, or returns NULL on failure. The bytes are uninitialized; initialize before reading them. Release the storage with free exactly once when no longer needed.",
+      "syntax": "void *malloc(size_t size);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\nint main(void) {\n    int *p = malloc(4 * sizeof *p);\n    if (!p) return 1;\n    for (int i = 0; i < 4; ++i) p[i] = i * 10;\n    printf(\"%d\\n\", p[3]);\n    free(p);\n    return 0;\n}\n",
+          "description": "Allocates and fills four integers."
+        }
+      ],
+      "keywords": [
+        "heap",
+        "allocation"
+      ],
+      "options": [
+        {
+          "flag": "size",
+          "description": "Requested number of bytes (size_t)."
+        }
+      ],
+      "note": "Avoid relying on the behavior of malloc(0); it is implementation-defined."
+    },
+    {
+      "id": "c-calloc",
+      "name": "calloc",
+      "category": "Pointers & Memory",
+      "type": "function",
+      "summary": "Allocate storage initialized to all zero bits.",
+      "description": "calloc(count, size) allocates space for an array of count elements and sets all bytes to zero. For standard integer types this produces zero values. Check for allocation failure and release the result with free.",
+      "syntax": "void *calloc(size_t count, size_t size);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\nint main(void) {\n    int *p = calloc(3, sizeof *p);\n    if (!p) return 1;\n    printf(\"%d\\n\", p[2]);\n    free(p);\n    return 0;\n}\n",
+          "description": "Allocates three zero-initialized integers."
+        }
+      ],
+      "keywords": [
+        "zeroed memory",
+        "allocation"
+      ],
+      "options": [
+        {
+          "flag": "count",
+          "description": "Number of elements."
+        },
+        {
+          "flag": "size",
+          "description": "Bytes per element."
+        }
+      ],
+      "note": "All-bits-zero is not guaranteed to represent a null pointer on every C implementation."
+    },
+    {
+      "id": "c-realloc",
+      "name": "realloc",
+      "category": "Pointers & Memory",
+      "type": "function",
+      "summary": "Resize a previously allocated block.",
+      "description": "realloc may move an allocation. On success the old pointer is invalidated even if the address is unchanged; on failure it returns NULL and leaves the old allocation intact. Preserve the original pointer until success.",
+      "syntax": "void *realloc(void *ptr, size_t size);",
+      "examples": [
+        {
+          "command": "#include <stdlib.h>\n#include <stdio.h>\nint main(void) {\n    int *a = malloc(2 * sizeof *a);\n    if (!a) return 1;\n    a[0] = 1; a[1] = 2;\n    int *tmp = realloc(a, 4 * sizeof *a);\n    if (!tmp) { free(a); return 1; }\n    a = tmp;\n    a[2] = 3; a[3] = 4;\n    printf(\"%d\\n\", a[3]);\n    free(a);\n    return 0;\n}\n",
+          "description": "Uses a temporary pointer to handle realloc failure safely."
+        }
+      ],
+      "keywords": [
+        "resize",
+        "heap"
+      ],
+      "options": [
+        {
+          "flag": "ptr",
+          "description": "Pointer returned by a previous allocation call, or NULL."
+        },
+        {
+          "flag": "size",
+          "description": "New size in bytes."
+        }
+      ],
+      "note": "Avoid realloc(ptr, 0) in portable code; zero-size behavior differs across C versions and implementations."
+    },
+    {
+      "id": "c-free",
+      "name": "free",
+      "category": "Pointers & Memory",
+      "type": "function",
+      "summary": "Release dynamically allocated storage.",
+      "description": "free accepts NULL or a pointer from a compatible allocation function that has not been freed. After free, pointers to the allocation are dangling and must not be dereferenced or freed again.",
+      "syntax": "void free(void *ptr);",
+      "examples": [
+        {
+          "command": "#include <stdlib.h>\nint main(void) {\n    int *p = malloc(sizeof *p);\n    if (!p) return 1;\n    *p = 5;\n    free(p);\n    p = NULL;\n    return 0;\n}\n",
+          "description": "Releases memory and clears the local pointer."
+        }
+      ],
+      "keywords": [
+        "deallocation",
+        "dangling pointer",
+        "double free"
+      ],
+      "options": [
+        {
+          "flag": "ptr",
+          "description": "Allocation pointer (or NULL)."
+        }
+      ],
+      "note": "Setting one variable to NULL does not clear copies of the pointer elsewhere."
+    },
+    {
+      "id": "c-memory-lifetime-and-dangling-pointers",
+      "name": "memory lifetime and dangling pointers",
+      "category": "Pointers & Memory",
+      "type": "concept",
+      "summary": "Know when a pointer stops designating a live object.",
+      "description": "A pointer becomes invalid for dereference after the pointed-to object ends its lifetime, such as when a local block ends or an allocation is freed. Returning a pointer to a local automatic variable is invalid.",
+      "syntax": "return pointer_to_live_object;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint *get_pointer(int *p) { return p; }\nint main(void) {\n    int value = 5;\n    int *p = get_pointer(&value);\n    printf(\"%d\\n\", *p);\n    return 0;\n}\n",
+          "description": "Returns a pointer to an object that remains alive in main."
+        }
+      ],
+      "keywords": [
+        "use-after-free",
+        "stack",
+        "dangling"
+      ],
+      "note": "Never return &local_variable when local_variable has automatic storage duration."
+    },
+    {
+      "id": "c-malloc-size-overflow",
+      "name": "malloc size overflow",
+      "category": "Pointers & Memory",
+      "type": "concept",
+      "summary": "Check count times element size before allocating.",
+      "description": "Multiplying two size_t values can wrap, yielding an allocation smaller than intended. Check count <= SIZE_MAX / sizeof element before computing the byte count.",
+      "syntax": "if (count > SIZE_MAX / sizeof *p) { /* error */ }",
+      "examples": [
+        {
+          "command": "#include <stdint.h>\n#include <stdlib.h>\nint main(void) {\n    size_t count = 100;\n    int *p = NULL;\n    if (count > SIZE_MAX / sizeof *p) return 1;\n    p = malloc(count * sizeof *p);\n    if (!p) return 1;\n    free(p);\n    return 0;\n}\n",
+          "description": "Uses SIZE_MAX from stdint.h to guard multiplication."
+        }
+      ],
+      "keywords": [
+        "integer overflow",
+        "allocation size",
+        "security"
+      ]
+    },
+    {
+      "id": "c-memcpy",
+      "name": "memcpy",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Copy a specified number of bytes between nonoverlapping regions.",
+      "description": "memcpy(dst, src, n) requires valid storage ranges and must not be used for overlapping regions. Use memmove if the ranges can overlap. The function does not allocate storage or append a string terminator.",
+      "syntax": "void *memcpy(void *dst, const void *src, size_t n);",
+      "examples": [
+        {
+          "command": "#include <string.h>\n#include <stdio.h>\nint main(void) {\n    int a[3] = {1, 2, 3}, b[3] = {0};\n    memcpy(b, a, sizeof a);\n    printf(\"%d\\n\", b[1]);\n    return 0;\n}\n",
+          "description": "Copies a complete int array into another of the same type."
+        }
+      ],
+      "keywords": [
+        "string.h",
+        "byte copy"
+      ],
+      "options": [
+        {
+          "flag": "dst",
+          "description": "Destination memory."
+        },
+        {
+          "flag": "src",
+          "description": "Source memory."
+        },
+        {
+          "flag": "n",
+          "description": "Number of bytes."
+        }
+      ]
+    },
+    {
+      "id": "c-memmove",
+      "name": "memmove",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Copy bytes safely even when source and destination overlap.",
+      "description": "memmove behaves as though bytes are first copied into a temporary nonoverlapping buffer. It is useful when moving data within the same array.",
+      "syntax": "void *memmove(void *dst, const void *src, size_t n);",
+      "examples": [
+        {
+          "command": "#include <string.h>\n#include <stdio.h>\nint main(void) {\n    char text[] = \"abcd\";\n    memmove(text + 1, text, 4);\n    puts(text);\n    return 0;\n}\n",
+          "description": "Shifts four bytes, including the d, to produce aabcd."
+        }
+      ],
+      "keywords": [
+        "overlap",
+        "string.h"
+      ],
+      "options": [
+        {
+          "flag": "dst",
+          "description": "Destination memory."
+        },
+        {
+          "flag": "src",
+          "description": "Source memory."
+        },
+        {
+          "flag": "n",
+          "description": "Number of bytes."
+        }
+      ],
+      "note": "This example relies on the array having five bytes and does not copy the terminator; the original terminator remains."
+    },
+    {
+      "id": "c-memset",
+      "name": "memset",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Set every byte in a memory region to a specified byte value.",
+      "description": "memset fills bytes; it does not perform typed element assignments. It is useful for clearing character buffers, but an all-zero byte representation is not universally valid for every C type.",
+      "syntax": "void *memset(void *ptr, int byte, size_t n);",
+      "examples": [
+        {
+          "command": "#include <string.h>\n#include <stdio.h>\nint main(void) {\n    unsigned char data[4];\n    memset(data, 0, sizeof data);\n    printf(\"%u\\n\", (unsigned)data[0]);\n    return 0;\n}\n",
+          "description": "Clears the bytes of an unsigned char array."
+        }
+      ],
+      "keywords": [
+        "byte initialization"
+      ],
+      "options": [
+        {
+          "flag": "ptr",
+          "description": "Destination memory."
+        },
+        {
+          "flag": "byte",
+          "description": "Value converted to unsigned char."
+        },
+        {
+          "flag": "n",
+          "description": "Bytes to set."
+        }
+      ]
+    },
+    {
+      "id": "c-memcmp",
+      "name": "memcmp",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Compare two memory regions byte by byte.",
+      "description": "memcmp compares the first n bytes as unsigned char values and returns a negative, zero, or positive integer. It is not a general struct equality test because padding bytes may differ.",
+      "syntax": "int memcmp(const void *a, const void *b, size_t n);",
+      "examples": [
+        {
+          "command": "#include <string.h>\n#include <stdio.h>\nint main(void) {\n    unsigned char a[] = {1, 2}, b[] = {1, 3};\n    printf(\"%d\\n\", memcmp(a, b, sizeof a) < 0);\n    return 0;\n}\n",
+          "description": "Checks whether the byte sequence a is lexicographically smaller."
+        }
+      ],
+      "keywords": [
+        "binary comparison"
+      ],
+      "options": [
+        {
+          "flag": "a",
+          "description": "First byte range."
+        },
+        {
+          "flag": "b",
+          "description": "Second byte range."
+        },
+        {
+          "flag": "n",
+          "description": "Bytes to compare."
+        }
+      ],
+      "note": "Do not use memcmp on a struct to compare its logical values."
+    },
+    {
+      "id": "c-one-dimensional-arrays",
+      "name": "one-dimensional arrays",
+      "category": "Arrays & Strings",
+      "type": "concept",
+      "summary": "Store multiple elements of the same type contiguously.",
+      "description": "Array indices range from 0 to length-1. The compiler does not check out-of-range access automatically. Arrays cannot be assigned as whole objects, though structures containing arrays can be assigned.",
+      "syntax": "int values[3] = {10, 20, 30};",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int values[3] = {10, 20, 30};\n    for (size_t i = 0; i < 3; ++i) printf(\"%d \", values[i]);\n    puts(\"\");\n    return 0;\n}\n",
+          "description": "Declares and iterates through a fixed-size array."
+        }
+      ],
+      "keywords": [
+        "contiguous",
+        "index",
+        "bounds"
+      ]
+    },
+    {
+      "id": "c-multidimensional-arrays",
+      "name": "multidimensional arrays",
+      "category": "Arrays & Strings",
+      "type": "concept",
+      "summary": "Store arrays of arrays in row-major order.",
+      "description": "int a[2][3] contains two rows, each holding three int elements. In memory the last index varies fastest. For a function taking such an array, all dimensions except the first need to be specified (or supplied as VLA parameters).",
+      "syntax": "int matrix[2][3] = {{1,2,3},{4,5,6}};",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a[2][3] = {{1, 2, 3}, {4, 5, 6}};\n    printf(\"%d\\n\", a[1][2]);\n    return 0;\n}\n",
+          "description": "Reads the final element of a 2-by-3 array."
+        }
+      ],
+      "keywords": [
+        "2D array",
+        "row-major"
+      ]
+    },
+    {
+      "id": "c-array-to-pointer-conversion",
+      "name": "array-to-pointer conversion",
+      "category": "Arrays & Strings",
+      "type": "concept",
+      "summary": "Most array expressions become pointers to their first elements.",
+      "description": "Except in contexts such as sizeof, unary &, and string-literal initialization, an array expression usually converts to a pointer to its first element. A function parameter written int a[] is adjusted to int *a; it does not carry array length.",
+      "syntax": "void process(int a[], size_t n);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stddef.h>\nvoid show(const int a[], size_t n) {\n    for (size_t i = 0; i < n; ++i) printf(\"%d \", a[i]);\n}\nint main(void) {\n    int a[] = {3, 4, 5};\n    show(a, sizeof a / sizeof a[0]);\n    return 0;\n}\n",
+          "description": "Passes both a pointer and an explicit element count."
+        }
+      ],
+      "keywords": [
+        "array decay",
+        "parameter",
+        "sizeof"
+      ],
+      "note": "sizeof on an array parameter measures a pointer, not the original array."
+    },
+    {
+      "id": "c-variable-length-arrays-vla",
+      "name": "variable length arrays (VLA)",
+      "category": "Arrays & Strings",
+      "type": "concept",
+      "summary": "Declare an automatic array whose length is computed at runtime (C99).",
+      "description": "C99 supports variable length arrays in suitable block scopes. Some later C implementations make VLA support optional; large VLAs can exhaust stack space. Validate lengths and prefer heap allocation for large dynamic data.",
+      "syntax": "int n = 5;\nint values[n];",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int n = 4;\n    int values[n];\n    for (int i = 0; i < n; ++i) values[i] = i;\n    printf(\"%d\\n\", values[3]);\n    return 0;\n}\n",
+          "description": "Uses a C99 runtime-sized automatic array."
+        }
+      ],
+      "keywords": [
+        "C99",
+        "stack"
+      ],
+      "note": "Unlike C++, standard C99 permits VLAs; not every toolchain supports them."
+    },
+    {
+      "id": "c-c-strings-and-0",
+      "name": "C strings and '\\0'",
+      "category": "Arrays & Strings",
+      "type": "concept",
+      "summary": "Represent text as a sequence of char ending in a null byte.",
+      "description": "C strings require space for the terminating '\\0'. strlen counts characters before the terminator, not buffer capacity. Functions that expect strings need a valid null terminator within accessible storage.",
+      "syntax": "char word[] = \"cat\";",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    char word[] = \"cat\";\n    printf(\"%zu %zu\\n\", strlen(word), sizeof word);\n    return 0;\n}\n",
+          "description": "The array holds four bytes while the string length is three."
+        }
+      ],
+      "keywords": [
+        "null terminated",
+        "buffer capacity"
+      ]
+    },
+    {
+      "id": "c-strlen",
+      "name": "strlen",
+      "category": "Arrays & Strings",
+      "type": "function",
+      "summary": "Count bytes before the terminating null character.",
+      "description": "strlen returns size_t and scans until '\\0'. It must be given a valid terminated string; passing a nonterminated byte buffer can read past its bounds.",
+      "syntax": "size_t strlen(const char *s);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    const char *s = \"hello\";\n    printf(\"%zu\\n\", strlen(s));\n    return 0;\n}\n",
+          "description": "Prints the length excluding the terminator."
+        }
+      ],
+      "keywords": [
+        "string.h",
+        "length"
+      ],
+      "options": [
+        {
+          "flag": "s",
+          "description": "A valid null-terminated byte string."
+        }
+      ],
+      "note": "strlen is not a Unicode character counter."
+    },
+    {
+      "id": "c-strcmp",
+      "name": "strcmp",
+      "category": "Arrays & Strings",
+      "type": "function",
+      "summary": "Compare two null-terminated strings lexicographically.",
+      "description": "strcmp returns a negative, zero, or positive integer; do not assume the exact magnitude. It is case-sensitive and compares using unsigned char values.",
+      "syntax": "int strcmp(const char *a, const char *b);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    printf(\"%d\\n\", strcmp(\"cat\", \"car\") > 0);\n    return 0;\n}\n",
+          "description": "Checks lexicographic ordering without relying on exact return magnitude."
+        }
+      ],
+      "keywords": [
+        "string.h",
+        "comparison"
+      ],
+      "options": [
+        {
+          "flag": "a",
+          "description": "First terminated string."
+        },
+        {
+          "flag": "b",
+          "description": "Second terminated string."
+        }
+      ]
+    },
+    {
+      "id": "c-strncmp",
+      "name": "strncmp",
+      "category": "Arrays & Strings",
+      "type": "function",
+      "summary": "Compare at most n characters from two C strings.",
+      "description": "strncmp stops at a difference, a null character, or the limit. Like strcmp it returns a sign, not a guaranteed -1/0/1. It does not solve every problem involving nonterminated byte arrays.",
+      "syntax": "int strncmp(const char *a, const char *b, size_t n);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    printf(\"%d\\n\", strncmp(\"prefixA\", \"prefixB\", 6) == 0);\n    return 0;\n}\n",
+          "description": "Compares only the first six characters."
+        }
+      ],
+      "keywords": [
+        "prefix",
+        "string.h"
+      ],
+      "options": [
+        {
+          "flag": "a",
+          "description": "First string."
+        },
+        {
+          "flag": "b",
+          "description": "Second string."
+        },
+        {
+          "flag": "n",
+          "description": "Maximum characters examined."
+        }
+      ]
+    },
+    {
+      "id": "c-strcpy",
+      "name": "strcpy",
+      "category": "Arrays & Strings",
+      "type": "function",
+      "summary": "Copy a C string including its null terminator.",
+      "description": "strcpy requires the destination to have sufficient space and nonoverlapping storage. The function has no buffer capacity parameter; prefer carefully bounded alternatives when the destination size is not guaranteed.",
+      "syntax": "char *strcpy(char *dst, const char *src);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    char dst[12];\n    strcpy(dst, \"hello\");\n    puts(dst);\n    return 0;\n}\n",
+          "description": "Copies a known short literal into a large enough array."
+        }
+      ],
+      "keywords": [
+        "string copy",
+        "buffer overflow"
+      ],
+      "options": [
+        {
+          "flag": "dst",
+          "description": "Writable array with sufficient capacity."
+        },
+        {
+          "flag": "src",
+          "description": "Valid source string."
+        }
+      ],
+      "note": "Never use strcpy with an unknown-length source and a fixed destination."
+    },
+    {
+      "id": "c-strncpy",
+      "name": "strncpy",
+      "category": "Arrays & Strings",
+      "type": "function",
+      "summary": "Copy at most n bytes, with tricky termination behavior.",
+      "description": "If the source fits before n, strncpy pads the destination with null bytes; otherwise it writes exactly n bytes without adding '\\0'. It is not a generally safe drop-in replacement for strcpy.",
+      "syntax": "char *strncpy(char *dst, const char *src, size_t n);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    char dst[8];\n    strncpy(dst, \"cat\", sizeof dst);\n    puts(dst);\n    return 0;\n}\n",
+          "description": "The short source is terminated and padded in this specific example."
+        }
+      ],
+      "keywords": [
+        "fixed width",
+        "termination"
+      ],
+      "options": [
+        {
+          "flag": "dst",
+          "description": "Destination buffer."
+        },
+        {
+          "flag": "src",
+          "description": "Source string."
+        },
+        {
+          "flag": "n",
+          "description": "Maximum bytes written."
+        }
+      ],
+      "note": "When truncating, explicitly ensure termination or use a different bounded-copy design."
+    },
+    {
+      "id": "c-strcat",
+      "name": "strcat",
+      "category": "Arrays & Strings",
+      "type": "function",
+      "summary": "Append one string to another.",
+      "description": "strcat finds the destination terminator and writes the source including '\\0'. Ensure capacity for the combined strings and prevent overlapping source/destination ranges.",
+      "syntax": "char *strcat(char *dst, const char *src);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    char text[16] = \"Hello\";\n    strcat(text, \", C\");\n    puts(text);\n    return 0;\n}\n",
+          "description": "Appends when the destination has enough capacity."
+        }
+      ],
+      "keywords": [
+        "concatenation",
+        "buffer overflow"
+      ],
+      "options": [
+        {
+          "flag": "dst",
+          "description": "Writable terminated string with spare capacity."
+        },
+        {
+          "flag": "src",
+          "description": "String to append."
+        }
+      ]
+    },
+    {
+      "id": "c-strchr",
+      "name": "strchr",
+      "category": "Arrays & Strings",
+      "type": "function",
+      "summary": "Find the first occurrence of a character in a string.",
+      "description": "strchr returns a pointer to a matching character or NULL if absent. Searching for '\\0' returns a pointer to the terminating null byte.",
+      "syntax": "char *strchr(const char *s, int c);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    const char *text = \"banana\";\n    const char *at = strchr(text, 'n');\n    printf(\"%s\\n\", at ? at : \"missing\");\n    return 0;\n}\n",
+          "description": "The returned pointer refers to the substring beginning at the first n."
+        }
+      ],
+      "keywords": [
+        "search",
+        "character"
+      ],
+      "options": [
+        {
+          "flag": "s",
+          "description": "String to search."
+        },
+        {
+          "flag": "c",
+          "description": "Character value being sought."
+        }
+      ]
+    },
+    {
+      "id": "c-strstr",
+      "name": "strstr",
+      "category": "Arrays & Strings",
+      "type": "function",
+      "summary": "Find the first occurrence of a substring.",
+      "description": "strstr searches a valid null-terminated haystack for a null-terminated needle. It returns the first match or NULL; the empty needle matches at the start.",
+      "syntax": "char *strstr(const char *haystack, const char *needle);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    const char *p = strstr(\"Hello world\", \"world\");\n    if (p) puts(p);\n    return 0;\n}\n",
+          "description": "Finds and prints the matched suffix."
+        }
+      ],
+      "keywords": [
+        "substring"
+      ],
+      "options": [
+        {
+          "flag": "haystack",
+          "description": "String to search."
+        },
+        {
+          "flag": "needle",
+          "description": "Substring to find."
+        }
+      ]
+    },
+    {
+      "id": "c-strtok",
+      "name": "strtok",
+      "category": "Arrays & Strings",
+      "type": "function",
+      "summary": "Split a mutable string into tokens using delimiter characters.",
+      "description": "strtok modifies its input by inserting null terminators and uses internal state across calls. Subsequent calls pass NULL to continue; nested or concurrent tokenization needs a different approach.",
+      "syntax": "char *strtok(char *str, const char *delim);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    char text[] = \"red,green,blue\";\n    for (char *token = strtok(text, \",\"); token; token = strtok(NULL, \",\")) puts(token);\n    return 0;\n}\n",
+          "description": "Splits a mutable comma-separated buffer."
+        }
+      ],
+      "keywords": [
+        "tokenizer",
+        "state"
+      ],
+      "options": [
+        {
+          "flag": "str",
+          "description": "Mutable input on first call; NULL to continue."
+        },
+        {
+          "flag": "delim",
+          "description": "Characters considered delimiters."
+        }
+      ],
+      "note": "strtok skips runs of delimiters and does not return empty fields."
+    },
+    {
+      "id": "c-ctype-h-character-tests",
+      "name": "ctype.h character tests",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Classify and transform single-byte characters.",
+      "description": "Functions such as isdigit, isalpha, isspace, toupper and tolower require either EOF or an unsigned-char-representable value. Cast potentially negative plain char values to unsigned char before calling.",
+      "syntax": "isdigit((unsigned char)c)\ntolower((unsigned char)c)",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <ctype.h>\n\nint main(void) {\n    char c = '7';\n    printf(\"%d\\n\", isdigit((unsigned char)c) != 0);\n    return 0;\n}\n",
+          "description": "Tests whether a character is a decimal digit."
+        }
+      ],
+      "keywords": [
+        "isdigit",
+        "isspace",
+        "isalpha",
+        "toupper",
+        "tolower"
+      ],
+      "note": "Behavior depends partly on the current locale; ctype functions do not process full Unicode code points."
+    },
+    {
+      "id": "c-printf",
+      "name": "printf",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Print formatted text to stdout.",
+      "description": "printf interprets conversion specifiers. Common ones: %d int, %u unsigned, %f double, %c int character, %s string, %p void pointer, %zu size_t, %lld long long. Argument types must match their specifiers.",
+      "syntax": "int printf(const char *format, ...);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int n = 12;\n    printf(\"n=%d, hex=%x\\n\", n, (unsigned)n);\n    return 0;\n}\n",
+          "description": "Prints an integer in decimal and hexadecimal."
+        }
+      ],
+      "keywords": [
+        "format specifier",
+        "stdout"
+      ],
+      "options": [
+        {
+          "flag": "format",
+          "description": "Format string containing conversion specifiers."
+        },
+        {
+          "flag": "...",
+          "description": "Values matching the format."
+        }
+      ],
+      "note": "A type mismatch in a variadic format argument can cause undefined behavior."
+    },
+    {
+      "id": "c-scanf",
+      "name": "scanf",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Read formatted input from stdin.",
+      "description": "scanf returns the number of successful assignments, or EOF for input failure before any conversion. For numeric conversions pass addresses such as &n. %s without a width can overflow a buffer; numeric conversions can also fail on invalid input.",
+      "syntax": "int scanf(const char *format, ...);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int number;\n    if (scanf(\"%d\", &number) == 1) printf(\"%d\\n\", number);\n    return 0;\n}\n",
+          "description": "Tests the conversion count before using the result."
+        }
+      ],
+      "keywords": [
+        "stdin",
+        "return value",
+        "conversion"
+      ],
+      "options": [
+        {
+          "flag": "format",
+          "description": "Input format specification."
+        },
+        {
+          "flag": "...",
+          "description": "Pointers to writable destination objects."
+        }
+      ],
+      "note": "scanf(\"%d\", ...) skips leading whitespace; pressing Enter alone does not end input."
+    },
+    {
+      "id": "c-fgets",
+      "name": "fgets",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Read at most size-1 characters into a buffer.",
+      "description": "fgets reads a line or part of one, retaining a newline if it fits and always null-terminating on success. It returns NULL on end-of-file with no characters read or on error.",
+      "syntax": "char *fgets(char *s, int size, FILE *stream);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    char line[80];\n    if (fgets(line, sizeof line, stdin)) printf(\"Read: %s\", line);\n    return 0;\n}\n",
+          "description": "Reads bounded input, avoiding an unbounded %s conversion."
+        }
+      ],
+      "keywords": [
+        "line input",
+        "safe input"
+      ],
+      "options": [
+        {
+          "flag": "s",
+          "description": "Writable character buffer."
+        },
+        {
+          "flag": "size",
+          "description": "Total buffer capacity, including terminator."
+        },
+        {
+          "flag": "stream",
+          "description": "Input stream such as stdin."
+        }
+      ],
+      "note": "If the line exceeds the buffer, the remainder stays in the input stream."
+    },
+    {
+      "id": "c-puts-fputs",
+      "name": "puts / fputs",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Write a string to stdout or a chosen stream.",
+      "description": "puts writes the string plus a newline to stdout. fputs writes the string without automatically appending a newline, and accepts a FILE* stream.",
+      "syntax": "puts(text);\nfputs(text, stdout);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    puts(\"first line\");\n    fputs(\"second line\\n\", stdout);\n    return 0;\n}\n",
+          "description": "Contrasts automatic newline handling."
+        }
+      ],
+      "keywords": [
+        "stdout",
+        "string output"
+      ]
+    },
+    {
+      "id": "c-getchar-putchar",
+      "name": "getchar / putchar",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Read or write a single character.",
+      "description": "getchar returns an unsigned char converted to int, or EOF on end-of-file/error. Store its result in int rather than char so EOF can be distinguished. putchar writes a character value.",
+      "syntax": "int c = getchar();\nputchar(c);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int c = getchar();\n    if (c != EOF) putchar(c);\n    return 0;\n}\n",
+          "description": "Copies one input character if available."
+        }
+      ],
+      "keywords": [
+        "EOF",
+        "stdin",
+        "stdout"
+      ]
+    },
+    {
+      "id": "c-eof-and-input-loops",
+      "name": "EOF and input loops",
+      "category": "Input & Output",
+      "type": "concept",
+      "summary": "Distinguish end-of-input from a character or failed conversion.",
+      "description": "EOF is a negative int macro used by input functions to report end-of-file or an error. A failed scanf conversion can return 0 (not EOF) if input does not match the format. Clear error states or consume invalid input as appropriate.",
+      "syntax": "while ((ch = getchar()) != EOF) { ... }",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int ch;\n    while ((ch = getchar()) != EOF) putchar(ch);\n    return 0;\n}\n",
+          "description": "Copies input until the stream ends."
+        }
+      ],
+      "keywords": [
+        "feof",
+        "input failure"
+      ],
+      "note": "feof is set only after an input attempt discovers end-of-file."
+    },
+    {
+      "id": "c-file-streams",
+      "name": "FILE * streams",
+      "category": "Input & Output",
+      "type": "concept",
+      "summary": "Represent open files with the stdio.h stream abstraction.",
+      "description": "FILE* connects standard I/O operations to a stream. The standard streams stdin, stdout and stderr are automatically available in hosted programs. Close files you open when finished.",
+      "syntax": "FILE *file = fopen(\"data.txt\", \"r\");",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    fprintf(stderr, \"diagnostic message\\n\");\n    return 0;\n}\n",
+          "description": "Uses the predefined stderr stream without opening a file."
+        }
+      ],
+      "keywords": [
+        "stdio.h",
+        "stdin",
+        "stdout",
+        "stderr"
+      ]
+    },
+    {
+      "id": "c-fopen",
+      "name": "fopen",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Open a file and obtain a FILE* stream.",
+      "description": "Modes include \"r\" (read existing), \"w\" (write/truncate or create), \"a\" (append), plus binary modifiers such as \"rb\" and update modes like \"r+\". Check for NULL; close the stream on success.",
+      "syntax": "FILE *fopen(const char *path, const char *mode);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    FILE *fp = fopen(\"example.txt\", \"w\");\n    if (!fp) return 1;\n    fputs(\"hello\\n\", fp);\n    fclose(fp);\n    return 0;\n}\n",
+          "description": "Creates or truncates a file, writes one line, and closes it."
+        }
+      ],
+      "keywords": [
+        "file I/O",
+        "mode"
+      ],
+      "options": [
+        {
+          "flag": "path",
+          "description": "File path."
+        },
+        {
+          "flag": "mode",
+          "description": "Open mode (read/write/append, optional binary or update)."
+        }
+      ],
+      "note": "Opening with \"w\" truncates an existing file."
+    },
+    {
+      "id": "c-fclose",
+      "name": "fclose",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Flush and close a FILE* stream.",
+      "description": "fclose releases stream resources and attempts to flush pending output. Check for EOF when output correctness matters. After fclose, the FILE* must not be used again.",
+      "syntax": "int fclose(FILE *stream);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    FILE *fp = tmpfile();\n    if (!fp) return 1;\n    fputs(\"data\", fp);\n    if (fclose(fp) == EOF) return 1;\n    return 0;\n}\n",
+          "description": "Closes a temporary file and checks for failure."
+        }
+      ],
+      "keywords": [
+        "flush",
+        "resource cleanup"
+      ],
+      "options": [
+        {
+          "flag": "stream",
+          "description": "Open stream to close."
+        }
+      ]
+    },
+    {
+      "id": "c-fprintf-fscanf",
+      "name": "fprintf / fscanf",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Perform formatted I/O with an explicit stream.",
+      "description": "fprintf is the stream-specific form of printf. fscanf is analogous to scanf: check its conversion count and use width limits for strings. Invalid or malformed input must be handled.",
+      "syntax": "fprintf(stream, \"value=%d\\n\", n);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    fprintf(stderr, \"Error code: %d\\n\", 3);\n    return 0;\n}\n",
+          "description": "Writes a formatted diagnostic to stderr."
+        }
+      ],
+      "keywords": [
+        "FILE",
+        "format strings"
+      ]
+    },
+    {
+      "id": "c-snprintf",
+      "name": "snprintf",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Format text into a bounded character buffer (C99).",
+      "description": "snprintf writes at most size bytes, including the terminator if size is nonzero. It returns the number of characters that would have been written, excluding the terminator, or a negative value on encoding error. Detect truncation by comparing with size.",
+      "syntax": "int snprintf(char *buf, size_t size, const char *fmt, ...);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    char buf[16];\n    int n = snprintf(buf, sizeof buf, \"%d:%s\", 7, \"ok\");\n    if (n >= 0 && (size_t)n < sizeof buf) puts(buf);\n    return 0;\n}\n",
+          "description": "Formats into an array while checking capacity."
+        }
+      ],
+      "keywords": [
+        "buffer",
+        "formatting",
+        "C99"
+      ],
+      "options": [
+        {
+          "flag": "buf",
+          "description": "Writable output buffer."
+        },
+        {
+          "flag": "size",
+          "description": "Capacity in bytes."
+        },
+        {
+          "flag": "fmt",
+          "description": "Format string."
+        },
+        {
+          "flag": "...",
+          "description": "Formatted arguments."
+        }
+      ]
+    },
+    {
+      "id": "c-fread-fwrite",
+      "name": "fread / fwrite",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Read or write binary blocks of data.",
+      "description": "fread and fwrite transfer a number of elements each having a given size. Their return values count complete elements processed. Check ferror and feof to understand short reads; raw binary layouts are often not portable between systems.",
+      "syntax": "fread(ptr, size, count, stream)\nfwrite(ptr, size, count, stream)",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    FILE *fp = tmpfile();\n    if (!fp) return 1;\n    unsigned char x[] = {1, 2, 3};\n    if (fwrite(x, 1, sizeof x, fp) != sizeof x) { fclose(fp); return 1; }\n    rewind(fp);\n    unsigned char y[3] = {0};\n    size_t got = fread(y, 1, sizeof y, fp);\n    fclose(fp);\n    return got == sizeof y && y[1] == 2 ? 0 : 1;\n}\n",
+          "description": "Writes and reads raw bytes using a temporary stream."
+        }
+      ],
+      "keywords": [
+        "binary I/O",
+        "short read"
+      ],
+      "note": "Do not write pointers or padded struct objects to disk expecting cross-platform portability."
+    },
+    {
+      "id": "c-fseek-ftell-rewind",
+      "name": "fseek / ftell / rewind",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Change or inspect a stream's file position.",
+      "description": "fseek uses a long offset and an origin such as SEEK_SET, SEEK_CUR or SEEK_END. ftell reports a position indicator; rewind seeks to the start and clears errors. Text-stream offsets have portability restrictions.",
+      "syntax": "fseek(fp, 0, SEEK_SET);\nlong pos = ftell(fp);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    FILE *fp = tmpfile();\n    if (!fp) return 1;\n    fputs(\"abc\", fp);\n    rewind(fp);\n    int ch = fgetc(fp);\n    fclose(fp);\n    return ch == 'a' ? 0 : 1;\n}\n",
+          "description": "Returns to the beginning of a temporary stream."
+        }
+      ],
+      "keywords": [
+        "seek",
+        "file position"
+      ],
+      "note": "For portable text streams, only use offsets obtained from ftell (and zero) as permitted by the standard."
+    },
+    {
+      "id": "c-perror-errno",
+      "name": "perror / errno",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Report error details after a failing library call.",
+      "description": "errno is a modifiable thread-local-like macro expression in C11 and may be set by library calls. A nonzero errno alone does not prove the last call failed; check that function's documented return value. perror prints a message to stderr.",
+      "syntax": "perror(\"open failed\");",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <errno.h>\nint main(void) {\n    FILE *fp = fopen(\"missing-file-for-example.txt\", \"r\");\n    if (!fp) perror(\"open failed\");\n    else fclose(fp);\n    return 0;\n}\n",
+          "description": "Reports the reason for an unsuccessful fopen."
+        }
+      ],
+      "keywords": [
+        "error checking",
+        "stderr"
+      ],
+      "note": "Only inspect errno after an operation whose specification reports errors through it."
+    },
+    {
+      "id": "c-designated-initializers",
+      "name": "designated initializers",
+      "category": "Structures & Classes",
+      "type": "concept",
+      "summary": "Initialize named struct members or selected array indices (C99).",
+      "description": "Designated initializers improve clarity and allow out-of-order member initialization. Unspecified members receive the same initialization as objects with static storage duration (zero for arithmetic types).",
+      "syntax": "struct Point p = {.y = 4, .x = 2};",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    struct Point { int x; int y; };\n    struct Point p = {.y = 4, .x = 2};\n    printf(\"%d %d\\n\", p.x, p.y);\n    return 0;\n}\n",
+          "description": "Initializes struct members by name."
+        }
+      ],
+      "keywords": [
+        "C99",
+        "aggregate",
+        "initializer"
+      ]
+    },
+    {
+      "id": "c-struct-padding-and-alignment",
+      "name": "struct padding and alignment",
+      "category": "Structures & Classes",
+      "type": "concept",
+      "summary": "Recognize that fields can have gaps between them.",
+      "description": "Compilers may insert padding between members and at the end of a struct to satisfy alignment requirements. sizeof(struct) need not equal the sum of member sizes. Use offsetof for member offsets; avoid serializing raw structs for interoperability.",
+      "syntax": "sizeof(struct Item)\noffsetof(struct Item, field)",
+      "examples": [
+        {
+          "command": "#include <stddef.h>\n#include <stdio.h>\nstruct Item { char tag; int value; };\nint main(void) {\n    printf(\"%zu %zu\\n\", sizeof(struct Item), offsetof(struct Item, value));\n    return 0;\n}\n",
+          "description": "Shows the size and member offset without assuming platform-specific results."
+        }
+      ],
+      "keywords": [
+        "padding",
+        "offsetof",
+        "ABI"
+      ]
+    },
+    {
+      "id": "c-self-referential-linked-node-struct",
+      "name": "self-referential linked-node struct",
+      "category": "Structures & Classes",
+      "type": "concept",
+      "summary": "Point from one struct to another of the same type.",
+      "description": "A struct may contain pointers to its own incomplete type; it cannot directly contain a member of its full type by value because that would require infinite size.",
+      "syntax": "struct Node { int value; struct Node *next; };",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nstruct Node { int value; struct Node *next; };\nint main(void) {\n    struct Node end = {2, NULL};\n    struct Node start = {1, &end};\n    printf(\"%d\\n\", start.next->value);\n    return 0;\n}\n",
+          "description": "Builds a two-node linked structure on the stack."
+        }
+      ],
+      "keywords": [
+        "linked list",
+        "incomplete type",
+        "struct pointer"
+      ]
+    },
+    {
+      "id": "c-bit-fields",
+      "name": "bit-fields",
+      "category": "Structures & Classes",
+      "type": "concept",
+      "summary": "Declare struct members occupying a specified number of bits.",
+      "description": "Bit-fields can reduce storage for small flags, but layout, alignment, and ordering are implementation-defined. Use unsigned int bit-fields when a known unsigned range is wanted.",
+      "syntax": "struct Flags { unsigned int ready : 1; };",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    struct Flags { unsigned int ready : 1; };\n    struct Flags f = {1};\n    printf(\"%u\\n\", f.ready);\n    return 0;\n}\n",
+          "description": "Stores a one-bit flag in a struct."
+        }
+      ],
+      "keywords": [
+        "packed bits",
+        "layout"
+      ],
+      "note": "Do not assume bit-field layout matches a wire format or file format."
+    },
+    {
+      "id": "c-atoi-strtol",
+      "name": "atoi / strtol",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Convert text to integers, preferably with validation.",
+      "description": "atoi does not report conversion errors reliably. strtol accepts a base and an end pointer, and can report range errors via errno. Prefer strtol for user-controlled input.",
+      "syntax": "long strtol(const char *s, char **end, int base);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\n#include <errno.h>\nint main(void) {\n    char *end;\n    errno = 0;\n    long value = strtol(\"123\", &end, 10);\n    if (errno == 0 && end != NULL && *end == '\\0') printf(\"%ld\\n\", value);\n    return 0;\n}\n",
+          "description": "Parses a decimal integer and checks that all characters were consumed."
+        }
+      ],
+      "keywords": [
+        "integer parsing",
+        "validation",
+        "errno"
+      ],
+      "options": [
+        {
+          "flag": "s",
+          "description": "Text to parse."
+        },
+        {
+          "flag": "end",
+          "description": "Optional pointer receiving the first unparsed character."
+        },
+        {
+          "flag": "base",
+          "description": "Base (2 through 36, or 0 for auto-detection)."
+        }
+      ],
+      "note": "Also reject end == s and check errno == ERANGE to handle empty or out-of-range input."
+    },
+    {
+      "id": "c-strtod",
+      "name": "strtod",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Convert text to double with error reporting.",
+      "description": "strtod parses a floating-point number and reports the stopping point through endptr. Range errors may set errno to ERANGE. Check both parser progress and trailing content.",
+      "syntax": "double strtod(const char *s, char **end);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\nint main(void) {\n    char *end;\n    double x = strtod(\"2.5\", &end);\n    if (*end == '\\0') printf(\"%.1f\\n\", x);\n    return 0;\n}\n",
+          "description": "Parses a simple double and verifies full consumption."
+        }
+      ],
+      "keywords": [
+        "floating parse",
+        "string"
+      ],
+      "options": [
+        {
+          "flag": "s",
+          "description": "Text to parse."
+        },
+        {
+          "flag": "end",
+          "description": "Optional stopping pointer."
+        }
+      ]
+    },
+    {
+      "id": "c-abs-labs-llabs",
+      "name": "abs / labs / llabs",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Return an integer's absolute value.",
+      "description": "abs accepts int, labs long, and llabs long long. If the positive value is not representable (for example abs(INT_MIN) in ordinary two's-complement int), behavior is undefined.",
+      "syntax": "int abs(int n);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void) {\n    printf(\"%d\\n\", abs(-12));\n    return 0;\n}\n",
+          "description": "Finds absolute value for a representable result."
+        }
+      ],
+      "keywords": [
+        "absolute value",
+        "stdlib.h"
+      ],
+      "note": "abs(INT_MIN) can overflow; handle the minimum signed value separately."
+    },
+    {
+      "id": "c-math-h-sqrt-pow-fabs",
+      "name": "math.h: sqrt / pow / fabs",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Use standard mathematical functions.",
+      "description": "sqrt computes a square root, pow raises to a power, and fabs returns floating absolute value. Many math operations are approximate and may set errno or raise floating exceptions on domain/range errors.",
+      "syntax": "double sqrt(double x);\ndouble pow(double x, double y);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <math.h>\n\nint main(void) {\n    printf(\"%.1f %.1f\\n\", sqrt(9.0), fabs(-2.5));\n    return 0;\n}\n",
+          "description": "Uses math.h functions on double values."
+        }
+      ],
+      "keywords": [
+        "square root",
+        "power",
+        "-lm"
+      ],
+      "note": "On some Unix toolchains you must link the math library using -lm."
+    },
+    {
+      "id": "c-rand-srand",
+      "name": "rand / srand",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Generate pseudorandom integers from an implementation-defined sequence.",
+      "description": "rand returns an integer between 0 and RAND_MAX. Call srand to choose a seed. Quality and range vary by implementation; rand is not suitable for cryptography. rand() % n can be biased.",
+      "syntax": "int rand(void);\nvoid srand(unsigned seed);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void) {\n    srand(123U);\n    printf(\"%d\\n\", rand());\n    return 0;\n}\n",
+          "description": "Seeds and reads a pseudorandom value."
+        }
+      ],
+      "keywords": [
+        "pseudo random",
+        "RAND_MAX",
+        "seed"
+      ],
+      "note": "Use a dedicated random source for security-sensitive tokens and keys."
+    },
+    {
+      "id": "c-qsort",
+      "name": "qsort",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Sort an array using a comparison callback.",
+      "description": "qsort sorts fixed-size elements in place. Its comparator receives const void* pointers to two elements and must return a negative, zero, or positive int. Use a comparison that does not overflow and does not mutate array elements.",
+      "syntax": "void qsort(void *base, size_t n, size_t size, int (*cmp)(const void *, const void *));",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\nint compare_int(const void *a, const void *b) {\n    int x = *(const int *)a, y = *(const int *)b;\n    return (x > y) - (x < y);\n}\nint main(void) {\n    int a[] = {4, 1, 3, 2};\n    qsort(a, 4, sizeof a[0], compare_int);\n    for (size_t i = 0; i < 4; ++i) printf(\"%d \", a[i]);\n    return 0;\n}\n",
+          "description": "Sorts integers using a safe three-way comparator."
+        }
+      ],
+      "keywords": [
+        "sort",
+        "callback",
+        "comparator"
+      ],
+      "options": [
+        {
+          "flag": "base",
+          "description": "Beginning of the array."
+        },
+        {
+          "flag": "n",
+          "description": "Element count."
+        },
+        {
+          "flag": "size",
+          "description": "Bytes per element."
+        },
+        {
+          "flag": "cmp",
+          "description": "Comparator accepting pointers to elements."
+        }
+      ],
+      "note": "qsort is not guaranteed to be stable; do not use return x - y when subtraction can overflow."
+    },
+    {
+      "id": "c-bsearch",
+      "name": "bsearch",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Binary-search a sorted array with a comparator.",
+      "description": "bsearch requires an array sorted according to the same comparator. It returns a pointer to a matching element or NULL; if several compare equal, which one is returned is unspecified.",
+      "syntax": "void *bsearch(const void *key, const void *base, size_t n, size_t size, int (*cmp)(const void *, const void *));",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\nint cmp(const void *a, const void *b) {\n    int x = *(const int *)a, y = *(const int *)b;\n    return (x > y) - (x < y);\n}\nint main(void) {\n    int a[] = {1, 3, 5, 7};\n    int target = 5;\n    int *found = bsearch(&target, a, 4, sizeof a[0], cmp);\n    if (found) printf(\"%d\\n\", *found);\n    return 0;\n}\n",
+          "description": "Searches a sorted array for 5."
+        }
+      ],
+      "keywords": [
+        "binary search",
+        "callback"
+      ],
+      "options": [
+        {
+          "flag": "key",
+          "description": "Pointer to sought value."
+        },
+        {
+          "flag": "base",
+          "description": "Sorted array."
+        },
+        {
+          "flag": "n",
+          "description": "Element count."
+        },
+        {
+          "flag": "size",
+          "description": "Element size."
+        },
+        {
+          "flag": "cmp",
+          "description": "Same ordering used for sorting."
+        }
+      ]
+    },
+    {
+      "id": "c-exit-exit-success-exit-failure",
+      "name": "exit / EXIT_SUCCESS / EXIT_FAILURE",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Terminate a hosted program with a status code.",
+      "description": "exit performs normal termination, including calling registered atexit handlers and flushing/closing standard streams as specified. A return from main also causes normal termination. EXIT_SUCCESS and EXIT_FAILURE are portable symbolic statuses.",
+      "syntax": "exit(EXIT_FAILURE);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void) {\n    int ok = 1;\n    if (!ok) return EXIT_FAILURE;\n    printf(\"done\\n\");\n    return EXIT_SUCCESS;\n}\n",
+          "description": "Returns a named portable success code."
+        }
+      ],
+      "keywords": [
+        "status code",
+        "stdlib.h"
+      ]
+    },
+    {
+      "id": "c-assert",
+      "name": "assert",
+      "category": "Build & Debugging",
+      "type": "function",
+      "summary": "Check an assumption during development.",
+      "description": "assert(condition) writes a diagnostic and aborts if the expression is false when assertions are enabled. Defining NDEBUG before including assert.h disables checks; do not put required side effects inside assert.",
+      "syntax": "assert(pointer != NULL);",
+      "examples": [
+        {
+          "command": "#include <assert.h>\nint main(void) {\n    int x = 2;\n    assert(x > 0);\n    return 0;\n}\n",
+          "description": "Documents an internal invariant that should always hold."
+        }
+      ],
+      "keywords": [
+        "debugging",
+        "NDEBUG"
+      ],
+      "note": "Use ordinary runtime validation for recoverable user-input errors."
+    },
+    {
+      "id": "c-time-clock",
+      "name": "time / clock",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Measure calendar time or approximate processor time.",
+      "description": "time returns calendar time in seconds when representable by time_t. clock returns an approximation of processor time, converted to seconds by dividing by CLOCKS_PER_SEC. Neither guarantees high-resolution wall-clock timing.",
+      "syntax": "time_t now = time(NULL);\nclock_t start = clock();",
+      "examples": [
+        {
+          "command": "#include <time.h>\n#include <stdio.h>\nint main(void) {\n    time_t now = time(NULL);\n    printf(\"%s\", now == (time_t)-1 ? \"unavailable\\n\" : \"time available\\n\");\n    return 0;\n}\n",
+          "description": "Checks whether calendar time was obtained."
+        }
+      ],
+      "keywords": [
+        "benchmark",
+        "time.h",
+        "timing"
+      ]
+    },
+    {
+      "id": "c-limits-h-float-h",
+      "name": "limits.h / float.h",
+      "category": "Standard Library",
+      "type": "concept",
+      "summary": "Inspect implementation-specific numeric limits.",
+      "description": "limits.h provides integer bounds such as INT_MAX, LONG_MIN, CHAR_BIT. float.h exposes properties such as DBL_MAX and DBL_EPSILON. Use these instead of assuming machine widths or floating precision.",
+      "syntax": "INT_MAX\nCHAR_BIT\nDBL_EPSILON",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <limits.h>\n#include <float.h>\nint main(void) {\n    printf(\"%d %d %g\\n\", CHAR_BIT, INT_MAX, DBL_EPSILON);\n    return 0;\n}\n",
+          "description": "Prints limits from the actual implementation."
+        }
+      ],
+      "keywords": [
+        "portability",
+        "numeric range"
+      ]
+    },
+    {
+      "id": "c-null-offsetof-ptrdiff-t-stddef-h",
+      "name": "NULL / offsetof / ptrdiff_t (stddef.h)",
+      "category": "Standard Library",
+      "type": "concept",
+      "summary": "Use core size, pointer-difference, and offset definitions.",
+      "description": "stddef.h defines size_t, ptrdiff_t, NULL and offsetof. offsetof measures the byte offset of a structure member from its start. Some headers supply the types independently.",
+      "syntax": "offsetof(struct Record, member)",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stddef.h>\nstruct Record { char code; int value; };\nint main(void) {\n    printf(\"%zu\\n\", offsetof(struct Record, value));\n    return 0;\n}\n",
+          "description": "Shows a standard layout offset query."
+        }
+      ],
+      "keywords": [
+        "stddef.h",
+        "offsetof",
+        "size_t"
+      ]
+    },
+    {
+      "id": "c-setjmp-longjmp",
+      "name": "setjmp / longjmp",
+      "category": "Standard Library",
+      "type": "function",
+      "summary": "Jump back to a saved execution environment.",
+      "description": "setjmp saves a calling environment to a jmp_buf; longjmp transfers control back. This mechanism is specialized and interacts with local non-volatile variables and resource cleanup. Prefer ordinary error returns for most applications.",
+      "syntax": "if (setjmp(env) == 0) { ... }",
+      "examples": [
+        {
+          "command": "#include <setjmp.h>\n#include <stdio.h>\nstatic jmp_buf env;\nvoid fail(void) { longjmp(env, 1); }\nint main(void) {\n    if (setjmp(env) == 0) fail();\n    else puts(\"recovered\");\n    return 0;\n}\n",
+          "description": "Demonstrates a jump to a saved valid environment."
+        }
+      ],
+      "keywords": [
+        "nonlocal jump",
+        "error handling"
+      ],
+      "note": "Do not jump into a function that has already returned."
+    },
+    {
+      "id": "c-gcc-compile-command",
+      "name": "gcc compile command",
+      "category": "Build & Debugging",
+      "type": "concept",
+      "summary": "Compile and link C99 source code with warnings.",
+      "description": "gcc -std=c99 selects the C99 language mode; -Wall and -Wextra enable many useful diagnostics. -o chooses an output filename. Compiling is separate from executing the resulting binary.",
+      "syntax": "gcc -std=c99 -Wall -Wextra main.c -o main",
+      "examples": [
+        {
+          "command": "/* Save this file as main.c and compile with:\n   gcc -std=c99 -Wall -Wextra main.c -o main\n   ./main\n*/\n#include <stdio.h>\nint main(void) {\n    puts(\"compiled C program\");\n    return 0;\n}\n",
+          "description": "A complete source file and shell commands to build and run it."
+        }
+      ],
+      "keywords": [
+        "compiler",
+        "GCC",
+        "flags",
+        "link"
+      ],
+      "note": "Warnings are valuable even when compilation succeeds."
+    },
+    {
+      "id": "c-separate-compilation-and-headers",
+      "name": "separate compilation and headers",
+      "category": "Build & Debugging",
+      "type": "concept",
+      "summary": "Compile multiple C files into one program.",
+      "description": "A common design places public declarations in .h files and definitions in .c files. Each .c file becomes a translation unit. Include guards prevent duplicate processing, while the linker combines the object files.",
+      "syntax": "gcc -c module.c\ngcc main.o module.o -o program",
+      "examples": [
+        {
+          "command": "/* main.c */\n#include <stdio.h>\nint twice(int n);\nint main(void) { printf(\"%d\\n\", twice(3)); return 0; }\n\n/* module.c (separate file, shown for illustration) */\n/* int twice(int n) { return 2 * n; } */\n",
+          "description": "Shows a function declaration and a second translation unit layout."
+        }
+      ],
+      "keywords": [
+        "linker",
+        "object files",
+        "include guards"
+      ],
+      "note": "The example illustrates two files; compile them separately using the commands in Syntax."
+    },
+    {
+      "id": "c-makefile-basics",
+      "name": "Makefile basics",
+      "category": "Build & Debugging",
+      "type": "concept",
+      "summary": "Define reproducible compilation targets and dependencies.",
+      "description": "make updates targets whose prerequisites are newer. Recipe lines normally begin with a tab character. A Makefile helps keep compilation options and multi-file dependencies consistent.",
+      "syntax": "CC = gcc\nCFLAGS = -std=c99 -Wall -Wextra\nprogram: main.c\n\t$(CC) $(CFLAGS) main.c -o program",
+      "examples": [
+        {
+          "command": "/* Save this C file as main.c, alongside a separate Makefile. */\n#include <stdio.h>\nint main(void) { puts(\"hello\"); return 0; }\n",
+          "description": "Use the Makefile syntax in the Syntax field to build main.c."
+        }
+      ],
+      "keywords": [
+        "make",
+        "dependencies",
+        "build"
+      ]
+    },
+    {
+      "id": "c-compiler-warnings-and-sanitizers",
+      "name": "compiler warnings and sanitizers",
+      "category": "Build & Debugging",
+      "type": "concept",
+      "summary": "Catch mistakes before and during execution.",
+      "description": "Use -Wall -Wextra -Wpedantic for additional compile-time checks. On supporting GCC/Clang platforms, -fsanitize=address,undefined helps detect many runtime errors. Sanitizers do not prove a program is correct.",
+      "syntax": "gcc -std=c99 -Wall -Wextra -Wpedantic -g -fsanitize=address,undefined main.c -o main",
+      "examples": [
+        {
+          "command": "/* Save as main.c and compile with sanitizer flags on a supported toolchain. */\n#include <stdio.h>\nint main(void) {\n    int x = 5;\n    printf(\"%d\\n\", x);\n    return 0;\n}\n",
+          "description": "Uses warnings, debug symbols, and runtime instrumentation."
+        }
+      ],
+      "keywords": [
+        "AddressSanitizer",
+        "UBSan",
+        "gcc",
+        "clang"
+      ],
+      "note": "Availability and specific diagnostics depend on the compiler/runtime."
+    },
+    {
+      "id": "c-gdb-debugging-basics",
+      "name": "gdb debugging basics",
+      "category": "Build & Debugging",
+      "type": "concept",
+      "summary": "Inspect a compiled C program step by step.",
+      "description": "Compile with -g to include debug symbols. In gdb, use break main, run, next, step, print variable, backtrace, and continue. Debugger commands are not C language statements.",
+      "syntax": "gcc -g -O0 main.c -o main\ngdb ./main",
+      "examples": [
+        {
+          "command": "/* Save as main.c and compile with -g. */\n#include <stdio.h>\nint main(void) {\n    int n = 3;\n    n += 4;\n    printf(\"%d\\n\", n);\n    return 0;\n}\n",
+          "description": "A small program whose variables can be inspected in a debugger."
+        }
+      ],
+      "keywords": [
+        "breakpoint",
+        "debugger",
+        "backtrace"
+      ]
+    },
+    {
+      "id": "c-undefined-vs-unspecified-vs-implementation-defined",
+      "name": "undefined vs unspecified vs implementation-defined",
+      "category": "Build & Debugging",
+      "type": "concept",
+      "summary": "Recognize three different portability classifications.",
+      "description": "Undefined behavior gives no requirements on the program's outcome. Unspecified behavior allows several documented possibilities without requiring which one is chosen. Implementation-defined behavior requires the implementation to document its selected behavior.",
+      "syntax": "/* UB: a[4] with int a[4] */",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int n = 7;\n    int copy = n;\n    printf(\"%d\\n\", copy);\n    return 0;\n}\n",
+          "description": "A fully defined alternative to reading outside an array."
+        }
+      ],
+      "keywords": [
+        "portability",
+        "undefined behavior",
+        "UB"
+      ],
+      "note": "Examples of UB include signed overflow, invalid pointer dereference, and unsequenced modifications."
+    },
+    {
+      "id": "c-header-guards",
+      "name": "header guards",
+      "category": "Build & Debugging",
+      "type": "concept",
+      "summary": "Prevent a header's declarations from being processed more than once.",
+      "description": "A common pattern is #ifndef NAME_H / #define NAME_H / ... / #endif. Choose unique guard identifiers. #pragma once is widely supported but not standardized by C99.",
+      "syntax": "#ifndef MY_HEADER_H\n#define MY_HEADER_H\n/* declarations */\n#endif",
+      "examples": [
+        {
+          "command": "/* Example of a standalone header named my_header.h:\n#ifndef MY_HEADER_H\n#define MY_HEADER_H\nint add(int x, int y);\n#endif\n*/\nint main(void) { return 0; }\n",
+          "description": "Illustrates a conventional portable header guard."
+        }
+      ],
+      "keywords": [
+        "preprocessor",
+        "multi-file"
+      ]
+    },
+    {
+      "id": "c-const-void-in-callbacks",
+      "name": "const void * in callbacks",
+      "category": "Pointers & Memory",
+      "type": "concept",
+      "summary": "Read a qsort comparator's pointer levels correctly.",
+      "description": "A qsort comparator receives pointers to array elements. For an array of int*, each element has type int*, so each comparator argument points to an int*: cast to int *const * (or const int *const * only when the original pointed-to objects have compatible qualification), then dereference twice to read an int.",
+      "syntax": "int x = **(int *const *)a;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\nint cmp(const void *a, const void *b) {\n    int x = **(int *const *)a;\n    int y = **(int *const *)b;\n    return (x > y) - (x < y);\n}\nint main(void) {\n    int values[] = {8, 3};\n    int *pointers[] = {&values[0], &values[1]};\n    qsort(pointers, 2, sizeof pointers[0], cmp);\n    printf(\"%d\\n\", *pointers[0]);\n    return 0;\n}\n",
+          "description": "Correctly sorts pointers by their referenced integer values."
+        }
+      ],
+      "keywords": [
+        "qsort",
+        "pointer-to-pointer",
+        "int *const *"
+      ],
+      "note": "int *const * describes a pointer to a const pointer to int; it does not make the pointed-to int const."
+    },
+    {
+      "id": "c-const-correctness-across-function-parameters",
+      "name": "const correctness across function parameters",
+      "category": "Functions",
+      "type": "concept",
+      "summary": "Express when a function promises not to modify an object.",
+      "description": "const int *p prevents modification of *p through p. For arrays passed as pointers, const documents read-only access. A pointer parameter itself is still passed by value and can be reassigned locally.",
+      "syntax": "void print_values(const int *values, size_t count);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stddef.h>\nvoid show(const int *a, size_t n) {\n    for (size_t i = 0; i < n; ++i) printf(\"%d \", a[i]);\n}\nint main(void) {\n    int a[] = {1, 2, 3};\n    show(a, 3);\n    return 0;\n}\n",
+          "description": "Uses const to express a read-only pointer parameter."
+        }
+      ],
+      "keywords": [
+        "const int *",
+        "API design"
+      ]
+    },
+    {
+      "id": "c-fgetc-fputc",
+      "name": "fgetc / fputc",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Read and write individual characters from/to a FILE stream.",
+      "description": "fgetc returns an unsigned char converted to int or EOF. fputc returns the written character converted to unsigned char on success or EOF on failure. Use int to hold fgetc's result.",
+      "syntax": "int fgetc(FILE *stream);\nint fputc(int c, FILE *stream);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    FILE *fp = tmpfile();\n    if (!fp) return 1;\n    fputc('A', fp);\n    rewind(fp);\n    int c = fgetc(fp);\n    fclose(fp);\n    printf(\"%c\\n\", c);\n    return 0;\n}\n",
+          "description": "Writes and reads one character from a temporary stream."
+        }
+      ],
+      "keywords": [
+        "stdio.h",
+        "EOF"
+      ]
+    },
+    {
+      "id": "c-feof-ferror-clearerr",
+      "name": "feof / ferror / clearerr",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Inspect and reset stream error and end-of-file indicators.",
+      "description": "feof reports whether an earlier read reached end-of-file; ferror reports the stream error indicator. clearerr resets both indicators. These functions do not tell you in advance whether the next read will succeed.",
+      "syntax": "feof(fp); ferror(fp); clearerr(fp);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    FILE *fp = tmpfile();\n    if (!fp) return 1;\n    int ch = fgetc(fp);\n    if (ch == EOF && feof(fp)) puts(\"end of file\");\n    if (ferror(fp)) puts(\"read error\");\n    fclose(fp);\n    return 0;\n}\n",
+          "description": "Distinguishes stream EOF from an I/O error."
+        }
+      ],
+      "keywords": [
+        "EOF",
+        "stream state"
+      ],
+      "note": "Do not write while (!feof(fp)); check each read's return value instead."
+    },
+    {
+      "id": "c-restrict-pointer",
+      "name": "restrict pointer",
+      "category": "Pointers & Memory",
+      "type": "keyword",
+      "summary": "Promise restricted aliasing for certain pointer accesses (C99).",
+      "description": "restrict is an optimization contract for access through suitably designated pointers. Violating it may cause undefined behavior. Use only when the function's aliasing requirements can really be guaranteed.",
+      "syntax": "void add(size_t n, int *restrict a, const int *restrict b);",
+      "examples": [
+        {
+          "command": "#include <stddef.h>\n#include <stdio.h>\nvoid add(size_t n, int *restrict a, const int *restrict b) {\n    for (size_t i = 0; i < n; ++i) a[i] += b[i];\n}\nint main(void) {\n    int a[] = {1, 2}, b[] = {3, 4};\n    add(2, a, b);\n    printf(\"%d\\n\", a[0]);\n    return 0;\n}\n",
+          "description": "Adds disjoint arrays with a restrict-qualified destination."
+        }
+      ],
+      "keywords": [
+        "aliasing",
+        "C99",
+        "optimization"
+      ],
+      "note": "Passing overlapping arrays may violate the restrict contract."
+    },
+    {
+      "id": "c-generic-selection",
+      "name": "_Generic selection",
+      "category": "Operators & Expressions",
+      "type": "keyword",
+      "summary": "Choose an expression according to its type (C11).",
+      "description": "A _Generic selection matches a controlling expression's type against associations at compile time. It provides type-based dispatch without runtime inspection and is available in C11 and later.",
+      "syntax": "_Generic((x), int: 1, double: 2, default: 0)",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    int x = 5;\n    int kind = _Generic((x), int: 1, double: 2, default: 0);\n    printf(\"%d\\n\", kind);\n    return 0;\n}\n",
+          "description": "Compile with -std=c11; matches an int expression."
+        }
+      ],
+      "keywords": [
+        "C11",
+        "generic"
+      ],
+      "note": "Not available in strict C99."
+    },
+    {
+      "id": "c-floating-point-special-values",
+      "name": "floating-point special values",
+      "category": "Types & Variables",
+      "type": "concept",
+      "summary": "Understand NaN, infinities, and comparison behavior.",
+      "description": "On implementations supporting IEC 60559-style floating point, NaN is unordered and comparisons with it (except !=) are false. INFINITY and NAN macros may be available from math.h depending on the implementation. Do not rely on exact IEEE representation without checking.",
+      "syntax": "isnan(x)\nisinf(x)",
+      "examples": [
+        {
+          "command": "#include <math.h>\n#include <stdio.h>\nint main(void) {\n    double x = 1.0 / 2.0;\n    printf(\"%d\\n\", isfinite(x) != 0);\n    return 0;\n}\n",
+          "description": "Checks whether an ordinary floating-point value is finite."
+        }
+      ],
+      "keywords": [
+        "NaN",
+        "infinity",
+        "isfinite"
+      ],
+      "note": "Availability and behavior of infinities/NaNs depend on the floating-point implementation."
+    },
+    {
+      "id": "c-string-formatting-and-precision",
+      "name": "string formatting and precision",
+      "category": "Input & Output",
+      "type": "concept",
+      "summary": "Control alignment, width, and precision in printf.",
+      "description": "A field width specifies minimum output width; a precision for %f specifies digits after the decimal point, and for %s limits bytes printed. Width/precision do not make an incorrect format argument type safe.",
+      "syntax": "printf(\"%8.2f\", x);\nprintf(\"%.3s\", text);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    printf(\"[%8.2f] [%.3s]\\n\", 3.5, \"abcdef\");\n    return 0;\n}\n",
+          "description": "Formats a number with padding and limits the printed prefix of a string."
+        }
+      ],
+      "keywords": [
+        "format width",
+        "precision"
+      ]
+    },
+    {
+      "id": "c-scanf-field-widths",
+      "name": "scanf field widths",
+      "category": "Input & Output",
+      "type": "concept",
+      "summary": "Bound string conversions and check assignment counts.",
+      "description": "For a char buffer with capacity 10, %9s leaves room for the terminating '\\0'. %c does not append a terminator. A field width for %s does not prevent all logical input errors; prefer fgets plus parsing for complex input.",
+      "syntax": "char word[10]; scanf(\"%9s\", word);",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    char word[10];\n    if (scanf(\"%9s\", word) == 1) puts(word);\n    return 0;\n}\n",
+          "description": "Bounds a %s conversion to nine characters."
+        }
+      ],
+      "keywords": [
+        "input safety",
+        "buffer overflow"
+      ],
+      "note": "A field width is a maximum conversion width, not a guarantee that input is valid."
+    },
+    {
+      "id": "c-array-of-pointers",
+      "name": "array of pointers",
+      "category": "Arrays & Strings",
+      "type": "concept",
+      "summary": "Store pointers as elements rather than storing values directly.",
+      "description": "int *items[3] is an array of three pointers to int. This differs from int (*p)[3], which is a pointer to an array of three int values. The parentheses change the declarator's meaning.",
+      "syntax": "int *items[3];\nint (*p)[3];",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a[] = {10, 20, 30};\n    int *items[] = {&a[2], &a[0]};\n    printf(\"%d\\n\", *items[0]);\n    return 0;\n}\n",
+          "description": "Reads an integer through an array element that is itself a pointer."
+        }
+      ],
+      "keywords": [
+        "declarators",
+        "pointer to array"
+      ]
+    },
+    {
+      "id": "c-pointer-to-array",
+      "name": "pointer to array",
+      "category": "Arrays & Strings",
+      "type": "concept",
+      "summary": "Point at a whole fixed-size array.",
+      "description": "int (*p)[3] is a pointer to an array of three ints. Incrementing p advances by three integers, not one. Contrast int *p[3], an array of pointers.",
+      "syntax": "int (*p)[3] = &array;",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a[3] = {1, 2, 3};\n    int (*p)[3] = &a;\n    printf(\"%d\\n\", (*p)[1]);\n    return 0;\n}\n",
+          "description": "Uses a pointer whose pointed-to object is the entire array."
+        }
+      ],
+      "keywords": [
+        "array pointer",
+        "declarator"
+      ]
+    },
+    {
+      "id": "c-const-array-data-and-string-literals",
+      "name": "const array data and string literals",
+      "category": "Arrays & Strings",
+      "type": "concept",
+      "summary": "Avoid attempting to modify literal text.",
+      "description": "A string literal has array-of-char type in C, but trying to modify it is undefined behavior. A char array initialized from a string literal creates separate writable storage; const char * is often the correct type for a read-only string parameter.",
+      "syntax": "const char *name = \"Ada\";\nchar copy[] = \"Ada\";",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    const char *name = \"Ada\";\n    char copy[] = \"Ada\";\n    copy[0] = 'E';\n    printf(\"%s %s\\n\", name, copy);\n    return 0;\n}\n",
+          "description": "Only the char array copy is modified."
+        }
+      ],
+      "keywords": [
+        "string literal",
+        "read-only"
+      ]
+    },
+    {
+      "id": "c-integer-division-and-negative-remainder",
+      "name": "integer division and negative remainder",
+      "category": "Operators & Expressions",
+      "type": "concept",
+      "summary": "Remember truncation toward zero for signed integer division.",
+      "description": "For C99 and later, division of integers discards the fractional part toward zero; the remainder has the sign of the dividend (or is zero). a == (a / b) * b + (a % b) when defined.",
+      "syntax": "-7 / 3\n-7 % 3",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    printf(\"%d %d\\n\", -7 / 3, -7 % 3);\n    return 0;\n}\n",
+          "description": "Prints -2 and -1 under C99 division rules."
+        }
+      ],
+      "keywords": [
+        "negative division",
+        "remainder"
+      ],
+      "note": "INT_MIN / -1 can be undefined when the quotient is not representable."
+    },
+    {
+      "id": "c-main-arguments-argc-and-argv",
+      "name": "main arguments: argc and argv",
+      "category": "Fundamentals",
+      "type": "concept",
+      "summary": "Receive command-line arguments in a hosted program.",
+      "description": "int main(int argc, char *argv[]) receives the argument count and an array of string pointers. argc is nonnegative and argv[argc] is a null pointer; argv[0] may identify the program. Do not assume optional arguments are present.",
+      "syntax": "int main(int argc, char *argv[])",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(int argc, char *argv[]) {\n    for (int i = 0; i < argc; ++i) printf(\"%s\\n\", argv[i]);\n    return 0;\n}\n",
+          "description": "Prints each command-line argument."
+        }
+      ],
+      "keywords": [
+        "CLI",
+        "argv",
+        "argc"
+      ],
+      "note": "These are program arguments, not Bash script variables."
+    }
+  ],
+  "topics": [
+    {
+      "id": "c-guide-getting-started-with-c99",
+      "type": "guide",
+      "name": "Getting started with C99",
+      "category": "Fundamentals",
+      "summary": "Create, build, and run a first C program.",
+      "description": "C is a compiled language; write source, compile it, review diagnostics, and run the executable separately.",
+      "sections": [
+        {
+          "title": "Minimal program",
+          "body": "A hosted C program starts in main. Include only the headers required by the functions you use.",
+          "items": [
+            {
+              "term": "#include <stdio.h>",
+              "definition": "Declares standard input/output functions."
+            },
+            {
+              "term": "int main(void)",
+              "definition": "Takes no command-line parameters."
+            },
+            {
+              "term": "return 0;",
+              "definition": "Returns successful termination status."
+            }
+          ]
+        },
+        {
+          "title": "Compile and execute",
+          "body": "Save source as hello.c, run gcc -std=c99 -Wall -Wextra hello.c -o hello, then run ./hello on a Unix-like system.",
+          "items": []
+        },
+        {
+          "title": "Common beginner mistakes",
+          "body": "A missing semicolon, calling undeclared functions, type-mismatched format specifiers, and confusing source files with executables are frequent early errors.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    puts(\"Hello, C!\");\n    return 0;\n}\n",
+          "description": "A complete program that can be compiled with a C99 compiler."
+        }
+      ],
+      "keywords": [
+        "first program",
+        "compiler",
+        "gcc"
+      ]
+    },
+    {
+      "id": "c-guide-variables-types-and-initialization",
+      "type": "guide",
+      "name": "Variables, types, and initialization",
+      "category": "Types & Variables",
+      "summary": "Choose types and initialize every value before reading.",
+      "description": "C is statically typed, and object declarations determine representation, allowed operations, storage duration, and visibility.",
+      "sections": [
+        {
+          "title": "Choose a suitable type",
+          "body": "Use int for ordinary integers, size_t for sizes, double for fractional calculations, and char arrays or pointers for text. Use stdint.h when explicit widths are truly required.",
+          "items": []
+        },
+        {
+          "title": "Initialize before use",
+          "body": "An automatic scalar without an initializer generally has an indeterminate value. Reading such a value may have undefined behavior.",
+          "items": []
+        },
+        {
+          "title": "Conversions and casts",
+          "body": "Integer promotions and usual arithmetic conversions can affect comparisons and calculations; add explicit casts only where meaningful.",
+          "items": []
+        },
+        {
+          "title": "Ranges and portability",
+          "body": "Read limits.h and float.h rather than assuming all platforms use identical type widths.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int count = 4;\n    double average = 11.0 / count;\n    printf(\"%.2f\\n\", average);\n    return 0;\n}\n",
+          "description": "Combines initialized variables with correctly typed division."
+        }
+      ],
+      "keywords": [
+        "declarations",
+        "initialization",
+        "type safety"
+      ]
+    },
+    {
+      "id": "c-guide-expressions-evaluation-and-precedence",
+      "type": "guide",
+      "name": "Expressions, evaluation, and precedence",
+      "category": "Operators & Expressions",
+      "summary": "Understand what an expression computes and when side effects occur.",
+      "description": "Parsing order and runtime evaluation order are different; parenthesizing clarifies grouping but cannot make all side effects safe.",
+      "sections": [
+        {
+          "title": "Grouping",
+          "body": "Multiplication binds tighter than addition; unary operators usually bind tighter than binary arithmetic. Use parentheses when the intended grouping is not obvious.",
+          "items": []
+        },
+        {
+          "title": "Evaluation order",
+          "body": "Function-call arguments and many operands are evaluated in an unspecified order; do not use expressions that require a particular ordering.",
+          "items": []
+        },
+        {
+          "title": "Short circuit",
+          "body": "&& and || conditionally skip the right operand and are suitable for guarding pointer access.",
+          "items": []
+        },
+        {
+          "title": "Overflow and division",
+          "body": "Signed integer overflow and division by zero are undefined. Integer division truncates toward zero in C99.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int n = 2;\n    int result = (n + 3) * 4;\n    if (result > 0 && n != 0) printf(\"%d\\n\", result / n);\n    return 0;\n}\n",
+          "description": "Combines grouping and a safely guarded division."
+        }
+      ],
+      "keywords": [
+        "operator precedence",
+        "unsequenced",
+        "undefined behavior"
+      ]
+    },
+    {
+      "id": "c-guide-conditionals-and-loops",
+      "type": "guide",
+      "name": "Conditionals and loops",
+      "category": "Control Flow",
+      "summary": "Select paths and repeat operations without infinite loops.",
+      "description": "Use if/else for arbitrary conditions, switch for integral labels, and for/while/do-while for iteration.",
+      "sections": [
+        {
+          "title": "if and switch",
+          "body": "Use if for range or compound conditions. switch selects labels and needs explicit break to prevent unintended fallthrough.",
+          "items": []
+        },
+        {
+          "title": "for, while and do-while",
+          "body": "for is convenient for counted iteration; while checks before the body; do-while checks after and therefore runs at least once.",
+          "items": []
+        },
+        {
+          "title": "Break and continue",
+          "body": "break exits the nearest loop/switch, while continue moves to the next loop iteration.",
+          "items": []
+        },
+        {
+          "title": "Loop invariants and bounds",
+          "body": "Be precise about start, stopping condition, increment, and whether n is included. Use size_t when indexing with nonnegative array sizes.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int sum = 0;\n    for (int i = 1; i <= 5; ++i) sum += i;\n    printf(\"%d\\n\", sum);\n    return 0;\n}\n",
+          "description": "A counted loop computes the sum 1 through 5."
+        }
+      ],
+      "keywords": [
+        "for",
+        "while",
+        "switch",
+        "if"
+      ]
+    },
+    {
+      "id": "c-guide-functions-prototypes-and-separate-files",
+      "type": "guide",
+      "name": "Functions, prototypes, and separate files",
+      "category": "Functions",
+      "summary": "Write reusable functions with predictable interfaces.",
+      "description": "Function prototypes provide type checking, while definitions provide implementation. C uses call-by-value even when the parameter's value is a pointer.",
+      "sections": [
+        {
+          "title": "Prototype before call",
+          "body": "A prototype such as int add(int a, int b); can appear in a header or before main.",
+          "items": []
+        },
+        {
+          "title": "Parameters and return values",
+          "body": "Function parameters are local copies of argument values. Pass a pointer to modify caller-owned data.",
+          "items": []
+        },
+        {
+          "title": "Scope and linkage",
+          "body": "static at file scope limits linkage to one translation unit; extern declarations can refer to an externally linked definition.",
+          "items": []
+        },
+        {
+          "title": "Headers",
+          "body": "Use include guards; include declarations and relevant type definitions, not non-inline ordinary function definitions in shared headers.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint twice(int n);\nint main(void) { printf(\"%d\\n\", twice(4)); return 0; }\nint twice(int n) { return n * 2; }\n",
+          "description": "Declares a function first, then defines it after main."
+        }
+      ],
+      "keywords": [
+        "declaration",
+        "definition",
+        "separate compilation"
+      ]
+    },
+    {
+      "id": "c-guide-pointers-from-first-principles",
+      "type": "guide",
+      "name": "Pointers from first principles",
+      "category": "Pointers & Memory",
+      "summary": "Build a reliable mental model of addresses and indirection.",
+      "description": "A pointer stores a value that may designate an object or function; the pointer variable and the pointed-to object are distinct.",
+      "sections": [
+        {
+          "title": "Read a declaration",
+          "body": "int *p declares p as a pointer to int. &x obtains x's address and *p reads or writes its pointed-to int.",
+          "items": []
+        },
+        {
+          "title": "Indirection levels",
+          "body": "int **pp points to an int* object; *pp is a pointer, **pp an int. Count dereferences according to the pointed-to layers.",
+          "items": []
+        },
+        {
+          "title": "Null and invalid pointers",
+          "body": "NULL designates no object. Do not dereference NULL, dangling, or one-past-end pointers.",
+          "items": []
+        },
+        {
+          "title": "Pointer arithmetic",
+          "body": "Adding n to int* advances by n int elements within one array; pointer subtraction yields element counts.",
+          "items": []
+        },
+        {
+          "title": "Const placement",
+          "body": "const int *p restricts writes through p; int *const p fixes the address stored in p.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int value = 7;\n    int *p = &value;\n    int **pp = &p;\n    **pp = 8;\n    printf(\"%d\\n\", value);\n    return 0;\n}\n",
+          "description": "Shows a value, pointer, and pointer to pointer working together."
+        }
+      ],
+      "keywords": [
+        "address",
+        "dereference",
+        "double pointer",
+        "const"
+      ]
+    },
+    {
+      "id": "c-guide-reading-complex-c-declarators",
+      "type": "guide",
+      "name": "Reading complex C declarators",
+      "category": "Pointers & Memory",
+      "summary": "Decode pointers, arrays, functions, and const placement.",
+      "description": "Read outward from the declared identifier while respecting parentheses and postfix []/() binding more tightly than prefix *.",
+      "sections": [
+        {
+          "title": "Examples",
+          "body": "int *a[3] means an array of three int pointers; int (*p)[3] means a pointer to an array of three int. Parentheses change the type.",
+          "items": []
+        },
+        {
+          "title": "Const pointer",
+          "body": "int *const p is a fixed pointer to writable int. const int *p is a reassignable pointer through which int cannot be modified.",
+          "items": []
+        },
+        {
+          "title": "Comparator cast",
+          "body": "With int *array[], each qsort element is int*. const void* comparator parameters point to those elements; int *const * expresses a pointer to a const pointer to int.",
+          "items": []
+        },
+        {
+          "title": "Function pointer",
+          "body": "int (*f)(int) is a pointer to a function taking int and returning int.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    int x = 1, y = 2;\n    int *a[2] = {&x, &y};\n    int *const *p = a;\n    printf(\"%d\\n\", **p);\n    return 0;\n}\n",
+          "description": "An array of pointers viewed through a pointer-to-const-pointer."
+        }
+      ],
+      "keywords": [
+        "declarator",
+        "int *const *",
+        "operator precedence"
+      ]
+    },
+    {
+      "id": "c-guide-arrays-dimensions-and-memory-layout",
+      "type": "guide",
+      "name": "Arrays, dimensions, and memory layout",
+      "category": "Arrays & Strings",
+      "summary": "Understand array elements, row-major storage, and parameter adjustment.",
+      "description": "An array is a contiguous collection of elements; many expressions convert an array to a pointer, but an array object is not itself a pointer variable.",
+      "sections": [
+        {
+          "title": "One dimension",
+          "body": "Use sizeof a / sizeof a[0] for a local fixed array with known complete array type.",
+          "items": []
+        },
+        {
+          "title": "Two dimensions",
+          "body": "For int m[2][3], the last index changes fastest. m[1][0] follows m[0][2] in row-major order.",
+          "items": []
+        },
+        {
+          "title": "Function parameters",
+          "body": "A parameter written int a[] is adjusted to int*. Pass the length separately.",
+          "items": []
+        },
+        {
+          "title": "Different pointer types",
+          "body": "int *a[3] is an array of pointers; int (*p)[3] points to an entire 3-element array.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a[2][3] = {{1,2,3},{4,5,6}};\n    for (int row = 0; row < 2; ++row) {\n        for (int col = 0; col < 3; ++col) printf(\"%d \", a[row][col]);\n        puts(\"\");\n    }\n    return 0;\n}\n",
+          "description": "Visits all elements in row-major order."
+        }
+      ],
+      "keywords": [
+        "2D",
+        "3D",
+        "row-major",
+        "array decay"
+      ]
+    },
+    {
+      "id": "c-guide-strings-and-safe-text-processing",
+      "type": "guide",
+      "name": "Strings and safe text processing",
+      "category": "Arrays & Strings",
+      "summary": "Work with null-terminated char sequences without overflows.",
+      "description": "C strings are byte arrays terminated by '\\0'. APIs require valid capacities and terminators; strings are not automatically length-checked.",
+      "sections": [
+        {
+          "title": "Capacity versus length",
+          "body": "sizeof local_array yields its byte size, while strlen counts bytes before the first '\\0'. For char s[]=\"abc\", sizeof s is 4 and strlen(s) is 3.",
+          "items": []
+        },
+        {
+          "title": "Input",
+          "body": "Use fgets to bound input size. scanf %s must have an appropriate field width.",
+          "items": []
+        },
+        {
+          "title": "Copying and appending",
+          "body": "strcpy/strcat require enough destination space and nonoverlap. snprintf is useful for bounded formatting.",
+          "items": []
+        },
+        {
+          "title": "Comparing",
+          "body": "strcmp returns only a sign. Never compare C strings using pointer equality if you want their text compared.",
+          "items": []
+        },
+        {
+          "title": "Encoding",
+          "body": "strlen counts bytes, not necessarily Unicode characters.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    char name[20] = \"Ada\";\n    printf(\"%zu %s\\n\", strlen(name), name);\n    return 0;\n}\n",
+          "description": "Demonstrates string length and a terminated char array."
+        }
+      ],
+      "keywords": [
+        "null byte",
+        "string.h",
+        "strcpy",
+        "strlen",
+        "fgets"
+      ]
+    },
+    {
+      "id": "c-guide-dynamic-memory-and-ownership",
+      "type": "guide",
+      "name": "Dynamic memory and ownership",
+      "category": "Pointers & Memory",
+      "summary": "Allocate, resize, and free memory without leaks or invalid access.",
+      "description": "Dynamic storage uses malloc/calloc/realloc and must be released with free. Track which code owns each allocation and how long references stay valid.",
+      "sections": [
+        {
+          "title": "Allocate safely",
+          "body": "Use malloc(count * sizeof *p), check against NULL, and protect multiplication from overflow for untrusted counts.",
+          "items": []
+        },
+        {
+          "title": "Initialize",
+          "body": "malloc leaves bytes uninitialized; calloc zeros bytes; explicit typed assignment is still needed for some representations.",
+          "items": []
+        },
+        {
+          "title": "Resize",
+          "body": "Use tmp = realloc(p, newsize); update p only after success. On failure the old allocation remains valid.",
+          "items": []
+        },
+        {
+          "title": "Release once",
+          "body": "free exactly once when the object is no longer needed. Never dereference a pointer after its allocation is freed.",
+          "items": []
+        },
+        {
+          "title": "Borrowing",
+          "body": "A pointer returned by a function does not automatically imply ownership. Define who frees memory in your API.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdlib.h>\n#include <stdio.h>\nint main(void) {\n    size_t count = 3;\n    int *a = malloc(count * sizeof *a);\n    if (!a) return 1;\n    for (size_t i = 0; i < count; ++i) a[i] = (int)i;\n    printf(\"%d\\n\", a[2]);\n    free(a);\n    return 0;\n}\n",
+          "description": "Allocates, initializes, uses, and releases a dynamic array."
+        }
+      ],
+      "keywords": [
+        "malloc",
+        "calloc",
+        "realloc",
+        "free",
+        "memory leak"
+      ]
+    },
+    {
+      "id": "c-guide-formatted-input-and-robust-parsing",
+      "type": "guide",
+      "name": "Formatted input and robust parsing",
+      "category": "Input & Output",
+      "summary": "Understand conversion counts, EOF, and text-to-number alternatives.",
+      "description": "Formatted input may fail because of end-of-file, bad syntax, or range issues. Treat return values as part of the API contract.",
+      "sections": [
+        {
+          "title": "scanf return value",
+          "body": "scanf returns the number of successful assignments. An invalid token can produce 0; EOF before any conversion reports EOF.",
+          "items": []
+        },
+        {
+          "title": "Whitespace",
+          "body": "Most numeric scanf conversions skip leading whitespace; newline alone does not signal end-of-input.",
+          "items": []
+        },
+        {
+          "title": "Read then parse",
+          "body": "fgets plus strtol offers more control over errors, trailing characters, and input length.",
+          "items": []
+        },
+        {
+          "title": "Format matching",
+          "body": "In scanf, %f expects float* and %lf expects double*. In printf, %f expects double due to default promotions.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\nint main(void) {\n    char buf[64];\n    if (!fgets(buf, sizeof buf, stdin)) return 1;\n    char *end;\n    long n = strtol(buf, &end, 10);\n    if (end == buf) return 1;\n    printf(\"%ld\\n\", n);\n    return 0;\n}\n",
+          "description": "Reads a bounded line then attempts integer parsing."
+        }
+      ],
+      "keywords": [
+        "scanf",
+        "fgets",
+        "strtol",
+        "EOF"
+      ]
+    },
+    {
+      "id": "c-guide-files-streams-and-error-handling",
+      "type": "guide",
+      "name": "Files, streams, and error handling",
+      "category": "Input & Output",
+      "summary": "Open, read, write, and close files defensively.",
+      "description": "stdio.h abstracts buffered I/O through FILE*. A good program checks every operation whose failure matters and closes resources on all paths.",
+      "sections": [
+        {
+          "title": "Open modes",
+          "body": "r reads existing files; w creates/truncates; a appends. Add b for binary where meaningful.",
+          "items": []
+        },
+        {
+          "title": "Return values",
+          "body": "fopen returns NULL on failure. fgets returns NULL on end-of-file or error. fread/fwrite return complete element counts.",
+          "items": []
+        },
+        {
+          "title": "EOF versus error",
+          "body": "After an unsuccessful read, feof and ferror distinguish end-of-file from a stream error.",
+          "items": []
+        },
+        {
+          "title": "Positioning",
+          "body": "Use fseek/ftell carefully; binary and text streams have different portable offset rules.",
+          "items": []
+        },
+        {
+          "title": "Cleanup",
+          "body": "fclose even on error paths. Check fclose when it matters whether buffered output was fully committed.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    FILE *fp = fopen(\"notes.txt\", \"w\");\n    if (!fp) { perror(\"notes.txt\"); return 1; }\n    if (fputs(\"saved\\n\", fp) == EOF) { fclose(fp); return 1; }\n    if (fclose(fp) == EOF) return 1;\n    return 0;\n}\n",
+          "description": "Creates a text file with basic failure checks."
+        }
+      ],
+      "keywords": [
+        "fopen",
+        "fclose",
+        "stderr",
+        "FILE"
+      ]
+    },
+    {
+      "id": "c-guide-structures-unions-and-enumeration",
+      "type": "guide",
+      "name": "Structures, unions, and enumeration",
+      "category": "Structures & Classes",
+      "summary": "Model grouped records, overlapping storage, and named states.",
+      "description": "struct groups fields, union overlays members, and enum defines integer constant names; their layout and semantics are not interchangeable.",
+      "sections": [
+        {
+          "title": "Structures",
+          "body": "Members have individual storage and may have padding. A struct value can be copied by assignment.",
+          "items": []
+        },
+        {
+          "title": "Unions",
+          "body": "Members share storage; writing one member does not automatically convert a different member's value.",
+          "items": []
+        },
+        {
+          "title": "Enums",
+          "body": "Useful for named state values; C enumeration types are related to integer types, not scoped classes as in C++.",
+          "items": []
+        },
+        {
+          "title": "Linked structures",
+          "body": "A struct can contain a pointer to itself, enabling lists and trees.",
+          "items": []
+        },
+        {
+          "title": "Layout portability",
+          "body": "Use offsetof and sizeof to observe your implementation's layout rather than hard-coding assumptions.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nenum State { WAITING, RUNNING, DONE };\nstruct Task { int id; enum State state; };\nint main(void) {\n    struct Task t = {.id = 4, .state = RUNNING};\n    printf(\"%d %d\\n\", t.id, (int)t.state);\n    return 0;\n}\n",
+          "description": "Combines a struct with an enum state."
+        }
+      ],
+      "keywords": [
+        "struct",
+        "union",
+        "enum",
+        "padding"
+      ]
+    },
+    {
+      "id": "c-guide-the-preprocessor-and-header-design",
+      "type": "guide",
+      "name": "The preprocessor and header design",
+      "category": "Fundamentals",
+      "summary": "Separate text substitution from the C compiler's type system.",
+      "description": "Preprocessing handles includes, conditional compilation, and macros before normal C compilation; macro substitution is not the same as a typed function call.",
+      "sections": [
+        {
+          "title": "Headers",
+          "body": "Place declarations and types needed by multiple source files in headers. Add unique include guards.",
+          "items": []
+        },
+        {
+          "title": "Macros",
+          "body": "#define substitutes preprocessing tokens. Parenthesize expression parameters and avoid evaluating argument expressions more than once.",
+          "items": []
+        },
+        {
+          "title": "Conditional compilation",
+          "body": "#if and #ifdef select code at compile time; this is distinct from runtime if.",
+          "items": []
+        },
+        {
+          "title": "Standard features",
+          "body": "Use library functions and const/enum for many tasks rather than reaching for a function-like macro.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#define SCALE 3\nint main(void) {\n    int value = 4;\n    printf(\"%d\\n\", value * SCALE);\n    return 0;\n}\n",
+          "description": "Defines a simple object-like macro."
+        }
+      ],
+      "keywords": [
+        "#define",
+        "#include",
+        "#ifndef",
+        "headers"
+      ]
+    },
+    {
+      "id": "c-guide-sorting-searching-and-callbacks",
+      "type": "guide",
+      "name": "Sorting, searching, and callbacks",
+      "category": "Standard Library",
+      "summary": "Use library algorithms with correct pointer levels.",
+      "description": "qsort and bsearch work on arbitrary fixed-size array elements through void pointers, which makes comparator types important.",
+      "sections": [
+        {
+          "title": "Comparator contract",
+          "body": "Return a negative int when first < second, zero when equal, and positive when first > second. Do not assume exact -1 or +1 is required.",
+          "items": []
+        },
+        {
+          "title": "Elements versus values",
+          "body": "The comparator gets pointers to array elements. With an int array, cast to const int*. With an int* array, each element is a pointer, so a pointer-to-pointer type is needed.",
+          "items": []
+        },
+        {
+          "title": "Overflow-safe compare",
+          "body": "Use (x > y) - (x < y), not x - y when the latter could overflow.",
+          "items": []
+        },
+        {
+          "title": "Binary search",
+          "body": "bsearch requires data sorted according to the exact same comparison order.",
+          "items": []
+        },
+        {
+          "title": "Stability",
+          "body": "qsort does not promise to preserve the order of equal elements.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\nint cmp(const void *a, const void *b) {\n    int x = *(const int *)a;\n    int y = *(const int *)b;\n    return (x > y) - (x < y);\n}\nint main(void) {\n    int values[] = {7, 2, 4};\n    qsort(values, 3, sizeof values[0], cmp);\n    printf(\"%d\\n\", values[0]);\n    return 0;\n}\n",
+          "description": "Sorts an array of actual int values."
+        }
+      ],
+      "keywords": [
+        "qsort",
+        "bsearch",
+        "comparator",
+        "int *const *"
+      ]
+    },
+    {
+      "id": "c-guide-undefined-behavior-and-common-c-pitfalls",
+      "type": "guide",
+      "name": "Undefined behavior and common C pitfalls",
+      "category": "Build & Debugging",
+      "summary": "Learn why compiling successfully does not guarantee correct execution.",
+      "description": "The C standard leaves certain incorrect programs with undefined behavior; compilers may optimize assuming those situations do not occur.",
+      "sections": [
+        {
+          "title": "Out-of-bounds access",
+          "body": "Only dereference array elements within their valid range. One-past-end pointers may be formed but not dereferenced.",
+          "items": []
+        },
+        {
+          "title": "Use after lifetime",
+          "body": "A pointer to a local variable is invalid after that object's lifetime ends; freed allocation references also become invalid.",
+          "items": []
+        },
+        {
+          "title": "Uninitialized data",
+          "body": "Read automatic scalars only after initialization.",
+          "items": []
+        },
+        {
+          "title": "Arithmetic",
+          "body": "Signed overflow and division by zero have undefined behavior; shift counts also have strict bounds.",
+          "items": []
+        },
+        {
+          "title": "Sequencing",
+          "body": "Avoid expressions that modify an object more than once without sequencing.",
+          "items": []
+        },
+        {
+          "title": "Formats",
+          "body": "Use printf/scanf specifiers matching the actual argument types.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int a[3] = {1, 2, 3};\n    for (size_t i = 0; i < sizeof a / sizeof a[0]; ++i) printf(\"%d \", a[i]);\n    puts(\"\");\n    return 0;\n}\n",
+          "description": "Uses a bounded traversal that avoids invalid array accesses."
+        }
+      ],
+      "keywords": [
+        "UB",
+        "undefined behavior",
+        "sanitizers",
+        "portability"
+      ]
+    },
+    {
+      "id": "c-guide-c99-compilation-and-debugging-workflow",
+      "type": "guide",
+      "name": "C99 compilation and debugging workflow",
+      "category": "Build & Debugging",
+      "summary": "Build reproducibly, observe warnings, and diagnose runtime errors.",
+      "description": "A simple debug loop is compile with warnings and symbols, run small tests, inspect failures, and use a debugger or sanitizer when appropriate.",
+      "sections": [
+        {
+          "title": "Compile",
+          "body": "gcc -std=c99 -Wall -Wextra -Wpedantic -g source.c -o program checks common issues while adding debug symbols.",
+          "items": []
+        },
+        {
+          "title": "Link",
+          "body": "Missing symbol errors during linking differ from compile errors; include all translation units and required libraries.",
+          "items": []
+        },
+        {
+          "title": "Debug",
+          "body": "Use breakpoints and inspect local variables with gdb, or use IDE debugger controls.",
+          "items": []
+        },
+        {
+          "title": "Runtime tools",
+          "body": "On supported platforms compile with -fsanitize=address,undefined to detect many memory and undefined-behavior errors.",
+          "items": []
+        },
+        {
+          "title": "Input/output tests",
+          "body": "Use files and diff to compare expected output with actual output; trailing spaces and extra newlines may matter in automated grading.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    int total = 0;\n    for (int i = 0; i < 3; ++i) total += i;\n    printf(\"%d\\n\", total);\n    return 0;\n}\n",
+          "description": "A deterministic program suitable for compiling and comparing with expected output."
+        }
+      ],
+      "keywords": [
+        "gcc",
+        "gdb",
+        "Makefile",
+        "diff",
+        "sanitizer"
+      ]
+    },
+    {
+      "id": "c-guide-c-versus-c-key-distinctions",
+      "type": "guide",
+      "name": "C versus C++: key distinctions",
+      "category": "Fundamentals",
+      "summary": "Do not assume a C code example obeys the same rules in C++.",
+      "description": "Although C and C++ share much syntax, they are separate languages with different type, library, compilation, and feature rules. Entries in this release target ISO C99 unless qualified otherwise.",
+      "sections": [
+        {
+          "title": "Language mode",
+          "body": "Compile C files with a C compiler and explicitly request -std=c99 when learning C99. A C++ compiler is not a C compiler.",
+          "items": []
+        },
+        {
+          "title": "void pointer conversions",
+          "body": "C implicitly converts void* to object pointers; standard C++ requires an explicit conversion.",
+          "items": []
+        },
+        {
+          "title": "Boolean and string literals",
+          "body": "In C99 bool comes from stdbool.h, and ordinary character constants have type int. Literal types and bool handling differ from C++.",
+          "items": []
+        },
+        {
+          "title": "Advanced features",
+          "body": "C++ classes, templates, references, overloaded functions, new/delete, std::vector, and iostream are not C99 facilities.",
+          "items": []
+        },
+        {
+          "title": "Shared interface",
+          "body": "A public header can sometimes support both languages using extern \"C\" guards under __cplusplus, but this is not a requirement for ordinary C projects.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdbool.h>\nint main(void) {\n    bool ok = true;\n    puts(ok ? \"C99 true\" : \"C99 false\");\n    return 0;\n}\n",
+          "description": "A valid ISO C99 Boolean example; not a C++ reference."
+        }
+      ],
+      "keywords": [
+        "C++",
+        "compatibility",
+        "standards"
+      ]
+    },
+    {
+      "id": "c-guide-memory-representation-and-bytes",
+      "type": "guide",
+      "name": "Memory representation and bytes",
+      "category": "Pointers & Memory",
+      "summary": "Use sizeof, alignment, and byte operations without unsafe assumptions.",
+      "description": "A C byte is the size of char; CHAR_BIT gives its bit width. Object representations, padding, alignment, and endianness can vary by implementation.",
+      "sections": [
+        {
+          "title": "Sizes",
+          "body": "sizeof measures bytes, not bits. For bit counts multiply by CHAR_BIT where needed.",
+          "items": []
+        },
+        {
+          "title": "Representation",
+          "body": "C does not require every multi-byte object to have the same byte order or padding rules.",
+          "items": []
+        },
+        {
+          "title": "Copying",
+          "body": "memcpy and memmove operate on byte representations; they do not convert numeric values.",
+          "items": []
+        },
+        {
+          "title": "Alignment",
+          "body": "malloc provides storage suitable for objects with fundamental alignment requirements. Casting an arbitrary byte address to a stricter pointer type is not automatically safe.",
+          "items": []
+        },
+        {
+          "title": "Serialization",
+          "body": "Prefer explicit byte formats for files or networks instead of writing raw struct layouts.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <limits.h>\nint main(void) {\n    printf(\"char bits=%d, int bytes=%zu\\n\", CHAR_BIT, sizeof(int));\n    return 0;\n}\n",
+          "description": "Reports implementation-specific object representation characteristics."
+        }
+      ],
+      "keywords": [
+        "byte",
+        "alignment",
+        "endianness",
+        "padding"
+      ]
+    },
+    {
+      "id": "c-guide-error-handling-and-cleanup-patterns",
+      "type": "guide",
+      "name": "Error handling and cleanup patterns",
+      "category": "Functions",
+      "summary": "Check return values and centralize cleanup for complex operations.",
+      "description": "C programs commonly report errors through return codes, NULL pointers, and errno. Resource ownership should remain explicit, especially across several early-exit paths.",
+      "sections": [
+        {
+          "title": "Check immediately",
+          "body": "After malloc or fopen, check for NULL. After scanf, validate the assignment count. Do not assume success.",
+          "items": []
+        },
+        {
+          "title": "Avoid leaks",
+          "body": "If later work fails, free allocations and close streams already obtained.",
+          "items": []
+        },
+        {
+          "title": "Dedicated cleanup",
+          "body": "For several owned resources, a single cleanup label can simplify all exit paths; using goto for this narrow purpose is common in C.",
+          "items": []
+        },
+        {
+          "title": "Preserve diagnostics",
+          "body": "Check the function's documented error mechanism; errno need not be meaningful unless an operation reports failure.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\nint main(void) {\n    int status = EXIT_FAILURE;\n    FILE *fp = fopen(\"output.txt\", \"w\");\n    if (!fp) return status;\n    if (fputs(\"ready\\n\", fp) == EOF) goto cleanup;\n    status = EXIT_SUCCESS;\ncleanup:\n    if (fclose(fp) == EOF) status = EXIT_FAILURE;\n    return status;\n}\n",
+          "description": "Uses a cleanup label to guarantee fclose on both paths."
+        }
+      ],
+      "keywords": [
+        "error codes",
+        "goto cleanup",
+        "resource ownership"
+      ]
+    },
+    {
+      "id": "c-guide-standard-headers-map",
+      "type": "guide",
+      "name": "Standard headers map",
+      "category": "Standard Library",
+      "summary": "Find the header that declares the function or type you need.",
+      "description": "Headers group related C library interfaces. Include the appropriate header rather than relying on incidental transitive declarations.",
+      "sections": [
+        {
+          "title": "stdio.h",
+          "body": "printf, scanf, fgets, FILE, fopen, fclose, EOF.",
+          "items": []
+        },
+        {
+          "title": "stdlib.h",
+          "body": "malloc, calloc, realloc, free, qsort, bsearch, strtol, exit.",
+          "items": []
+        },
+        {
+          "title": "string.h",
+          "body": "strlen, strcmp, strcpy, strstr, memcpy, memmove, memset.",
+          "items": []
+        },
+        {
+          "title": "stddef.h / stdint.h",
+          "body": "size_t, ptrdiff_t, offsetof, NULL; fixed-width or minimum-width integer types.",
+          "items": []
+        },
+        {
+          "title": "ctype.h / math.h",
+          "body": "Character classification and transformations; floating math such as sqrt, fabs and pow.",
+          "items": []
+        },
+        {
+          "title": "limits.h / float.h",
+          "body": "Implementation's integer and floating-point limits.",
+          "items": []
+        },
+        {
+          "title": "assert.h / errno.h / time.h",
+          "body": "Assertions, error macros, and clock/calendar-time facilities.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\nint main(void) {\n    char *p = malloc(6);\n    if (!p) return 1;\n    strcpy(p, \"hello\");\n    printf(\"%zu\\n\", strlen(p));\n    free(p);\n    return 0;\n}\n",
+          "description": "Combines declarations from three relevant headers."
+        }
+      ],
+      "keywords": [
+        "library headers",
+        "stdlib.h",
+        "stdio.h",
+        "string.h"
+      ]
+    },
+    {
+      "id": "c-guide-complex-input-bounds-and-output-formatting",
+      "type": "guide",
+      "name": "Complex input, bounds, and output formatting",
+      "category": "Input & Output",
+      "summary": "Avoid fragile scanf loops and output mismatches.",
+      "description": "Read input with explicit bounds, check conversion results, and generate exact output without accidental separators.",
+      "sections": [
+        {
+          "title": "Bounded input",
+          "body": "If a fixed buffer holds N bytes, reserve a byte for the null terminator when reading text.",
+          "items": []
+        },
+        {
+          "title": "EOF loops",
+          "body": "A numeric scanf loop stops on nonnumeric input (return 0) or EOF, not necessarily at a newline.",
+          "items": []
+        },
+        {
+          "title": "Whitespace",
+          "body": "scanf numeric conversions skip leading whitespace; fgets preserves a newline when it fits.",
+          "items": []
+        },
+        {
+          "title": "Exact output",
+          "body": "Automated graders can reject trailing spaces, missing separators, or extra lines. Format separators deliberately.",
+          "items": []
+        },
+        {
+          "title": "Type-sensitive specifiers",
+          "body": "Match %d with int, %zu with size_t, %lld with long long, and use & for scanf destinations.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    int a[] = {2, 4, 6};\n    for (size_t i = 0; i < 3; ++i) {\n        if (i != 0) putchar(' ');\n        printf(\"%d\", a[i]);\n    }\n    putchar('\\n');\n    return 0;\n}\n",
+          "description": "Prints exactly one space between values and no trailing space."
+        }
+      ],
+      "keywords": [
+        "scanf loop",
+        "grader",
+        "diff",
+        "whitespace"
+      ]
+    },
+    {
+      "id": "c-guide-practical-code-review-checklist",
+      "type": "guide",
+      "name": "Practical code review checklist",
+      "category": "Build & Debugging",
+      "summary": "Check correctness, portability, diagnostics, and cleanup before sharing.",
+      "description": "Small systematic checks are often more useful than adding features when learning C.",
+      "sections": [
+        {
+          "title": "Types and initialization",
+          "body": "Does each variable have the right type? Are automatic values initialized before use?",
+          "items": []
+        },
+        {
+          "title": "Bounds and lifetimes",
+          "body": "Are array indices valid? Do all pointers designate live storage? Are dynamically allocated objects freed once?",
+          "items": []
+        },
+        {
+          "title": "Input errors",
+          "body": "Are scanf/fgets/strtol results checked? Are input buffers correctly sized?",
+          "items": []
+        },
+        {
+          "title": "Output",
+          "body": "Do format specifiers match the argument types? Are required newlines and separators exact?",
+          "items": []
+        },
+        {
+          "title": "Portability",
+          "body": "Are language-version assumptions stated and implementation-dependent widths avoided?",
+          "items": []
+        },
+        {
+          "title": "Build",
+          "body": "Does the program compile with -std=c99 -Wall -Wextra -Wpedantic? Are warnings understood rather than ignored?",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\n\nint main(void) {\n    int values[] = {1, 2, 3};\n    int total = 0;\n    for (size_t i = 0; i < sizeof values / sizeof values[0]; ++i) total += values[i];\n    printf(\"%d\\n\", total);\n    return 0;\n}\n",
+          "description": "A small complete program suitable for a checklist pass."
+        }
+      ],
+      "keywords": [
+        "code review",
+        "safety",
+        "warnings"
+      ]
+    }
+  ]
+}
