@@ -1,8 +1,14 @@
-# Bash Command Library
+# Programming Reference Library
 
-A fast, publicly accessible Bash and Unix command reference. Browse 117 practical commands and 18 searchable Bash syntax guides in English. The site is hosted on GitHub Pages and keeps a local cache for offline use.
+A fast, publicly accessible reference covering Bash and an expandable C / C++ library. Browse 117 practical Bash commands and 18 searchable Bash syntax guides in English; an independent C / C++ section is available and starts empty. The site is hosted on GitHub Pages and keeps a local cache for offline use.
 
 **Live website:** https://yardensz.github.io/bash-command-library/
+
+## Multiple libraries
+
+Use the **Library** selector in the site header to switch between **Bash** and **C / C++**. Each library has its own content file, version history, categories, local cache and deep links. The C / C++ data has intentionally not been populated yet. The website remains English-only.
+
+For the complete schema, maintenance workflow and cross-chat instructions, see [LIBRARY_GUIDE.md](LIBRARY_GUIDE.md).
 
 ## Features
 
@@ -35,14 +41,17 @@ The site does not require a dedicated server, API token, database, or build step
 
 ## Maintaining the command library
 
-- `commands.json`: the current database, including `version`, `updatedAt`, `commands`, and `topics` (noncommand guides).
+- `libraries.json`: catalog of available language libraries.
+- `libraries/c-cpp.json` and `libraries/c-cpp-versions.json`: independent C / C++ content and version history.
+- `libraries/history/c-cpp/X.Y.Z.json`: read-only C / C++ release snapshots.
+- `commands.json`: the current Bash database, including `version`, `updatedAt`, `commands`, and `topics` (noncommand guides).
 - `versions.json`: release metadata in newest-first order.
 - `history/X.Y.Z.json`: read-only snapshots of released data.
 - `app.js`: search, rendering, navigation, version selection, and caching.
 - `styles.css`: responsive presentation and syntax colors.
 - `sw.js`: network-first caching for offline use.
 
-For each new release, update `commands.json`, save a matching snapshot, add an entry to `versions.json`, and advance the cache version in `sw.js`. Write descriptive Git commit messages.
+For each Bash release, update `commands.json`, save a matching snapshot, add an entry to `versions.json`, and advance the cache version in `sw.js`. For C / C++ releases follow [LIBRARY_GUIDE.md](LIBRARY_GUIDE.md). Write descriptive Git commit messages.
 
 Older reference snapshots have been translated to English so browsing previous library versions does not reintroduce a Hebrew interface. Original Git commits remain available in Git history.
 
