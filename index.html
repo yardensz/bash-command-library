@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f6f2">
-  <meta name="description" content="A fast, offline-friendly Bash command reference with syntax highlighting, useful flags, and examples.">
-  <title>Bash Library — Command Reference</title>
+  <meta name="description" content="A fast, offline-friendly programming and command reference with searchable examples and version history.">
+  <title>Reference Library — Programming &amp; Commands</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="styles.css">
@@ -14,10 +14,10 @@
 <body>
 <div class="app">
   <header class="topbar">
-    <a class="brand" href="./" aria-label="Bash Library" dir="ltr">
-      <span class="brand-mark">Bash Library</span>
+    <a class="brand" href="./" aria-label="Reference Library" dir="ltr">
+      <span class="brand-mark">Reference Library</span>
     </a>
-    <div class="topbar-utilities">
+    <div class="topbar-utilities"><div class="library-switch"><label for="librarySelect">Library</label><select id="librarySelect" aria-label="Choose a reference library"><option value="bash">Bash</option><option value="c-cpp">C / C++</option></select></div>
       <div class="stat" aria-label="Number of commands in the library">
         <span class="stat-number" id="commandCount">—</span>
         <span class="stat-label" id="itemCountLabel">commands · guides</span>
@@ -31,13 +31,13 @@
   </header>
 
   <section class="search-zone" aria-label="Search the library">
-    <label for="searchInput">Search commands &amp; guides</label>
+    <label for="searchInput" id="searchTitle">Search Bash references</label>
     <div class="search-wrap">
       <span class="search-icon" aria-hidden="true">⌕</span>
       <input id="searchInput" type="search" placeholder="Search if, for, wc, regex, =, options..." autocomplete="off" spellcheck="false" aria-label="Search commands">
       <span class="shortcut" aria-hidden="true">/</span>
     </div>
-    <p class="search-hint">Search command names, flags, syntax and examples. Matching context is highlighted. Press <kbd>/</kbd> to search.</p>
+    <p class="search-hint" id="searchHint">Search command names, flags, syntax and examples. Matching context is highlighted. Press <kbd>/</kbd> to search.</p>
   </section>
 
   <div class="meta-strip">
@@ -47,7 +47,7 @@
 
   <div class="workspace">
     <aside class="sidebar" aria-label="Command list">
-      <div class="sidebar-title"><span>Library index</span></div>
+      <div class="sidebar-title"><span id="indexTitle">Bash index</span></div>
       <div id="categories" class="categories" aria-label="Filter by category"></div>
       <div class="list-meta"><span id="resultsCount">— results</span><span>Select an entry ↓</span></div>
       <nav id="commandList" class="commands-list" aria-label="Command list"></nav>
@@ -55,7 +55,7 @@
     <main class="main" id="mainContent" tabindex="-1" aria-live="polite"><div class="empty">Loading commands...</div></main>
   </div>
 
-  <footer class="footer"><span id="syncInfo">The library is cached for offline access after your first visit.</span><span class="footer-right"><bdi dir="ltr">Bash Library</bdi> · <a href="https://github.com/yardensz/bash-command-library" target="_blank" rel="noopener noreferrer">Source on GitHub</a></span></footer>
+  <footer class="footer"><span id="syncInfo">The library is cached for offline access after your first visit.</span><span class="footer-right"><bdi dir="ltr">Reference Library</bdi> · <a href="https://github.com/yardensz/bash-command-library" target="_blank" rel="noopener noreferrer">Source on GitHub</a></span></footer>
 </div>
 <div class="modal-backdrop hidden" id="modalBackdrop" role="presentation">
   <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><h2 id="modalTitle"></h2><button class="btn tiny" id="modalClose" type="button" aria-label="Close">✕</button></div><div id="modalContent"></div></section>
