@@ -29,7 +29,7 @@
 
   function configureLibrary(id,updateURL=false){
     const l=state.catalog.libraries.find(x=>x.id===id)||state.catalog.libraries.find(x=>x.id===state.catalog.defaultLibrary)||FALLBACK.libraries[0];
-    state.library=l;state.libraryId=l.id;state.data={version:'—',commands:[],topics:[]};state.versions=null;state.selected=null;state.category='All';state.query='';state.historical=false;
+    state.library=l;state.libraryId=l.id;state.data={version:'—',commands:[],topics:[]};state.versions=null;state.selected=(()=>{try{return new URLSearchParams(location.hash.slice(1)).get('cmd');}catch{return null;}})();state.category='All';state.query='';state.historical=false;
     $('librarySelect').value=l.id;$('searchInput').value='';$('searchInput').placeholder=l.searchPlaceholder||'Search the reference...';
     $('searchTitle').textContent='Search '+l.name+' references';$('searchHint').textContent=(l.searchHint||'Search names, syntax and examples.')+' Press / to search.';$('indexTitle').textContent=l.name+' index';document.title=l.name+' — Reference Library';
     if(updateURL){const url=new URL(location.href);url.searchParams.set('library',l.id);url.hash='';history.replaceState(null,'',url);}
@@ -300,8 +300,6 @@
   $('modalClose').addEventListener('click',closeModal);
   $('modalBackdrop').addEventListener('click',e=>{if(e.target===$('modalBackdrop'))closeModal();});
   window.addEventListener('online',()=>refresh(true));
-  const initialHash=(()=>{try{return new URLSearchParams(location.hash.slice(1)).get('cmd');}catch{return null;}})();
-  state.selected=initialHash;
   loadCatalog();
   if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 })();
