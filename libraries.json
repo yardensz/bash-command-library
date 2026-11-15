@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "defaultLibrary": "bash",
+  "libraries": [
+    {
+      "id": "bash",
+      "name": "Bash",
+      "description": "Bash and command-line reference",
+      "data": "commands.json",
+      "versions": "versions.json",
+      "entryLabel": "commands",
+      "guideLabel": "guides",
+      "categories": [
+        "All",
+        "Files & Directories",
+        "Text & Search",
+        "System",
+        "Network & Web",
+        "Control Flow & Loops",
+        "Concepts & Syntax"
+      ],
+      "searchPlaceholder": "Search if, for, wc, regex, =, options...",
+      "searchHint": "Search command names, flags, syntax and examples.",
+      "emptyMessage": "No Bash entries are available yet."
+    },
+    {
+      "id": "c-cpp",
+      "name": "C / C++",
+      "description": "C and C++ language reference",
+      "data": "libraries/c-cpp.json",
+      "versions": "libraries/c-cpp-versions.json",
+      "entryLabel": "entries",
+      "guideLabel": "guides",
+      "categories": [
+        "All",
+        "Fundamentals",
+        "Types & Variables",
+        "Operators & Expressions",
+        "Control Flow",
+        "Functions",
+        "Pointers & Memory",
+        "Arrays & Strings",
+        "Input & Output",
+        "Structures & Classes",
+        "Standard Library",
+        "Build & Debugging"
+      ],
+      "searchPlaceholder": "Search pointers, arrays, functions, types...",
+      "searchHint": "Search C / C++ functions, operators, types, concepts and examples.",
+      "emptyMessage": "The C / C++ library is ready. Entries will be added in a separate conversation."
+    }
+  ]
+}
