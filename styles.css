@@ -375,3 +375,11 @@ body {direction:ltr}
 .flaginfo-popover strong{display:block;font-size:11px;color:var(--accent);margin-bottom:4px}
 .flaginfo-popover p{margin:0;font-size:12px;line-height:1.55;font-weight:400;color:var(--ink)}
 @media(max-width:700px){.option-key{gap:5px}.flaginfo-popover{width:min(260px,calc(100vw - 55px))}}
+
+/* Multi-library navigation */
+.library-switch {display:flex;align-items:center;gap:8px;flex-shrink:0}
+.library-switch label {font-size:11px;color:var(--muted);font-weight:650}
+.library-switch select {appearance:auto;color:var(--ink);background:var(--surface);border:1px solid var(--stroke);border-radius:8px;padding:6px 10px;font-size:13px;font-weight:700;min-width:116px;max-width:170px}
+.library-switch select:focus-visible {outline:2px solid var(--accent);outline-offset:2px}
+@media(max-width:700px){.topbar-utilities{flex-wrap:wrap}.library-switch{order:0}}
+@media(max-width:480px){.library-switch select{min-width:105px}}
