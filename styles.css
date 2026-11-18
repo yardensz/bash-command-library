@@ -383,3 +383,7 @@ body {direction:ltr}
 .library-switch select:focus-visible {outline:2px solid var(--accent);outline-offset:2px}
 @media(max-width:700px){.topbar-utilities{flex-wrap:wrap}.library-switch{order:0}}
 @media(max-width:480px){.library-switch select{min-width:105px}}
+
+/* Highlight the letters that explain a command name or option name. */
+.mnemonic-letter{font-weight:850;text-decoration:underline;text-decoration-thickness:1.6px;text-underline-offset:2px;color:var(--accent)}
+.nameinfo-popover .mnemonic-letter,.flaginfo-popover .mnemonic-letter{font-weight:850}
