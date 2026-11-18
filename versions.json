@@ -1,7 +1,16 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "1.7.3",
+  "latestVersion": "1.8.0",
   "releases": [
+    {
+      "version": "1.8.0",
+      "date": "2026-11-18",
+      "title": "Highlighted mnemonic letters and clearer option names",
+      "summary": "Emphasized the letters behind command and option names in info popovers, clarified grep -l/-L and ambiguous flags, and preserved explanations outside the popovers.",
+      "commandCount": 129,
+      "topicCount": 25,
+      "snapshot": "history/1.8.0.json"
+    },
     {
       "version": "1.7.3",
       "date": "2026-11-18",
