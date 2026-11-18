@@ -1,7 +1,16 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "1.7.1",
+  "latestVersion": "1.7.2",
   "releases": [
+    {
+      "version": "1.7.2",
+      "date": "2026-11-18",
+      "title": "Final flag-name corrections and review",
+      "summary": "Resolved every remaining generic option-name placeholder, including abbreviated Linux flags, signals and backup switches.",
+      "commandCount": 129,
+      "topicCount": 25,
+      "snapshot": "history/1.7.2.json"
+    },
     {
       "version": "1.7.1",
       "date": "2026-11-18",
