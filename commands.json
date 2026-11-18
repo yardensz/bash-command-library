@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.7.0",
+  "version": "1.7.1",
   "updatedAt": "2026-11-18",
   "commands": [
     {
@@ -125,7 +125,7 @@
           "description": "Go to the previous directory (an argument, not a flag).",
           "info": {
             "kind": "Option name",
-            "text": "Option undefined"
+            "text": "Previous directory"
           }
         }
       ],
@@ -181,7 +181,7 @@
           "description": "Show the logical path, which may contain symbolic links.",
           "info": {
             "kind": "Option name",
-            "text": "Option -L (context-specific letter)"
+            "text": "Logical path"
           }
         },
         {
@@ -189,7 +189,7 @@
           "description": "Resolve symbolic links and print the physical path.",
           "info": {
             "kind": "Option name",
-            "text": "Option -P (context-specific letter)"
+            "text": "Physical path"
           }
         }
       ],
@@ -293,7 +293,7 @@
           "description": "Do not create missing files.",
           "info": {
             "kind": "Option name",
-            "text": "Option -c (context-specific letter)"
+            "text": "No create"
           }
         },
         {
@@ -301,7 +301,7 @@
           "description": "Update the access timestamp.",
           "info": {
             "kind": "Option name",
-            "text": "Option -a (context-specific letter)"
+            "text": "Access time"
           }
         },
         {
@@ -309,7 +309,7 @@
           "description": "Update the modification timestamp.",
           "info": {
             "kind": "Option name",
-            "text": "Option -m (context-specific letter)"
+            "text": "Modification time"
           }
         }
       ],
@@ -554,7 +554,7 @@
           "description": "Number all output lines.",
           "info": {
             "kind": "Option name",
-            "text": "Option -n (context-specific letter)"
+            "text": "Number lines"
           }
         },
         {
@@ -562,7 +562,7 @@
           "description": "Number only nonempty lines.",
           "info": {
             "kind": "Option name",
-            "text": "Option -b (context-specific letter)"
+            "text": "Number nonblank lines"
           }
         },
         {
@@ -570,7 +570,7 @@
           "description": "Collapse repeated empty lines when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Option -s (context-specific letter)"
+            "text": "Squeeze blank lines"
           }
         },
         {
@@ -666,7 +666,7 @@
           "description": "Sort using field N as the key.",
           "info": {
             "kind": "Option name",
-            "text": "Key"
+            "text": "Key field"
           }
         },
         {
@@ -682,7 +682,7 @@
           "description": "Write sorted output to the specified file.",
           "info": {
             "kind": "Option name",
-            "text": "Output"
+            "text": "Output file"
           }
         }
       ],
@@ -1416,7 +1416,7 @@
           "description": "Omit the trailing newline.",
           "info": {
             "kind": "Option name",
-            "text": "Option -n (context-specific letter)"
+            "text": "No newline"
           }
         },
         {
@@ -1475,7 +1475,7 @@
           "description": "Search manual descriptions by keyword.",
           "info": {
             "kind": "Option name",
-            "text": "Option -k (context-specific letter)"
+            "text": "Keyword"
           }
         },
         {
@@ -2226,7 +2226,7 @@
           "description": "Use unified diff format.",
           "info": {
             "kind": "Option name",
-            "text": "Option -u (context-specific letter)"
+            "text": "Unified format"
           }
         },
         {
@@ -2242,7 +2242,7 @@
           "description": "Compare directories recursively.",
           "info": {
             "kind": "Option name",
-            "text": "Option -r (context-specific letter)"
+            "text": "Recursive"
           }
         }
       ],
@@ -2653,7 +2653,7 @@
           "description": "Clear the current session's in-memory history.",
           "info": {
             "kind": "Option name",
-            "text": "Option -c (context-specific letter)"
+            "text": "Clear"
           }
         }
       ],
@@ -2857,7 +2857,7 @@
           "description": "Display UTC time.",
           "info": {
             "kind": "Option name",
-            "text": "Option -u (context-specific letter)"
+            "text": "UTC"
           }
         }
       ],
@@ -3003,7 +3003,7 @@
           "description": "Create a symbolic rather than a hard link.",
           "info": {
             "kind": "Option name",
-            "text": "Option -s (context-specific letter)"
+            "text": "Symbolic link"
           }
         },
         {
@@ -3011,7 +3011,7 @@
           "description": "Replace an existing destination if allowed; use carefully.",
           "info": {
             "kind": "Option name",
-            "text": "Option -f (context-specific letter)"
+            "text": "Force"
           }
         }
       ],
@@ -3207,7 +3207,7 @@
           "description": "List exported variables.",
           "info": {
             "kind": "Option name",
-            "text": "Option -p (context-specific letter)"
+            "text": "Print"
           }
         },
         {
@@ -3215,7 +3215,7 @@
           "description": "Stop exporting a variable without deleting its value.",
           "info": {
             "kind": "Option name",
-            "text": "Option -n (context-specific letter)"
+            "text": "Remove export attribute"
           }
         }
       ],
@@ -3264,7 +3264,7 @@
           "description": "Start with an empty environment.",
           "info": {
             "kind": "Option name",
-            "text": "Option -i (context-specific letter)"
+            "text": "Ignore environment"
           }
         },
         {
@@ -3272,7 +3272,7 @@
           "description": "Remove a variable from the launched program's environment.",
           "info": {
             "kind": "Option name",
-            "text": "Option -u (context-specific letter)"
+            "text": "Unset"
           }
         }
       ],
@@ -3388,7 +3388,7 @@
           "description": "Show all available information.",
           "info": {
             "kind": "Option name",
-            "text": "Option -a (context-specific letter)"
+            "text": "All"
           }
         },
         {
@@ -3396,7 +3396,7 @@
           "description": "Show the kernel or system name.",
           "info": {
             "kind": "Option name",
-            "text": "Option -s (context-specific letter)"
+            "text": "System name"
           }
         },
         {
@@ -3404,7 +3404,7 @@
           "description": "Show the machine architecture.",
           "info": {
             "kind": "Option name",
-            "text": "Option -m (context-specific letter)"
+            "text": "Machine"
           }
         }
       ],
@@ -3451,7 +3451,7 @@
           "description": "Use a comma as the field separator.",
           "info": {
             "kind": "Option name",
-            "text": "Option -d (context-specific letter)"
+            "text": "Delimiter"
           }
         },
         {
@@ -3459,7 +3459,7 @@
           "description": "Join lines from each file into one long output line.",
           "info": {
             "kind": "Option name",
-            "text": "Option -s (context-specific letter)"
+            "text": "Serial"
           }
         }
       ],
@@ -3530,7 +3530,7 @@
           "description": "Continue an interrupted download when supported by the server.",
           "info": {
             "kind": "Option name",
-            "text": "Option -c (context-specific letter)"
+            "text": "Continue"
           }
         },
         {
@@ -3799,7 +3799,7 @@
           "description": "Show verbose connection diagnostics.",
           "info": {
             "kind": "Option name",
-            "text": "Option -v (context-specific letter)"
+            "text": "Verbose"
           }
         },
         {
@@ -3855,7 +3855,7 @@
           "description": "Copy directories recursively.",
           "info": {
             "kind": "Option name",
-            "text": "Option -r (context-specific letter)"
+            "text": "Recursive"
           }
         },
         {
@@ -3871,7 +3871,7 @@
           "description": "Use the specified SSH private key.",
           "info": {
             "kind": "Option name",
-            "text": "Option -i (context-specific letter)"
+            "text": "Identity file"
           }
         },
         {
@@ -3928,7 +3928,7 @@
           "description": "Archive mode: preserve structure and common metadata.",
           "info": {
             "kind": "Option name",
-            "text": "Option -a (context-specific letter)"
+            "text": "Archive"
           }
         },
         {
@@ -3936,7 +3936,7 @@
           "description": "Show copied entries and progress messages.",
           "info": {
             "kind": "Option name",
-            "text": "Option -v (context-specific letter)"
+            "text": "Verbose"
           }
         },
         {
@@ -3960,7 +3960,7 @@
           "description": "Compress data during transfer when useful.",
           "info": {
             "kind": "Option name",
-            "text": "Option -z (context-specific letter)"
+            "text": "Compress"
           }
         }
       ],
@@ -4082,7 +4082,7 @@
           "description": "Show TCP sockets.",
           "info": {
             "kind": "Option name",
-            "text": "Option -t (context-specific letter)"
+            "text": "TCP"
           }
         },
         {
@@ -4090,7 +4090,7 @@
           "description": "Show UDP sockets.",
           "info": {
             "kind": "Option name",
-            "text": "Option -u (context-specific letter)"
+            "text": "UDP"
           }
         },
         {
@@ -4098,7 +4098,7 @@
           "description": "Show listening sockets.",
           "info": {
             "kind": "Option name",
-            "text": "Option -l (context-specific letter)"
+            "text": "Listening"
           }
         },
         {
@@ -4106,7 +4106,7 @@
           "description": "Show numerical addresses and ports.",
           "info": {
             "kind": "Option name",
-            "text": "Option -n (context-specific letter)"
+            "text": "Numeric"
           }
         },
         {
@@ -4114,7 +4114,7 @@
           "description": "Show owning processes when permitted.",
           "info": {
             "kind": "Option name",
-            "text": "Option -p (context-specific letter)"
+            "text": "Processes"
           }
         }
       ],
@@ -4179,7 +4179,7 @@
           "description": "Perform a reverse DNS lookup.",
           "info": {
             "kind": "Option name",
-            "text": "Option -x (context-specific letter)"
+            "text": "Reverse DNS lookup"
           }
         },
         {
@@ -4239,7 +4239,7 @@
           "description": "Choose a record type such as MX or AAAA.",
           "info": {
             "kind": "Option name",
-            "text": "Option -t (context-specific letter)"
+            "text": "Record type"
           }
         },
         {
@@ -4247,7 +4247,7 @@
           "description": "Request a broader DNS report.",
           "info": {
             "kind": "Option name",
-            "text": "Option -a (context-specific letter)"
+            "text": "All"
           }
         },
         {
@@ -4255,7 +4255,7 @@
           "description": "Show verbose output.",
           "info": {
             "kind": "Option name",
-            "text": "Option -v (context-specific letter)"
+            "text": "Verbose"
           }
         }
       ],
@@ -4302,7 +4302,7 @@
           "description": "Probe a port without sending application data.",
           "info": {
             "kind": "Option name",
-            "text": "Option -z (context-specific letter)"
+            "text": "Zero-I/O scanning"
           }
         },
         {
@@ -4310,7 +4310,7 @@
           "description": "Use verbose output.",
           "info": {
             "kind": "Option name",
-            "text": "Option -v (context-specific letter)"
+            "text": "Verbose"
           }
         },
         {
@@ -4318,7 +4318,7 @@
           "description": "Set a timeout (details depend on implementation).",
           "info": {
             "kind": "Option name",
-            "text": "Option -w (context-specific letter)"
+            "text": "Wait timeout"
           }
         },
         {
@@ -4326,7 +4326,7 @@
           "description": "Use UDP instead of TCP.",
           "info": {
             "kind": "Option name",
-            "text": "Option -u (context-specific letter)"
+            "text": "UDP"
           }
         }
       ],
@@ -4375,7 +4375,7 @@
           "description": "Limit the maximum number of hops.",
           "info": {
             "kind": "Option name",
-            "text": "Option -m (context-specific letter)"
+            "text": "Maximum hops"
           }
         },
         {
@@ -4383,7 +4383,7 @@
           "description": "Avoid DNS lookups for intermediate hops.",
           "info": {
             "kind": "Option name",
-            "text": "Option -n (context-specific letter)"
+            "text": "Numeric"
           }
         },
         {
@@ -4391,7 +4391,7 @@
           "description": "Set a per-probe wait time on many Unix systems.",
           "info": {
             "kind": "Option name",
-            "text": "Option -w (context-specific letter)"
+            "text": "Wait"
           }
         }
       ],
@@ -4511,7 +4511,7 @@
           "description": "Print changed entries.",
           "info": {
             "kind": "Option name",
-            "text": "Option -v (context-specific letter)"
+            "text": "Verbose"
           }
         }
       ],
@@ -4558,7 +4558,7 @@
           "description": "Limit recursion depth.",
           "info": {
             "kind": "Option name",
-            "text": "Option -L (context-specific letter)"
+            "text": "Levels"
           }
         },
         {
@@ -4566,7 +4566,7 @@
           "description": "Include hidden entries.",
           "info": {
             "kind": "Option name",
-            "text": "Option -a (context-specific letter)"
+            "text": "All"
           }
         },
         {
@@ -4574,7 +4574,7 @@
           "description": "Display directories only.",
           "info": {
             "kind": "Option name",
-            "text": "Option -d (context-specific letter)"
+            "text": "Directories"
           }
         },
         {
@@ -4582,7 +4582,7 @@
           "description": "Exclude matching names.",
           "info": {
             "kind": "Option name",
-            "text": "Option -I (context-specific letter)"
+            "text": "Ignore pattern"
           }
         }
       ],
@@ -4629,7 +4629,7 @@
           "description": "Include directories recursively.",
           "info": {
             "kind": "Option name",
-            "text": "Option -r (context-specific letter)"
+            "text": "Recursive"
           }
         },
         {
@@ -4645,7 +4645,7 @@
           "description": "Update entries in an existing archive.",
           "info": {
             "kind": "Option name",
-            "text": "Option -u (context-specific letter)"
+            "text": "Update"
           }
         }
       ],
@@ -4692,7 +4692,7 @@
           "description": "List archive members without extracting.",
           "info": {
             "kind": "Option name",
-            "text": "Option -l (context-specific letter)"
+            "text": "List"
           }
         },
         {
@@ -4700,7 +4700,7 @@
           "description": "Extract into the specified directory.",
           "info": {
             "kind": "Option name",
-            "text": "Option -d (context-specific letter)"
+            "text": "Destination"
           }
         },
         {
@@ -4708,7 +4708,7 @@
           "description": "Never overwrite an existing file.",
           "info": {
             "kind": "Option name",
-            "text": "Option -n (context-specific letter)"
+            "text": "Never overwrite"
           }
         },
         {
@@ -4763,7 +4763,7 @@
           "description": "Keep the original input file when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Option -k (context-specific letter)"
+            "text": "Keep original"
           }
         },
         {
@@ -4771,7 +4771,7 @@
           "description": "Decompress instead of compress.",
           "info": {
             "kind": "Option name",
-            "text": "Option -d (context-specific letter)"
+            "text": "Decompress"
           }
         },
         {
@@ -4787,7 +4787,7 @@
           "description": "List compression information.",
           "info": {
             "kind": "Option name",
-            "text": "Option -l (context-specific letter)"
+            "text": "List"
           }
         }
       ],
@@ -4833,7 +4833,7 @@
           "description": "Keep the compressed file when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Option -k (context-specific letter)"
+            "text": "Keep original"
           }
         },
         {
@@ -4841,7 +4841,7 @@
           "description": "Write decompressed data to standard output.",
           "info": {
             "kind": "Option name",
-            "text": "Option -c (context-specific letter)"
+            "text": "Output to stdout"
           }
         },
         {
@@ -4849,7 +4849,7 @@
           "description": "Test compressed data integrity.",
           "info": {
             "kind": "Option name",
-            "text": "Option -t (context-specific letter)"
+            "text": "Test"
           }
         }
       ],
@@ -4896,7 +4896,7 @@
           "description": "Require all path components to exist on GNU systems.",
           "info": {
             "kind": "Option name",
-            "text": "Option -e (context-specific letter)"
+            "text": "Existing components"
           }
         },
         {
@@ -4904,7 +4904,7 @@
           "description": "On GNU systems, accept missing path components.",
           "info": {
             "kind": "Option name",
-            "text": "Option -m (context-specific letter)"
+            "text": "Missing components permitted"
           }
         }
       ],
@@ -4951,7 +4951,7 @@
           "description": "On GNU systems, resolve the full canonical target path.",
           "info": {
             "kind": "Option name",
-            "text": "Option -f (context-specific letter)"
+            "text": "Canonicalize"
           }
         },
         {
@@ -4959,7 +4959,7 @@
           "description": "Avoid adding a newline to the output, where supported.",
           "info": {
             "kind": "Option name",
-            "text": "Option -n (context-specific letter)"
+            "text": "No newline"
           }
         }
       ],
@@ -5007,7 +5007,7 @@
           "description": "Create a temporary directory.",
           "info": {
             "kind": "Option name",
-            "text": "Option -d (context-specific letter)"
+            "text": "Directory"
           }
         },
         {
@@ -5015,7 +5015,7 @@
           "description": "Use a specified parent directory on GNU systems.",
           "info": {
             "kind": "Option name",
-            "text": "Option -p (context-specific letter)"
+            "text": "Parent"
           }
         }
       ],
@@ -5146,7 +5146,7 @@
           "description": "Run as the specified user.",
           "info": {
             "kind": "Option name",
-            "text": "Option -u (context-specific letter)"
+            "text": "User"
           }
         },
         {
@@ -5154,7 +5154,7 @@
           "description": "Refresh cached credentials without running a command.",
           "info": {
             "kind": "Option name",
-            "text": "Option -v (context-specific letter)"
+            "text": "Validate credentials"
           }
         },
         {
@@ -5162,7 +5162,7 @@
           "description": "Invalidate the current cached authentication timestamp.",
           "info": {
             "kind": "Option name",
-            "text": "Option -k (context-specific letter)"
+            "text": "Kill credential timestamp"
           }
         }
       ],
@@ -5534,7 +5534,7 @@
           "description": "List available signals.",
           "info": {
             "kind": "Option name",
-            "text": "Option -l (context-specific letter)"
+            "text": "List signals"
           }
         }
       ],
@@ -5582,7 +5582,7 @@
           "description": "Match the full command line rather than only the process name.",
           "info": {
             "kind": "Option name",
-            "text": "Option -f (context-specific letter)"
+            "text": "Full command line"
           }
         },
         {
@@ -5590,7 +5590,7 @@
           "description": "Only match processes owned by the specified user.",
           "info": {
             "kind": "Option name",
-            "text": "Option -u (context-specific letter)"
+            "text": "User"
           }
         },
         {
@@ -5646,7 +5646,7 @@
           "description": "Monitor a particular process ID on supported implementations.",
           "info": {
             "kind": "Option name",
-            "text": "Option -p (context-specific letter)"
+            "text": "Process ID"
           }
         },
         {
@@ -5654,7 +5654,7 @@
           "description": "Set the refresh delay on Linux; syntax differs across systems.",
           "info": {
             "kind": "Option name",
-            "text": "Option -d (context-specific letter)"
+            "text": "Delay"
           }
         },
         {
@@ -5662,7 +5662,7 @@
           "description": "Use batch output mode on Linux.",
           "info": {
             "kind": "Option name",
-            "text": "Option -b (context-specific letter)"
+            "text": "Batch"
           }
         }
       ],
@@ -5718,7 +5718,7 @@
           "description": "Show values in mebibytes.",
           "info": {
             "kind": "Option name",
-            "text": "Option -m (context-specific letter)"
+            "text": "Mebibytes"
           }
         },
         {
@@ -5726,7 +5726,7 @@
           "description": "Refresh every N seconds.",
           "info": {
             "kind": "Option name",
-            "text": "Option -s (context-specific letter)"
+            "text": "Seconds"
           }
         }
       ],
@@ -5774,7 +5774,7 @@
           "description": "Show a concise, friendly uptime on Linux.",
           "info": {
             "kind": "Option name",
-            "text": "Option -p (context-specific letter)"
+            "text": "Pretty"
           }
         },
         {
@@ -5782,7 +5782,7 @@
           "description": "Show the system startup time on Linux.",
           "info": {
             "kind": "Option name",
-            "text": "Option -s (context-specific letter)"
+            "text": "Since boot"
           }
         }
       ],
@@ -5939,7 +5939,7 @@
           "description": "Show every matching path when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Option -a (context-specific letter)"
+            "text": "All"
           }
         }
       ],
@@ -5986,7 +5986,7 @@
           "description": "Search only for binaries.",
           "info": {
             "kind": "Option name",
-            "text": "Option -b (context-specific letter)"
+            "text": "Binaries"
           }
         },
         {
@@ -5994,7 +5994,7 @@
           "description": "Search only for manual pages.",
           "info": {
             "kind": "Option name",
-            "text": "Option -m (context-specific letter)"
+            "text": "Manual pages"
           }
         },
         {
@@ -6002,7 +6002,7 @@
           "description": "Search only for source files when known.",
           "info": {
             "kind": "Option name",
-            "text": "Option -s (context-specific letter)"
+            "text": "Sources"
           }
         }
       ],
@@ -6104,7 +6104,7 @@
           "description": "Remove all aliases in the current shell.",
           "info": {
             "kind": "Option name",
-            "text": "Option -a (context-specific letter)"
+            "text": "All"
           }
         }
       ],
@@ -6287,7 +6287,7 @@
           "description": "Show line numbers.",
           "info": {
             "kind": "Option name",
-            "text": "Option -l (context-specific letter)"
+            "text": "Line numbers"
           }
         },
         {
@@ -6358,7 +6358,7 @@
           "description": "Skip loading user configuration files.",
           "info": {
             "kind": "Option name",
-            "text": "Option -u (context-specific letter)"
+            "text": "User configuration"
           }
         }
       ],
@@ -6405,7 +6405,7 @@
           "description": "Include process IDs.",
           "info": {
             "kind": "Option name",
-            "text": "Option -l (context-specific letter)"
+            "text": "Long format"
           }
         },
         {
@@ -6413,7 +6413,7 @@
           "description": "Show process group IDs only.",
           "info": {
             "kind": "Option name",
-            "text": "Option -p (context-specific letter)"
+            "text": "Process group IDs"
           }
         },
         {
@@ -6421,7 +6421,7 @@
           "description": "Show running jobs only.",
           "info": {
             "kind": "Option name",
-            "text": "Option -r (context-specific letter)"
+            "text": "Running"
           }
         }
       ],
@@ -6618,7 +6618,7 @@
           "description": "Use the specified signal when time expires.",
           "info": {
             "kind": "Option name",
-            "text": "Option -s (context-specific letter)"
+            "text": "Signal"
           }
         },
         {
@@ -6626,7 +6626,7 @@
           "description": "After an initial signal, send SIGKILL if the command is still running.",
           "info": {
             "kind": "Option name",
-            "text": "Option -k (context-specific letter)"
+            "text": "Kill after grace period"
           }
         },
         {
@@ -6799,7 +6799,7 @@
           "description": "Verify files against the checksums listed in FILE.",
           "info": {
             "kind": "Option name",
-            "text": "Option -c (context-specific letter)"
+            "text": "Check"
           }
         },
         {
@@ -6807,7 +6807,7 @@
           "description": "Read files in binary mode (default on many systems).",
           "info": {
             "kind": "Option name",
-            "text": "Option -b (context-specific letter)"
+            "text": "Binary"
           }
         }
       ],
@@ -6855,7 +6855,7 @@
           "description": "Print a short description or path for a command.",
           "info": {
             "kind": "Option name",
-            "text": "Option -v (context-specific letter)"
+            "text": "Brief description"
           }
         },
         {
@@ -6871,7 +6871,7 @@
           "description": "Use a default executable search path.",
           "info": {
             "kind": "Option name",
-            "text": "Option -p (context-specific letter)"
+            "text": "Default search PATH"
           }
         }
       ],
@@ -7524,7 +7524,7 @@
           "description": "Silent: report terminal attachment through the exit status only.",
           "info": {
             "kind": "Option name",
-            "text": "Option -s (context-specific letter)"
+            "text": "Silent"
           }
         }
       ],
@@ -7632,7 +7632,7 @@
           "description": "Do not display the usual banner where supported (may require privileges).",
           "info": {
             "kind": "Option name",
-            "text": "Option -n (context-specific letter)"
+            "text": "No banner"
           }
         }
       ],
