@@ -1,7 +1,16 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "1.6.0",
+  "latestVersion": "1.7.0",
   "releases": [
+    {
+      "version": "1.7.0",
+      "date": "2026-11-18",
+      "title": "Name mnemonics, expanded flags and course workshop coverage",
+      "summary": "Reworked all command and option info popovers, added practical CLI flags, file tools and Bash scripting guides from course tutorials and workshop.",
+      "commandCount": 129,
+      "topicCount": 25,
+      "snapshot": "history/1.7.0.json"
+    },
     {
       "version": "1.6.0",
       "date": "2026-11-14",
