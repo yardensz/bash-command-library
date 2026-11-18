@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.7.2",
+  "version": "1.7.3",
   "updatedAt": "2026-11-18",
   "commands": [
     {
@@ -2910,8 +2910,8 @@
           "flag": "--",
           "description": "Mark the end of options, where supported.",
           "info": {
-            "kind": "Option name",
-            "text": ""
+            "kind": "Syntax name",
+            "text": "End of options"
           }
         }
       ],
@@ -2955,8 +2955,8 @@
           "flag": "--",
           "description": "Mark the end of options, where supported.",
           "info": {
-            "kind": "Option name",
-            "text": ""
+            "kind": "Syntax name",
+            "text": "End of options"
           }
         }
       ],
