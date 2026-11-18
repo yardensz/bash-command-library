@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.7.1",
+  "version": "1.7.2",
   "updatedAt": "2026-11-18",
   "commands": [
     {
@@ -4033,7 +4033,7 @@
           "description": "Use brief output when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Option -br"
+            "text": "Brief"
           }
         }
       ],
@@ -4447,7 +4447,7 @@
           "description": "Describe each ownership change.",
           "info": {
             "kind": "Option name",
-            "text": "Option -v (context-specific letter)"
+            "text": "Verbose"
           }
         },
         {
@@ -5317,7 +5317,7 @@
           "description": "Automatically answer yes to prompts; use cautiously.",
           "info": {
             "kind": "Option name",
-            "text": "Option -y"
+            "text": "Assume yes"
           }
         }
       ],
@@ -5518,7 +5518,7 @@
           "description": "Send SIGTERM, requesting graceful termination.",
           "info": {
             "kind": "Option name",
-            "text": "Option -TERM"
+            "text": "Terminate signal (SIGTERM)"
           }
         },
         {
@@ -5526,7 +5526,7 @@
           "description": "Send SIGKILL, forcing the process to stop.",
           "info": {
             "kind": "Option name",
-            "text": "Option -KILL"
+            "text": "Kill signal (SIGKILL)"
           }
         },
         {
@@ -5598,7 +5598,7 @@
           "description": "Send SIGTERM explicitly.",
           "info": {
             "kind": "Option name",
-            "text": "Option -TERM"
+            "text": "Terminate signal (SIGTERM)"
           }
         }
       ],
@@ -6295,7 +6295,7 @@
           "description": "Make a backup when saving files, where supported.",
           "info": {
             "kind": "Option name",
-            "text": "Option -B"
+            "text": "Backup"
           }
         }
       ],
