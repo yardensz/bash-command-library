@@ -2,12 +2,12 @@
 
 ## Scope and outcome
 
-Reviewed the shared GitHub Pages Bash reference against course files supplied during this update. The English-only library is now at **1.7.2**, with **129 individual command or keyword entries**, **25 topical guides**, and **433 documented option/syntax rows**.
+Reviewed the shared GitHub Pages Bash reference against course files supplied during this update. The English-only library is now at **1.7.3**, with **129 individual command or keyword entries**, **25 topical guides**, and **433 documented option/syntax rows**.
 
 Changes:
 - Rewrote the short **command-name** info buttons throughout the previous 117-entry library, concentrating on names, expansions, historical etymology, or literal naming.
 - Replaced option info buttons for all 339 previously documented rows with brief mnemonic or syntax labels. Full behavior remains in the option descriptions below.
-- Corrected command-specific overloaded letters and resolved all generic mnemonic placeholders in follow-up releases 1.7.1 and 1.7.2.
+- Corrected command-specific overloaded letters and resolved all generic mnemonic placeholders in follow-up releases 1.7.1, 1.7.2 and 1.7.3.
 - Expanded relevant common flags, especially `sed`, `grep`, `cut`, `cat`, `less`, `tail`, `awk`, `find`, `test`, `read`, and `chmod`.
 - Added 12 reference entries and seven topical guides. Bash version history is preserved with immutable snapshots; the independent C / C++ content was left unchanged.
 
