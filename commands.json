@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.7.3",
+  "version": "1.8.0",
   "updatedAt": "2026-11-18",
   "commands": [
     {
@@ -16,7 +16,10 @@
           "description": "Show detailed information: permissions, ownership, size, and date.",
           "info": {
             "kind": "Option name",
-            "text": "Long listing"
+            "text": "Long listing",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -24,7 +27,10 @@
           "description": "Include hidden entries beginning with a dot.",
           "info": {
             "kind": "Option name",
-            "text": "All"
+            "text": "All",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -32,7 +38,10 @@
           "description": "Show human-readable file sizes, useful with -l.",
           "info": {
             "kind": "Option name",
-            "text": "Human-readable"
+            "text": "Human-readable",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -40,7 +49,10 @@
           "description": "List subdirectories recursively.",
           "info": {
             "kind": "Option name",
-            "text": "Recursive"
+            "text": "Recursive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -48,7 +60,10 @@
           "description": "Sort by modification time.",
           "info": {
             "kind": "Option name",
-            "text": "Time"
+            "text": "Time",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -56,7 +71,14 @@
           "description": "Colorize entries automatically on GNU ls.",
           "info": {
             "kind": "Option name",
-            "text": "Automatic color"
+            "text": "Automatic color",
+            "emphasis": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ]
           }
         }
       ],
@@ -86,7 +108,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "List"
+        "text": "List",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints directory entries.",
@@ -109,7 +134,8 @@
           "description": "Parent directory (an argument, not a flag).",
           "info": {
             "kind": "Syntax name",
-            "text": "Parent directory"
+            "text": "Parent directory",
+            "emphasis": []
           }
         },
         {
@@ -117,7 +143,8 @@
           "description": "Shortcut for your home directory.",
           "info": {
             "kind": "Syntax name",
-            "text": "Home directory"
+            "text": "Home directory",
+            "emphasis": []
           }
         },
         {
@@ -125,7 +152,8 @@
           "description": "Go to the previous directory (an argument, not a flag).",
           "info": {
             "kind": "Option name",
-            "text": "Previous directory"
+            "text": "Previous directory",
+            "emphasis": []
           }
         }
       ],
@@ -158,7 +186,11 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Change Directory"
+        "text": "Change Directory",
+        "emphasis": [
+          0,
+          7
+        ]
       },
       "output": {
         "stdout": "Usually none; changes the shell's current directory.",
@@ -181,7 +213,10 @@
           "description": "Show the logical path, which may contain symbolic links.",
           "info": {
             "kind": "Option name",
-            "text": "Logical path"
+            "text": "Logical path",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -189,7 +224,10 @@
           "description": "Resolve symbolic links and print the physical path.",
           "info": {
             "kind": "Option name",
-            "text": "Physical path"
+            "text": "Physical path",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -214,7 +252,12 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Print Working Directory"
+        "text": "Print Working Directory",
+        "emphasis": [
+          0,
+          6,
+          14
+        ]
       },
       "output": {
         "stdout": "Prints the current directory.",
@@ -237,7 +280,10 @@
           "description": "Create missing parent directories; allow directories that already exist.",
           "info": {
             "kind": "Option name",
-            "text": "Parents"
+            "text": "Parents",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -245,7 +291,10 @@
           "description": "Print a message for each newly created directory.",
           "info": {
             "kind": "Option name",
-            "text": "Verbose"
+            "text": "Verbose",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -270,7 +319,14 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Make Directory"
+        "text": "Make Directory",
+        "emphasis": [
+          0,
+          2,
+          5,
+          6,
+          7
+        ]
       },
       "output": {
         "stdout": "Usually none; creates directories.",
@@ -293,7 +349,10 @@
           "description": "Do not create missing files.",
           "info": {
             "kind": "Option name",
-            "text": "No create"
+            "text": "No create",
+            "emphasis": [
+              3
+            ]
           }
         },
         {
@@ -301,7 +360,10 @@
           "description": "Update the access timestamp.",
           "info": {
             "kind": "Option name",
-            "text": "Access time"
+            "text": "Access time",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -309,7 +371,10 @@
           "description": "Update the modification timestamp.",
           "info": {
             "kind": "Option name",
-            "text": "Modification time"
+            "text": "Modification time",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -333,7 +398,14 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Touch (file timestamps)"
+        "text": "Touch (file timestamps)",
+        "emphasis": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
       },
       "output": {
         "stdout": "Usually none; creates or updates files.",
@@ -356,7 +428,10 @@
           "description": "Copy directories recursively.",
           "info": {
             "kind": "Option name",
-            "text": "Recursive"
+            "text": "Recursive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -364,7 +439,10 @@
           "description": "Ask before overwriting a destination.",
           "info": {
             "kind": "Option name",
-            "text": "Interactive"
+            "text": "Interactive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -372,7 +450,10 @@
           "description": "Avoid overwriting destinations when supported; behavior varies.",
           "info": {
             "kind": "Option name",
-            "text": "No clobber"
+            "text": "No clobber",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -380,7 +461,10 @@
           "description": "Print the files being copied.",
           "info": {
             "kind": "Option name",
-            "text": "Verbose"
+            "text": "Verbose",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -403,7 +487,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Copy"
+        "text": "Copy",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Usually none; copies files.",
@@ -426,7 +513,10 @@
           "description": "Ask before overwriting the destination.",
           "info": {
             "kind": "Option name",
-            "text": "Interactive"
+            "text": "Interactive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -434,7 +524,10 @@
           "description": "Avoid overwriting an existing target when supported.",
           "info": {
             "kind": "Option name",
-            "text": "No clobber"
+            "text": "No clobber",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -442,7 +535,10 @@
           "description": "Show the entries that were moved.",
           "info": {
             "kind": "Option name",
-            "text": "Verbose"
+            "text": "Verbose",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -469,7 +565,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Move"
+        "text": "Move",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Usually none; moves or renames files.",
@@ -492,7 +591,10 @@
           "description": "Ask for confirmation before each deletion.",
           "info": {
             "kind": "Option name",
-            "text": "Interactive"
+            "text": "Interactive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -500,7 +602,10 @@
           "description": "Delete directories and their contents recursively; use caution.",
           "info": {
             "kind": "Option name",
-            "text": "Recursive"
+            "text": "Recursive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -508,7 +613,10 @@
           "description": "Print which items are removed.",
           "info": {
             "kind": "Option name",
-            "text": "Verbose"
+            "text": "Verbose",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -531,7 +639,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Remove"
+        "text": "Remove",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Usually none; removes files.",
@@ -554,7 +665,10 @@
           "description": "Number all output lines.",
           "info": {
             "kind": "Option name",
-            "text": "Number lines"
+            "text": "Number lines",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -562,7 +676,10 @@
           "description": "Number only nonempty lines.",
           "info": {
             "kind": "Option name",
-            "text": "Number nonblank lines"
+            "text": "Number nonblank lines",
+            "emphasis": [
+              3
+            ]
           }
         },
         {
@@ -570,7 +687,10 @@
           "description": "Collapse repeated empty lines when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Squeeze blank lines"
+            "text": "Squeeze blank lines",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -578,7 +698,10 @@
           "description": "Display nonprinting characters, tabs and line endings (GNU cat).",
           "info": {
             "kind": "Option name",
-            "text": "Show all"
+            "text": "Show all",
+            "emphasis": [
+              5
+            ]
           }
         },
         {
@@ -586,7 +709,10 @@
           "description": "Mark line endings with $.",
           "info": {
             "kind": "Option name",
-            "text": "Show line ends"
+            "text": "Show line ends",
+            "emphasis": [
+              10
+            ]
           }
         },
         {
@@ -594,7 +720,10 @@
           "description": "Mark tab characters with ^I.",
           "info": {
             "kind": "Option name",
-            "text": "Show tabs"
+            "text": "Show tabs",
+            "emphasis": [
+              5
+            ]
           }
         }
       ],
@@ -619,7 +748,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Concatenate"
+        "text": "Concatenate",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints file contents to stdout.",
@@ -642,7 +774,10 @@
           "description": "Sort by numeric value.",
           "info": {
             "kind": "Option name",
-            "text": "Numeric"
+            "text": "Numeric",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -650,7 +785,10 @@
           "description": "Reverse the order.",
           "info": {
             "kind": "Option name",
-            "text": "Reverse"
+            "text": "Reverse",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -658,7 +796,10 @@
           "description": "Show unique lines only.",
           "info": {
             "kind": "Option name",
-            "text": "Unique"
+            "text": "Unique",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -666,7 +807,10 @@
           "description": "Sort using field N as the key.",
           "info": {
             "kind": "Option name",
-            "text": "Key field"
+            "text": "Key field",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -674,7 +818,10 @@
           "description": "Choose the field separator.",
           "info": {
             "kind": "Option name",
-            "text": "Field separator"
+            "text": "Field separator",
+            "emphasis": [
+              12
+            ]
           }
         },
         {
@@ -682,7 +829,10 @@
           "description": "Write sorted output to the specified file.",
           "info": {
             "kind": "Option name",
-            "text": "Output file"
+            "text": "Output file",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -715,7 +865,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Sort"
+        "text": "Sort",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints sorted input lines.",
@@ -738,7 +891,10 @@
           "description": "Ignore uppercase/lowercase differences.",
           "info": {
             "kind": "Option name",
-            "text": "Ignore case"
+            "text": "Ignore case",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -746,7 +902,10 @@
           "description": "Show matching line numbers.",
           "info": {
             "kind": "Option name",
-            "text": "Line number"
+            "text": "Line number",
+            "emphasis": [
+              5
+            ]
           }
         },
         {
@@ -754,7 +913,10 @@
           "description": "Search subdirectories recursively.",
           "info": {
             "kind": "Option name",
-            "text": "Recursive"
+            "text": "Recursive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -762,7 +924,10 @@
           "description": "Print lines that do not match.",
           "info": {
             "kind": "Option name",
-            "text": "Invert match"
+            "text": "Invert match",
+            "emphasis": [
+              2
+            ]
           }
         },
         {
@@ -770,7 +935,10 @@
           "description": "Treat the pattern as literal text.",
           "info": {
             "kind": "Option name",
-            "text": "Fixed strings"
+            "text": "Fixed strings",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -778,7 +946,10 @@
           "description": "Enable extended regex.",
           "info": {
             "kind": "Option name",
-            "text": "Extended regex"
+            "text": "Extended regex",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -786,7 +957,10 @@
           "description": "Print only matching substrings, one per line, instead of full matching lines.",
           "info": {
             "kind": "Option name",
-            "text": "Only matching"
+            "text": "Only matching",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -794,7 +968,10 @@
           "description": "Quiet mode: print nothing; signal whether a match was found through the exit status.",
           "info": {
             "kind": "Option name",
-            "text": "Quiet"
+            "text": "Quiet",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -802,7 +979,10 @@
           "description": "Require whole-word matches (word boundaries), rather than matching substrings inside larger words.",
           "info": {
             "kind": "Option name",
-            "text": "Word"
+            "text": "Word",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -810,7 +990,10 @@
           "description": "Print names of files containing a match.",
           "info": {
             "kind": "Option name",
-            "text": "Files with matches"
+            "text": "List matching filenames",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -818,7 +1001,10 @@
           "description": "Print names of files without matches.",
           "info": {
             "kind": "Option name",
-            "text": "Files without matches"
+            "text": "List filenames without matches",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -826,7 +1012,10 @@
           "description": "Count selected lines per file.",
           "info": {
             "kind": "Option name",
-            "text": "Count"
+            "text": "Count",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -834,7 +1023,10 @@
           "description": "Show N lines after each match.",
           "info": {
             "kind": "Option name",
-            "text": "After context"
+            "text": "After context",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -842,7 +1034,10 @@
           "description": "Show N lines before each match.",
           "info": {
             "kind": "Option name",
-            "text": "Before context"
+            "text": "Before context",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -850,7 +1045,10 @@
           "description": "Show N lines before and after each match.",
           "info": {
             "kind": "Option name",
-            "text": "Context"
+            "text": "Context",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -858,7 +1056,14 @@
           "description": "Highlight matches when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Automatic color"
+            "text": "Automatic color",
+            "emphasis": [
+              10,
+              11,
+              12,
+              13,
+              14
+            ]
           }
         },
         {
@@ -866,7 +1071,10 @@
           "description": "Stop after N selected lines (GNU grep).",
           "info": {
             "kind": "Option name",
-            "text": "Maximum count"
+            "text": "Maximum count",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -926,7 +1134,13 @@
       ],
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Global / Regular Expression / Print (historical editor notation)"
+        "text": "Global Regular Expression Print",
+        "emphasis": [
+          0,
+          7,
+          15,
+          26
+        ]
       }
     },
     {
@@ -942,7 +1156,10 @@
           "description": "Match filenames with a glob; quote the pattern.",
           "info": {
             "kind": "Option name",
-            "text": "Name"
+            "text": "Name",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -950,7 +1167,10 @@
           "description": "Match filenames without case sensitivity when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Ignore-case name"
+            "text": "Ignore-case name",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -958,7 +1178,10 @@
           "description": "Match regular files only.",
           "info": {
             "kind": "Option name",
-            "text": "Type: file"
+            "text": "Type: file",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -966,7 +1189,10 @@
           "description": "Match directories only.",
           "info": {
             "kind": "Option name",
-            "text": "Type: directory"
+            "text": "Type: directory",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -974,7 +1200,10 @@
           "description": "Limit recursion depth on GNU find.",
           "info": {
             "kind": "Option name",
-            "text": "Maximum depth"
+            "text": "Maximum depth",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -982,7 +1211,10 @@
           "description": "Match modification age in 24-hour periods.",
           "info": {
             "kind": "Option name",
-            "text": "Modification time"
+            "text": "Modification time",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -990,7 +1222,10 @@
           "description": "Match file size using find size units.",
           "info": {
             "kind": "Option name",
-            "text": "Size"
+            "text": "Size",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -998,7 +1233,10 @@
           "description": "Run COMMAND on each selected path.",
           "info": {
             "kind": "Option name",
-            "text": "Execute"
+            "text": "Execute",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1006,7 +1244,10 @@
           "description": "Print matching paths.",
           "info": {
             "kind": "Option name",
-            "text": "Print"
+            "text": "Print",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -1036,7 +1277,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Find"
+        "text": "Find",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints paths matching its tests by default.",
@@ -1059,7 +1303,10 @@
           "description": "Show the first N lines.",
           "info": {
             "kind": "Option name",
-            "text": "Number of lines"
+            "text": "Number of lines",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1067,7 +1314,10 @@
           "description": "Show the first N bytes.",
           "info": {
             "kind": "Option name",
-            "text": "Count of bytes"
+            "text": "Count of bytes",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1075,7 +1325,10 @@
           "description": "Show every line except the last N (GNU head).",
           "info": {
             "kind": "Option name",
-            "text": "Negative line count"
+            "text": "Negative line count",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -1099,7 +1352,13 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Head (beginning)"
+        "text": "Head (beginning)",
+        "emphasis": [
+          0,
+          1,
+          2,
+          3
+        ]
       },
       "output": {
         "stdout": "Prints the initial lines.",
@@ -1122,7 +1381,10 @@
           "description": "Show the last N lines.",
           "info": {
             "kind": "Option name",
-            "text": "Number of lines"
+            "text": "Number of lines",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1130,7 +1392,10 @@
           "description": "Follow new lines as they are added.",
           "info": {
             "kind": "Option name",
-            "text": "Follow"
+            "text": "Follow",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1138,7 +1403,10 @@
           "description": "Show the last N bytes.",
           "info": {
             "kind": "Option name",
-            "text": "Count of bytes"
+            "text": "Count of bytes",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1146,7 +1414,10 @@
           "description": "Follow a file by name and retry after rotation (GNU tail).",
           "info": {
             "kind": "Option name",
-            "text": "Follow name"
+            "text": "Follow name",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1154,7 +1425,14 @@
           "description": "Keep retrying when input files are temporarily inaccessible (GNU tail).",
           "info": {
             "kind": "Option name",
-            "text": "Retry"
+            "text": "Retry",
+            "emphasis": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
           }
         },
         {
@@ -1162,7 +1440,10 @@
           "description": "Begin output at line N and continue to the end.",
           "info": {
             "kind": "Option name",
-            "text": "Start at line N"
+            "text": "Start at line N",
+            "emphasis": [
+              14
+            ]
           }
         }
       ],
@@ -1191,7 +1472,13 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Tail (end)"
+        "text": "Tail (end)",
+        "emphasis": [
+          0,
+          1,
+          2,
+          3
+        ]
       },
       "output": {
         "stdout": "Prints the final lines.",
@@ -1214,7 +1501,10 @@
           "description": "Count newline characters.",
           "info": {
             "kind": "Option name",
-            "text": "Lines"
+            "text": "Lines",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1222,7 +1512,10 @@
           "description": "Count words.",
           "info": {
             "kind": "Option name",
-            "text": "Words"
+            "text": "Words",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1230,7 +1523,10 @@
           "description": "Count bytes.",
           "info": {
             "kind": "Option name",
-            "text": "Bytes (count)"
+            "text": "Bytes (count)",
+            "emphasis": [
+              7
+            ]
           }
         },
         {
@@ -1238,7 +1534,10 @@
           "description": "Count characters according to the locale.",
           "info": {
             "kind": "Option name",
-            "text": "Characters"
+            "text": "Multibyte characters",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1246,7 +1545,10 @@
           "description": "Report maximum display width of any line (GNU wc).",
           "info": {
             "kind": "Option name",
-            "text": "Max line length"
+            "text": "Max line length",
+            "emphasis": [
+              4
+            ]
           }
         }
       ],
@@ -1285,7 +1587,11 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Word Count"
+        "text": "Word Count",
+        "emphasis": [
+          0,
+          5
+        ]
       },
       "output": {
         "stdout": "Counts of lines, words, characters, or bytes, depending on options. With -w it counts whitespace-delimited words, not specific word matches.",
@@ -1312,7 +1618,10 @@
           "description": "Show line numbers.",
           "info": {
             "kind": "Option name",
-            "text": "Line numbers"
+            "text": "Line numbers",
+            "emphasis": [
+              5
+            ]
           }
         },
         {
@@ -1320,7 +1629,10 @@
           "description": "Do not wrap long lines.",
           "info": {
             "kind": "Option name",
-            "text": "Chop long lines"
+            "text": "Chop long lines",
+            "emphasis": [
+              14
+            ]
           }
         },
         {
@@ -1328,7 +1640,8 @@
           "description": "Search for text inside less (not a flag).",
           "info": {
             "kind": "Syntax name",
-            "text": "Search"
+            "text": "Search",
+            "emphasis": []
           }
         },
         {
@@ -1336,7 +1649,10 @@
           "description": "Quit the pager (a key, not a flag).",
           "info": {
             "kind": "Syntax name",
-            "text": "Quit"
+            "text": "Quit",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1344,7 +1660,10 @@
           "description": "Display raw control characters (unsafe with untrusted terminal data).",
           "info": {
             "kind": "Option name",
-            "text": "Raw"
+            "text": "Raw",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1352,7 +1671,10 @@
           "description": "Follow output inside less (interactive key).",
           "info": {
             "kind": "Option name",
-            "text": "Follow"
+            "text": "Follow",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1360,7 +1682,10 @@
           "description": "Go to the first line (interactive key).",
           "info": {
             "kind": "Option name",
-            "text": "Go"
+            "text": "Go",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1368,7 +1693,10 @@
           "description": "Go to the last line (interactive key).",
           "info": {
             "kind": "Option name",
-            "text": "Go to end"
+            "text": "Go to end",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -1393,7 +1721,13 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Less (play on the pager named more)"
+        "text": "Less (play on the pager named more)",
+        "emphasis": [
+          0,
+          1,
+          2,
+          3
+        ]
       },
       "output": {
         "stdout": "Displays an interactive pager.",
@@ -1416,7 +1750,10 @@
           "description": "Omit the trailing newline.",
           "info": {
             "kind": "Option name",
-            "text": "No newline"
+            "text": "No newline",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1424,7 +1761,8 @@
           "description": "Example of variable expansion; not a flag.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: $HOME"
+            "text": "Literal syntax: $HOME",
+            "emphasis": []
           }
         }
       ],
@@ -1452,7 +1790,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Echo"
+        "text": "Echo",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints arguments with a final newline.",
@@ -1475,7 +1816,10 @@
           "description": "Search manual descriptions by keyword.",
           "info": {
             "kind": "Option name",
-            "text": "Keyword"
+            "text": "Keyword",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1483,7 +1827,10 @@
           "description": "Quit the manual viewer (not a flag).",
           "info": {
             "kind": "Syntax name",
-            "text": "Quit"
+            "text": "Quit",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -1510,7 +1857,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Manual"
+        "text": "Manual",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Displays manual documentation.",
@@ -1543,7 +1893,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Clear"
+        "text": "Clear",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Clears the terminal display.",
@@ -1566,7 +1919,8 @@
           "description": "Insert a string.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: %s"
+            "text": "Literal syntax: %s",
+            "emphasis": []
           }
         },
         {
@@ -1574,7 +1928,8 @@
           "description": "Insert an integer.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: %d"
+            "text": "Literal syntax: %d",
+            "emphasis": []
           }
         },
         {
@@ -1582,7 +1937,8 @@
           "description": "Newline escape inside a format string (not a flag).",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: \\n"
+            "text": "Literal syntax: \\n",
+            "emphasis": []
           }
         }
       ],
@@ -1611,7 +1967,15 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Print Formatted"
+        "text": "Print Formatted",
+        "emphasis": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6
+        ]
       },
       "output": {
         "stdout": "Prints text according to a format string.",
@@ -1634,7 +1998,10 @@
           "description": "Set the field delimiter.",
           "info": {
             "kind": "Option name",
-            "text": "Delimiter"
+            "text": "Delimiter",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1642,7 +2009,10 @@
           "description": "Select field numbers, starting at 1.",
           "info": {
             "kind": "Option name",
-            "text": "Fields"
+            "text": "Fields",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1650,7 +2020,10 @@
           "description": "Select character ranges.",
           "info": {
             "kind": "Option name",
-            "text": "Characters"
+            "text": "Characters",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1658,7 +2031,10 @@
           "description": "Select byte positions rather than fields or characters.",
           "info": {
             "kind": "Option name",
-            "text": "Bytes"
+            "text": "Bytes",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1666,7 +2042,19 @@
           "description": "Invert the selected field or character positions (GNU cut).",
           "info": {
             "kind": "Option name",
-            "text": "Complement"
+            "text": "Complement",
+            "emphasis": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ]
           }
         },
         {
@@ -1674,7 +2062,10 @@
           "description": "Suppress lines lacking the specified field delimiter.",
           "info": {
             "kind": "Option name",
-            "text": "Only delimited"
+            "text": "Suppress undelimited lines",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -1701,7 +2092,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Cut"
+        "text": "Cut",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints selected fields/columns.",
@@ -1724,7 +2118,10 @@
           "description": "Count adjacent occurrences.",
           "info": {
             "kind": "Option name",
-            "text": "Count"
+            "text": "Count",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1732,7 +2129,10 @@
           "description": "Show only repeated lines.",
           "info": {
             "kind": "Option name",
-            "text": "Duplicates"
+            "text": "Duplicates",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1740,7 +2140,10 @@
           "description": "Show lines that appear only once.",
           "info": {
             "kind": "Option name",
-            "text": "Unique"
+            "text": "Unique",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -1764,7 +2167,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Unique"
+        "text": "Unique",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints lines with adjacent duplicates handled.",
@@ -1787,7 +2193,10 @@
           "description": "Delete selected characters.",
           "info": {
             "kind": "Option name",
-            "text": "Delete"
+            "text": "Delete",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1795,7 +2204,10 @@
           "description": "Collapse consecutive occurrences.",
           "info": {
             "kind": "Option name",
-            "text": "Squeeze"
+            "text": "Squeeze",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1803,7 +2215,10 @@
           "description": "Map characters in SET1 to SET2 (arguments).",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: SET1 SET2"
+            "text": "Literal syntax: SET1 SET2",
+            "emphasis": [
+              8
+            ]
           }
         }
       ],
@@ -1828,7 +2243,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Translate"
+        "text": "Translate",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints translated or deleted character stream.",
@@ -1851,7 +2269,10 @@
           "description": "Suppress normal automatic printing.",
           "info": {
             "kind": "Option name",
-            "text": "No automatic printing"
+            "text": "No automatic printing",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1859,7 +2280,11 @@
           "description": "Replace old with new throughout each line.",
           "info": {
             "kind": "Syntax name",
-            "text": "s = Substitute; g = Global"
+            "text": "Substitute / Global",
+            "emphasis": [
+              0,
+              13
+            ]
           }
         },
         {
@@ -1867,7 +2292,10 @@
           "description": "Specify an additional sed expression.",
           "info": {
             "kind": "Option name",
-            "text": "Expression"
+            "text": "Expression",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1875,7 +2303,10 @@
           "description": "Edit file in place; optionally retain a backup with SUFFIX (GNU syntax; BSD sed differs).",
           "info": {
             "kind": "Option name",
-            "text": "In-place"
+            "text": "In-place",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1883,7 +2314,10 @@
           "description": "Use extended regular expressions in the sed script.",
           "info": {
             "kind": "Option name",
-            "text": "Extended regex"
+            "text": "Extended regex",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1891,7 +2325,10 @@
           "description": "Load sed commands from FILE.",
           "info": {
             "kind": "Option name",
-            "text": "Script file"
+            "text": "Script file",
+            "emphasis": [
+              7
+            ]
           }
         },
         {
@@ -1899,7 +2336,10 @@
           "description": "Delete the selected pattern space and start the next cycle.",
           "info": {
             "kind": "Option name",
-            "text": "Delete"
+            "text": "Delete",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1907,7 +2347,10 @@
           "description": "Print the current pattern space.",
           "info": {
             "kind": "Option name",
-            "text": "Print"
+            "text": "Print",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1915,7 +2358,11 @@
           "description": "Replace all occurrences in each selected line.",
           "info": {
             "kind": "Option name",
-            "text": "Substitute / Global"
+            "text": "Substitute / Global",
+            "emphasis": [
+              0,
+              13
+            ]
           }
         },
         {
@@ -1923,7 +2370,10 @@
           "description": "Apply an edit only to a line number, address range, or matching pattern.",
           "info": {
             "kind": "Option name",
-            "text": "Address"
+            "text": "Address",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1931,7 +2381,8 @@
           "description": "Delete line 5 (sed script example).",
           "info": {
             "kind": "Option name",
-            "text": "Line 5 + delete"
+            "text": "Line 5 + delete",
+            "emphasis": []
           }
         },
         {
@@ -1939,7 +2390,8 @@
           "description": "Print lines 3 through 7 (sed script example).",
           "info": {
             "kind": "Option name",
-            "text": "Line range + print"
+            "text": "Line range + print",
+            "emphasis": []
           }
         }
       ],
@@ -1964,7 +2416,12 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Stream Editor"
+        "text": "Stream Editor",
+        "emphasis": [
+          0,
+          7,
+          8
+        ]
       },
       "output": {
         "stdout": "Prints transformed text by default.",
@@ -1987,7 +2444,10 @@
           "description": "Choose the field separator.",
           "info": {
             "kind": "Option name",
-            "text": "Field separator"
+            "text": "Field separator",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -1995,7 +2455,8 @@
           "description": "Refer to the first input field in awk.",
           "info": {
             "kind": "Syntax name",
-            "text": "Field 1"
+            "text": "Field 1",
+            "emphasis": []
           }
         },
         {
@@ -2003,7 +2464,10 @@
           "description": "Built-in variable for the current record number.",
           "info": {
             "kind": "Syntax name",
-            "text": "Number of Records"
+            "text": "Number of Records",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2011,7 +2475,10 @@
           "description": "Assign a variable before executing the awk program.",
           "info": {
             "kind": "Option name",
-            "text": "Variable"
+            "text": "Variable",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2019,7 +2486,10 @@
           "description": "Execute this block before the first input record.",
           "info": {
             "kind": "Option name",
-            "text": "Begin"
+            "text": "Begin",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2027,7 +2497,10 @@
           "description": "Execute this block after the last input record.",
           "info": {
             "kind": "Option name",
-            "text": "End"
+            "text": "End",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2035,7 +2508,10 @@
           "description": "Number of fields in the current record.",
           "info": {
             "kind": "Option name",
-            "text": "Number of Fields"
+            "text": "Number of Fields",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2043,7 +2519,8 @@
           "description": "The complete current input record.",
           "info": {
             "kind": "Option name",
-            "text": "Record zero (whole record)"
+            "text": "Record zero (whole record)",
+            "emphasis": []
           }
         },
         {
@@ -2051,7 +2528,10 @@
           "description": "Input field separator variable.",
           "info": {
             "kind": "Option name",
-            "text": "Field Separator"
+            "text": "Field Separator",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2059,7 +2539,10 @@
           "description": "Output field separator variable.",
           "info": {
             "kind": "Option name",
-            "text": "Output Field Separator"
+            "text": "Output Field Separator",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -2084,7 +2567,12 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Aho, Weinberger and Kernighan (authors' surnames)"
+        "text": "Aho, Weinberger, Kernighan",
+        "emphasis": [
+          0,
+          5,
+          17
+        ]
       },
       "output": {
         "stdout": "Prints values requested by the AWK program.",
@@ -2107,7 +2595,10 @@
           "description": "Append rather than overwrite.",
           "info": {
             "kind": "Option name",
-            "text": "Append"
+            "text": "Append",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2115,7 +2606,10 @@
           "description": "Ignore interrupts when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Ignore interrupts"
+            "text": "Ignore interrupts",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -2140,7 +2634,12 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "T-shaped pipe fitting"
+        "text": "T-shaped pipe fitting",
+        "emphasis": [
+          0,
+          6,
+          12
+        ]
       },
       "output": {
         "stdout": "Prints input and writes a copy to named files.",
@@ -2163,7 +2662,10 @@
           "description": "Use no more than N arguments per invocation.",
           "info": {
             "kind": "Option name",
-            "text": "Number of arguments"
+            "text": "Number of arguments",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2171,7 +2673,8 @@
           "description": "Read NUL-separated input for safe filename handling.",
           "info": {
             "kind": "Option name",
-            "text": "NUL delimiter"
+            "text": "NUL delimiter",
+            "emphasis": []
           }
         },
         {
@@ -2179,7 +2682,10 @@
           "description": "Replace a placeholder with each input value.",
           "info": {
             "kind": "Option name",
-            "text": "Replace string"
+            "text": "Replace string",
+            "emphasis": [
+              11
+            ]
           }
         }
       ],
@@ -2203,7 +2709,14 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Arguments"
+        "text": "eXecute with ARGumentS (memory aid, not an official acronym)",
+        "emphasis": [
+          1,
+          13,
+          14,
+          15,
+          21
+        ]
       },
       "output": {
         "stdout": "Output comes from the command that xargs launches.",
@@ -2226,7 +2739,10 @@
           "description": "Use unified diff format.",
           "info": {
             "kind": "Option name",
-            "text": "Unified format"
+            "text": "Unified format",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2234,7 +2750,10 @@
           "description": "Report briefly whether differences exist.",
           "info": {
             "kind": "Option name",
-            "text": "Quiet"
+            "text": "Quiet",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2242,7 +2761,10 @@
           "description": "Compare directories recursively.",
           "info": {
             "kind": "Option name",
-            "text": "Recursive"
+            "text": "Recursive",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -2265,7 +2787,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Difference"
+        "text": "Difference",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints differences; no differences normally yield no text.",
@@ -2288,7 +2813,8 @@
           "description": "Add execute permission for selected classes.",
           "info": {
             "kind": "Syntax name",
-            "text": "Add execute"
+            "text": "Add execute",
+            "emphasis": []
           }
         },
         {
@@ -2296,7 +2822,10 @@
           "description": "Let the owner execute the file.",
           "info": {
             "kind": "Syntax name",
-            "text": "User + execute"
+            "text": "User + execute",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2304,7 +2833,10 @@
           "description": "Remove the owner's write permission.",
           "info": {
             "kind": "Syntax name",
-            "text": "User - write"
+            "text": "User - write",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2312,7 +2844,10 @@
           "description": "Remove write permission from the group.",
           "info": {
             "kind": "Option name",
-            "text": "Group - write"
+            "text": "Group - write",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2320,7 +2855,10 @@
           "description": "Change permissions recursively (GNU and many Unix chmod variants).",
           "info": {
             "kind": "Option name",
-            "text": "Recursive"
+            "text": "Recursive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2328,7 +2866,10 @@
           "description": "Describe changed files.",
           "info": {
             "kind": "Option name",
-            "text": "Verbose"
+            "text": "Verbose",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2336,7 +2877,10 @@
           "description": "Report only files whose mode changed (GNU chmod).",
           "info": {
             "kind": "Option name",
-            "text": "Changes"
+            "text": "Changes",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -2364,7 +2908,14 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Change Mode"
+        "text": "Change Mode",
+        "emphasis": [
+          0,
+          1,
+          7,
+          8,
+          9
+        ]
       },
       "output": {
         "stdout": "Usually none; changes permission bits.",
@@ -2387,7 +2938,10 @@
           "description": "Use human-readable units.",
           "info": {
             "kind": "Option name",
-            "text": "Human-readable"
+            "text": "Human-readable",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2395,7 +2949,10 @@
           "description": "Display only a total per path.",
           "info": {
             "kind": "Option name",
-            "text": "Summarize"
+            "text": "Summarize",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2403,7 +2960,10 @@
           "description": "Include files as well as directories.",
           "info": {
             "kind": "Option name",
-            "text": "All"
+            "text": "All",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -2429,7 +2989,11 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Disk Usage"
+        "text": "Disk Usage",
+        "emphasis": [
+          0,
+          5
+        ]
       },
       "output": {
         "stdout": "Prints space usage.",
@@ -2452,7 +3016,10 @@
           "description": "Use human-readable sizes.",
           "info": {
             "kind": "Option name",
-            "text": "Human-readable"
+            "text": "Human-readable",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2460,7 +3027,10 @@
           "description": "Use 1024-byte blocks.",
           "info": {
             "kind": "Option name",
-            "text": "1024-byte blocks"
+            "text": "1024-byte blocks",
+            "emphasis": [
+              14
+            ]
           }
         },
         {
@@ -2468,7 +3038,10 @@
           "description": "Show inode statistics where supported.",
           "info": {
             "kind": "Option name",
-            "text": "Inodes"
+            "text": "Inodes",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -2493,7 +3066,11 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Disk Free"
+        "text": "Disk Free",
+        "emphasis": [
+          0,
+          5
+        ]
       },
       "output": {
         "stdout": "Prints filesystem usage.",
@@ -2516,7 +3093,10 @@
           "description": "Print the type without the filename.",
           "info": {
             "kind": "Option name",
-            "text": "Brief"
+            "text": "Brief",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2524,7 +3104,10 @@
           "description": "Print MIME information where supported.",
           "info": {
             "kind": "Option name",
-            "text": "MIME type"
+            "text": "MIME type",
+            "emphasis": [
+              1
+            ]
           }
         },
         {
@@ -2532,7 +3115,10 @@
           "description": "Follow symbolic links.",
           "info": {
             "kind": "Option name",
-            "text": "Dereference"
+            "text": "Follow Links",
+            "emphasis": [
+              7
+            ]
           }
         }
       ],
@@ -2557,7 +3143,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "File"
+        "text": "File",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints detected file types.",
@@ -2580,7 +3169,10 @@
           "description": "Show all matches.",
           "info": {
             "kind": "Option name",
-            "text": "All"
+            "text": "All",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2588,7 +3180,10 @@
           "description": "Print a short classification such as builtin or file.",
           "info": {
             "kind": "Option name",
-            "text": "Type"
+            "text": "Type",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2596,7 +3191,10 @@
           "description": "Find the executable in PATH, if available.",
           "info": {
             "kind": "Option name",
-            "text": "Path"
+            "text": "Path",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -2622,7 +3220,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Type"
+        "text": "Type",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints command lookup type.",
@@ -2645,7 +3246,10 @@
           "description": "Show the most recent N entries (argument, not flag).",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: N"
+            "text": "Literal syntax: N",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -2653,7 +3257,10 @@
           "description": "Clear the current session's in-memory history.",
           "info": {
             "kind": "Option name",
-            "text": "Clear"
+            "text": "Clear",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -2677,7 +3284,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "History"
+        "text": "History",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints history entries.",
@@ -2700,7 +3310,10 @@
           "description": "Show all processes (POSIX style).",
           "info": {
             "kind": "Option name",
-            "text": "Every process"
+            "text": "Every process",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2708,7 +3321,10 @@
           "description": "Show more process details.",
           "info": {
             "kind": "Option name",
-            "text": "Full format"
+            "text": "Full format",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2716,7 +3332,8 @@
           "description": "Show BSD-style process listing without a dash.",
           "info": {
             "kind": "Syntax name",
-            "text": "BSD process-listing convention"
+            "text": "BSD process-listing convention",
+            "emphasis": []
           }
         }
       ],
@@ -2739,7 +3356,11 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Process Status"
+        "text": "Process Status",
+        "emphasis": [
+          0,
+          8
+        ]
       },
       "output": {
         "stdout": "Prints process table.",
@@ -2762,7 +3383,10 @@
           "description": "Create an archive.",
           "info": {
             "kind": "Option name",
-            "text": "Create"
+            "text": "Create",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2770,7 +3394,10 @@
           "description": "List archive contents.",
           "info": {
             "kind": "Option name",
-            "text": "Table"
+            "text": "Table",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2778,7 +3405,10 @@
           "description": "Extract an archive.",
           "info": {
             "kind": "Option name",
-            "text": "Extract"
+            "text": "Extract",
+            "emphasis": [
+              1
+            ]
           }
         },
         {
@@ -2786,7 +3416,10 @@
           "description": "Specify the archive filename.",
           "info": {
             "kind": "Option name",
-            "text": "File"
+            "text": "File",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -2794,7 +3427,10 @@
           "description": "Use gzip compression or decompression when supported.",
           "info": {
             "kind": "Option name",
-            "text": "gzip"
+            "text": "gzip",
+            "emphasis": [
+              1
+            ]
           }
         }
       ],
@@ -2818,7 +3454,12 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Tape Archive"
+        "text": "Tape Archive",
+        "emphasis": [
+          0,
+          5,
+          6
+        ]
       },
       "output": {
         "stdout": "Creates archive output or lists members depending on options.",
@@ -2841,7 +3482,8 @@
           "description": "Use a year-month-day format.",
           "info": {
             "kind": "Syntax name",
-            "text": "Year / month / day"
+            "text": "Year / month / day",
+            "emphasis": []
           }
         },
         {
@@ -2849,7 +3491,8 @@
           "description": "Use 24-hour hours and minutes.",
           "info": {
             "kind": "Syntax name",
-            "text": "Hour / minute"
+            "text": "Hour / minute",
+            "emphasis": []
           }
         },
         {
@@ -2857,7 +3500,10 @@
           "description": "Display UTC time.",
           "info": {
             "kind": "Option name",
-            "text": "UTC"
+            "text": "UTC",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -2880,7 +3526,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Date"
+        "text": "Date",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints formatted date/time.",
@@ -2903,7 +3552,10 @@
           "description": "Optional suffix to remove (argument, not flag).",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: suffix"
+            "text": "Literal syntax: suffix",
+            "emphasis": [
+              8
+            ]
           }
         },
         {
@@ -2911,7 +3563,8 @@
           "description": "Mark the end of options, where supported.",
           "info": {
             "kind": "Syntax name",
-            "text": "End of options"
+            "text": "End of options",
+            "emphasis": []
           }
         }
       ],
@@ -2933,7 +3586,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Base Name"
+        "text": "Base Name",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints the basename.",
@@ -2956,7 +3612,8 @@
           "description": "Mark the end of options, where supported.",
           "info": {
             "kind": "Syntax name",
-            "text": "End of options"
+            "text": "End of options",
+            "emphasis": []
           }
         }
       ],
@@ -2980,7 +3637,16 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Directory Name"
+        "text": "Directory Name",
+        "emphasis": [
+          0,
+          1,
+          2,
+          10,
+          11,
+          12,
+          13
+        ]
       },
       "output": {
         "stdout": "Prints the directory path.",
@@ -3003,7 +3669,10 @@
           "description": "Create a symbolic rather than a hard link.",
           "info": {
             "kind": "Option name",
-            "text": "Symbolic link"
+            "text": "Symbolic link",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3011,7 +3680,10 @@
           "description": "Replace an existing destination if allowed; use carefully.",
           "info": {
             "kind": "Option name",
-            "text": "Force"
+            "text": "Force",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -3037,7 +3709,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Link"
+        "text": "Link",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Usually none; creates links.",
@@ -3060,7 +3735,10 @@
           "description": "Follow a symbolic link to its target where supported.",
           "info": {
             "kind": "Option name",
-            "text": "Dereference"
+            "text": "Follow Links",
+            "emphasis": [
+              7
+            ]
           }
         },
         {
@@ -3068,7 +3746,10 @@
           "description": "On GNU/Linux, choose an output format; %s prints size in bytes.",
           "info": {
             "kind": "Option name",
-            "text": "Format"
+            "text": "Custom format",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -3093,7 +3774,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Status"
+        "text": "Status",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints file metadata.",
@@ -3116,7 +3800,10 @@
           "description": "Do not interpret backslashes as escapes; usually recommended.",
           "info": {
             "kind": "Option name",
-            "text": "Raw"
+            "text": "Raw",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3124,7 +3811,10 @@
           "description": "Display a prompt before reading (Bash).",
           "info": {
             "kind": "Option name",
-            "text": "Prompt"
+            "text": "Prompt",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3132,7 +3822,10 @@
           "description": "Read words into an array.",
           "info": {
             "kind": "Option name",
-            "text": "Array"
+            "text": "Array",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3140,7 +3833,10 @@
           "description": "Stop reading at DELIM instead of a newline.",
           "info": {
             "kind": "Option name",
-            "text": "Delimiter"
+            "text": "Delimiter",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3148,7 +3844,10 @@
           "description": "Time out after the specified number of seconds.",
           "info": {
             "kind": "Option name",
-            "text": "Timeout"
+            "text": "Timeout",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3156,7 +3855,10 @@
           "description": "Do not echo typed characters.",
           "info": {
             "kind": "Option name",
-            "text": "Silent"
+            "text": "Silent",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -3184,7 +3886,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Read"
+        "text": "Read",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Usually none; stores input in variables.",
@@ -3207,7 +3912,10 @@
           "description": "List exported variables.",
           "info": {
             "kind": "Option name",
-            "text": "Print"
+            "text": "Print",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3215,7 +3923,10 @@
           "description": "Stop exporting a variable without deleting its value.",
           "info": {
             "kind": "Option name",
-            "text": "Remove export attribute"
+            "text": "No longer exported",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -3241,7 +3952,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Export"
+        "text": "Export",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Usually none; may list exported variables.",
@@ -3264,7 +3978,10 @@
           "description": "Start with an empty environment.",
           "info": {
             "kind": "Option name",
-            "text": "Ignore environment"
+            "text": "Ignore environment",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3272,7 +3989,10 @@
           "description": "Remove a variable from the launched program's environment.",
           "info": {
             "kind": "Option name",
-            "text": "Unset"
+            "text": "Unset",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -3295,7 +4015,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Environment"
+        "text": "Environment",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints environment or runs specified command.",
@@ -3332,7 +4055,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Sleep"
+        "text": "Sleep",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "No output; waits.",
@@ -3365,7 +4091,15 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Who Am I"
+        "text": "Who Am I",
+        "emphasis": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          7
+        ]
       },
       "output": {
         "stdout": "Prints effective user name.",
@@ -3388,7 +4122,10 @@
           "description": "Show all available information.",
           "info": {
             "kind": "Option name",
-            "text": "All"
+            "text": "All",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3396,7 +4133,10 @@
           "description": "Show the kernel or system name.",
           "info": {
             "kind": "Option name",
-            "text": "System name"
+            "text": "System name",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3404,7 +4144,10 @@
           "description": "Show the machine architecture.",
           "info": {
             "kind": "Option name",
-            "text": "Machine"
+            "text": "Machine",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -3428,7 +4171,14 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Unix Name"
+        "text": "Unix Name",
+        "emphasis": [
+          0,
+          5,
+          6,
+          7,
+          8
+        ]
       },
       "output": {
         "stdout": "Prints system information.",
@@ -3451,7 +4201,10 @@
           "description": "Use a comma as the field separator.",
           "info": {
             "kind": "Option name",
-            "text": "Delimiter"
+            "text": "Delimiter",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3459,7 +4212,10 @@
           "description": "Join lines from each file into one long output line.",
           "info": {
             "kind": "Option name",
-            "text": "Serial"
+            "text": "Serial",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -3483,7 +4239,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Paste"
+        "text": "Paste",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints merged input lines.",
@@ -3506,7 +4265,10 @@
           "description": "Write downloaded data to FILE. Use -O - (or -O-) to send the response body to stdout; the second '-' is an argument, not another flag.",
           "info": {
             "kind": "Option name",
-            "text": "Output document"
+            "text": "Output document",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3514,7 +4276,10 @@
           "description": "Write wget log messages to FILE (lowercase o). This does NOT choose the downloaded content's destination.",
           "info": {
             "kind": "Option name",
-            "text": "Output log"
+            "text": "Output log",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3522,7 +4287,10 @@
           "description": "Quiet mode: suppress progress and diagnostics. Optional; it does not make downloads work.",
           "info": {
             "kind": "Option name",
-            "text": "Quiet"
+            "text": "Quiet",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3530,7 +4298,10 @@
           "description": "Continue an interrupted download when supported by the server.",
           "info": {
             "kind": "Option name",
-            "text": "Continue"
+            "text": "Continue",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3538,7 +4309,10 @@
           "description": "Save downloaded files into the specified directory.",
           "info": {
             "kind": "Option name",
-            "text": "Directory prefix"
+            "text": "Directory prefix",
+            "emphasis": [
+              10
+            ]
           }
         },
         {
@@ -3546,7 +4320,15 @@
           "description": "Check whether a URL is accessible without downloading its contents.",
           "info": {
             "kind": "Option name",
-            "text": "Spider mode"
+            "text": "Spider mode",
+            "emphasis": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
           }
         },
         {
@@ -3554,7 +4336,10 @@
           "description": "No verbose: suppress normal progress chatter while still showing basic status and errors.",
           "info": {
             "kind": "Option name",
-            "text": "Non-verbose"
+            "text": "Non-verbose",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -3609,7 +4394,13 @@
       ],
       "nameInfo": {
         "kind": "Name origin",
-        "text": "World Wide Web + Get"
+        "text": "World Wide Web + Get",
+        "emphasis": [
+          0,
+          17,
+          18,
+          19
+        ]
       }
     },
     {
@@ -3625,7 +4416,10 @@
           "description": "Follow HTTP redirects.",
           "info": {
             "kind": "Option name",
-            "text": "Location"
+            "text": "Location",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3633,7 +4427,10 @@
           "description": "Write the response to the specified file.",
           "info": {
             "kind": "Option name",
-            "text": "Output file"
+            "text": "Output file",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3641,7 +4438,10 @@
           "description": "Save using the remote filename.",
           "info": {
             "kind": "Option name",
-            "text": "Remote filename"
+            "text": "Remote filename",
+            "emphasis": [
+              3
+            ]
           }
         },
         {
@@ -3649,7 +4449,10 @@
           "description": "Fetch response headers only.",
           "info": {
             "kind": "Option name",
-            "text": "Headers only"
+            "text": "Include response headers",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3657,7 +4460,10 @@
           "description": "Specify the HTTP request method.",
           "info": {
             "kind": "Option name",
-            "text": "Request method"
+            "text": "eXtra/custom request method",
+            "emphasis": [
+              1
+            ]
           }
         },
         {
@@ -3665,7 +4471,10 @@
           "description": "Add a request header.",
           "info": {
             "kind": "Option name",
-            "text": "Header"
+            "text": "Header",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -3696,7 +4505,13 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Client URL"
+        "text": "Client URL",
+        "emphasis": [
+          0,
+          7,
+          8,
+          9
+        ]
       },
       "output": {
         "stdout": "Usually prints response data unless redirected.",
@@ -3719,7 +4534,10 @@
           "description": "On Linux and many Unix systems, stop after COUNT requests.",
           "info": {
             "kind": "Option name",
-            "text": "Count"
+            "text": "Count",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3727,7 +4545,10 @@
           "description": "Wait the specified interval between requests.",
           "info": {
             "kind": "Option name",
-            "text": "Interval"
+            "text": "Interval",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3735,7 +4556,10 @@
           "description": "Set a response wait time on Linux; syntax differs across systems.",
           "info": {
             "kind": "Option name",
-            "text": "Wait"
+            "text": "Wait",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -3760,7 +4584,13 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Sonar ping sound"
+        "text": "Sonar ping sound",
+        "emphasis": [
+          6,
+          7,
+          8,
+          9
+        ]
       },
       "output": {
         "stdout": "Prints reply timing and statistics.",
@@ -3783,7 +4613,10 @@
           "description": "Connect to a non-default SSH port.",
           "info": {
             "kind": "Option name",
-            "text": "Port"
+            "text": "Port",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3791,7 +4624,10 @@
           "description": "Use the specified private-key identity file.",
           "info": {
             "kind": "Option name",
-            "text": "Identity"
+            "text": "Identity file",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3799,7 +4635,10 @@
           "description": "Show verbose connection diagnostics.",
           "info": {
             "kind": "Option name",
-            "text": "Verbose"
+            "text": "Verbose",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3807,7 +4646,10 @@
           "description": "Connect through a jump host when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Jump host"
+            "text": "Jump host",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -3832,7 +4674,12 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Secure Shell"
+        "text": "Secure Shell",
+        "emphasis": [
+          0,
+          7,
+          8
+        ]
       },
       "output": {
         "stdout": "Remote shell or command output.",
@@ -3855,7 +4702,10 @@
           "description": "Copy directories recursively.",
           "info": {
             "kind": "Option name",
-            "text": "Recursive"
+            "text": "Recursive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3863,7 +4713,10 @@
           "description": "Use a custom SSH port (capital P).",
           "info": {
             "kind": "Option name",
-            "text": "Port (uppercase P)"
+            "text": "Port (uppercase P)",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3871,7 +4724,10 @@
           "description": "Use the specified SSH private key.",
           "info": {
             "kind": "Option name",
-            "text": "Identity file"
+            "text": "Identity file",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3879,7 +4735,10 @@
           "description": "Preserve file timestamps and modes when possible.",
           "info": {
             "kind": "Option name",
-            "text": "Preserve"
+            "text": "Preserve",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -3905,7 +4764,12 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Secure Copy"
+        "text": "Secure Copy",
+        "emphasis": [
+          0,
+          7,
+          9
+        ]
       },
       "output": {
         "stdout": "Usually no copied content to stdout.",
@@ -3928,7 +4792,10 @@
           "description": "Archive mode: preserve structure and common metadata.",
           "info": {
             "kind": "Option name",
-            "text": "Archive"
+            "text": "Archive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3936,7 +4803,10 @@
           "description": "Show copied entries and progress messages.",
           "info": {
             "kind": "Option name",
-            "text": "Verbose"
+            "text": "Verbose",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -3944,7 +4814,15 @@
           "description": "Preview planned changes without copying files.",
           "info": {
             "kind": "Option name",
-            "text": "dry run"
+            "text": "dry run",
+            "emphasis": [
+              0,
+              1,
+              2,
+              4,
+              5,
+              6
+            ]
           }
         },
         {
@@ -3952,7 +4830,15 @@
           "description": "Remove files from the destination that are absent at the source; destructive.",
           "info": {
             "kind": "Option name",
-            "text": "delete"
+            "text": "delete",
+            "emphasis": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
           }
         },
         {
@@ -3960,7 +4846,10 @@
           "description": "Compress data during transfer when useful.",
           "info": {
             "kind": "Option name",
-            "text": "Compress"
+            "text": "Zip/compress transfer",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -3986,7 +4875,14 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Remote Synchronization"
+        "text": "Remote Synchronization",
+        "emphasis": [
+          0,
+          7,
+          8,
+          9,
+          10
+        ]
       },
       "output": {
         "stdout": "May print status or copied entries with options.",
@@ -4009,7 +4905,10 @@
           "description": "Show assigned IP addresses.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: addr show"
+            "text": "Literal syntax: addr show",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -4017,7 +4916,10 @@
           "description": "List network interfaces and their state.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: link show"
+            "text": "Literal syntax: link show",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4025,7 +4927,10 @@
           "description": "Display the routing table.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: route show"
+            "text": "Literal syntax: route show",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -4033,7 +4938,10 @@
           "description": "Use brief output when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Brief"
+            "text": "Brief",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -4059,7 +4967,11 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Internet Protocol"
+        "text": "Internet Protocol",
+        "emphasis": [
+          0,
+          9
+        ]
       },
       "output": {
         "stdout": "Prints network addresses and routes for show operations.",
@@ -4082,7 +4994,10 @@
           "description": "Show TCP sockets.",
           "info": {
             "kind": "Option name",
-            "text": "TCP"
+            "text": "TCP",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4090,7 +5005,10 @@
           "description": "Show UDP sockets.",
           "info": {
             "kind": "Option name",
-            "text": "UDP"
+            "text": "UDP",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4098,7 +5016,10 @@
           "description": "Show listening sockets.",
           "info": {
             "kind": "Option name",
-            "text": "Listening"
+            "text": "Listening",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4106,7 +5027,10 @@
           "description": "Show numerical addresses and ports.",
           "info": {
             "kind": "Option name",
-            "text": "Numeric"
+            "text": "Numeric",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4114,7 +5038,10 @@
           "description": "Show owning processes when permitted.",
           "info": {
             "kind": "Option name",
-            "text": "Processes"
+            "text": "Processes",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -4140,7 +5067,11 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Socket Statistics"
+        "text": "Socket Statistics",
+        "emphasis": [
+          0,
+          7
+        ]
       },
       "output": {
         "stdout": "Prints socket listings.",
@@ -4163,7 +5094,8 @@
           "description": "Show a condensed answer.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: +short"
+            "text": "Literal syntax: +short",
+            "emphasis": []
           }
         },
         {
@@ -4171,7 +5103,10 @@
           "description": "Ask for mail-exchanger records.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: MX"
+            "text": "Literal syntax: MX",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -4179,7 +5114,10 @@
           "description": "Perform a reverse DNS lookup.",
           "info": {
             "kind": "Option name",
-            "text": "Reverse DNS lookup"
+            "text": "Reverse lookup (x indicates reverse mode; not an acronym)",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -4187,7 +5125,8 @@
           "description": "Query a specified DNS server.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: @SERVER"
+            "text": "Literal syntax: @SERVER",
+            "emphasis": []
           }
         }
       ],
@@ -4216,7 +5155,12 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Domain Information Groper"
+        "text": "Domain Information Groper",
+        "emphasis": [
+          0,
+          7,
+          19
+        ]
       },
       "output": {
         "stdout": "Prints DNS query details.",
@@ -4239,7 +5183,10 @@
           "description": "Choose a record type such as MX or AAAA.",
           "info": {
             "kind": "Option name",
-            "text": "Record type"
+            "text": "Record type",
+            "emphasis": [
+              7
+            ]
           }
         },
         {
@@ -4247,7 +5194,10 @@
           "description": "Request a broader DNS report.",
           "info": {
             "kind": "Option name",
-            "text": "All"
+            "text": "All",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4255,7 +5205,10 @@
           "description": "Show verbose output.",
           "info": {
             "kind": "Option name",
-            "text": "Verbose"
+            "text": "Verbose",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -4279,7 +5232,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Host"
+        "text": "Host",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints DNS results.",
@@ -4302,7 +5258,10 @@
           "description": "Probe a port without sending application data.",
           "info": {
             "kind": "Option name",
-            "text": "Zero-I/O scanning"
+            "text": "Zero-I/O scanning",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4310,7 +5269,10 @@
           "description": "Use verbose output.",
           "info": {
             "kind": "Option name",
-            "text": "Verbose"
+            "text": "Verbose",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4318,7 +5280,10 @@
           "description": "Set a timeout (details depend on implementation).",
           "info": {
             "kind": "Option name",
-            "text": "Wait timeout"
+            "text": "Wait timeout",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4326,7 +5291,10 @@
           "description": "Use UDP instead of TCP.",
           "info": {
             "kind": "Option name",
-            "text": "UDP"
+            "text": "UDP",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -4352,7 +5320,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Netcat"
+        "text": "Netcat",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "May print network traffic based on mode.",
@@ -4375,7 +5346,10 @@
           "description": "Limit the maximum number of hops.",
           "info": {
             "kind": "Option name",
-            "text": "Maximum hops"
+            "text": "Maximum hops",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4383,7 +5357,10 @@
           "description": "Avoid DNS lookups for intermediate hops.",
           "info": {
             "kind": "Option name",
-            "text": "Numeric"
+            "text": "Numeric",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4391,7 +5368,10 @@
           "description": "Set a per-probe wait time on many Unix systems.",
           "info": {
             "kind": "Option name",
-            "text": "Wait"
+            "text": "Wait",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -4416,7 +5396,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Trace Route"
+        "text": "Trace Route",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints network hops.",
@@ -4439,7 +5422,10 @@
           "description": "Apply ownership changes recursively.",
           "info": {
             "kind": "Option name",
-            "text": "Recursive"
+            "text": "Recursive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4447,7 +5433,10 @@
           "description": "Describe each ownership change.",
           "info": {
             "kind": "Option name",
-            "text": "Verbose"
+            "text": "Verbose",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4455,7 +5444,18 @@
           "description": "On GNU systems, copy ownership from a reference file.",
           "info": {
             "kind": "Option name",
-            "text": "reference"
+            "text": "reference",
+            "emphasis": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ]
           }
         }
       ],
@@ -4480,7 +5480,14 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Change Owner"
+        "text": "Change Owner",
+        "emphasis": [
+          0,
+          1,
+          7,
+          8,
+          9
+        ]
       },
       "output": {
         "stdout": "Usually none; changes file owner.",
@@ -4503,7 +5510,10 @@
           "description": "Apply group changes recursively.",
           "info": {
             "kind": "Option name",
-            "text": "Recursive"
+            "text": "Recursive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4511,7 +5521,10 @@
           "description": "Print changed entries.",
           "info": {
             "kind": "Option name",
-            "text": "Verbose"
+            "text": "Verbose",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -4535,7 +5548,14 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Change Group"
+        "text": "Change Group",
+        "emphasis": [
+          0,
+          1,
+          7,
+          8,
+          11
+        ]
       },
       "output": {
         "stdout": "Usually none; changes file group.",
@@ -4558,7 +5578,10 @@
           "description": "Limit recursion depth.",
           "info": {
             "kind": "Option name",
-            "text": "Levels"
+            "text": "Levels",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4566,7 +5589,10 @@
           "description": "Include hidden entries.",
           "info": {
             "kind": "Option name",
-            "text": "All"
+            "text": "All",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4574,7 +5600,10 @@
           "description": "Display directories only.",
           "info": {
             "kind": "Option name",
-            "text": "Directories"
+            "text": "Directories",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4582,7 +5611,10 @@
           "description": "Exclude matching names.",
           "info": {
             "kind": "Option name",
-            "text": "Ignore pattern"
+            "text": "Ignore pattern",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -4606,7 +5638,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Tree"
+        "text": "Tree",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints indented tree.",
@@ -4629,7 +5664,10 @@
           "description": "Include directories recursively.",
           "info": {
             "kind": "Option name",
-            "text": "Recursive"
+            "text": "Recursive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4637,7 +5675,8 @@
           "description": "Use high compression when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Compression level 9"
+            "text": "Compression level 9",
+            "emphasis": []
           }
         },
         {
@@ -4645,7 +5684,10 @@
           "description": "Update entries in an existing archive.",
           "info": {
             "kind": "Option name",
-            "text": "Update"
+            "text": "Update",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -4669,7 +5711,12 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Zip (name, not acronym)"
+        "text": "Zip (name, not acronym)",
+        "emphasis": [
+          0,
+          1,
+          2
+        ]
       },
       "output": {
         "stdout": "Prints archive status; writes ZIP file.",
@@ -4692,7 +5739,10 @@
           "description": "List archive members without extracting.",
           "info": {
             "kind": "Option name",
-            "text": "List"
+            "text": "List",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4700,7 +5750,10 @@
           "description": "Extract into the specified directory.",
           "info": {
             "kind": "Option name",
-            "text": "Destination"
+            "text": "Destination",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4708,7 +5761,10 @@
           "description": "Never overwrite an existing file.",
           "info": {
             "kind": "Option name",
-            "text": "Never overwrite"
+            "text": "Never overwrite",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4716,7 +5772,10 @@
           "description": "Overwrite existing files without prompting; use carefully.",
           "info": {
             "kind": "Option name",
-            "text": "Output"
+            "text": "Output",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -4740,7 +5799,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Unzip"
+        "text": "Unzip",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints extraction status; extracts files.",
@@ -4763,7 +5825,10 @@
           "description": "Keep the original input file when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Keep original"
+            "text": "Keep original",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4771,7 +5836,10 @@
           "description": "Decompress instead of compress.",
           "info": {
             "kind": "Option name",
-            "text": "Decompress"
+            "text": "Decompress",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4779,7 +5847,8 @@
           "description": "Use higher compression.",
           "info": {
             "kind": "Option name",
-            "text": "Compression level 9"
+            "text": "Compression level 9",
+            "emphasis": []
           }
         },
         {
@@ -4787,7 +5856,10 @@
           "description": "List compression information.",
           "info": {
             "kind": "Option name",
-            "text": "List"
+            "text": "List",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -4810,7 +5882,13 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "GNU Zip"
+        "text": "GNU Zip",
+        "emphasis": [
+          0,
+          4,
+          5,
+          6
+        ]
       },
       "output": {
         "stdout": "Usually none; writes gzip data/file.",
@@ -4833,7 +5911,10 @@
           "description": "Keep the compressed file when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Keep original"
+            "text": "Keep original",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4841,7 +5922,10 @@
           "description": "Write decompressed data to standard output.",
           "info": {
             "kind": "Option name",
-            "text": "Output to stdout"
+            "text": "Copy to standard output",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4849,7 +5933,10 @@
           "description": "Test compressed data integrity.",
           "info": {
             "kind": "Option name",
-            "text": "Test"
+            "text": "Test",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -4873,7 +5960,15 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "GNU Unzip"
+        "text": "GNU Unzip",
+        "emphasis": [
+          0,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
       },
       "output": {
         "stdout": "Usually none; extracts gzip data/file.",
@@ -4896,7 +5991,10 @@
           "description": "Require all path components to exist on GNU systems.",
           "info": {
             "kind": "Option name",
-            "text": "Existing components"
+            "text": "Existing components",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4904,7 +6002,10 @@
           "description": "On GNU systems, accept missing path components.",
           "info": {
             "kind": "Option name",
-            "text": "Missing components permitted"
+            "text": "Missing components permitted",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -4928,7 +6029,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Real Path"
+        "text": "Real Path",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints canonical path.",
@@ -4951,7 +6055,10 @@
           "description": "On GNU systems, resolve the full canonical target path.",
           "info": {
             "kind": "Option name",
-            "text": "Canonicalize"
+            "text": "Follow links to canonical path",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -4959,7 +6066,10 @@
           "description": "Avoid adding a newline to the output, where supported.",
           "info": {
             "kind": "Option name",
-            "text": "No newline"
+            "text": "No newline",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -4984,7 +6094,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Read Link"
+        "text": "Read Link",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints symlink target.",
@@ -5007,7 +6120,10 @@
           "description": "Create a temporary directory.",
           "info": {
             "kind": "Option name",
-            "text": "Directory"
+            "text": "Directory",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5015,7 +6131,10 @@
           "description": "Use a specified parent directory on GNU systems.",
           "info": {
             "kind": "Option name",
-            "text": "Parent"
+            "text": "Parent",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -5039,7 +6158,15 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Make Temporary"
+        "text": "Make Temporary",
+        "emphasis": [
+          0,
+          2,
+          5,
+          6,
+          7,
+          8
+        ]
       },
       "output": {
         "stdout": "Prints created temporary path.",
@@ -5062,7 +6189,10 @@
           "description": "Show changes in the working tree.",
           "info": {
             "kind": "Syntax name",
-            "text": "Status"
+            "text": "Status",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5070,7 +6200,10 @@
           "description": "Stage selected changes for a commit.",
           "info": {
             "kind": "Syntax name",
-            "text": "Add"
+            "text": "Add",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5078,7 +6211,10 @@
           "description": "Record staged changes with a message.",
           "info": {
             "kind": "Syntax name",
-            "text": "Commit message"
+            "text": "Commit message",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5086,7 +6222,10 @@
           "description": "Show a compact commit history.",
           "info": {
             "kind": "Syntax name",
-            "text": "One-line log"
+            "text": "One-line log",
+            "emphasis": [
+              4
+            ]
           }
         },
         {
@@ -5094,7 +6233,10 @@
           "description": "Run Git as though started inside DIR.",
           "info": {
             "kind": "Option name",
-            "text": "Change directory"
+            "text": "Change directory",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -5123,7 +6265,12 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Git (name, not acronym)"
+        "text": "Git (name, not acronym)",
+        "emphasis": [
+          0,
+          1,
+          2
+        ]
       },
       "output": {
         "stdout": "Depends on Git subcommand: status, logs, diffs, etc.",
@@ -5146,7 +6293,10 @@
           "description": "Run as the specified user.",
           "info": {
             "kind": "Option name",
-            "text": "User"
+            "text": "User",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5154,7 +6304,10 @@
           "description": "Refresh cached credentials without running a command.",
           "info": {
             "kind": "Option name",
-            "text": "Validate credentials"
+            "text": "Validate credentials",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5162,7 +6315,10 @@
           "description": "Invalidate the current cached authentication timestamp.",
           "info": {
             "kind": "Option name",
-            "text": "Kill credential timestamp"
+            "text": "Kill credential timestamp",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -5186,7 +6342,13 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Superuser Do (historical)"
+        "text": "Superuser Do (historical)",
+        "emphasis": [
+          0,
+          1,
+          10,
+          11
+        ]
       },
       "output": {
         "stdout": "Passes through the invoked command's output.",
@@ -5209,7 +6371,10 @@
           "description": "Refresh available package metadata.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: update"
+            "text": "Literal syntax: update",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -5217,7 +6382,10 @@
           "description": "Install the specified package.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: install PACKAGE"
+            "text": "Literal syntax: install PACKAGE",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -5225,7 +6393,10 @@
           "description": "Search the package index.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: search QUERY"
+            "text": "Literal syntax: search QUERY",
+            "emphasis": [
+              8
+            ]
           }
         },
         {
@@ -5233,7 +6404,10 @@
           "description": "Display package details.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: show PACKAGE"
+            "text": "Literal syntax: show PACKAGE",
+            "emphasis": [
+              8
+            ]
           }
         },
         {
@@ -5241,7 +6415,10 @@
           "description": "Uninstall a package.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: remove PACKAGE"
+            "text": "Literal syntax: remove PACKAGE",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -5270,7 +6447,12 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Advanced Package Tool"
+        "text": "Advanced Package Tool",
+        "emphasis": [
+          0,
+          9,
+          17
+        ]
       },
       "output": {
         "stdout": "Prints package operation details.",
@@ -5293,7 +6475,10 @@
           "description": "Refresh package metadata.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: update"
+            "text": "Literal syntax: update",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -5301,7 +6486,10 @@
           "description": "Install a named package.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: install PACKAGE"
+            "text": "Literal syntax: install PACKAGE",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -5309,7 +6497,10 @@
           "description": "Remove a named package.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: remove PACKAGE"
+            "text": "Literal syntax: remove PACKAGE",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -5317,7 +6508,10 @@
           "description": "Automatically answer yes to prompts; use cautiously.",
           "info": {
             "kind": "Option name",
-            "text": "Assume yes"
+            "text": "Assume yes",
+            "emphasis": [
+              7
+            ]
           }
         }
       ],
@@ -5342,7 +6536,15 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "APT get"
+        "text": "Advanced Package Tool — get",
+        "emphasis": [
+          0,
+          9,
+          17,
+          24,
+          25,
+          26
+        ]
       },
       "output": {
         "stdout": "Prints APT operation details.",
@@ -5365,7 +6567,10 @@
           "description": "Show a service's current state and recent information.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: status UNIT"
+            "text": "Literal syntax: status UNIT",
+            "emphasis": [
+              8
+            ]
           }
         },
         {
@@ -5373,7 +6578,10 @@
           "description": "Start a unit.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: start UNIT"
+            "text": "Literal syntax: start UNIT",
+            "emphasis": [
+              8
+            ]
           }
         },
         {
@@ -5381,7 +6589,10 @@
           "description": "Stop a unit.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: stop UNIT"
+            "text": "Literal syntax: stop UNIT",
+            "emphasis": [
+              8
+            ]
           }
         },
         {
@@ -5389,7 +6600,10 @@
           "description": "Restart a unit.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: restart UNIT"
+            "text": "Literal syntax: restart UNIT",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -5397,7 +6611,10 @@
           "description": "Enable automatic startup of a unit.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: enable UNIT"
+            "text": "Literal syntax: enable UNIT",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -5423,7 +6640,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "System Control"
+        "text": "System Control",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Shows status or service action information.",
@@ -5446,7 +6666,10 @@
           "description": "Show messages for a selected systemd unit.",
           "info": {
             "kind": "Option name",
-            "text": "Unit"
+            "text": "Unit",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5454,7 +6677,10 @@
           "description": "Follow new log entries as they arrive.",
           "info": {
             "kind": "Option name",
-            "text": "Follow"
+            "text": "Follow",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5462,7 +6688,10 @@
           "description": "Show the last N entries.",
           "info": {
             "kind": "Option name",
-            "text": "Number of entries"
+            "text": "Number of entries",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5470,7 +6699,14 @@
           "description": "Only show logs since a given date or time.",
           "info": {
             "kind": "Option name",
-            "text": "Since"
+            "text": "Since",
+            "emphasis": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
           }
         }
       ],
@@ -5495,7 +6731,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Journal Control"
+        "text": "Journal Control",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints journal logs.",
@@ -5518,7 +6757,10 @@
           "description": "Send SIGTERM, requesting graceful termination.",
           "info": {
             "kind": "Option name",
-            "text": "Terminate signal (SIGTERM)"
+            "text": "Terminate signal (SIGTERM)",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5526,7 +6768,10 @@
           "description": "Send SIGKILL, forcing the process to stop.",
           "info": {
             "kind": "Option name",
-            "text": "Kill signal (SIGKILL)"
+            "text": "Kill signal (SIGKILL)",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5534,7 +6779,10 @@
           "description": "List available signals.",
           "info": {
             "kind": "Option name",
-            "text": "List signals"
+            "text": "List signals",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -5559,7 +6807,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Kill"
+        "text": "Kill",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Usually none; sends process signal.",
@@ -5582,7 +6833,10 @@
           "description": "Match the full command line rather than only the process name.",
           "info": {
             "kind": "Option name",
-            "text": "Full command line"
+            "text": "Full command line",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5590,7 +6844,10 @@
           "description": "Only match processes owned by the specified user.",
           "info": {
             "kind": "Option name",
-            "text": "User"
+            "text": "User",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5598,7 +6855,10 @@
           "description": "Send SIGTERM explicitly.",
           "info": {
             "kind": "Option name",
-            "text": "Terminate signal (SIGTERM)"
+            "text": "Terminate signal (SIGTERM)",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -5623,7 +6883,14 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Process Kill"
+        "text": "Process Kill",
+        "emphasis": [
+          0,
+          8,
+          9,
+          10,
+          11
+        ]
       },
       "output": {
         "stdout": "Usually none; signals matching processes.",
@@ -5646,7 +6913,10 @@
           "description": "Monitor a particular process ID on supported implementations.",
           "info": {
             "kind": "Option name",
-            "text": "Process ID"
+            "text": "Process ID",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5654,7 +6924,10 @@
           "description": "Set the refresh delay on Linux; syntax differs across systems.",
           "info": {
             "kind": "Option name",
-            "text": "Delay"
+            "text": "Delay",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5662,7 +6935,10 @@
           "description": "Use batch output mode on Linux.",
           "info": {
             "kind": "Option name",
-            "text": "Batch"
+            "text": "Batch",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -5687,7 +6963,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Top"
+        "text": "Top",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Displays live process table.",
@@ -5710,7 +6989,10 @@
           "description": "Use human-readable units.",
           "info": {
             "kind": "Option name",
-            "text": "Human-readable"
+            "text": "Human-readable",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5718,7 +7000,10 @@
           "description": "Show values in mebibytes.",
           "info": {
             "kind": "Option name",
-            "text": "Mebibytes"
+            "text": "Mebibytes",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5726,7 +7011,10 @@
           "description": "Refresh every N seconds.",
           "info": {
             "kind": "Option name",
-            "text": "Seconds"
+            "text": "Seconds",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -5751,7 +7039,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Free"
+        "text": "Free",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints RAM/swap statistics.",
@@ -5774,7 +7065,10 @@
           "description": "Show a concise, friendly uptime on Linux.",
           "info": {
             "kind": "Option name",
-            "text": "Pretty"
+            "text": "Pretty",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5782,7 +7076,10 @@
           "description": "Show the system startup time on Linux.",
           "info": {
             "kind": "Option name",
-            "text": "Since boot"
+            "text": "Since boot",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -5806,7 +7103,15 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Up Time"
+        "text": "Up Time",
+        "emphasis": [
+          0,
+          1,
+          3,
+          4,
+          5,
+          6
+        ]
       },
       "output": {
         "stdout": "Prints uptime and load average.",
@@ -5829,7 +7134,10 @@
           "description": "Show only the user ID.",
           "info": {
             "kind": "Option name",
-            "text": "User"
+            "text": "User",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5837,7 +7145,10 @@
           "description": "Show only the primary group ID.",
           "info": {
             "kind": "Option name",
-            "text": "Group"
+            "text": "Group",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5845,7 +7156,10 @@
           "description": "Show the numeric IDs of all groups.",
           "info": {
             "kind": "Option name",
-            "text": "Groups"
+            "text": "Groups",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5853,7 +7167,10 @@
           "description": "Use names instead of numeric IDs with another selection flag.",
           "info": {
             "kind": "Option name",
-            "text": "Name"
+            "text": "Name",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -5878,7 +7195,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Identity"
+        "text": "Identity",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints user/group identifiers.",
@@ -5916,7 +7236,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Groups"
+        "text": "Groups",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints groups.",
@@ -5939,7 +7262,10 @@
           "description": "Show every matching path when supported.",
           "info": {
             "kind": "Option name",
-            "text": "All"
+            "text": "All",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -5963,7 +7289,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Which"
+        "text": "Which",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints executable path(s).",
@@ -5986,7 +7315,10 @@
           "description": "Search only for binaries.",
           "info": {
             "kind": "Option name",
-            "text": "Binaries"
+            "text": "Binaries",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -5994,7 +7326,10 @@
           "description": "Search only for manual pages.",
           "info": {
             "kind": "Option name",
-            "text": "Manual pages"
+            "text": "Manual pages",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6002,7 +7337,10 @@
           "description": "Search only for source files when known.",
           "info": {
             "kind": "Option name",
-            "text": "Sources"
+            "text": "Sources",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -6026,7 +7364,16 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Where Is"
+        "text": "Where Is",
+        "emphasis": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6,
+          7
+        ]
       },
       "output": {
         "stdout": "Prints binary/manual locations.",
@@ -6049,7 +7396,10 @@
           "description": "List currently defined aliases.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: alias"
+            "text": "Literal syntax: alias",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -6057,7 +7407,10 @@
           "description": "Define a persistent-in-session alias (assignment syntax, not a flag).",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: name='command'"
+            "text": "Literal syntax: name='command'",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -6081,7 +7434,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Alias"
+        "text": "Alias",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Lists aliases or prints nothing when defining one.",
@@ -6104,7 +7460,10 @@
           "description": "Remove all aliases in the current shell.",
           "info": {
             "kind": "Option name",
-            "text": "All"
+            "text": "All",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -6128,7 +7487,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Unalias"
+        "text": "Unalias",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Usually none; removes aliases.",
@@ -6151,7 +7513,8 @@
           "description": "POSIX-style dot syntax for sourcing a script.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: . filename"
+            "text": "Literal syntax: . filename",
+            "emphasis": []
           }
         },
         {
@@ -6159,7 +7522,10 @@
           "description": "Path to the script to execute in the current shell.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: filename"
+            "text": "Literal syntax: filename",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -6184,7 +7550,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Source"
+        "text": "Source",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Output of sourced commands, if any.",
@@ -6207,7 +7576,10 @@
           "description": "Run commands supplied as a string.",
           "info": {
             "kind": "Option name",
-            "text": "Command string"
+            "text": "Command string",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6215,7 +7587,10 @@
           "description": "Check script syntax without executing it.",
           "info": {
             "kind": "Option name",
-            "text": "No execution (syntax check)"
+            "text": "No execution (syntax check)",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6223,7 +7598,10 @@
           "description": "Print commands as they execute for debugging.",
           "info": {
             "kind": "Option name",
-            "text": "Execution trace"
+            "text": "Execution trace",
+            "emphasis": [
+              1
+            ]
           }
         },
         {
@@ -6231,7 +7609,16 @@
           "description": "Show the Bash version.",
           "info": {
             "kind": "Option name",
-            "text": "Version"
+            "text": "Version",
+            "emphasis": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
           }
         }
       ],
@@ -6264,7 +7651,13 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Bourne Again SHell"
+        "text": "Bourne Again SHell",
+        "emphasis": [
+          0,
+          7,
+          13,
+          14
+        ]
       },
       "output": {
         "stdout": "Output of Bash commands/scripts, if any.",
@@ -6287,7 +7680,10 @@
           "description": "Show line numbers.",
           "info": {
             "kind": "Option name",
-            "text": "Line numbers"
+            "text": "Line numbers",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6295,7 +7691,10 @@
           "description": "Make a backup when saving files, where supported.",
           "info": {
             "kind": "Option name",
-            "text": "Backup"
+            "text": "Backup",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -6319,7 +7718,12 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Nano (name, not acronym)"
+        "text": "Nano (name, not acronym)",
+        "emphasis": [
+          0,
+          16,
+          20
+        ]
       },
       "output": {
         "stdout": "Interactive terminal editor.",
@@ -6342,7 +7746,10 @@
           "description": "Open in read-only mode.",
           "info": {
             "kind": "Option name",
-            "text": "Recursive"
+            "text": "Recursive",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6350,7 +7757,8 @@
           "description": "Open at line N (substitute a number).",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: +N"
+            "text": "Literal syntax: +N",
+            "emphasis": []
           }
         },
         {
@@ -6358,7 +7766,10 @@
           "description": "Skip loading user configuration files.",
           "info": {
             "kind": "Option name",
-            "text": "User configuration"
+            "text": "User configuration",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -6382,7 +7793,12 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Vi IMproved"
+        "text": "Vi IMproved",
+        "emphasis": [
+          0,
+          3,
+          4
+        ]
       },
       "output": {
         "stdout": "Interactive terminal editor.",
@@ -6405,7 +7821,10 @@
           "description": "Include process IDs.",
           "info": {
             "kind": "Option name",
-            "text": "Long format"
+            "text": "Long format",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6413,7 +7832,10 @@
           "description": "Show process group IDs only.",
           "info": {
             "kind": "Option name",
-            "text": "Process group IDs"
+            "text": "Process group IDs",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6421,7 +7843,10 @@
           "description": "Show running jobs only.",
           "info": {
             "kind": "Option name",
-            "text": "Running"
+            "text": "Running",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -6445,7 +7870,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Jobs"
+        "text": "Jobs",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints current shell job list.",
@@ -6468,7 +7896,8 @@
           "description": "Choose job number 1 (argument, not a flag).",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: %1"
+            "text": "Literal syntax: %1",
+            "emphasis": []
           }
         },
         {
@@ -6476,7 +7905,8 @@
           "description": "Select a job from the output of jobs.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: %job"
+            "text": "Literal syntax: %job",
+            "emphasis": []
           }
         }
       ],
@@ -6500,7 +7930,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Foreground"
+        "text": "Foreground",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Foreground job output.",
@@ -6523,7 +7956,8 @@
           "description": "Choose job number 1 (argument, not a flag).",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: %1"
+            "text": "Literal syntax: %1",
+            "emphasis": []
           }
         }
       ],
@@ -6547,7 +7981,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Background"
+        "text": "Background",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Usually prints job status.",
@@ -6570,7 +8007,10 @@
           "description": "Default file for output when output is not redirected; not a flag.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: nohup.out"
+            "text": "Literal syntax: nohup.out",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -6595,7 +8035,14 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "No Hangup"
+        "text": "No Hangup",
+        "emphasis": [
+          0,
+          1,
+          3,
+          7,
+          8
+        ]
       },
       "output": {
         "stdout": "Runs command; output may go to nohup.out.",
@@ -6618,7 +8065,10 @@
           "description": "Use the specified signal when time expires.",
           "info": {
             "kind": "Option name",
-            "text": "Signal"
+            "text": "Signal",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6626,7 +8076,10 @@
           "description": "After an initial signal, send SIGKILL if the command is still running.",
           "info": {
             "kind": "Option name",
-            "text": "Kill after grace period"
+            "text": "Kill after grace period",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6634,7 +8087,23 @@
           "description": "Return the command's exit status when possible.",
           "info": {
             "kind": "Option name",
-            "text": "preserve status"
+            "text": "preserve status",
+            "emphasis": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14
+            ]
           }
         }
       ],
@@ -6658,7 +8127,16 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Time Out"
+        "text": "Time Out",
+        "emphasis": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7
+        ]
       },
       "output": {
         "stdout": "Passes through wrapped command's output.",
@@ -6681,7 +8159,10 @@
           "description": "Set the refresh interval.",
           "info": {
             "kind": "Option name",
-            "text": "Interval"
+            "text": "Interval",
+            "emphasis": [
+              1
+            ]
           }
         },
         {
@@ -6689,7 +8170,10 @@
           "description": "Highlight changes between updates.",
           "info": {
             "kind": "Option name",
-            "text": "Differences"
+            "text": "Differences",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6697,7 +8181,10 @@
           "description": "Hide the header line.",
           "info": {
             "kind": "Option name",
-            "text": "No title"
+            "text": "No title",
+            "emphasis": [
+              3
+            ]
           }
         }
       ],
@@ -6721,7 +8208,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Watch"
+        "text": "Watch",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Displays periodically refreshed output.",
@@ -6744,7 +8234,10 @@
           "description": "Choose the separator between output numbers on GNU seq.",
           "info": {
             "kind": "Option name",
-            "text": "Separator"
+            "text": "Separator",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6752,7 +8245,10 @@
           "description": "Pad numbers to equal width when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Equal width"
+            "text": "Equal width",
+            "emphasis": [
+              6
+            ]
           }
         }
       ],
@@ -6776,7 +8272,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Sequence"
+        "text": "Sequence",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints numeric sequence.",
@@ -6799,7 +8298,10 @@
           "description": "Verify files against the checksums listed in FILE.",
           "info": {
             "kind": "Option name",
-            "text": "Check"
+            "text": "Check",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6807,7 +8309,10 @@
           "description": "Read files in binary mode (default on many systems).",
           "info": {
             "kind": "Option name",
-            "text": "Binary"
+            "text": "Binary",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -6832,7 +8337,15 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Secure Hash Algorithm 256-bit Checksum"
+        "text": "Secure Hash Algorithm 256-bit Checksum",
+        "emphasis": [
+          0,
+          7,
+          12,
+          35,
+          36,
+          37
+        ]
       },
       "output": {
         "stdout": "Prints file digests or verification results.",
@@ -6855,7 +8368,10 @@
           "description": "Print a short description or path for a command.",
           "info": {
             "kind": "Option name",
-            "text": "Brief description"
+            "text": "Verify lookup",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6863,7 +8379,10 @@
           "description": "Show a verbose description of command lookup.",
           "info": {
             "kind": "Option name",
-            "text": "Verbose"
+            "text": "Verbose",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -6871,7 +8390,10 @@
           "description": "Use a default executable search path.",
           "info": {
             "kind": "Option name",
-            "text": "Default search PATH"
+            "text": "Default search PATH",
+            "emphasis": [
+              15
+            ]
           }
         }
       ],
@@ -6900,7 +8422,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Command"
+        "text": "Command",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Output of invoked command, or command-lookup information.",
@@ -6923,7 +8448,10 @@
           "description": "Starts the commands for a successful condition.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: then"
+            "text": "Literal syntax: then",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -6931,7 +8459,10 @@
           "description": "Else if: check another condition when earlier tests fail.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: elif"
+            "text": "Literal syntax: elif",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -6939,7 +8470,10 @@
           "description": "Fallback commands when earlier conditions fail.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: else"
+            "text": "Literal syntax: else",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -6947,7 +8481,10 @@
           "description": "Ends the if construct (if spelled backward).",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: fi"
+            "text": "Literal syntax: fi",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -6981,7 +8518,10 @@
       "type": "keyword",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "If"
+        "text": "If",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Output comes from commands in the selected branch.",
@@ -7007,7 +8547,10 @@
           "description": "Choose the values to iterate over. Without 'in', for iterates over the positional arguments.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: in list"
+            "text": "Literal syntax: in list",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -7015,7 +8558,10 @@
           "description": "Begins the commands run on each iteration.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: do"
+            "text": "Literal syntax: do",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -7023,7 +8569,10 @@
           "description": "Ends the loop body.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: done"
+            "text": "Literal syntax: done",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -7031,7 +8580,10 @@
           "description": "C-style arithmetic for loop; Bash syntax.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: for ((init; test; update))"
+            "text": "Literal syntax: for ((init; test; update))",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -7065,7 +8617,10 @@
       "type": "keyword",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "For"
+        "text": "For",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Output comes from commands in each iteration.",
@@ -7091,7 +8646,10 @@
           "description": "A command or test; the loop continues while its exit status is 0.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: condition"
+            "text": "Literal syntax: condition",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -7099,7 +8657,10 @@
           "description": "Begins the body.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: do"
+            "text": "Literal syntax: do",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -7107,7 +8668,10 @@
           "description": "Ends the body.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: done"
+            "text": "Literal syntax: done",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -7141,7 +8705,10 @@
       "type": "keyword",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "While"
+        "text": "While",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Output comes from commands in each iteration.",
@@ -7167,7 +8734,10 @@
           "description": "The loop continues while this command fails (nonzero exit status).",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: condition"
+            "text": "Literal syntax: condition",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -7175,7 +8745,10 @@
           "description": "Begins the loop body.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: do"
+            "text": "Literal syntax: do",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -7183,7 +8756,10 @@
           "description": "Ends the loop body.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: done"
+            "text": "Literal syntax: done",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -7206,7 +8782,10 @@
       "type": "keyword",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Until"
+        "text": "Until",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Output comes from commands in each iteration.",
@@ -7232,7 +8811,8 @@
           "description": "Ends a branch pattern.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: )"
+            "text": "Literal syntax: )",
+            "emphasis": []
           }
         },
         {
@@ -7240,7 +8820,8 @@
           "description": "Stops the current branch so no further branches are considered.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: ;;"
+            "text": "Literal syntax: ;;",
+            "emphasis": []
           }
         },
         {
@@ -7248,7 +8829,8 @@
           "description": "Default wildcard pattern; usually placed last.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: *"
+            "text": "Literal syntax: *",
+            "emphasis": []
           }
         },
         {
@@ -7256,7 +8838,10 @@
           "description": "Ends the case construct (case spelled backward).",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: esac"
+            "text": "Literal syntax: esac",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -7283,7 +8868,10 @@
       "type": "keyword",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Case"
+        "text": "Case",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Output comes from commands in the chosen branch.",
@@ -7309,7 +8897,10 @@
           "description": "Optional number of nested loops to exit; default is 1.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: n"
+            "text": "Literal syntax: n",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -7333,7 +8924,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Break"
+        "text": "Break",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Nothing; leaves a loop.",
@@ -7356,7 +8950,10 @@
           "description": "Optional number of nested loops whose iteration is continued; default is 1.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: n"
+            "text": "Literal syntax: n",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -7380,7 +8977,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Continue"
+        "text": "Continue",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Nothing; skips to the next iteration.",
@@ -7403,7 +9003,10 @@
           "description": "Destination username of a logged-in user.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: user"
+            "text": "Literal syntax: user",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -7411,7 +9014,10 @@
           "description": "Optional particular terminal when the user has several sessions.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: tty"
+            "text": "Literal syntax: tty",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -7437,7 +9043,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Write"
+        "text": "Write",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Sends input to another terminal, not stdout.",
@@ -7460,7 +9069,10 @@
           "description": "Show additional information about users and session activity where supported.",
           "info": {
             "kind": "Option name",
-            "text": "User"
+            "text": "User",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7468,7 +9080,10 @@
           "description": "Print a heading line.",
           "info": {
             "kind": "Option name",
-            "text": "Header"
+            "text": "Header",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7476,7 +9091,10 @@
           "description": "Display the last system boot time when supported.",
           "info": {
             "kind": "Option name",
-            "text": "Boot"
+            "text": "Boot",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -7501,7 +9119,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Who"
+        "text": "Who",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints logged-in user records.",
@@ -7524,7 +9145,10 @@
           "description": "Silent: report terminal attachment through the exit status only.",
           "info": {
             "kind": "Option name",
-            "text": "Silent"
+            "text": "Silent",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -7549,7 +9173,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Teletypewriter"
+        "text": "Teletypewriter",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Prints terminal device path.",
@@ -7572,7 +9199,10 @@
           "description": "Allow other users to write to this terminal (subject to system policy).",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: y"
+            "text": "Literal syntax: y",
+            "emphasis": [
+              16
+            ]
           }
         },
         {
@@ -7580,7 +9210,10 @@
           "description": "Disallow other users from writing to this terminal.",
           "info": {
             "kind": "Syntax name",
-            "text": "Literal syntax: n"
+            "text": "Literal syntax: n",
+            "emphasis": [
+              16
+            ]
           }
         }
       ],
@@ -7609,7 +9242,10 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Message"
+        "text": "Message",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Reports or changes terminal message permissions.",
@@ -7632,7 +9268,10 @@
           "description": "Do not display the usual banner where supported (may require privileges).",
           "info": {
             "kind": "Option name",
-            "text": "No banner"
+            "text": "No banner",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -7658,7 +9297,13 @@
       "type": "utility",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Write All"
+        "text": "Write All",
+        "emphasis": [
+          0,
+          6,
+          7,
+          8
+        ]
       },
       "output": {
         "stdout": "Sends a message to logged-in terminals.",
@@ -7681,7 +9326,10 @@
           "description": "True if FILE exists and is a regular file.",
           "info": {
             "kind": "Option name",
-            "text": "Regular file"
+            "text": "Regular file",
+            "emphasis": [
+              8
+            ]
           }
         },
         {
@@ -7689,7 +9337,10 @@
           "description": "True if DIR exists and is a directory.",
           "info": {
             "kind": "Option name",
-            "text": "Directory"
+            "text": "Directory",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7697,7 +9348,10 @@
           "description": "True if STRING is empty.",
           "info": {
             "kind": "Option name",
-            "text": "Zero length"
+            "text": "Zero length",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7705,7 +9359,10 @@
           "description": "Numeric equality between operands.",
           "info": {
             "kind": "Option name",
-            "text": "Equal (numeric)"
+            "text": "Equal (numeric)",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7713,7 +9370,10 @@
           "description": "True when the path exists.",
           "info": {
             "kind": "Option name",
-            "text": "Exists"
+            "text": "Exists",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7721,7 +9381,10 @@
           "description": "True when the string is not empty.",
           "info": {
             "kind": "Option name",
-            "text": "Nonzero length"
+            "text": "Nonzero length",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7729,7 +9392,10 @@
           "description": "True when the left file is newer than the right file.",
           "info": {
             "kind": "Option name",
-            "text": "Newer than"
+            "text": "Newer than",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7737,7 +9403,10 @@
           "description": "True when the left file is older than the right file.",
           "info": {
             "kind": "Option name",
-            "text": "Older than"
+            "text": "Older than",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7745,7 +9414,10 @@
           "description": "Integer greater-than comparison.",
           "info": {
             "kind": "Option name",
-            "text": "Greater than"
+            "text": "Greater than",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7753,7 +9425,10 @@
           "description": "Integer less-than comparison.",
           "info": {
             "kind": "Option name",
-            "text": "Less than"
+            "text": "Less than",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7761,7 +9436,10 @@
           "description": "Integer greater-than-or-equal comparison.",
           "info": {
             "kind": "Option name",
-            "text": "Greater/equal"
+            "text": "Greater/equal",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7769,7 +9447,10 @@
           "description": "Integer less-than-or-equal comparison.",
           "info": {
             "kind": "Option name",
-            "text": "Less/equal"
+            "text": "Less/equal",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7777,7 +9458,10 @@
           "description": "Integer not-equal comparison.",
           "info": {
             "kind": "Option name",
-            "text": "Not equal"
+            "text": "Not equal",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7785,7 +9469,10 @@
           "description": "True when file is readable.",
           "info": {
             "kind": "Option name",
-            "text": "Readable"
+            "text": "Readable",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7793,7 +9480,10 @@
           "description": "True when file is writable.",
           "info": {
             "kind": "Option name",
-            "text": "Writable"
+            "text": "Writable",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7801,7 +9491,10 @@
           "description": "True when file is executable or a searchable directory.",
           "info": {
             "kind": "Option name",
-            "text": "Executable"
+            "text": "Executable",
+            "emphasis": [
+              1
+            ]
           }
         }
       ],
@@ -7829,7 +9522,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Test"
+        "text": "Test",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Nothing; result is the exit status.",
@@ -7852,7 +9548,8 @@
           "description": "Required final argument ending the test.",
           "info": {
             "kind": "Syntax name",
-            "text": "Closing bracket"
+            "text": "Closing bracket",
+            "emphasis": []
           }
         },
         {
@@ -7860,7 +9557,10 @@
           "description": "Compare numbers for equality.",
           "info": {
             "kind": "Option name",
-            "text": "Equal (numeric)"
+            "text": "Equal (numeric)",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -7868,7 +9568,8 @@
           "description": "Compare strings for equality.",
           "info": {
             "kind": "Syntax name",
-            "text": "String equality"
+            "text": "String equality",
+            "emphasis": []
           }
         },
         {
@@ -7876,7 +9577,10 @@
           "description": "Test whether a file exists and has nonzero size.",
           "info": {
             "kind": "Option name",
-            "text": "Nonzero size"
+            "text": "Nonzero size",
+            "emphasis": [
+              8
+            ]
           }
         }
       ],
@@ -7902,7 +9606,8 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Bracket form of test"
+        "text": "[ (opening bracket of test)",
+        "emphasis": []
       },
       "output": {
         "stdout": "Nothing; result is the exit status.",
@@ -7938,7 +9643,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "True"
+        "text": "True",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Nothing; returns status 0.",
@@ -7974,7 +9682,10 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "False"
+        "text": "False",
+        "emphasis": [
+          0
+        ]
       },
       "output": {
         "stdout": "Nothing; returns status 1.",
@@ -8015,7 +9726,8 @@
       "type": "builtin",
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Null (colon) command"
+        "text": ": (colon null command)",
+        "emphasis": []
       },
       "output": {
         "stdout": "Nothing; returns success when redirections succeed.",
@@ -8039,7 +9751,10 @@
           "description": "Limit output to N input bytes.",
           "info": {
             "kind": "Option name",
-            "text": "Length"
+            "text": "Length",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8047,7 +9762,10 @@
           "description": "Start at the specified offset.",
           "info": {
             "kind": "Option name",
-            "text": "Seek"
+            "text": "Seek",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8055,7 +9773,10 @@
           "description": "Group N bytes together.",
           "info": {
             "kind": "Option name",
-            "text": "Group"
+            "text": "Group",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8063,7 +9784,10 @@
           "description": "Reverse a hex dump into binary data.",
           "info": {
             "kind": "Option name",
-            "text": "Reverse"
+            "text": "Reverse",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -8085,7 +9809,10 @@
       "note": null,
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Hex dump (stylized name)"
+        "text": "Hex dump (stylized name)",
+        "emphasis": [
+          2
+        ]
       }
     },
     {
@@ -8102,7 +9829,10 @@
           "description": "Display numeric vendor and device IDs.",
           "info": {
             "kind": "Option name",
-            "text": "Numeric names"
+            "text": "Numeric names",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8110,7 +9840,10 @@
           "description": "Show verbose information.",
           "info": {
             "kind": "Option name",
-            "text": "Verbose"
+            "text": "Verbose",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8118,7 +9851,10 @@
           "description": "Show related kernel drivers.",
           "info": {
             "kind": "Option name",
-            "text": "Kernel drivers"
+            "text": "Kernel drivers",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -8135,7 +9871,14 @@
       "note": null,
       "nameInfo": {
         "kind": "Name origin",
-        "text": "List PCI"
+        "text": "List PCI",
+        "emphasis": [
+          0,
+          2,
+          5,
+          6,
+          7
+        ]
       }
     },
     {
@@ -8152,7 +9895,10 @@
           "description": "Number of positions to shift; defaults to 1.",
           "info": {
             "kind": "Option name",
-            "text": "Count"
+            "text": "Count",
+            "emphasis": [
+              3
+            ]
           }
         }
       ],
@@ -8173,7 +9919,10 @@
       "note": null,
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Shift"
+        "text": "Shift",
+        "emphasis": [
+          0
+        ]
       }
     },
     {
@@ -8190,7 +9939,10 @@
           "description": "Letters to recognize; a following colon marks a required argument.",
           "info": {
             "kind": "Option name",
-            "text": "Option string"
+            "text": "Option string",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8198,7 +9950,10 @@
           "description": "Variable holding the option argument where applicable.",
           "info": {
             "kind": "Option name",
-            "text": "Option argument"
+            "text": "Option argument",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8206,7 +9961,10 @@
           "description": "Index of next argument to process.",
           "info": {
             "kind": "Option name",
-            "text": "Option index"
+            "text": "Option index",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -8224,7 +9982,16 @@
       "note": null,
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Get Options"
+        "text": "Get Options",
+        "emphasis": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          10
+        ]
       }
     },
     {
@@ -8241,7 +10008,10 @@
           "description": "Exit in many unhandled nonzero-status situations; exceptions apply.",
           "info": {
             "kind": "Option name",
-            "text": "Errexit"
+            "text": "Errexit",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8249,7 +10019,10 @@
           "description": "Treat unset variables as errors in most expansions.",
           "info": {
             "kind": "Option name",
-            "text": "Nounset"
+            "text": "Nounset",
+            "emphasis": [
+              2
+            ]
           }
         },
         {
@@ -8257,7 +10030,10 @@
           "description": "Print expanded commands as they execute.",
           "info": {
             "kind": "Option name",
-            "text": "Xtrace"
+            "text": "Xtrace",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8265,7 +10041,10 @@
           "description": "Use the rightmost failing pipeline command's status rather than only the last command's status.",
           "info": {
             "kind": "Option name",
-            "text": "Pipefail"
+            "text": "Option: pipefail",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8273,7 +10052,8 @@
           "description": "Set or replace positional parameters after end-of-options marker.",
           "info": {
             "kind": "Option name",
-            "text": "End of options"
+            "text": "End of options",
+            "emphasis": []
           }
         }
       ],
@@ -8294,7 +10074,10 @@
       "note": null,
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Set"
+        "text": "Set",
+        "emphasis": [
+          0
+        ]
       }
     },
     {
@@ -8311,7 +10094,10 @@
           "description": "Remove variables.",
           "info": {
             "kind": "Option name",
-            "text": "Variables"
+            "text": "Variables",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8319,7 +10105,10 @@
           "description": "Remove functions.",
           "info": {
             "kind": "Option name",
-            "text": "Functions"
+            "text": "Functions",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -8336,7 +10125,10 @@
       "note": null,
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Unset"
+        "text": "Unset",
+        "emphasis": [
+          0
+        ]
       }
     },
     {
@@ -8353,7 +10145,10 @@
           "description": "Indexed array.",
           "info": {
             "kind": "Option name",
-            "text": "Array"
+            "text": "Array",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8361,7 +10156,10 @@
           "description": "Associative array.",
           "info": {
             "kind": "Option name",
-            "text": "Associative array"
+            "text": "Associative array",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8369,7 +10167,10 @@
           "description": "Integer arithmetic attribute.",
           "info": {
             "kind": "Option name",
-            "text": "Integer"
+            "text": "Integer",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8377,7 +10178,10 @@
           "description": "Read-only attribute.",
           "info": {
             "kind": "Option name",
-            "text": "Read-only"
+            "text": "Read-only",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8385,7 +10189,10 @@
           "description": "Print declarations.",
           "info": {
             "kind": "Option name",
-            "text": "Print"
+            "text": "Print",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -8403,7 +10210,10 @@
       "note": null,
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Declare"
+        "text": "Declare",
+        "emphasis": [
+          0
+        ]
       }
     },
     {
@@ -8420,7 +10230,10 @@
           "description": "Indexed array.",
           "info": {
             "kind": "Option name",
-            "text": "Array"
+            "text": "Array",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8428,7 +10241,10 @@
           "description": "Integer attribute.",
           "info": {
             "kind": "Option name",
-            "text": "Integer"
+            "text": "Integer",
+            "emphasis": [
+              0
+            ]
           }
         },
         {
@@ -8436,7 +10252,10 @@
           "description": "Read-only variable.",
           "info": {
             "kind": "Option name",
-            "text": "Read-only"
+            "text": "Read-only",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -8454,7 +10273,10 @@
       "note": null,
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Local"
+        "text": "Local",
+        "emphasis": [
+          0
+        ]
       }
     },
     {
@@ -8471,7 +10293,8 @@
           "description": "Exit status in the range 0–255 (0 means success).",
           "info": {
             "kind": "Option name",
-            "text": "Exit status"
+            "text": "Exit status",
+            "emphasis": []
           }
         }
       ],
@@ -8488,7 +10311,10 @@
       "note": null,
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Return"
+        "text": "Return",
+        "emphasis": [
+          0
+        ]
       }
     },
     {
@@ -8505,7 +10331,8 @@
           "description": "Exit status in the range 0–255.",
           "info": {
             "kind": "Option name",
-            "text": "Exit status"
+            "text": "Exit status",
+            "emphasis": []
           }
         }
       ],
@@ -8522,7 +10349,10 @@
       "note": null,
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Exit"
+        "text": "Exit",
+        "emphasis": [
+          0
+        ]
       }
     },
     {
@@ -8539,7 +10369,10 @@
           "description": "Use a custom record separator.",
           "info": {
             "kind": "Option name",
-            "text": "Separator"
+            "text": "Separator",
+            "emphasis": [
+              0
+            ]
           }
         }
       ],
@@ -8556,7 +10389,12 @@
       "note": null,
       "nameInfo": {
         "kind": "Name origin",
-        "text": "cat spelled backwards"
+        "text": "cat spelled backwards",
+        "emphasis": [
+          2,
+          13,
+          14
+        ]
       }
     },
     {
@@ -8573,7 +10411,8 @@
           "description": "String conversion.",
           "info": {
             "kind": "Option name",
-            "text": "String"
+            "text": "String",
+            "emphasis": []
           }
         },
         {
@@ -8581,7 +10420,8 @@
           "description": "Signed decimal conversion.",
           "info": {
             "kind": "Option name",
-            "text": "Decimal"
+            "text": "Decimal",
+            "emphasis": []
           }
         },
         {
@@ -8589,7 +10429,8 @@
           "description": "Shell-escaped representation (Bash-specific).",
           "info": {
             "kind": "Option name",
-            "text": "Quote"
+            "text": "Quote",
+            "emphasis": []
           }
         }
       ],
@@ -8607,7 +10448,15 @@
       "note": null,
       "nameInfo": {
         "kind": "Name origin",
-        "text": "Print Formatted"
+        "text": "Print Formatted (Bash builtin)",
+        "emphasis": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6
+        ]
       }
     }
   ],
