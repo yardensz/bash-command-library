@@ -1,7 +1,16 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "1.7.2",
+  "latestVersion": "1.7.3",
   "releases": [
+    {
+      "version": "1.7.3",
+      "date": "2026-11-18",
+      "title": "Complete name-info and option-info coverage",
+      "summary": "Final completeness check: all Bash entries and all 433 option or syntax rows now have short, distinct info-button labels.",
+      "commandCount": 129,
+      "topicCount": 25,
+      "snapshot": "history/1.7.3.json"
+    },
     {
       "version": "1.7.2",
       "date": "2026-11-18",
