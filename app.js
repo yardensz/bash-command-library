@@ -169,10 +169,17 @@
   const syntaxLegend = `<div class="syntax-legend" aria-label="Syntax color legend"><span><i class="leg-command"></i>Command</span><span><i class="leg-flag"></i>Option / flag</span><span><i class="leg-arg"></i>Argument</span><span><i class="leg-path"></i>Path or file</span></div>`;
 
   const shareButton='<button class="btn tiny" id="shareBtn" type="button" title="Copy a link to this entry">Link</button>';
+  // Only numeric character positions are accepted; all text is escaped before highlighting.
+  function mnemonicHTML(info){
+    const value=String(info?.text||''), indexes=new Set(
+      Array.isArray(info?.emphasis)?info.emphasis.filter(i=>Number.isInteger(i)&&i>=0&&i<value.length):[]
+    );
+    return Array.from(value).map((ch,i)=>indexes.has(i)?'<span class="mnemonic-letter">'+esc(ch)+'</span>':esc(ch)).join('');
+  }
   function infoControls(c){
     const info=c.nameInfo;
     if(!info)return '<div class="detail-actions">'+shareButton+'</div>';
-    return `<div class="detail-actions" id="nameInfoControl">${shareButton}<button class="nameinfo-button" id="nameInfoBtn" type="button" aria-label="What does ${esc(c.name)} mean?" aria-controls="nameInfoPopup" aria-expanded="false" title="What does the name mean?">i</button><div class="nameinfo-popover" id="nameInfoPopup" role="note" hidden><strong>${esc(info.kind)}</strong><p>${esc(info.text)}</p></div></div>`;
+    return `<div class="detail-actions" id="nameInfoControl">${shareButton}<button class="nameinfo-button" id="nameInfoBtn" type="button" aria-label="What does ${esc(c.name)} mean?" aria-controls="nameInfoPopup" aria-expanded="false" title="What does the name mean?">i</button><div class="nameinfo-popover" id="nameInfoPopup" role="note" hidden><strong>${esc(info.kind)}</strong><p>${mnemonicHTML(info)}</p></div></div>`;
   }
   function closeNameInfo(){
     const popup=$('nameInfoPopup'),button=$('nameInfoBtn');
@@ -191,7 +198,7 @@
   function optionHTML(o,i){
     const tip=o.info;
     const btn=tip?`<button class="flaginfo-button" id="flagInfoButton-${i}" data-flag-button="${i}" type="button" aria-label="Explain ${esc(o.flag)}" aria-expanded="false" aria-controls="flagInfoPopup-${i}" title="Remember this option">i</button>`:'';
-    const popup=tip?`<div class="flaginfo-popover" id="flagInfoPopup-${i}" data-flag-popover="${i}" role="note" hidden><strong>${esc(tip.kind)}</strong><p>${esc(tip.text)}</p></div>`:'';
+    const popup=tip?`<div class="flaginfo-popover" id="flagInfoPopup-${i}" data-flag-popover="${i}" role="note" hidden><strong>${esc(tip.kind)}</strong><p>${mnemonicHTML(tip)}</p></div>`:'';
     return `<div class="option-card"><span class="option-key"><code dir="ltr">${esc(o.flag)}</code>${btn}</span><span class="option-description">${esc(o.description)}</span>${popup}</div>`;
   }
   function closeFlagInfos(){
