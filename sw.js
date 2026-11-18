@@ -1,6 +1,6 @@
 /* Same-origin offline cache for static GitHub Pages hosting. No third-party calls. */
-const CACHE_NAME = 'bash-library-shell-v14';
-const CORE = ['./','./index.html','./styles.css','./app.js','./commands.json','./versions.json','./libraries.json','./libraries/c-cpp.json','./libraries/c-cpp-versions.json','./libraries/history/c-cpp/0.1.0.json','./favicon.svg','./manifest.webmanifest','./history/1.0.0.json','./history/1.1.0.json','./history/1.1.1.json','./history/1.2.0.json','./history/1.3.0.json','./history/1.4.0.json','./history/1.5.0.json','./history/1.5.1.json','./history/1.6.0.json','./history/1.7.0.json','./history/1.7.1.json','./history/1.7.2.json','./history/1.7.3.json'];
+const CACHE_NAME = 'bash-library-shell-v15';
+const CORE = ['./','./index.html','./styles.css','./app.js','./commands.json','./versions.json','./libraries.json','./libraries/c-cpp.json','./libraries/c-cpp-versions.json','./libraries/history/c-cpp/0.1.0.json','./favicon.svg','./manifest.webmanifest','./history/1.0.0.json','./history/1.1.0.json','./history/1.1.1.json','./history/1.2.0.json','./history/1.3.0.json','./history/1.4.0.json','./history/1.5.0.json','./history/1.5.1.json','./history/1.6.0.json','./history/1.7.0.json','./history/1.7.1.json','./history/1.7.2.json','./history/1.7.3.json','./history/1.8.0.json'];
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
 });
