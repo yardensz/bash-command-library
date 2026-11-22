@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.2.0",
+  "version": "1.3.0",
   "updatedAt": "2026-11-22",
   "commands": [
     {
@@ -455,39 +455,50 @@
       "name": "enum",
       "category": "Structures & Classes",
       "type": "type",
-      "summary": "Define named integer constants as an enumeration.",
-      "description": "An enum declares a set of integer constants. In C99 the compatible integer type of an enum is implementation-defined; an enumerator is an int constant when its value is representable. Use enum for states and choices.",
-      "syntax": "enum Color { RED, GREEN, BLUE };",
+      "summary": "Name integral states and choices with enumeration constants.",
+      "description": "An enum declares named integer constants, not a struct of fields. Without explicit initializers the first enumerator is 0 and each next is the previous value plus 1; an explicit value resets that sequence. Enumerators may share values. Declare variables with enum Color color in C99 (unless you define a typedef). C99 enumerator constants are of type int; the compatible integer type chosen for the enum itself is implementation-defined. Switch on enum values to handle cases. An enum does not itself reject every unexpected numeric value at runtime.",
+      "syntax": "enum State { WAITING, RUNNING = 5, DONE }; /* values 0, 5, 6 */\nenum State state = DONE;",
       "examples": [
         {
-          "command": "#include <stdio.h>\n\nint main(void) {\n    enum Color { RED, GREEN, BLUE };\n    enum Color color = GREEN;\n    printf(\"%d\\n\", (int)color);\n    return 0;\n}\n",
-          "description": "Defines a small, named set of integer values."
+          "command": "#include <stdio.h>\nenum State { WAITING, RUNNING = 5, DONE };\nint main(void) {\n    enum State state = DONE;\n    if (state == DONE) printf(\"%d\\n\", (int)state);\n    return 0;\n}\n",
+          "description": "After an explicit 5, the next enumerator has value 6; enum constants can be compared.",
+          "output": "6"
         }
       ],
       "keywords": [
         "enumeration",
-        "state machine"
-      ]
+        "state machine",
+        "enumerator",
+        "auto-increment",
+        "switch"
+      ],
+      "note": "Unlike C++ enum class, ordinary C99 enumerator names are not scoped under the enum tag."
     },
     {
       "id": "c-struct",
       "name": "struct",
       "category": "Structures & Classes",
       "type": "type",
-      "summary": "Group related members into one object.",
-      "description": "A structure's members are accessed with .; a pointer to a structure uses ->. Member layout may contain padding. Assignment copies a whole struct value, including array members.",
-      "syntax": "struct Point { int x; int y; };",
+      "summary": "Group related fields; copy whole structs, compare members explicitly.",
+      "description": "struct groups named members into one object. Access a direct member with object.member and a pointed-to member with pointer->member. Chain access for nested fields: student.address.city, p->address.city, or p->address_ptr->city, depending on which members are pointers. Struct assignment (=) copies the complete value, including array members; C99 does not allow == or != directly between struct values. Compare the members you care about explicitly. Never use memcmp to infer semantic equality from raw struct bytes: padding and pointer members can make it misleading.",
+      "syntax": "struct Point { int x, y; };\nstruct Point a = {1, 2};\nstruct Point b = a;          /* assignment copies */\nint same = (a.x == b.x && a.y == b.y);",
       "examples": [
         {
-          "command": "#include <stdio.h>\n\nint main(void) {\n    struct Point { int x; int y; };\n    struct Point point = {2, 3};\n    printf(\"%d %d\\n\", point.x, point.y);\n    return 0;\n}\n",
-          "description": "Defines, initializes, and accesses structure members."
+          "command": "#include <stdio.h>\nstruct Address { int number; };\nstruct Student { int id; struct Address address; };\nint main(void) {\n    struct Student a = {7, {42}};\n    struct Student b = a;           /* whole-struct copy */\n    struct Student *p = &a;\n    p->address.number = 43;        /* same as a.address.number = 43 */\n    int same = (a.id == b.id && a.address.number == b.address.number);\n    printf(\"%d %d\\n\", a.address.number, same);\n    return 0;\n}\n",
+          "description": "Reads a nested member, updates it through a pointer, and compares fields instead of applying == to structs.",
+          "output": "43 0"
         }
       ],
       "keywords": [
         "record",
         "members",
+        "nested struct",
+        "struct equality",
+        "assignment",
+        "member access",
         "padding"
-      ]
+      ],
+      "note": "C has no built-in struct ==; copying with = is supported, and comparing two pointers to structs with == compares addresses, not their field values."
     },
     {
       "id": "c-union",
@@ -598,19 +609,23 @@
       "category": "Operators & Expressions",
       "type": "operator",
       "summary": "Request a conversion to a chosen type.",
-      "description": "A C cast uses (type)expression. Casting integers to floating point before division changes the operation performed. A cast cannot make an invalid pointer conversion safe by itself.",
-      "syntax": "(double)numerator / denominator",
+      "description": "A C cast has the form (type)expression. It requests a conversion, not a guaranteed safe reinterpretation. (double)a / b performs floating division; (double)(a / b) converts after integer division has already happened. Converting a floating value to int truncates the fractional part toward zero when the integral result is representable; outside that range behavior is undefined. Do not use a cast to hide incompatible pointer types. Conversion of an object pointer to int is implementation-defined and may be undefined if the result cannot be represented; intptr_t/uintptr_t from stdint.h are optional types intended for representing object pointers when provided.",
+      "syntax": "(double)a / b\n(int)3.9  /* 3 */",
       "examples": [
         {
-          "command": "#include <stdio.h>\n\nint main(void) {\n    int a = 5, b = 2;\n    printf(\"%.2f\\n\", (double)a / b);\n    return 0;\n}\n",
-          "description": "Converts one operand before division to avoid integer division."
+          "command": "#include <stdio.h>\nint main(void) {\n    int a = 5, b = 2;\n    printf(\"%.1f %.1f %d\\n\", (double)a / b, (double)(a / b), (int)3.9);\n    return 0;\n}\n",
+          "description": "Casting before division changes the calculation; casting afterward does not restore the lost fraction.",
+          "output": "2.5 2.0 3"
         }
       ],
       "keywords": [
         "type conversion",
-        "coercion"
+        "coercion",
+        "numeric cast",
+        "pointer cast",
+        "uintptr_t"
       ],
-      "note": "Casting away type incompatibilities does not remove undefined behavior."
+      "note": "Before narrowing to int, confirm the value is representable. A pointer cast is not a portable way to inspect memory alignment."
     },
     {
       "id": "c-arithmetic",
@@ -639,7 +654,7 @@
       "category": "Operators & Expressions",
       "type": "operator",
       "summary": "Compare values to produce 0 or 1.",
-      "description": "== checks equality and = assigns; they are not interchangeable. Results of relational and equality operators have type int. For floating values, exact equality can be surprising due to rounding.",
+      "description": "== checks equality and = assigns; they are not interchangeable. Results of relational and equality operators have type int. For floating values, exact equality can be surprising due to rounding. In C99, == cannot compare whole struct values; compare their members, or use == between struct pointers only when you intend to compare pointer values (addresses).",
       "syntax": "a == b; a != b; a < b;",
       "examples": [
         {
@@ -649,7 +664,9 @@
       ],
       "keywords": [
         "relational",
-        "equality"
+        "equality",
+        "struct equality",
+        "pointer equality"
       ]
     },
     {
@@ -658,18 +675,22 @@
       "category": "Operators & Expressions",
       "type": "operator",
       "summary": "Combine truth values with short-circuit evaluation.",
-      "description": "&& evaluates the right operand only if the left is true; || evaluates the right only if the left is false. ! reverses truth. Results are int 0 or 1. Short-circuiting is often used to check a pointer before dereferencing it.",
-      "syntax": "a && b; a || b; !a;",
+      "description": "Logical &&, ||, and ! test whether operands are zero (false) or nonzero (true); their result is always int 0 or 1. && skips its right operand when the left is false; || skips it when the left is true. ! turns zero into 1 and any nonzero value into 0. These are different from bitwise &, |, and ~, which combine individual integer bits and do not short-circuit.",
+      "syntax": "a && b;  /* logical AND */\na || b;  /* logical OR */\n!a;      /* logical NOT */",
       "examples": [
         {
-          "command": "#include <stdio.h>\n\nint main(void) {\n    int a = 1, b = 0;\n    printf(\"%d %d %d\\n\", a && b, a || b, !a);\n    return 0;\n}\n",
-          "description": "Demonstrates conjunction, disjunction, and negation."
+          "command": "#include <stdio.h>\nint main(void) {\n    int a = 2, b = 4;\n    printf(\"%d %d %d\\n\", a && b, a || 0, !a);\n    return 0;\n}\n",
+          "description": "Nonzero values count as true; all three results are 0 or 1.",
+          "output": "1 1 0"
         }
       ],
       "keywords": [
         "short circuit",
-        "boolean"
-      ]
+        "boolean",
+        "truthiness",
+        "versus bitwise"
+      ],
+      "note": "These are expression results, not I/O function return codes."
     },
     {
       "id": "c-bitwise",
@@ -677,19 +698,24 @@
       "category": "Operators & Expressions",
       "type": "operator",
       "summary": "Operate on individual integer bits.",
-      "description": "&, |, ^, and ~ perform bitwise AND, OR, XOR, and complement. Unlike && and ||, bitwise binary operators do not short-circuit. Prefer unsigned operands for predictable bit manipulation.",
-      "syntax": "mask & flag; mask | flag; a ^ b; ~a;",
+      "description": "Bitwise &, |, ^, and ~ operate on each bit of integer operands: AND keeps bits set in both, OR keeps bits set in either, XOR keeps bits set in exactly one, and ~ flips all bits in the promoted operand. Unlike logical && and ||, bitwise & and | evaluate both operands and can return integer values other than 0 or 1. Use unsigned operands for predictable bit manipulation. With mixed equality and bitwise operators, equality groups first: flags & 3u == 0u means flags & (3u == 0u), not (flags & 3u) == 0u.",
+      "syntax": "a & b;  /* bitwise AND */\na | b;  /* bitwise OR */\na ^ b;  /* bitwise XOR */\n~a;     /* bitwise NOT */\n(flags & 3u) == 0u",
       "examples": [
         {
-          "command": "#include <stdio.h>\n\nint main(void) {\n    unsigned a = 6U, b = 3U;\n    printf(\"%u %u\\n\", a & b, a | b);\n    return 0;\n}\n",
-          "description": "Bitwise operations on 6 (110) and 3 (011)."
+          "command": "#include <stdio.h>\nint main(void) {\n    unsigned a = 6u, b = 3u;  /* binary 110 and 011 */\n    printf(\"%u %u %u\\n\", a & b, a | b, a ^ b);\n    printf(\"%u %d\\n\", ~0u, !0u);\n    return 0;\n}\n",
+          "description": "Shows bitwise results 2, 7, and 5; ~0u equals UINT_MAX (platform-dependent value) while !0u is 1."
         }
       ],
       "keywords": [
         "mask",
         "flags",
-        "binary"
-      ]
+        "binary",
+        "bitwise NOT",
+        "XOR",
+        "logical versus bitwise",
+        "precedence"
+      ],
+      "note": "For a zero-bit mask test, write (flags & mask) == 0u with explicit parentheses; ~0u has value UINT_MAX, not 1."
     },
     {
       "id": "c-shifts",
@@ -854,17 +880,38 @@
       "category": "Structures & Classes",
       "type": "operator",
       "summary": "Read a struct or union member directly or through a pointer.",
-      "description": "Use object.member for an object; use pointer->member for a pointer to a struct or union. p->x means (*p).x.",
-      "syntax": "object.member\npointer->member",
+      "description": "Use object.member when you have a struct or union object, and pointer->member when you have a pointer to it; p->field means (*p).field. For nested direct members, chain dots: student.address.city. If the outer object is a pointer, begin with ->: p->address.city. If an inner member is a pointer, use -> again: p->address_ptr->city. Use the member's actual type to choose each step.",
+      "syntax": "student.address.city\np->address.city\np->address_ptr->city",
       "examples": [
         {
-          "command": "#include <stdio.h>\n\nint main(void) {\n    struct P { int x; } point = {7};\n    struct P *p = &point;\n    printf(\"%d %d\\n\", point.x, p->x);\n    return 0;\n}\n",
-          "description": "Shows equivalent direct and pointer member access."
+          "command": "#include <stdio.h>\nstruct Address { int number; };\nstruct Student { struct Address address; struct Address *other; };\nint main(void) {\n    struct Address backup = {8};\n    struct Student student = {{5}, &backup};\n    struct Student *p = &student;\n    printf(\"%d %d %d\\n\", student.address.number, p->address.number, p->other->number);\n    return 0;\n}\n",
+          "description": "Shows direct and pointer access across two nesting levels.",
+          "output": "5 5 8"
         }
       ],
       "keywords": [
         "struct pointer",
-        "arrow"
+        "arrow",
+        "nested fields",
+        "dot operator"
+      ],
+      "options": [
+        {
+          "flag": "object.member",
+          "description": "Access a field of a struct/union object."
+        },
+        {
+          "flag": "pointer->member",
+          "description": "Access a field through a struct/union pointer; equivalent to (*pointer).member."
+        },
+        {
+          "flag": "p->inner.field",
+          "description": "Use -> to reach an outer object through p, then . for its nested struct member."
+        },
+        {
+          "flag": "p->inner_ptr->field",
+          "description": "Use another -> when an intermediate field is itself a pointer."
+        }
       ]
     },
     {
@@ -873,8 +920,8 @@
       "category": "Operators & Expressions",
       "type": "concept",
       "summary": "Know how expressions group before evaluation.",
-      "description": "Precedence determines parsing; associativity breaks grouping ties. Neither determines the runtime evaluation order of all operands. Parentheses improve clarity for mixed logical and arithmetic expressions.",
-      "syntax": "(a + b) * c",
+      "description": "Precedence and associativity determine how an expression groups; they do not determine evaluation order for all operands. Equality == binds more tightly than bitwise &, so a & 3 == 0 groups as a & (3 == 0). To test whether the low two bits are zero, write (a & 3) == 0. For pointer addresses, first choose a suitable integer type and account for implementation-specific representation; a cast to int is unsafe to assume portable.",
+      "syntax": "(a & 0x3u) == 0u\n/* Without parentheses, a & 0x3u == 0u means a & (0x3u == 0u). */",
       "examples": [
         {
           "command": "#include <stdio.h>\n\nint main(void) {\n    int a = 2, b = 3, c = 4;\n    printf(\"%d %d\\n\", a + b * c, (a + b) * c);\n    return 0;\n}\n",
@@ -883,7 +930,10 @@
       ],
       "keywords": [
         "associativity",
-        "evaluation order"
+        "evaluation order",
+        "bitwise and equality",
+        "mask",
+        "address alignment"
       ]
     },
     {
@@ -1083,8 +1133,8 @@
       "category": "Functions",
       "type": "concept",
       "summary": "Declare parameters, a return type, and a function body.",
-      "description": "A function definition includes executable statements. In C99, all called functions should have declarations in scope; implicit function declarations are not permitted.",
-      "syntax": "int add(int a, int b) { return a + b; }",
+      "description": "A function definition names its return type and typed parameters, then provides a body. In a call, arguments are expressions whose values initialize the corresponding parameters; their types must be compatible. A void return type means no value is returned. The caller should use or check a meaningful return value when the function contract requires it. C99 calls need a declaration in scope; implicit function declarations are not permitted.",
+      "syntax": "int add(int a, int b) { return a + b; }\nint result = add(2, 3);",
       "examples": [
         {
           "command": "#include <stdio.h>\nint add(int a, int b) { return a + b; }\nint main(void) {\n    printf(\"%d\\n\", add(2, 3));\n    return 0;\n}\n",
@@ -1093,7 +1143,9 @@
       ],
       "keywords": [
         "parameters",
-        "return type"
+        "arguments",
+        "return type",
+        "call"
       ]
     },
     {
@@ -1102,8 +1154,8 @@
       "category": "Functions",
       "type": "concept",
       "summary": "Declare a function's interface before defining it.",
-      "description": "A prototype tells the compiler the parameter types and result type, allowing calls before the definition. int f(void) declares no parameters; int f() in C99 is not a prototype and should usually be avoided.",
-      "syntax": "int square(int x);",
+      "description": "A prototype declares the return and parameter types before a call, allowing argument and return-value type checking. Argument names in a prototype are optional; they can clarify meaning. int f(void) declares no arguments. In C99 int f() is not a prototype and should normally be avoided. A declaration alone does not implement the function.",
+      "syntax": "int add(int a, int b);\nint result = add(2, 3);",
       "examples": [
         {
           "command": "#include <stdio.h>\nint square(int x);\nint main(void) { printf(\"%d\\n\", square(4)); return 0; }\nint square(int x) { return x * x; }\n",
@@ -1112,7 +1164,9 @@
       ],
       "keywords": [
         "declaration",
-        "header"
+        "header",
+        "parameter",
+        "argument"
       ]
     },
     {
@@ -1120,18 +1174,23 @@
       "name": "pass by value",
       "category": "Functions",
       "type": "concept",
-      "summary": "Function parameters are independent local objects.",
-      "description": "In C, arguments are passed by value. To update an object in the caller, pass a pointer to it. Passing a struct copies the struct; passing an array argument converts it to a pointer.",
-      "syntax": "void change(int x);",
+      "summary": "Arguments are copied; pointers let a function modify caller-owned objects.",
+      "description": "C99 passes argument values into parameter objects. Passing int x copies the number, so assignments to the parameter do not change the caller. Passing &x copies x's address into an int* parameter; *parameter changes the caller's x. A pointer argument itself is still copied: assigning parameter = &other does not redirect the caller's pointer; pass the address of that pointer (int**) if the function needs to change it. Passing a struct by value copies the struct; an array parameter written int a[] is adjusted to int* and its length must be supplied separately.",
+      "syntax": "void change_local(int n);\nvoid change_value(int *p);\nvoid change_pointer(int **pp);",
       "examples": [
         {
-          "command": "#include <stdio.h>\nvoid change(int x) { x = 99; (void)x; }\nint main(void) {\n    int n = 5;\n    change(n);\n    printf(\"%d\\n\", n);\n    return 0;\n}\n",
-          "description": "The caller's integer remains unchanged."
+          "command": "#include <stdio.h>\nvoid change_local(int n) { n = 9; (void)n; }\nvoid change_value(int *p) { *p = 9; }\nvoid change_pointer(int **pp, int *target) { *pp = target; }\nint main(void) {\n    int x = 5, y = 7;\n    int *p = &x;\n    change_local(x);            /* x stays 5 */\n    change_value(p);            /* x becomes 9 */\n    change_pointer(&p, &y);     /* p now points to y */\n    printf(\"%d %d\\n\", x, *p);\n    return 0;\n}\n",
+          "description": "Contrasts a copied int, a pointer used to change an int, and a pointer-to-pointer used to redirect the caller's pointer.",
+          "output": "9 7"
         }
       ],
       "keywords": [
         "argument",
-        "call by value"
+        "call by value",
+        "int *",
+        "int **",
+        "struct copy",
+        "array parameter"
       ]
     },
     {
@@ -1345,17 +1404,20 @@
       "category": "Pointers & Memory",
       "type": "concept",
       "summary": "Store the address of another pointer.",
-      "description": "int **pp points to an int* object; *pp is the inner pointer and **pp is the int it designates. This is useful for updating caller pointers or handling arrays of pointers.",
-      "syntax": "int **pp = &p;",
+      "description": "int **pp points to an int* variable. *pp is that pointer variable (an int*), and **pp is the int it points to. If int *p = &x and int **pp = &p, assigning **pp = 9 changes x; assigning *pp = &y changes p to point to y. Assigning pp = &q instead changes which pointer variable pp refers to, when q is another int* variable. Validate each indirection before dereferencing.",
+      "syntax": "int *p = &x;\nint **pp = &p;\n**pp = 9;  /* changes x */\n*pp = &y; /* changes p */",
       "examples": [
         {
-          "command": "#include <stdio.h>\n\nint main(void) {\n    int value = 8;\n    int *p = &value;\n    int **pp = &p;\n    **pp = 12;\n    printf(\"%d\\n\", value);\n    return 0;\n}\n",
-          "description": "Two dereferences reach the original integer."
+          "command": "#include <stdio.h>\nint main(void) {\n    int x = 5, y = 8;\n    int *p = &x;\n    int **pp = &p;\n    **pp = 9;\n    *pp = &y;\n    printf(\"%d %d\\n\", x, *p);\n    return 0;\n}\n",
+          "description": "Two dereferences modify x; assigning through one dereference redirects p.",
+          "output": "9 8"
         }
       ],
       "keywords": [
         "double pointer",
-        "indirection"
+        "indirection",
+        "redirect pointer",
+        "int **"
       ]
     },
     {
@@ -1670,19 +1732,24 @@
       "category": "Arrays & Strings",
       "type": "concept",
       "summary": "Store multiple elements of the same type contiguously.",
-      "description": "Array indices range from 0 to length-1. The compiler does not check out-of-range access automatically. Arrays cannot be assigned as whole objects, though structures containing arrays can be assigned.",
-      "syntax": "int values[3] = {10, 20, 30};",
+      "description": "An array stores elements of one type contiguously. For an array int arr[5], arr[i] and *(arr + i) designate the same element, provided i is in range; *arr is arr[0] and *(arr + 4) is arr[4]. In most expressions arr converts to a pointer to its first element, but the array object itself is not a pointer variable. C does not automatically check bounds, and whole arrays cannot be assigned.",
+      "syntax": "int arr[5] = {10, 20, 30, 40, 50};\narr[4] == *(arr + 4);  /* both refer to 50 */\n*arr = 11;            /* changes arr[0] */",
       "examples": [
         {
-          "command": "#include <stdio.h>\n\nint main(void) {\n    int values[3] = {10, 20, 30};\n    for (size_t i = 0; i < 3; ++i) printf(\"%d \", values[i]);\n    puts(\"\");\n    return 0;\n}\n",
-          "description": "Declares and iterates through a fixed-size array."
+          "command": "#include <stdio.h>\nint main(void) {\n    int arr[5] = {10, 20, 30, 40, 50};\n    printf(\"%d %d %d\\n\", arr[4], *(arr + 4), *arr);\n    *(arr + 4) = 99;\n    printf(\"%d\\n\", arr[4]);\n    return 0;\n}\n",
+          "description": "Shows equivalent indexing and pointer arithmetic, then modifies the fifth element.",
+          "output": "50 50 10\n99"
         }
       ],
       "keywords": [
         "contiguous",
         "index",
-        "bounds"
-      ]
+        "bounds",
+        "pointer arithmetic",
+        "*(arr + i)",
+        "*arr"
+      ],
+      "note": "Use *(arr + 4), not *(arr4); arr4 would be a different identifier if it existed. Indices run from 0 through length - 1."
     },
     {
       "id": "c-multidimensional-arrays",
@@ -1690,17 +1757,21 @@
       "category": "Arrays & Strings",
       "type": "concept",
       "summary": "Store arrays of arrays in row-major order.",
-      "description": "int a[2][3] contains two rows, each holding three int elements. In memory the last index varies fastest. For a function taking such an array, all dimensions except the first need to be specified (or supplied as VLA parameters).",
-      "syntax": "int matrix[2][3] = {{1,2,3},{4,5,6}};",
+      "description": "int a[2][3] is an array of two arrays of three int elements, laid out in row-major order. a[row][col] is equivalent to *(*(a + row) + col) within bounds. The expression a typically converts to a pointer to a 3-int row (int (*)[3]), not to int**. Functions taking a two-dimensional array need the inner dimension declared or passed by a suitable VLA parameter.",
+      "syntax": "int a[2][3] = {{1, 2, 3}, {4, 5, 6}};\na[1][2] == *(*(a + 1) + 2);",
       "examples": [
         {
-          "command": "#include <stdio.h>\n\nint main(void) {\n    int a[2][3] = {{1, 2, 3}, {4, 5, 6}};\n    printf(\"%d\\n\", a[1][2]);\n    return 0;\n}\n",
-          "description": "Reads the final element of a 2-by-3 array."
+          "command": "#include <stdio.h>\nint main(void) {\n    int a[2][3] = {{1, 2, 3}, {4, 5, 6}};\n    printf(\"%d %d\\n\", a[1][2], *(*(a + 1) + 2));\n    return 0;\n}\n",
+          "description": "Double indexing and two levels of pointer arithmetic reach the same element.",
+          "output": "6 6"
         }
       ],
       "keywords": [
         "2D array",
-        "row-major"
+        "row-major",
+        "pointer arithmetic",
+        "int (*)[3]",
+        "not int **"
       ]
     },
     {
@@ -1709,8 +1780,8 @@
       "category": "Arrays & Strings",
       "type": "concept",
       "summary": "Most array expressions become pointers to their first elements.",
-      "description": "Except in contexts such as sizeof, unary &, and string-literal initialization, an array expression usually converts to a pointer to its first element. A function parameter written int a[] is adjusted to int *a; it does not carry array length.",
-      "syntax": "void process(int a[], size_t n);",
+      "description": "Except in contexts such as sizeof and unary &, an array expression usually converts to a pointer to its first element. Thus arr[i] equals *(arr + i), while &arr[0] and the converted arr yield the same address with compatible element-pointer type. &arr has a different type: a pointer to the entire array, not an int*. A function parameter spelled int a[] is adjusted to int *a and does not carry the array length.",
+      "syntax": "int arr[3] = {2, 4, 6};\nint first = *arr;           /* arr[0] */\nint second = *(arr + 1);   /* arr[1] */\nint (*whole)[3] = &arr;    /* pointer to entire array */",
       "examples": [
         {
           "command": "#include <stdio.h>\n#include <stddef.h>\nvoid show(const int a[], size_t n) {\n    for (size_t i = 0; i < n; ++i) printf(\"%d \", a[i]);\n}\nint main(void) {\n    int a[] = {3, 4, 5};\n    show(a, sizeof a / sizeof a[0]);\n    return 0;\n}\n",
@@ -1720,9 +1791,12 @@
       "keywords": [
         "array decay",
         "parameter",
-        "sizeof"
+        "sizeof",
+        "*(arr + i)",
+        "&arr",
+        "&arr[0]"
       ],
-      "note": "sizeof on an array parameter measures a pointer, not the original array."
+      "note": "Only use arr + i and dereference if the result points to an existing element; sizeof on an array parameter measures a pointer, not the caller's array."
     },
     {
       "id": "c-variable-length-arrays-vla",
@@ -3414,7 +3488,7 @@
       "sections": [
         {
           "title": "Grouping",
-          "body": "Multiplication binds tighter than addition; unary operators usually bind tighter than binary arithmetic. Use parentheses when the intended grouping is not obvious.",
+          "body": "Multiplication binds tighter than addition; equality == binds tighter than bitwise &: x & 3 == 0 is x & (3 == 0). Write (x & 3) == 0 to test masked bits. Parentheses group expressions but do not impose a runtime order of evaluation for unrelated operands.",
           "items": []
         },
         {
@@ -3430,6 +3504,11 @@
         {
           "title": "Overflow and division",
           "body": "Signed integer overflow and division by zero are undefined. Integer division truncates toward zero in C99.",
+          "items": []
+        },
+        {
+          "title": "Logical versus bitwise",
+          "body": "&&, ||, ! turn zero/nonzero truth into a result of int 0 or 1; && and || short-circuit. &, |, ^, ~ work on integer bits; binary bitwise operators evaluate both operands and can yield other values. 6 && 3 is 1, but 6 & 3 is 2.",
           "items": []
         }
       ],
@@ -3502,7 +3581,7 @@
         },
         {
           "title": "Parameters and return values",
-          "body": "Function parameters are local copies of argument values. Pass a pointer to modify caller-owned data.",
+          "body": "Each argument value initializes a local parameter. int parameters are independent copies; an int* parameter can modify the caller's int via *p, and int** can modify the caller's pointer via *pp. A struct argument is copied; an array parameter adjusts to a pointer, so pass the length separately.",
           "items": []
         },
         {
@@ -3520,6 +3599,11 @@
         {
           "command": "#include <stdio.h>\nint twice(int n);\nint main(void) { printf(\"%d\\n\", twice(4)); return 0; }\nint twice(int n) { return n * 2; }\n",
           "description": "Declares a function first, then defines it after main."
+        },
+        {
+          "command": "#include <stdio.h>\nvoid increase(int *number) { ++*number; }\nint main(void) {\n    int score = 4;\n    increase(&score);\n    printf(\"%d\\n\", score);\n    return 0;\n}\n",
+          "description": "Passes a variable's address to modify the caller's value.",
+          "output": "5"
         }
       ],
       "keywords": [
@@ -3544,6 +3628,11 @@
         {
           "title": "Which operator do you need?",
           "body": "To obtain an object's address, use &x. To use the object through a pointer, use *p. To pass an int variable to scanf(\"%d\", &x), use &x because scanf needs an int*; to print the value through an initialized pointer, use printf(\"%d\", *p).",
+          "items": []
+        },
+        {
+          "title": "Change the value or the pointer",
+          "body": "With int x = 5, y = 8; int *p = &x; int **pp = &p;: x = 10 modifies x directly; *p = 10 modifies x through p; p = &y redirects p; **pp = 10 modifies whichever int p currently points to; *pp = &x redirects p through pp. If int *q = &y, pp = &q redirects pp itself. &p has type int**. A plain int has no pointer target to redirect.",
           "items": []
         },
         {
@@ -3581,7 +3670,10 @@
         "declaration",
         "address-of &",
         "dereference *",
-        "int *p = &x"
+        "int *p = &x",
+        "change pointer target",
+        "**pp",
+        "pointer value versus pointee"
       ]
     },
     {
@@ -3635,12 +3727,12 @@
       "sections": [
         {
           "title": "One dimension",
-          "body": "Use sizeof a / sizeof a[0] for a local fixed array with known complete array type.",
+          "body": "For an int arr[5], arr[i] and *(arr + i) refer to the same valid element; *arr is arr[0], *(arr + 4) is arr[4]. Use sizeof arr / sizeof arr[0] only while arr still has array type.",
           "items": []
         },
         {
           "title": "Two dimensions",
-          "body": "For int m[2][3], the last index changes fastest. m[1][0] follows m[0][2] in row-major order.",
+          "body": "For int m[2][3], m[1][2] equals *(*(m + 1) + 2), within bounds. m decays to a pointer to a row (int (*)[3]), not int**; the last index changes fastest in row-major order.",
           "items": []
         },
         {
@@ -3658,6 +3750,11 @@
         {
           "command": "#include <stdio.h>\n\nint main(void) {\n    int a[2][3] = {{1,2,3},{4,5,6}};\n    for (int row = 0; row < 2; ++row) {\n        for (int col = 0; col < 3; ++col) printf(\"%d \", a[row][col]);\n        puts(\"\");\n    }\n    return 0;\n}\n",
           "description": "Visits all elements in row-major order."
+        },
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    int arr[5] = {1, 2, 3, 4, 5};\n    printf(\"%d %d\\n\", arr[4], *(arr + 4));\n    return 0;\n}\n",
+          "description": "Indexing and pointer arithmetic reach the same fifth element.",
+          "output": "5 5"
         }
       ],
       "keywords": [
@@ -3862,7 +3959,12 @@
       "sections": [
         {
           "title": "Structures",
-          "body": "Members have individual storage and may have padding. A struct value can be copied by assignment.",
+          "body": "Members have individual storage and may have padding. Whole-struct assignment (=) copies the members, including arrays. C99 does not support == or != for struct objects; compare the members of interest explicitly. memcmp on raw structs can be misleading because of padding and pointer members.",
+          "items": []
+        },
+        {
+          "title": "Nested fields",
+          "body": "Use record.address.city for nested struct objects, p->address.city for a pointer to record, and p->address_ptr->city if the nested field is itself a pointer.",
           "items": []
         },
         {
@@ -3872,7 +3974,7 @@
         },
         {
           "title": "Enums",
-          "body": "Useful for named state values; C enumeration types are related to integer types, not scoped classes as in C++.",
+          "body": "Enumerators normally start at 0 and increment by 1; explicit initializers reset the next value (for example A, B = 5, C have 0, 5, 6). In C99, use enum Tag for the variable type without a typedef.",
           "items": []
         },
         {
@@ -4494,6 +4596,16 @@
           "items": []
         },
         {
+          "title": "Plain int versus pointer",
+          "body": "With int x = 5; and int y = 8;, x = 10 changes x. With int *p = &x;, *p = 10 changes x through p, while p = &y changes where p points. The int x itself has no pointer target to redirect.",
+          "items": []
+        },
+        {
+          "title": "Pointer to pointer",
+          "body": "With int **pp = &p;, **pp = 10 changes the int reached through p; *pp = &y changes p to point to y. If int *q = &x;, then pp = &q changes where pp itself points. &p has type int**.",
+          "items": []
+        },
+        {
           "title": "In a scanf call",
           "body": "scanf(\"%d\", &x) receives an int* and stores the converted number in x. If p already points to x, scanf(\"%d\", p) is also valid. scanf(\"%d\", *p) is wrong because *p is an int, not an int*.",
           "items": []
@@ -4509,6 +4621,11 @@
           "command": "#include <stdio.h>\nint main(void) {\n    int x = 5;\n    int *p = &x;\n    int copy = *p;\n    *p = 9;\n    printf(\"%d %d\\n\", copy, x);\n    return 0;\n}\n",
           "description": "Reading *p copies the old value; assigning *p changes x through the pointer.",
           "output": "5 9"
+        },
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    int x = 5, y = 8;\n    int *p = &x;\n    int **pp = &p;\n    **pp = 10;          /* changes x */\n    *pp = &y;           /* redirects p */\n    printf(\"%d %d\\n\", x, *p);\n    return 0;\n}\n",
+          "description": "Compares changing the pointed-to int with redirecting a pointer through a pointer-to-pointer.",
+          "output": "10 8"
         }
       ],
       "keywords": [
@@ -4520,6 +4637,197 @@
         "scanf",
         "int *p = &x",
         "indirection"
+      ]
+    },
+    {
+      "id": "c-guide-struct-nested-members-and-equality",
+      "type": "guide",
+      "name": "Struct fields, nested access, and equality",
+      "category": "Structures & Classes",
+      "summary": "Copy whole structs, access nested members, and compare fields correctly.",
+      "description": "In ISO C99, struct and enum are different kinds of types: a struct groups fields; an enum supplies named integer constants. A struct can contain other structs or pointers to structs.",
+      "sections": [
+        {
+          "title": "Object or pointer",
+          "body": "For struct Student s, use s.id. For struct Student *p = &s, use p->id, which means (*p).id. To write, assign s.id = 3 or p->id = 3.",
+          "items": []
+        },
+        {
+          "title": "Nested members",
+          "body": "With struct Student { struct Address address; }, use s.address.city or p->address.city. If address is struct Address*, use s.address->city or p->address->city.",
+          "items": []
+        },
+        {
+          "title": "Copy versus equality",
+          "body": "struct Student t = s; or t = s; copies the struct object, including array members. C99 rejects s == t and s != t. Compare chosen fields individually using == and &&. Pointer equality p == q compares pointer values, not struct content.",
+          "items": []
+        },
+        {
+          "title": "Avoid comparing raw bytes",
+          "body": "memcmp(&s, &t, sizeof s) is not a general struct-equality test: padding bytes may differ, and equal text behind distinct pointers may have different pointer values. Decide which fields define logical equality.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nstruct Address { int city_code; };\nstruct Student { int id; struct Address address; };\nint main(void) {\n    struct Student a = {1, {40}};\n    struct Student b = a;\n    struct Student *p = &a;\n    p->address.city_code = 41;\n    int equal = a.id == b.id && a.address.city_code == b.address.city_code;\n    printf(\"%d\\n\", equal);\n    return 0;\n}\n",
+          "description": "Uses struct assignment, nested access through a pointer, and member-by-member equality.",
+          "output": "0"
+        }
+      ],
+      "keywords": [
+        "struct",
+        "nested fields",
+        "dot",
+        "arrow",
+        "==",
+        "memcmp",
+        "assignment"
+      ]
+    },
+    {
+      "id": "c-guide-function-arguments-values-pointers-and-arrays",
+      "type": "guide",
+      "name": "Function arguments: values, pointers, and arrays",
+      "category": "Functions",
+      "summary": "See what a function receives and which changes reach the caller.",
+      "description": "In ISO C99, parameters are local objects initialized from argument values. The caller's variable is not automatically shared with the callee.",
+      "sections": [
+        {
+          "title": "Ordinary value",
+          "body": "void f(int n) receives a copy. f(x) cannot change x by assigning n.",
+          "items": []
+        },
+        {
+          "title": "Pointer argument",
+          "body": "void f(int *p) receives a copy of an address. f(&x) can change x through *p, but assigning p = &y inside f changes only the local pointer copy.",
+          "items": []
+        },
+        {
+          "title": "Pointer to pointer",
+          "body": "void f(int **pp) receives the address of a caller pointer: f(&p) can redirect caller p through *pp = &y.",
+          "items": []
+        },
+        {
+          "title": "Struct and array",
+          "body": "void f(struct Point pt) receives a struct copy. For void f(int a[], size_t n), a is adjusted to int*; assignments to a[i] can modify the original array, but the array length is not supplied automatically.",
+          "items": []
+        },
+        {
+          "title": "Return contract",
+          "body": "A function's declared return type tells you whether it returns a value. Functions do not universally return 1 for success or 0 for failure; read each function's contract.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nvoid set_value(int *p) { *p = 9; }\nvoid set_target(int **pp, int *target) { *pp = target; }\nint main(void) {\n    int x = 1, y = 2;\n    int *p = &x;\n    set_value(p);\n    set_target(&p, &y);\n    printf(\"%d %d\\n\", x, *p);\n    return 0;\n}\n",
+          "description": "A pointer argument changes x; a pointer-to-pointer argument redirects the caller's p.",
+          "output": "9 2"
+        }
+      ],
+      "keywords": [
+        "pass by value",
+        "argument",
+        "parameter",
+        "int*",
+        "int**",
+        "array parameter",
+        "struct copy"
+      ]
+    },
+    {
+      "id": "c-guide-logical-versus-bitwise-operators",
+      "type": "guide",
+      "name": "Logical versus bitwise AND, OR, and NOT",
+      "category": "Operators & Expressions",
+      "summary": "Compare truth-value operators with per-bit operators and short-circuit rules.",
+      "description": "C99 logical operators treat zero as false and nonzero as true; bitwise operators act on integer bit patterns. They use different syntax and can give different results even with the same operands.",
+      "sections": [
+        {
+          "title": "AND",
+          "body": "a && b means both are nonzero; result is 0 or 1 and the right side is skipped if a is zero. a & b keeps bits present in both integer operands; it evaluates both sides and may yield values other than 1.",
+          "items": []
+        },
+        {
+          "title": "OR",
+          "body": "a || b means at least one is nonzero; result is 0 or 1 and the right side is skipped if a is nonzero. a | b sets every bit set in either integer operand.",
+          "items": []
+        },
+        {
+          "title": "NOT and XOR",
+          "body": "!a is 1 if a is zero, otherwise 0. ~a flips every bit of the integer's promoted representation; with unsigned use ~0u for UINT_MAX. a ^ b is bitwise XOR: only bits set in exactly one operand remain.",
+          "items": []
+        },
+        {
+          "title": "Grouping with equality",
+          "body": "Equality == has higher precedence than bitwise &: flags & mask == 0 is flags & (mask == 0). Always write (flags & mask) == 0 when checking whether selected bits are clear.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    unsigned a = 6u, b = 3u; /* 110, 011 */\n    printf(\"%d %u\\n\", a && b, a & b);\n    printf(\"%d %u\\n\", a || b, a | b);\n    printf(\"%d %u\\n\", !a, a ^ b);\n    return 0;\n}\n",
+          "description": "Logical results are 0/1, while bitwise results reflect the original bits.",
+          "output": "1 2\n1 7\n0 5"
+        }
+      ],
+      "keywords": [
+        "&&",
+        "&",
+        "||",
+        "|",
+        "!",
+        "~",
+        "^",
+        "short circuit",
+        "mask"
+      ]
+    },
+    {
+      "id": "c-guide-pointer-address-mask-and-alignment",
+      "type": "guide",
+      "name": "Address masks, casts, and precedence",
+      "category": "Operators & Expressions",
+      "summary": "Understand an address-mask expression before using it as an alignment test.",
+      "description": "The expression (int)&r & 0x3 == 0 is not a reliable ISO C99 alignment test. It has two independent problems: precedence makes the equality test bind before bitwise AND, and converting an object pointer to int is implementation-defined or can be undefined if int cannot represent it.",
+      "sections": [
+        {
+          "title": "Parse the expression",
+          "body": "Equality == binds more tightly than bitwise &: (int)&r & 0x3 == 0 groups as ((int)&r) & (0x3 == 0), not (((int)&r) & 0x3) == 0. Since 0x3 == 0 is false, the entire bitwise AND yields zero, assuming the pointer conversion itself is valid.",
+          "items": []
+        },
+        {
+          "title": "Parenthesize the intended test",
+          "body": "For an unsigned integer value bits, write (bits & 0x3u) == 0u to check whether its low two bits are zero. This is an integer mask test; it makes no claim about pointer representation.",
+          "items": []
+        },
+        {
+          "title": "Pointers and integer types",
+          "body": "A cast from &r to int can lose information or be undefined if unrepresentable. C99's <stdint.h> optionally provides uintptr_t, an unsigned integer type capable of representing void* values. If available, a platform-specific test can use ((uintptr_t)(void *)&r & (uintptr_t)0x3u) == 0u; the meaning of the low address bits and alignment is still implementation-dependent.",
+          "items": []
+        },
+        {
+          "title": "Alignment is a separate requirement",
+          "body": "Do not assume a 4-byte int, four-byte alignment, or that clearing low two bits proves alignment across all implementations. Alignment rules and pointer representations depend on the target system.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    unsigned bits = 12u;\n    printf(\"%d\\n\", (bits & 0x3u) == 0u);\n    return 0;\n}\n",
+          "description": "Portable integer-mask example; 12 (binary 1100) has its low two bits clear. This example does not cast or examine a pointer.",
+          "output": "1"
+        }
+      ],
+      "keywords": [
+        "(int)&r & 0x3 == 0",
+        "precedence",
+        "uintptr_t",
+        "address",
+        "alignment",
+        "mask",
+        "pointer cast"
       ]
     }
   ]
