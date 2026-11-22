@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "1.0.0",
-  "updatedAt": "2026-11-15",
+  "version": "1.1.0",
+  "updatedAt": "2026-11-22",
   "commands": [
     {
       "id": "c-c-program-structure",
@@ -2012,7 +2012,7 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Print formatted text to stdout.",
-      "description": "printf interprets conversion specifiers. Common ones: %d int, %u unsigned, %f double, %c int character, %s string, %p void pointer, %zu size_t, %lld long long. Argument types must match their specifiers.",
+      "description": "printf interprets conversion specifiers. Common ones: %d int, %u unsigned, %f double, %c int character, %s string, %p void pointer, %zu size_t, %lld long long. Argument types must match their specifiers. printf writes to stdout; fprintf selects an explicit stream. Printed values do not change the program's exit status.",
       "syntax": "int printf(const char *format, ...);",
       "examples": [
         {
@@ -2034,7 +2034,7 @@
           "description": "Values matching the format."
         }
       ],
-      "note": "A type mismatch in a variadic format argument can cause undefined behavior."
+      "note": "Return value: number of characters printed on success, or a negative value on output error. This is not a Boolean success value. A type mismatch in a variadic format argument can cause undefined behavior."
     },
     {
       "id": "c-scanf",
@@ -2042,7 +2042,7 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Read formatted input from stdin.",
-      "description": "scanf returns the number of successful assignments, or EOF for input failure before any conversion. For numeric conversions pass addresses such as &n. %s without a width can overflow a buffer; numeric conversions can also fail on invalid input.",
+      "description": "scanf reads formatted data from stdin; fscanf accepts an explicit FILE* source. For %d pass an int* such as &n. Numeric conversions skip leading whitespace (including newlines), so scanf cannot by itself guarantee exactly one integer per line. Check the return count. Malformed input can leave the offending characters unread; out-of-range conversions to int are not a robust validation method.",
       "syntax": "int scanf(const char *format, ...);",
       "examples": [
         {
@@ -2065,7 +2065,7 @@
           "description": "Pointers to writable destination objects."
         }
       ],
-      "note": "scanf(\"%d\", ...) skips leading whitespace; pressing Enter alone does not end input."
+      "note": "Return value: count of successful assignments (possibly 0); EOF if input failure occurs before the first conversion. A successful single %d returns 1, not a general success flag."
     },
     {
       "id": "c-fgets",
@@ -2073,7 +2073,7 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Read at most size-1 characters into a buffer.",
-      "description": "fgets reads a line or part of one, retaining a newline if it fits and always null-terminating on success. It returns NULL on end-of-file with no characters read or on error.",
+      "description": "fgets reads at most size - 1 characters from stream into s and adds a terminating '\\0'. It stops at a newline (and retains it), end-of-file, or capacity. One call can read only part of a long line: check for a newline and collect the remainder when whole-line validation matters. It does not convert numeric text into int.",
       "syntax": "char *fgets(char *s, int size, FILE *stream);",
       "examples": [
         {
@@ -2099,7 +2099,7 @@
           "description": "Input stream such as stdin."
         }
       ],
-      "note": "If the line exceeds the buffer, the remainder stays in the input stream."
+      "note": "Return value: s (the buffer pointer) on success; NULL if end-of-file occurs before reading any character or on a read error. Inspect feof/ferror if you need to distinguish those cases."
     },
     {
       "id": "c-puts-fputs",
@@ -2146,7 +2146,7 @@
       "category": "Input & Output",
       "type": "concept",
       "summary": "Distinguish end-of-input from a character or failed conversion.",
-      "description": "EOF is a negative int macro used by input functions to report end-of-file or an error. A failed scanf conversion can return 0 (not EOF) if input does not match the format. Clear error states or consume invalid input as appropriate.",
+      "description": "EOF is an integer macro used by many input functions to report end-of-file or a read failure. A failed scanf conversion can return 0 for a nonmatching token, which is different from EOF. fgetc returns an int character value or EOF; inspect feof/ferror after EOF when the distinction matters.",
       "syntax": "while ((ch = getchar()) != EOF) { ... }",
       "examples": [
         {
@@ -2158,7 +2158,7 @@
         "feof",
         "input failure"
       ],
-      "note": "feof is set only after an input attempt discovers end-of-file."
+      "note": "EOF is a sentinel value, not a function and not a Boolean; feof becomes true only after a read has encountered end-of-file."
     },
     {
       "id": "c-file-streams",
@@ -2166,50 +2166,89 @@
       "category": "Input & Output",
       "type": "concept",
       "summary": "Represent open files with the stdio.h stream abstraction.",
-      "description": "FILE* connects standard I/O operations to a stream. The standard streams stdin, stdout and stderr are automatically available in hosted programs. Close files you open when finished.",
+      "description": "A FILE* is a stream handle used by C standard I/O functions; it is not the file path or the file contents. Hosted C programs already have stdin (input), stdout (normal output), and stderr (diagnostics). Redirection and pipes can connect these streams to files or other programs without changing C code. Reading from a stream advances its position; opening for reading does not modify the file. Close streams you open with fopen.",
       "syntax": "FILE *file = fopen(\"data.txt\", \"r\");",
       "examples": [
         {
-          "command": "#include <stdio.h>\n\nint main(void) {\n    fprintf(stderr, \"diagnostic message\\n\");\n    return 0;\n}\n",
-          "description": "Uses the predefined stderr stream without opening a file."
+          "command": "#include <stdio.h>\nint main(void) {\n    int n;\n    if (fscanf(stdin, \"%d\", &n) == 1)\n        fprintf(stdout, \"Read: %d\\n\", n);\n    fprintf(stderr, \"This is a diagnostic\\n\");\n    return 0;\n}\n",
+          "description": "Reads from stdin, sends data to stdout, and sends a separate diagnostic to stderr."
         }
       ],
       "keywords": [
         "stdio.h",
         "stdin",
         "stdout",
-        "stderr"
-      ]
+        "stderr",
+        "redirection",
+        "pipes"
+      ],
+      "note": "FILE* is a type, not a function; a stream has no success/failure return value of its own."
     },
     {
       "id": "c-fopen",
       "name": "fopen",
       "category": "Input & Output",
       "type": "function",
-      "summary": "Open a file and obtain a FILE* stream.",
-      "description": "Modes include \"r\" (read existing), \"w\" (write/truncate or create), \"a\" (append), plus binary modifiers such as \"rb\" and update modes like \"r+\". Check for NULL; close the stream on success.",
+      "summary": "Open a path as a FILE* stream using a mode string.",
+      "description": "fopen(path, mode) opens a stream attached to a file. With \"r\" it reads an existing file without changing it; opening alone does not parse any data. \"w\" immediately creates or truncates a file; \"a\" creates or appends. A plus sign adds both reading and writing; b requests binary mode (important where text-mode translation occurs). If opening fails, fopen returns NULL; never use that pointer for I/O. Close successfully opened streams with fclose.",
       "syntax": "FILE *fopen(const char *path, const char *mode);",
       "examples": [
         {
-          "command": "#include <stdio.h>\nint main(void) {\n    FILE *fp = fopen(\"example.txt\", \"w\");\n    if (!fp) return 1;\n    fputs(\"hello\\n\", fp);\n    fclose(fp);\n    return 0;\n}\n",
-          "description": "Creates or truncates a file, writes one line, and closes it."
+          "command": "#include <stdio.h>\nint main(int argc, char *argv[]) {\n    if (argc < 2) return 1;\n    FILE *input = fopen(argv[1], \"r\");\n    if (input == NULL) { perror(argv[1]); return 1; }\n    int score;\n    if (fscanf(input, \"%d\", &score) == 1) printf(\"%d\\n\", score);\n    fclose(input);\n    return 0;\n}\n",
+          "description": "Open an argument path for reading; fopen returns a stream, then fscanf actually reads from it."
         }
       ],
       "keywords": [
         "file I/O",
-        "mode"
+        "mode",
+        "r",
+        "w",
+        "a",
+        "r+",
+        "w+",
+        "a+",
+        "binary",
+        "NULL"
       ],
       "options": [
         {
           "flag": "path",
-          "description": "File path."
+          "description": "Path as a null-terminated string (for example argv[1] or \"grades.txt\")."
         },
         {
-          "flag": "mode",
-          "description": "Open mode (read/write/append, optional binary or update)."
+          "flag": "\"r\"",
+          "description": "Read existing file; fail if it cannot be opened."
+        },
+        {
+          "flag": "\"w\"",
+          "description": "Create or truncate existing file immediately; write only."
+        },
+        {
+          "flag": "\"a\"",
+          "description": "Create if needed; all writes append to the end."
+        },
+        {
+          "flag": "\"r+\"",
+          "description": "Read and write an existing file; do not truncate."
+        },
+        {
+          "flag": "\"w+\"",
+          "description": "Read and write; create or truncate immediately."
+        },
+        {
+          "flag": "\"a+\"",
+          "description": "Read and append; create if needed; all writes go to the end."
+        },
+        {
+          "flag": "\"rb\", \"wb\", \"ab\"",
+          "description": "Binary variants of r, w, and a; on some systems they avoid text newline translation."
+        },
+        {
+          "flag": "\"r+b\", \"w+b\", \"a+b\"",
+          "description": "Binary read/write variants; \"rb+\", \"wb+\", and \"ab+\" also work in ISO C."
         }
       ],
-      "note": "Opening with \"w\" truncates an existing file."
+      "note": "Return value: FILE* on success; NULL on failure. \"w\" and \"w+\" erase existing contents upon opening."
     },
     {
       "id": "c-fclose",
@@ -2217,7 +2256,7 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Flush and close a FILE* stream.",
-      "description": "fclose releases stream resources and attempts to flush pending output. Check for EOF when output correctness matters. After fclose, the FILE* must not be used again.",
+      "description": "fclose flushes buffered output (if any), closes the stream, and releases its resources. Afterward the FILE* is invalid. Do not fclose a stream that failed to open; a stream opened by fopen should be closed, including on early error paths. Check output-stream closure if write correctness matters.",
       "syntax": "int fclose(FILE *stream);",
       "examples": [
         {
@@ -2234,7 +2273,8 @@
           "flag": "stream",
           "description": "Open stream to close."
         }
-      ]
+      ],
+      "note": "Return value: 0 on success; EOF on failure. Closing stdin, stdout, or stderr is usually unnecessary in a simple program."
     },
     {
       "id": "c-fprintf-fscanf",
@@ -2242,18 +2282,33 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Perform formatted I/O with an explicit stream.",
-      "description": "fprintf is the stream-specific form of printf. fscanf is analogous to scanf: check its conversion count and use width limits for strings. Invalid or malformed input must be handled.",
-      "syntax": "fprintf(stream, \"value=%d\\n\", n);",
+      "description": "fprintf writes formatted output to the chosen stream; fscanf reads formatted input from a chosen stream. scanf(format, ...) is equivalent to fscanf(stdin, format, ...) and printf(format, ...) writes to stdout. Use fprintf(stderr, ...) for diagnostics. For fscanf(\"%d\", &value), a matching number produces one successful assignment; malformed tokens may produce zero, and EOF before any conversion produces EOF. fscanf skips whitespace before numeric conversions, not line boundaries.",
+      "syntax": "int fprintf(FILE *stream, const char *format, ...);\nint fscanf(FILE *stream, const char *format, ...);",
       "examples": [
         {
-          "command": "#include <stdio.h>\nint main(void) {\n    fprintf(stderr, \"Error code: %d\\n\", 3);\n    return 0;\n}\n",
-          "description": "Writes a formatted diagnostic to stderr."
+          "command": "#include <stdio.h>\nint main(void) {\n    int n;\n    if (fscanf(stdin, \"%d\", &n) == 1)\n        fprintf(stdout, \"Value: %d\\n\", n);\n    else\n        fprintf(stderr, \"Expected an integer\\n\");\n    return 0;\n}\n",
+          "description": "Checks a single integer conversion and separates normal output from diagnostics."
         }
       ],
       "keywords": [
         "FILE",
         "format strings"
-      ]
+      ],
+      "options": [
+        {
+          "flag": "stream",
+          "description": "A FILE* such as stdin, stdout, stderr, or a stream from fopen."
+        },
+        {
+          "flag": "format",
+          "description": "A format string with matching conversions such as %d for int."
+        },
+        {
+          "flag": "...",
+          "description": "Values for fprintf; writable destination pointers for fscanf."
+        }
+      ],
+      "note": "Return values: fprintf returns the number of characters written or a negative value on failure; fscanf returns assignments made (0 is possible), or EOF for input failure before any assignment."
     },
     {
       "id": "c-snprintf",
@@ -2339,7 +2394,7 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Report error details after a failing library call.",
-      "description": "errno is a modifiable thread-local-like macro expression in C11 and may be set by library calls. A nonzero errno alone does not prove the last call failed; check that function's documented return value. perror prints a message to stderr.",
+      "description": "After a function reports failure, perror prints a prefix and an error description to stderr based on the current errno. errno is an error-code macro, not a function return value; a nonzero errno alone does not prove the latest operation failed. Not every library failure reports a useful errno; consult the function contract.",
       "syntax": "perror(\"open failed\");",
       "examples": [
         {
@@ -2351,7 +2406,7 @@
         "error checking",
         "stderr"
       ],
-      "note": "Only inspect errno after an operation whose specification reports errors through it."
+      "note": "Return value: perror is void; errno is an error-code value. Check fopen's NULL result before calling perror."
     },
     {
       "id": "c-designated-initializers",
@@ -2439,12 +2494,12 @@
       "category": "Standard Library",
       "type": "function",
       "summary": "Convert text to integers, preferably with validation.",
-      "description": "atoi does not report conversion errors reliably. strtol accepts a base and an end pointer, and can report range errors via errno. Prefer strtol for user-controlled input.",
+      "description": "atoi does not provide reliable error reporting. strtol converts the initial integer portion of a string to long; end receives the address of the first unparsed character. Reject end == s (no digits), unexpected trailing characters, and results outside the permitted application range. Set errno = 0 before the call and test errno == ERANGE to detect overflow/underflow. Only cast to int after checking its range. A successful conversion may legitimately return 0.",
       "syntax": "long strtol(const char *s, char **end, int base);",
       "examples": [
         {
-          "command": "#include <stdio.h>\n#include <stdlib.h>\n#include <errno.h>\nint main(void) {\n    char *end;\n    errno = 0;\n    long value = strtol(\"123\", &end, 10);\n    if (errno == 0 && end != NULL && *end == '\\0') printf(\"%ld\\n\", value);\n    return 0;\n}\n",
-          "description": "Parses a decimal integer and checks that all characters were consumed."
+          "command": "#include <errno.h>\n#include <stdio.h>\n#include <stdlib.h>\nint main(void) {\n    const char *text = \"42\";\n    char *end;\n    errno = 0;\n    long value = strtol(text, &end, 10);\n    if (end == text || *end != '\\0' || errno == ERANGE || value < 0 || value > 100)\n        return 1;\n    int grade = (int)value;\n    printf(\"%d\\n\", grade);\n    return 0;\n}\n",
+          "description": "Validates an entire decimal string and the permitted 0–100 range before converting to int."
         }
       ],
       "keywords": [
@@ -2466,7 +2521,7 @@
           "description": "Base (2 through 36, or 0 for auto-detection)."
         }
       ],
-      "note": "Also reject end == s and check errno == ERANGE to handle empty or out-of-range input."
+      "note": "Return values: strtol returns the converted long, or LONG_MAX/LONG_MIN for range overflow with errno == ERANGE; atoi returns an int but offers no dependable error check. strtol does not return 1 for success."
     },
     {
       "id": "c-strtod",
@@ -2948,7 +3003,7 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Read and write individual characters from/to a FILE stream.",
-      "description": "fgetc returns an unsigned char converted to int or EOF. fputc returns the written character converted to unsigned char on success or EOF on failure. Use int to hold fgetc's result.",
+      "description": "fgetc reads one byte/character from a FILE* stream and returns it as an unsigned char converted to int; it returns EOF on end-of-file or error. Use int rather than char for the result so EOF remains distinguishable. fputc writes a character to a stream.",
       "syntax": "int fgetc(FILE *stream);\nint fputc(int c, FILE *stream);",
       "examples": [
         {
@@ -2959,7 +3014,8 @@
       "keywords": [
         "stdio.h",
         "EOF"
-      ]
+      ],
+      "note": "Return values: fgetc returns a character value or EOF; fputc returns the character written (as unsigned char converted to int) or EOF on error."
     },
     {
       "id": "c-feof-ferror-clearerr",
@@ -2967,7 +3023,7 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Inspect and reset stream error and end-of-file indicators.",
-      "description": "feof reports whether an earlier read reached end-of-file; ferror reports the stream error indicator. clearerr resets both indicators. These functions do not tell you in advance whether the next read will succeed.",
+      "description": "feof reports whether the stream's end-of-file indicator was set by an earlier read; ferror reports the error indicator. Both return nonzero if set and zero otherwise. clearerr resets both indicators and returns no value; they cannot predict the next read's outcome.",
       "syntax": "feof(fp); ferror(fp); clearerr(fp);",
       "examples": [
         {
@@ -2979,7 +3035,7 @@
         "EOF",
         "stream state"
       ],
-      "note": "Do not write while (!feof(fp)); check each read's return value instead."
+      "note": "Return values: feof/ferror return nonzero when their respective indicator is set, otherwise 0; clearerr returns void. Do not loop on !feof: test each read instead."
     },
     {
       "id": "c-restrict-pointer",
@@ -3165,20 +3221,48 @@
       "category": "Fundamentals",
       "type": "concept",
       "summary": "Receive command-line arguments in a hosted program.",
-      "description": "int main(int argc, char *argv[]) receives the argument count and an array of string pointers. argc is nonnegative and argv[argc] is a null pointer; argv[0] may identify the program. Do not assume optional arguments are present.",
+      "description": "int main(int argc, char *argv[]) receives a count and an array of argument strings. On usual command-line launches argv[0] is the program name, argv[1] the first argument, and argc includes the program name. Check argc before accessing argv[1]; absent arguments do not imply an empty argv[1]. argv[argc] is NULL. Filenames and relative or absolute paths are ordinary strings, not file handles.",
       "syntax": "int main(int argc, char *argv[])",
       "examples": [
         {
-          "command": "#include <stdio.h>\nint main(int argc, char *argv[]) {\n    for (int i = 0; i < argc; ++i) printf(\"%s\\n\", argv[i]);\n    return 0;\n}\n",
-          "description": "Prints each command-line argument."
+          "command": "#include <stdio.h>\nint main(int argc, char *argv[]) {\n    if (argc > 1) printf(\"Path: %s\\n\", argv[1]);\n    else puts(\"No path argument; use stdin\");\n    return 0;\n}\n",
+          "description": "Run as ./program data/grades.txt or ./program; check argc before argv[1]."
         }
       ],
       "keywords": [
         "CLI",
         "argv",
-        "argc"
+        "argc",
+        "path",
+        "filename",
+        "command-line argument"
       ],
-      "note": "These are program arguments, not Bash script variables."
+      "note": "The result returned by main is a program exit status, not a function input conversion count: return 0 indicates success; return EXIT_FAILURE (from stdlib.h) indicates failure portably."
+    },
+    {
+      "id": "c-stdin-stdout-stderr",
+      "name": "stdin / stdout / stderr",
+      "category": "Input & Output",
+      "type": "concept",
+      "summary": "Use the three pre-opened standard C streams.",
+      "description": "Hosted C programs start with stdin for input, stdout for ordinary output, and stderr for diagnostics. scanf and getchar read stdin; printf and putchar write stdout; fprintf(stderr, ...) writes diagnostics. In a shell, redirection and pipelines connect these streams to a terminal, file, or another program. C's stream names designate FILE* handles, not paths or text stored in strings.",
+      "syntax": "fscanf(stdin, \"%d\", &n);\nfprintf(stdout, \"%d\\n\", n);\nfprintf(stderr, \"Invalid input\\n\");",
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    int n;\n    if (fscanf(stdin, \"%d\", &n) != 1) {\n        fprintf(stderr, \"Expected a number\\n\");\n        return 1;\n    }\n    fprintf(stdout, \"Number: %d\\n\", n);\n    return 0;\n}\n",
+          "description": "Run with a terminal, ./program < data.txt, or printf '42\\n' | ./program; C always reads from stdin."
+        }
+      ],
+      "keywords": [
+        "standard streams",
+        "stdin",
+        "stdout",
+        "stderr",
+        "redirection",
+        "pipe",
+        "2>"
+      ],
+      "note": "A stream does not itself return 0 or 1. Individual I/O calls have distinct return contracts, and main's exit status is separate from stderr output."
     }
   ],
   "topics": [
@@ -3642,7 +3726,7 @@
         },
         {
           "title": "Read then parse",
-          "body": "fgets plus strtol offers more control over errors, trailing characters, and input length.",
+          "body": "Read a complete line first if errors must cite its original text or exactly one integer per line is required. strtol gives a long, an end pointer, and ERANGE for range overflow; check the entire line and application range before converting to int. A fixed-size fgets buffer can split a long invalid line.",
           "items": []
         },
         {
@@ -3654,7 +3738,7 @@
       "examples": [
         {
           "command": "#include <stdio.h>\n#include <stdlib.h>\nint main(void) {\n    char buf[64];\n    if (!fgets(buf, sizeof buf, stdin)) return 1;\n    char *end;\n    long n = strtol(buf, &end, 10);\n    if (end == buf) return 1;\n    printf(\"%ld\\n\", n);\n    return 0;\n}\n",
-          "description": "Reads a bounded line then attempts integer parsing."
+          "description": "Demonstrates bounded input and partial integer parsing; it does not yet reject trailing text or long split lines."
         }
       ],
       "keywords": [
@@ -3674,12 +3758,12 @@
       "sections": [
         {
           "title": "Open modes",
-          "body": "r reads existing files; w creates/truncates; a appends. Add b for binary where meaningful.",
+          "body": "fopen mode strings: r read existing; w create/truncate immediately; a create/append; r+ read/write existing; w+ read/write with truncation; a+ read/append. Append b for binary mode (for example rb or w+b). These are mode strings, not command-line flags.",
           "items": []
         },
         {
           "title": "Return values",
-          "body": "fopen returns NULL on failure. fgets returns NULL on end-of-file or error. fread/fwrite return complete element counts.",
+          "body": "Return conventions differ: fopen gives FILE* or NULL; fgets gives its destination pointer or NULL; fprintf gives characters written or a negative error value; fscanf gives assignment count, 0 for matching failure, or EOF for input failure before conversion; fclose gives 0 or EOF.",
           "items": []
         },
         {
@@ -4234,6 +4318,99 @@
         "code review",
         "safety",
         "warnings"
+      ]
+    },
+    {
+      "id": "c-guide-command-line-path-or-standard-input",
+      "type": "guide",
+      "name": "Use a file path argument or standard input",
+      "category": "Input & Output",
+      "summary": "Read through one FILE* regardless of how input was supplied.",
+      "description": "A command-line path argument identifies a file to open. With no path argument, stdin already supplies the input data; it need not contain another filename. A relative name such as grades.txt is also a path. The program may be run as ./program grades.txt or ./program < grades.txt.",
+      "sections": [
+        {
+          "title": "Choose the source",
+          "body": "Check argc before accessing argv[1]. If a path is present, fopen(argv[1], \"r\") returns a FILE* on success or NULL on failure. If no argument is present, use stdin directly.",
+          "items": []
+        },
+        {
+          "title": "Read through one handle",
+          "body": "Keep the chosen FILE* in input, then use fgets(input) or fscanf(input, ...). fopen only opens the stream: it does not parse or print file contents.",
+          "items": []
+        },
+        {
+          "title": "Ownership",
+          "body": "Close streams you opened with fopen. An ordinary program need not close stdin itself. Report errors with fprintf(stderr, ...) or perror after a failed fopen.",
+          "items": []
+        },
+        {
+          "title": "Shell invocation",
+          "body": "./program data/grades.txt passes a path in argv[1]. ./program < data/grades.txt puts file CONTENTS into stdin; ./program without redirection usually reads terminal input.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(int argc, char *argv[]) {\n    FILE *input = stdin;\n    if (argc > 1) {\n        input = fopen(argv[1], \"r\");\n        if (!input) { perror(argv[1]); return 1; }\n    }\n    int grade;\n    while (fscanf(input, \"%d\", &grade) == 1)\n        printf(\"%d\\n\", grade);\n    if (input != stdin) fclose(input);\n    return 0;\n}\n",
+          "description": "Illustrates the source-selection pattern for already-valid whitespace-separated integers; use line-based parsing to validate one value per line."
+        }
+      ],
+      "keywords": [
+        "argv[1]",
+        "argc",
+        "stdin",
+        "FILE*",
+        "fopen",
+        "relative path",
+        "input redirection"
+      ]
+    },
+    {
+      "id": "c-guide-validate-one-integer-per-line",
+      "type": "guide",
+      "name": "Validate one integer per input line",
+      "category": "Input & Output",
+      "summary": "Preserve original text, validate a complete line, and then use an int.",
+      "description": "When error messages must include the original line and input must contain exactly one valid integer per line, read a whole line as text first. A C99 int of four bytes does not bound the length of a malformed line. A fixed-size fgets buffer may split a long line; collect additional chunks or grow a buffer with realloc when full input must be retained.",
+      "sections": [
+        {
+          "title": "Read the whole line",
+          "body": "fgets reads at most capacity minus one characters; a retained newline indicates completion except on a final line without newline. fgetc with a growable buffer can support arbitrary finite line lengths using ISO C99; getline is POSIX, not ISO C99.",
+          "items": []
+        },
+        {
+          "title": "Parse without losing the text",
+          "body": "strtol(line, &end, 10) gives a long and points end to the first unparsed character. Check end != line, errno != ERANGE, and that only permitted whitespace remains. scanf(\"%d\", ...) skips whitespace across line boundaries and cannot preserve malformed line text by itself.",
+          "items": []
+        },
+        {
+          "title": "Validate before conversion",
+          "body": "Reject values outside the application's allowed range before casting to int. For a 0–100 grade, the cast is safe after confirming 0 <= value <= 100, even on systems where int is smaller than 32 bits.",
+          "items": []
+        },
+        {
+          "title": "Report the original line",
+          "body": "For invalid input, print the required line number and original line content to stderr; trim the line-ending delimiter only if the output format requires it. Return a failure status from main after releasing opened files and allocated buffers.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <ctype.h>\n#include <errno.h>\n#include <stdio.h>\n#include <stdlib.h>\n/* line is a complete string without its newline delimiter. */\nint parse_grade(const char *line, int line_number, int *grade) {\n    char *end;\n    errno = 0;\n    long value = strtol(line, &end, 10);\n    while (isspace((unsigned char)*end)) ++end;\n    if (end == line || *end != '\\0' || errno == ERANGE || value < 0 || value > 100) {\n        fprintf(stderr, \"Error at line %d: invalid input %s\\n\", line_number, line);\n        return 0;\n    }\n    *grade = (int)value;\n    return 1;\n}\n",
+          "description": "Validates an already-read complete line, preserves its original text for diagnostics, and stores an int only on success. The helper returns 1/0 by its own design; other C functions use different return conventions."
+        }
+      ],
+      "keywords": [
+        "one per line",
+        "strtol",
+        "ERANGE",
+        "fgets",
+        "fgetc",
+        "realloc",
+        "invalid input",
+        "line number",
+        "int",
+        "stderr"
       ]
     }
   ]

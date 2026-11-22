@@ -1,7 +1,16 @@
 {
   "schemaVersion": 1,
-  "latestVersion": "1.0.0",
+  "latestVersion": "1.1.0",
   "releases": [
+    {
+      "version": "1.1.0",
+      "date": "2026-11-22",
+      "title": "Standard streams and reliable file input",
+      "summary": "Expanded C99 reference for stdin/stdout/stderr, argc/argv, file modes and return values, input source selection, and line-by-line integer validation with preserved diagnostics.",
+      "commandCount": 145,
+      "topicCount": 25,
+      "snapshot": "libraries/history/c-cpp/1.1.0.json"
+    },
     {
       "version": "1.0.0",
       "date": "2026-11-15",
