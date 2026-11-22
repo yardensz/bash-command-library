@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "updatedAt": "2026-11-22",
   "commands": [
     {
@@ -793,20 +793,41 @@
       "name": "address-of & and dereference *",
       "category": "Pointers & Memory",
       "type": "operator",
-      "summary": "Obtain an object's address or access the object it points to.",
-      "description": "& usually creates a pointer to an object, while unary * accesses the pointed-to object. Dereferencing NULL, an invalid pointer, or one-past-the-end is undefined behavior.",
-      "syntax": "int *p = &x;\nint y = *p;",
+      "summary": "Compare address-of (&) with dereference (*) in expressions.",
+      "description": "After a declaration, unary &x produces a pointer to x (its address); unary *p accesses the object p points to. If x is int, &x has type int*; if p is int*, *p is an int lvalue that can be read or assigned. These operations work in opposite directions: object to pointer, and pointer to object. A pointer must point to a live suitable object before it is dereferenced. In a declaration such as int *p, * has a different grammatical role: it declares p as a pointer.",
+      "syntax": "int x = 7;\nint *p = &x;  // declaration *; expression &\nint y = *p;   // expression * reads x\n*p = 9;      // expression * writes x",
       "examples": [
         {
-          "command": "#include <stdio.h>\n\nint main(void) {\n    int x = 7;\n    int *p = &x;\n    *p = 9;\n    printf(\"%d\\n\", x);\n    return 0;\n}\n",
-          "description": "Writing through p changes the original x."
+          "command": "#include <stdio.h>\nint main(void) {\n    int x = 7;\n    int *p = &x;\n    printf(\"%d\\n\", *p); /* reads x: 7 */\n    *p = 9;             /* changes x */\n    printf(\"%d\\n\", x);  /* prints 9 */\n    return 0;\n}\n",
+          "description": "The declaration uses * to declare p; &x provides its address; *p accesses x afterwards.",
+          "output": "7\n9"
         }
       ],
       "keywords": [
         "pointer",
-        "reference",
-        "indirection"
-      ]
+        "address of",
+        "dereference",
+        "indirection",
+        "declaration vs expression",
+        "ampersand",
+        "asterisk",
+        "scanf"
+      ],
+      "options": [
+        {
+          "flag": "&x (expression)",
+          "description": "Get the address of object x; result is a pointer (int* when x is int)."
+        },
+        {
+          "flag": "*p (expression)",
+          "description": "Access the object pointed to by p; read or modify it (int when p is int*)."
+        },
+        {
+          "flag": "*p (declaration)",
+          "description": "In int *p, declare p as a pointer to int; no dereference occurs."
+        }
+      ],
+      "note": "In other contexts, binary * is multiplication and binary & is bitwise AND. Dereferencing NULL or an invalid pointer has undefined behavior."
     },
     {
       "id": "c-array-subscript",
@@ -1219,17 +1240,44 @@
       "category": "Pointers & Memory",
       "type": "concept",
       "summary": "Declare a variable that holds an address.",
-      "description": "int *p means p points to int. The asterisk belongs to the declarator; in int *p, x; only p is a pointer. Pointers must be initialized before dereference.",
-      "syntax": "int *p = &value;",
+      "description": "In a declaration, int *p declares p as a pointer to int; the * is part of the declarator and does not access memory. A pointer holds an address, so p can be initialized with &value, where & is an address-of operator applied to an existing object. After declaration, p is the pointer, *p is the pointed-to int, and &p is the address of the pointer variable itself (int**). In int *a, b; only a is a pointer. Initialize pointers before dereferencing.",
+      "syntax": "int value = 10;\nint *p = &value;  // p is int*, * declares it, &value supplies an address\nint copy = *p;   // * reads value\n*p = 12;        // * writes value",
       "examples": [
         {
-          "command": "#include <stdio.h>\n\nint main(void) {\n    int value = 10;\n    int *p = &value;\n    printf(\"%d\\n\", *p);\n    return 0;\n}\n",
-          "description": "Creates a pointer to a local integer."
+          "command": "#include <stdio.h>\nint main(void) {\n    int value = 10;\n    int *p = &value;\n    printf(\"%d\\n\", *p);\n    *p = 12;\n    printf(\"%d\\n\", value);\n    return 0;\n}\n",
+          "description": "Declaration * creates a pointer variable, & obtains an object's address, and expression * accesses the object.",
+          "output": "10\n12"
         }
       ],
       "keywords": [
         "indirection",
-        "declaration"
+        "declaration",
+        "address-of",
+        "dereference",
+        "int pointer",
+        "int **"
+      ],
+      "options": [
+        {
+          "flag": "int *p",
+          "description": "Declare p as an int pointer; * is declaration syntax, not a read."
+        },
+        {
+          "flag": "&value",
+          "description": "Expression yielding the address of value, suitable for initializing p."
+        },
+        {
+          "flag": "p",
+          "description": "The pointer value itself, referring to value after initialization."
+        },
+        {
+          "flag": "*p",
+          "description": "Expression referring to the int that p points to."
+        },
+        {
+          "flag": "&p",
+          "description": "Address of the pointer variable p; its type is int**."
+        }
       ]
     },
     {
@@ -3489,8 +3537,13 @@
       "description": "A pointer stores a value that may designate an object or function; the pointer variable and the pointed-to object are distinct.",
       "sections": [
         {
-          "title": "Read a declaration",
-          "body": "int *p declares p as a pointer to int. &x obtains x's address and *p reads or writes its pointed-to int.",
+          "title": "Declaration versus expression",
+          "body": "In int *p = &x;, the * belongs to the declaration and says p has type int*. The &x is an expression that produces x's address. Later *p is an expression that reads or changes x. &p instead produces the address of the pointer variable p (type int**).",
+          "items": []
+        },
+        {
+          "title": "Which operator do you need?",
+          "body": "To obtain an object's address, use &x. To use the object through a pointer, use *p. To pass an int variable to scanf(\"%d\", &x), use &x because scanf needs an int*; to print the value through an initialized pointer, use printf(\"%d\", *p).",
           "items": []
         },
         {
@@ -3524,7 +3577,11 @@
         "address",
         "dereference",
         "double pointer",
-        "const"
+        "const",
+        "declaration",
+        "address-of &",
+        "dereference *",
+        "int *p = &x"
       ]
     },
     {
@@ -4411,6 +4468,58 @@
         "line number",
         "int",
         "stderr"
+      ]
+    },
+    {
+      "id": "c-guide-asterisk-and-ampersand-in-c-pointers",
+      "type": "guide",
+      "name": "* and &: declarations versus pointer expressions",
+      "category": "Pointers & Memory",
+      "summary": "See exactly when * declares a pointer, & obtains an address, and * accesses a value.",
+      "description": "The same characters can have different roles depending on their position in C code. Compare declarations to expressions and track the type of every result. These examples use ISO C99 pointers to int.",
+      "sections": [
+        {
+          "title": "In a declaration",
+          "body": "int x = 5; declares an int. int *p; declares a pointer to int. The * in int *p is declaration syntax; it does not dereference anything. int *a, b; declares only a as a pointer and b as a plain int.",
+          "items": []
+        },
+        {
+          "title": "At initialization",
+          "body": "int *p = &x; combines two roles: the declaration * says p is an int*, while the expression &x obtains x's address to store in p. & is not the syntax for declaring a C pointer.",
+          "items": []
+        },
+        {
+          "title": "After declaration",
+          "body": "p is the pointer (type int*). *p is x itself through p (type int), so int copy = *p reads x and *p = 9 changes x. &x again produces an int*; &p produces an int** because p is also a variable with an address.",
+          "items": []
+        },
+        {
+          "title": "In a scanf call",
+          "body": "scanf(\"%d\", &x) receives an int* and stores the converted number in x. If p already points to x, scanf(\"%d\", p) is also valid. scanf(\"%d\", *p) is wrong because *p is an int, not an int*.",
+          "items": []
+        },
+        {
+          "title": "Keep other meanings separate",
+          "body": "In expressions a * b multiplies numbers and a & b performs bitwise AND on integer operands. This guide discusses unary & (address-of) and unary * (dereference), plus * in pointer declarations.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "#include <stdio.h>\nint main(void) {\n    int x = 5;\n    int *p = &x;\n    int copy = *p;\n    *p = 9;\n    printf(\"%d %d\\n\", copy, x);\n    return 0;\n}\n",
+          "description": "Reading *p copies the old value; assigning *p changes x through the pointer.",
+          "output": "5 9"
+        }
+      ],
+      "keywords": [
+        "pointer declaration",
+        "dereference",
+        "address-of",
+        "ampersand",
+        "asterisk",
+        "scanf",
+        "int *p = &x",
+        "indirection"
       ]
     }
   ]
