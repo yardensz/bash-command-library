@@ -48,6 +48,30 @@
       "searchPlaceholder": "Search pointers, arrays, functions, types...",
       "searchHint": "Search C / C++ functions, operators, types, concepts and examples.",
       "emptyMessage": "The C / C++ library is ready. Entries will be added in a separate conversation."
+    },
+    {
+      "id": "make",
+      "name": "GNU Make",
+      "description": "GNU Make build rules, commands, variables and libraries",
+      "data": "libraries/make.json",
+      "versions": "libraries/make-versions.json",
+      "entryLabel": "entries",
+      "guideLabel": "guides",
+      "categories": [
+        "All",
+        "Fundamentals",
+        "Command-line Interface",
+        "Targets & Dependencies",
+        "Variables & Expansion",
+        "Automatic Variables",
+        "Recipes & Shell",
+        "Built-in Rules",
+        "Libraries & Linking",
+        "Debugging & Safety"
+      ],
+      "searchPlaceholder": "Search make, -f, clean, .PHONY, $@, -j, ar...",
+      "searchHint": "Search Makefile rules, automatic variables, recipes, tool flags and examples.",
+      "emptyMessage": "No GNU Make entries are available yet."
     }
   ]
 }

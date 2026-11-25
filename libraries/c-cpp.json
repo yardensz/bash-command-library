@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "1.3.0",
-  "updatedAt": "2026-11-22",
+  "version": "1.4.0",
+  "updatedAt": "2026-11-25",
   "commands": [
     {
       "id": "c-c-program-structure",
@@ -56,6 +56,10 @@
         {
           "command": "#include <stdio.h>\n\nint main(void) {\n    puts(\"stdio.h declares puts\");\n    return 0;\n}\n",
           "description": "The standard header makes puts available."
+        },
+        {
+          "command": "/* main.c */\n#include \"circle.h\"\n#include \"shape.h\"\n/* Include public declarations, not the module implementation .c files. */",
+          "description": "Tutorial 04 pp. 2–4: use module headers to expose declarations across translation units."
         }
       ],
       "keywords": [
@@ -526,12 +530,16 @@
       "category": "Types & Variables",
       "type": "concept",
       "summary": "Distinguish lifetime, visibility, and cross-file linkage.",
-      "description": "Automatic local objects typically exist during block execution. Static storage-duration objects exist for the program lifetime and are initialized once. At file scope, static also gives internal linkage; extern commonly declares an object defined elsewhere.",
-      "syntax": "static int calls = 0;",
+      "description": "At file scope, static gives an object or function internal linkage: other translation units cannot refer to that same identifier by external linkage. An extern declaration can refer to an externally linked definition elsewhere. At block scope, static instead gives an object static storage duration, so its value persists between calls; this is not the same concept as file-scope visibility. Ordinary auto block locals have automatic storage duration.",
+      "syntax": "/* car.c */\nstatic int seats = 4;\n\n/* counter.c */\nint total = 0;\n\n/* counter.h */\nextern int total;",
       "examples": [
         {
           "command": "#include <stdio.h>\n\nint main(void) {\n    static int calls = 0;\n    ++calls;\n    printf(\"%d\\n\", calls);\n    return 0;\n}\n",
           "description": "Shows a variable with static storage duration."
+        },
+        {
+          "command": "/* car.c */\n#include \"car.h\"\nstatic int number_of_seats = 4;\nstatic int turn_wheel(void) { return number_of_seats; }\nvoid car_drive(void) { (void)turn_wheel(); }",
+          "description": "Shows private file-scope function and object as in Tutorial 04 p. 11. Header car.h declares car_drive(void)."
         }
       ],
       "keywords": [
@@ -2134,12 +2142,24 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Print formatted text to stdout.",
-      "description": "printf interprets conversion specifiers. Common ones: %d int, %u unsigned, %f double, %c int character, %s string, %p void pointer, %zu size_t, %lld long long. Argument types must match their specifiers. printf writes to stdout; fprintf selects an explicit stream. Printed values do not change the program's exit status.",
-      "syntax": "int printf(const char *format, ...);",
+      "description": "printf formats values and writes them to stdout (no automatic trailing newline). Its first argument is a format string; each conversion must match the type of the corresponding variadic argument. For output, float is promoted to double and printed with %f; use %Lf for long double, %zu for size_t, and cast a pointer to void* for %p. A format can include flags, minimum width, precision, and a length modifier before the conversion letter. The return is a character count (not a generic Boolean).",
+      "syntax": "int printf(const char *format, ...);\n/* General conversion: %[flags][width][.precision][length]specifier */",
       "examples": [
         {
           "command": "#include <stdio.h>\n\nint main(void) {\n    int n = 12;\n    printf(\"n=%d, hex=%x\\n\", n, (unsigned)n);\n    return 0;\n}\n",
           "description": "Prints an integer in decimal and hexadecimal."
+        },
+        {
+          "command": "printf(\"value=%d, hex=%#x, fixed=%.2f\\n\", 42, 42u, 3.14159);",
+          "description": "Syntax-only example showing conversions, alternate form, and precision."
+        },
+        {
+          "command": "size_t count = 15;\nprintf(\"left: |%-8s| count=%zu\\n\", \"hello\", count);",
+          "description": "Left alignment, field width, and size_t format."
+        },
+        {
+          "command": "printf(\"dynamic width: |%*.*f|\\n\", 9, 3, 2.71828);",
+          "description": "Uses one int for width, another int for precision, and one double for the value."
         }
       ],
       "keywords": [
@@ -2149,14 +2169,82 @@
       "options": [
         {
           "flag": "format",
-          "description": "Format string containing conversion specifiers."
+          "description": "NUL-terminated format string containing literal text and conversion specifications."
         },
         {
           "flag": "...",
-          "description": "Values matching the format."
+          "description": "One correctly typed argument for each conversion that consumes an argument."
+        },
+        {
+          "flag": "%d / %i",
+          "description": "Signed int in decimal."
+        },
+        {
+          "flag": "%u / %o / %x / %X",
+          "description": "Unsigned int as decimal, octal, or hexadecimal."
+        },
+        {
+          "flag": "%f / %F",
+          "description": "Floating value (double after argument promotions) in decimal fixed format."
+        },
+        {
+          "flag": "%e / %E / %g / %G / %a / %A",
+          "description": "Floating value in scientific, compact, or hexadecimal notation."
+        },
+        {
+          "flag": "%c",
+          "description": "Print one character from an int."
+        },
+        {
+          "flag": "%s",
+          "description": "Print a NUL-terminated string."
+        },
+        {
+          "flag": "%p",
+          "description": "Print a pointer, passed as void*; formatting implementation-defined."
+        },
+        {
+          "flag": "%%",
+          "description": "Print a literal percent sign; consumes no argument."
+        },
+        {
+          "flag": "%n",
+          "description": "Store number of characters written so far in an int*; no output. Avoid untrusted formats."
+        },
+        {
+          "flag": "-",
+          "description": "Left-justify within the minimum width."
+        },
+        {
+          "flag": "+",
+          "description": "Print a sign for nonnegative signed numbers too."
+        },
+        {
+          "flag": "space",
+          "description": "Insert a leading space for nonnegative signed numbers if + is not specified."
+        },
+        {
+          "flag": "#",
+          "description": "Use alternative form for applicable numeric conversions."
+        },
+        {
+          "flag": "0",
+          "description": "Pad numeric output with leading zeroes under applicable conditions."
+        },
+        {
+          "flag": "width / *",
+          "description": "Minimum field width; * obtains width from an int argument."
+        },
+        {
+          "flag": ".precision / .*",
+          "description": "Precision or precision read from an int argument; its meaning depends on conversion."
+        },
+        {
+          "flag": "hh, h, l, ll, j, z, t, L",
+          "description": "Length modifiers; they alter the expected argument type where applicable."
         }
       ],
-      "note": "Return value: number of characters printed on success, or a negative value on output error. This is not a Boolean success value. A type mismatch in a variadic format argument can cause undefined behavior."
+      "note": "Return value: number of characters written on success, negative on output error. Incorrect argument types yield undefined behavior; never use untrusted input as the format string."
     },
     {
       "id": "c-scanf",
@@ -2164,12 +2252,20 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Read formatted input from stdin.",
-      "description": "scanf reads formatted data from stdin; fscanf accepts an explicit FILE* source. For %d pass an int* such as &n. Numeric conversions skip leading whitespace (including newlines), so scanf cannot by itself guarantee exactly one integer per line. Check the return count. Malformed input can leave the offending characters unread; out-of-range conversions to int are not a robust validation method.",
-      "syntax": "int scanf(const char *format, ...);",
+      "description": "scanf reads formatted text from stdin and writes conversions into caller-provided addresses. For %d pass int*, usually &n; for %lf pass double*; for %f pass float*. Most numeric conversions skip leading whitespace; %c and %[ do not. %% matches a literal percent. A field width on %s or %[ is needed to prevent buffer overflow and must leave space for the string terminator. The function returns the number of assignments made, 0 on matching failure before any assignment, or EOF if an input failure prevents the first conversion. It does not enforce line boundaries.",
+      "syntax": "int scanf(const char *format, ...);\n/* Example: scanf(\"%d %9s\", &number, word); */",
       "examples": [
         {
           "command": "#include <stdio.h>\n\nint main(void) {\n    int number;\n    if (scanf(\"%d\", &number) == 1) printf(\"%d\\n\", number);\n    return 0;\n}\n",
           "description": "Tests the conversion count before using the result."
+        },
+        {
+          "command": "int x;\nif (scanf(\"%d\", &x) == 1) {\n    printf(\"%d\\n\", x);\n}",
+          "description": "Check the conversion count before using an int."
+        },
+        {
+          "command": "char word[10];\nif (scanf(\"%9s\", word) == 1) {\n    puts(word);\n}",
+          "description": "Use field width that leaves room for the terminating NUL."
         }
       ],
       "keywords": [
@@ -2180,14 +2276,54 @@
       "options": [
         {
           "flag": "format",
-          "description": "Input format specification."
+          "description": "Input format string describing literal characters, whitespace, and conversions."
         },
         {
           "flag": "...",
-          "description": "Pointers to writable destination objects."
+          "description": "Pointers to writable storage with types matching the conversions."
+        },
+        {
+          "flag": "%d / %i",
+          "description": "Read decimal int or auto-base int respectively into int*."
+        },
+        {
+          "flag": "%u / %x / %o",
+          "description": "Read unsigned integer in the chosen base into unsigned int*."
+        },
+        {
+          "flag": "%f / %lf / %Lf",
+          "description": "Read into float*, double*, long double* respectively; differs from printf."
+        },
+        {
+          "flag": "%c",
+          "description": "Read character(s) into char storage; does not append a NUL byte."
+        },
+        {
+          "flag": "%s",
+          "description": "Read a non-whitespace word into char[] and append a NUL. Specify width."
+        },
+        {
+          "flag": "%[...]",
+          "description": "Read a scanset into char[] and append NUL. Specify width; syntax depends on set characters."
+        },
+        {
+          "flag": "%%",
+          "description": "Match an input percent sign; no destination pointer."
+        },
+        {
+          "flag": "*",
+          "description": "Suppress assignment for a conversion; it does not increment assignment count."
+        },
+        {
+          "flag": "field width",
+          "description": "Limit how many input characters are consumed by one conversion (except an automatic NUL terminator)."
+        },
+        {
+          "flag": "h, hh, l, ll, L",
+          "description": "Length modifiers controlling pointed-to storage type for suitable conversions."
         }
       ],
-      "note": "Return value: count of successful assignments (possibly 0); EOF if input failure occurs before the first conversion. A successful single %d returns 1, not a general success flag."
+      "note": "Return is assignment count / 0 / EOF; it is never a general 1-for-success Boolean. Avoid unbounded %s, and use fgets with explicit parsing when validating whole lines or out-of-range numbers."
     },
     {
       "id": "c-fgets",
@@ -2229,8 +2365,8 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Write a string to stdout or a chosen stream.",
-      "description": "puts writes the string plus a newline to stdout. fputs writes the string without automatically appending a newline, and accepts a FILE* stream.",
-      "syntax": "puts(text);\nfputs(text, stdout);",
+      "description": "puts writes a NUL-terminated string followed by a newline to stdout. fputs writes its NUL-terminated string to a selected FILE* and does not add a newline. Neither writes the terminating NUL byte as file data. For raw bytes including the NUL, use fwrite.",
+      "syntax": "int puts(const char *s);\nint fputs(const char *s, FILE *stream);",
       "examples": [
         {
           "command": "#include <stdio.h>\n\nint main(void) {\n    puts(\"first line\");\n    fputs(\"second line\\n\", stdout);\n    return 0;\n}\n",
@@ -2240,7 +2376,18 @@
       "keywords": [
         "stdout",
         "string output"
-      ]
+      ],
+      "options": [
+        {
+          "flag": "s",
+          "description": "NUL-terminated string to write."
+        },
+        {
+          "flag": "stream (fputs)",
+          "description": "Destination output stream. "
+        }
+      ],
+      "note": "puts/fputs return a nonnegative value on success and EOF on failure; success is not necessarily 1."
     },
     {
       "id": "c-getchar-putchar",
@@ -2294,6 +2441,10 @@
         {
           "command": "#include <stdio.h>\nint main(void) {\n    int n;\n    if (fscanf(stdin, \"%d\", &n) == 1)\n        fprintf(stdout, \"Read: %d\\n\", n);\n    fprintf(stderr, \"This is a diagnostic\\n\");\n    return 0;\n}\n",
           "description": "Reads from stdin, sends data to stdout, and sends a separate diagnostic to stderr."
+        },
+        {
+          "command": "/* Two independent openings of the same file usually maintain independent stream positions. */\nFILE *left = fopen(\"foobar.txt\", \"r\");\nFILE *right = fopen(\"foobar.txt\", \"r\");\n/* Check both for NULL before reading and fclose both afterward. */",
+          "description": "Tutorial 03 pp. 19–20: each separately opened stream starts at its own initial file position; distinct from dup() on POSIX."
         }
       ],
       "keywords": [
@@ -2404,12 +2555,16 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Perform formatted I/O with an explicit stream.",
-      "description": "fprintf writes formatted output to the chosen stream; fscanf reads formatted input from a chosen stream. scanf(format, ...) is equivalent to fscanf(stdin, format, ...) and printf(format, ...) writes to stdout. Use fprintf(stderr, ...) for diagnostics. For fscanf(\"%d\", &value), a matching number produces one successful assignment; malformed tokens may produce zero, and EOF before any conversion produces EOF. fscanf skips whitespace before numeric conversions, not line boundaries.",
+      "description": "fprintf uses the same output formatting rules as printf but writes to an explicit FILE*. fscanf uses scanf-style input conversions from an explicit FILE*. fprintf takes values, while fscanf normally requires writable destination pointers; conversion counts from fscanf differ from character counts returned by fprintf. Both formats support conversion-specific width/length syntax. The C library uses no universal 0/1 return convention.",
       "syntax": "int fprintf(FILE *stream, const char *format, ...);\nint fscanf(FILE *stream, const char *format, ...);",
       "examples": [
         {
           "command": "#include <stdio.h>\nint main(void) {\n    int n;\n    if (fscanf(stdin, \"%d\", &n) == 1)\n        fprintf(stdout, \"Value: %d\\n\", n);\n    else\n        fprintf(stderr, \"Expected an integer\\n\");\n    return 0;\n}\n",
           "description": "Checks a single integer conversion and separates normal output from diagnostics."
+        },
+        {
+          "command": "FILE *fp = fopen(\"values.txt\", \"r\");\nif (fp != NULL) {\n    int x, y, z;\n    int assigned = fscanf(fp, \"%d %d %d\", &x, &y, &z);\n    if (assigned == 3) {\n        fprintf(stdout, \"%d %d %d\\n\", x, y, z);\n    }\n    fclose(fp);\n}",
+          "description": "Tutorial 03 p. 18 and Live workshop p. 10: three formatted values, explicit stream, assignment count."
         }
       ],
       "keywords": [
@@ -2419,18 +2574,26 @@
       "options": [
         {
           "flag": "stream",
-          "description": "A FILE* such as stdin, stdout, stderr, or a stream from fopen."
+          "description": "Output stream for fprintf, input stream for fscanf."
         },
         {
           "flag": "format",
-          "description": "A format string with matching conversions such as %d for int."
+          "description": "printf-like format for fprintf, scanf-like pattern for fscanf."
         },
         {
           "flag": "...",
-          "description": "Values for fprintf; writable destination pointers for fscanf."
+          "description": "Formatted values for fprintf; writable destinations for fscanf."
+        },
+        {
+          "flag": "fprintf: flags/width/precision",
+          "description": "Output formatting such as %-8s, %#x, %.2f."
+        },
+        {
+          "flag": "fscanf: field width and *",
+          "description": "Input conversion controls such as %9s and %*d."
         }
       ],
-      "note": "Return values: fprintf returns the number of characters written or a negative value on failure; fscanf returns assignments made (0 is possible), or EOF for input failure before any assignment."
+      "note": "fprintf returns characters written (>=0) or negative on error; fscanf returns the number of assignments, including 0, or EOF if an input failure occurs before the first conversion completes."
     },
     {
       "id": "c-snprintf",
@@ -2476,19 +2639,45 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Read or write binary blocks of data.",
-      "description": "fread and fwrite transfer a number of elements each having a given size. Their return values count complete elements processed. Check ferror and feof to understand short reads; raw binary layouts are often not portable between systems.",
-      "syntax": "fread(ptr, size, count, stream)\nfwrite(ptr, size, count, stream)",
+      "description": "fread reads up to nmemb elements of size bytes into ptr; fwrite writes up to nmemb elements of size bytes from ptr. The return value is the number of whole elements successfully transferred, not always a byte count and not a generic Boolean. On short fread, inspect feof(stream) versus ferror(stream); a short fwrite signals an error. Raw binary layouts may be incompatible across architectures or compiler settings.",
+      "syntax": "size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);\nsize_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);",
       "examples": [
         {
           "command": "#include <stdio.h>\nint main(void) {\n    FILE *fp = tmpfile();\n    if (!fp) return 1;\n    unsigned char x[] = {1, 2, 3};\n    if (fwrite(x, 1, sizeof x, fp) != sizeof x) { fclose(fp); return 1; }\n    rewind(fp);\n    unsigned char y[3] = {0};\n    size_t got = fread(y, 1, sizeof y, fp);\n    fclose(fp);\n    return got == sizeof y && y[1] == 2 ? 0 : 1;\n}\n",
           "description": "Writes and reads raw bytes using a temporary stream."
+        },
+        {
+          "command": "/* fp is an already-open writable binary FILE*. */\nint numbers[] = {10, 20, 30};\nsize_t written = fwrite(numbers, sizeof numbers[0], 3, fp);\nif (written != 3) { /* handle output error */ }",
+          "description": "Tutorial 03 pp. 15–16: size means bytes per element, nmemb means element count."
         }
       ],
       "keywords": [
         "binary I/O",
         "short read"
       ],
-      "note": "Do not write pointers or padded struct objects to disk expecting cross-platform portability."
+      "note": "<stdio.h>; both return complete-element counts. Never assume returned size equals nmemb without checking.",
+      "options": [
+        {
+          "flag": "ptr (fread)",
+          "description": "Writable destination array/buffer."
+        },
+        {
+          "flag": "ptr (fwrite)",
+          "description": "Readable source array/buffer."
+        },
+        {
+          "flag": "size",
+          "description": "Bytes in each element."
+        },
+        {
+          "flag": "nmemb",
+          "description": "Number of elements requested."
+        },
+        {
+          "flag": "stream",
+          "description": "An open input/output FILE* as appropriate."
+        }
+      ]
     },
     {
       "id": "c-fseek-ftell-rewind",
@@ -2496,19 +2685,45 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Change or inspect a stream's file position.",
-      "description": "fseek uses a long offset and an origin such as SEEK_SET, SEEK_CUR or SEEK_END. ftell reports a position indicator; rewind seeks to the start and clears errors. Text-stream offsets have portability restrictions.",
-      "syntax": "fseek(fp, 0, SEEK_SET);\nlong pos = ftell(fp);",
+      "description": "fseek changes a stream position using origin SEEK_SET (beginning), SEEK_CUR (current), or SEEK_END (end, with portability limits). ftell reads a position indicator; rewind returns to the beginning and clears stream indicators but has no return value for failure. With text streams, nonzero offsets must generally be values previously obtained from ftell and used with SEEK_SET; arbitrary byte offsets are appropriate only in suitable binary streams.",
+      "syntax": "int fseek(FILE *stream, long offset, int whence);\nlong ftell(FILE *stream);\nvoid rewind(FILE *stream);",
       "examples": [
         {
           "command": "#include <stdio.h>\nint main(void) {\n    FILE *fp = tmpfile();\n    if (!fp) return 1;\n    fputs(\"abc\", fp);\n    rewind(fp);\n    int ch = fgetc(fp);\n    fclose(fp);\n    return ch == 'a' ? 0 : 1;\n}\n",
           "description": "Returns to the beginning of a temporary stream."
+        },
+        {
+          "command": "/* fp is an open binary FILE*. */\nif (fseek(fp, 9L, SEEK_SET) != 0) { /* error */ }\nif (fputs(\" sam\", fp) == EOF) { /* error */ }",
+          "description": "Tutorial 03 p. 23: replace selected bytes of This is an apple. in place."
         }
       ],
       "keywords": [
         "seek",
         "file position"
       ],
-      "note": "For portable text streams, only use offsets obtained from ftell (and zero) as permitted by the standard."
+      "note": "fseek: 0 success/nonzero failure; ftell: position or -1L on error; rewind: void (inspect stream error state or use fseek when checking success is necessary).",
+      "options": [
+        {
+          "flag": "stream",
+          "description": "Open stream to position/inspect."
+        },
+        {
+          "flag": "offset",
+          "description": "Displacement as long, subject to text/binary stream rules."
+        },
+        {
+          "flag": "SEEK_SET",
+          "description": "Seek relative to file start."
+        },
+        {
+          "flag": "SEEK_CUR",
+          "description": "Seek relative to current position."
+        },
+        {
+          "flag": "SEEK_END",
+          "description": "Seek relative to end (binary stream support/behavior can vary)."
+        }
+      ]
     },
     {
       "id": "c-perror-errno",
@@ -2940,12 +3155,20 @@
       "category": "Build & Debugging",
       "type": "concept",
       "summary": "Compile and link C99 source code with warnings.",
-      "description": "gcc -std=c99 selects the C99 language mode; -Wall and -Wextra enable many useful diagnostics. -o chooses an output filename. Compiling is separate from executing the resulting binary.",
-      "syntax": "gcc -std=c99 -Wall -Wextra main.c -o main",
+      "description": "GCC is a compiler driver. Compile a source file into an object file with -c (do not link); link object files into an executable by omitting -c. Use -o to choose an output name, -g for debug information, -Wall for a useful subset of warnings (not literally all warnings), and -std=c99 for ISO C99 mode. -I finds headers, -L finds libraries at link time, and -lNAME requests libNAME. Commands conventionally return shell exit status 0 on success and nonzero on errors.",
+      "syntax": "gcc -g -Wall -std=c99 -c module.c -o module.o\ngcc -g main.o module.o -o program\ngcc main.o -Llib -lctest -o program",
       "examples": [
         {
           "command": "/* Save this file as main.c and compile with:\n   gcc -std=c99 -Wall -Wextra main.c -o main\n   ./main\n*/\n#include <stdio.h>\nint main(void) {\n    puts(\"compiled C program\");\n    return 0;\n}\n",
           "description": "A complete source file and shell commands to build and run it."
+        },
+        {
+          "command": "gcc -g -Wall -std=c99 -c my_file.c\ngcc -g my_file.o -o prog.exe",
+          "description": "Source syntax from Tutorial 04 p. 12: compile .c to .o then link .o to an executable."
+        },
+        {
+          "command": "gcc -Wall -c module1.c\ngcc -Wall -c module2.c\ngcc main.o module1.o module2.o -Lpath/to/library-directory -lctest -o prog.exe",
+          "description": "Adapted from Tutorial 04 p. 28; objects and library are linked, with consistent libctest name."
         }
       ],
       "keywords": [
@@ -2954,7 +3177,61 @@
         "flags",
         "link"
       ],
-      "note": "Warnings are valuable even when compilation succeeds."
+      "note": "Warnings are valuable even when compilation succeeds.",
+      "options": [
+        {
+          "flag": "-c",
+          "description": "Produce .o object files without linking."
+        },
+        {
+          "flag": "-o FILE",
+          "description": "Specify output filename."
+        },
+        {
+          "flag": "-g",
+          "description": "Include debug information for debuggers such as GDB."
+        },
+        {
+          "flag": "-Wall",
+          "description": "Enable common diagnostic warnings; not all GCC warnings."
+        },
+        {
+          "flag": "-Wextra",
+          "description": "Enable additional warnings."
+        },
+        {
+          "flag": "-std=c99",
+          "description": "Select ISO C99 language mode."
+        },
+        {
+          "flag": "-I DIR",
+          "description": "Add an include/header search path."
+        },
+        {
+          "flag": "-L DIR",
+          "description": "Add a library search path for the link stage."
+        },
+        {
+          "flag": "-l NAME",
+          "description": "Link using a library named libNAME."
+        },
+        {
+          "flag": "-fpic / -fPIC",
+          "description": "Generate position-independent code suitable for shared libraries on supporting targets."
+        },
+        {
+          "flag": "-shared",
+          "description": "Link as a shared library on supporting targets."
+        },
+        {
+          "flag": "-E",
+          "description": "Stop after preprocessing."
+        },
+        {
+          "flag": "-S",
+          "description": "Stop after source-to-assembly compilation."
+        }
+      ]
     },
     {
       "id": "c-separate-compilation-and-headers",
@@ -2962,12 +3239,16 @@
       "category": "Build & Debugging",
       "type": "concept",
       "summary": "Compile multiple C files into one program.",
-      "description": "A common design places public declarations in .h files and definitions in .c files. Each .c file becomes a translation unit. Include guards prevent duplicate processing, while the linker combines the object files.",
-      "syntax": "gcc -c module.c\ngcc main.o module.o -o program",
+      "description": "Put public declarations in module headers (.h) and function definitions in corresponding source files (.c). gcc -c compiles each source independently to .o; a subsequent gcc invocation links all required .o files into the executable. A declaration alone does not provide function code. Include headers where their declarations are needed, and list required objects during linking.",
+      "syntax": "gcc -c shape.c -o shape.o\ngcc -c circle.c -o circle.o\ngcc -c main.c -o main.o\ngcc main.o circle.o shape.o -o prog.exe",
       "examples": [
         {
           "command": "/* main.c */\n#include <stdio.h>\nint twice(int n);\nint main(void) { printf(\"%d\\n\", twice(3)); return 0; }\n\n/* module.c (separate file, shown for illustration) */\n/* int twice(int n) { return 2 * n; } */\n",
           "description": "Shows a function declaration and a second translation unit layout."
+        },
+        {
+          "command": "/* shape.h */\n#ifndef SHAPE_H\n#define SHAPE_H\nvoid shape_draw(void);\n#endif\n\n/* shape.c */\n#include \"shape.h\"\nvoid shape_draw(void) { }\n\n/* main.c */\n#include \"shape.h\"\nint main(void) { shape_draw(); return 0; }",
+          "description": "Three-file declaration/implementation example adapted from Tutorial 04 pp. 2–3 and 10. Each marked block belongs to its own file."
         }
       ],
       "keywords": [
@@ -2983,8 +3264,8 @@
       "category": "Build & Debugging",
       "type": "concept",
       "summary": "Define reproducible compilation targets and dependencies.",
-      "description": "make updates targets whose prerequisites are newer. Recipe lines normally begin with a tab character. A Makefile helps keep compilation options and multi-file dependencies consistent.",
-      "syntax": "CC = gcc\nCFLAGS = -std=c99 -Wall -Wextra\nprogram: main.c\n\t$(CC) $(CFLAGS) main.c -o program",
+      "description": "A Makefile declares build targets, prerequisites, and TAB-prefixed shell recipes. make normally builds a default target and rebuilds only targets that need updating. This C entry is an introductory bridge; the independent Make library contains a fuller guide to flags, rules, variables, archives and examples.",
+      "syntax": "CC = gcc\nCFLAGS = -std=c99 -Wall -g\nprogram: main.c\n\t$(CC) $(CFLAGS) main.c -o program",
       "examples": [
         {
           "command": "/* Save this C file as main.c, alongside a separate Makefile. */\n#include <stdio.h>\nint main(void) { puts(\"hello\"); return 0; }\n",
@@ -3066,12 +3347,16 @@
       "category": "Build & Debugging",
       "type": "concept",
       "summary": "Prevent a header's declarations from being processed more than once.",
-      "description": "A common pattern is #ifndef NAME_H / #define NAME_H / ... / #endif. Choose unique guard identifiers. #pragma once is widely supported but not standardized by C99.",
-      "syntax": "#ifndef MY_HEADER_H\n#define MY_HEADER_H\n/* declarations */\n#endif",
+      "description": "An include guard uses #ifndef/#define/#endif so that one header’s contents are processed at most once per translation unit, even when included through multiple paths. Repeated compatible function declarations are allowed in C; guards are especially important for typedefs, structure definitions and other header contents that cannot be repeated arbitrarily in a translation unit. Header guards do not prevent multiple non-static function definitions across different .c files.",
+      "syntax": "#ifndef SHAPE_H\n#define SHAPE_H\n\nvoid shape_draw(void);\n\n#endif",
       "examples": [
         {
           "command": "/* Example of a standalone header named my_header.h:\n#ifndef MY_HEADER_H\n#define MY_HEADER_H\nint add(int x, int y);\n#endif\n*/\nint main(void) { return 0; }\n",
           "description": "Illustrates a conventional portable header guard."
+        },
+        {
+          "command": "/* circle.h */\n#ifndef CIRCLE_H\n#define CIRCLE_H\n#include \"shape.h\"\nvoid circle_draw(void);\n#endif",
+          "description": "Nested include guards from Tutorial 04 p. 10, for indirect includes of shape.h."
         }
       ],
       "keywords": [
@@ -3125,7 +3410,7 @@
       "category": "Input & Output",
       "type": "function",
       "summary": "Read and write individual characters from/to a FILE stream.",
-      "description": "fgetc reads one byte/character from a FILE* stream and returns it as an unsigned char converted to int; it returns EOF on end-of-file or error. Use int rather than char for the result so EOF remains distinguishable. fputc writes a character to a stream.",
+      "description": "fgetc reads a character/byte from an input stream as an unsigned char converted to int, or EOF when end-of-file or a read error occurs. fputc writes a character converted to unsigned char to an output stream and returns that character converted to int, or EOF on write error. Use int for fgetc result so EOF is distinguishable.",
       "syntax": "int fgetc(FILE *stream);\nint fputc(int c, FILE *stream);",
       "examples": [
         {
@@ -3137,7 +3422,17 @@
         "stdio.h",
         "EOF"
       ],
-      "note": "Return values: fgetc returns a character value or EOF; fputc returns the character written (as unsigned char converted to int) or EOF on error."
+      "note": "fgetc: int character or EOF; fputc: written character or EOF. On fgetc EOF distinguish end from failure via feof/ferror.",
+      "options": [
+        {
+          "flag": "stream",
+          "description": "Stream to read from or write to."
+        },
+        {
+          "flag": "c (fputc)",
+          "description": "Character value, converted to unsigned char for output."
+        }
+      ]
     },
     {
       "id": "c-feof-ferror-clearerr",
@@ -3385,6 +3680,212 @@
         "2>"
       ],
       "note": "A stream does not itself return 0 or 1. Individual I/O calls have distinct return contracts, and main's exit status is separate from stderr output."
+    },
+    {
+      "id": "c-fflush",
+      "name": "fflush",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Flush buffered output without closing the stream.",
+      "description": "fflush(stream) requests that buffered unwritten output be passed to the underlying host environment; fflush(NULL) performs this for all open output streams. It does not close a stream. Calling fflush on an input-only stream is not a portable ISO C99 way to discard unread input.",
+      "syntax": "int fflush(FILE *stream);",
+      "options": [
+        {
+          "flag": "stream",
+          "description": "An output/update stream in a valid flushing state, or NULL to flush all output streams."
+        }
+      ],
+      "examples": [
+        {
+          "command": "if (fflush(stdout) == EOF) {\n    perror(\"fflush\");\n}",
+          "description": "Check an explicit output flush (Tutorial 03 p. 13; Workshop Live session p. 7)."
+        }
+      ],
+      "keywords": [
+        "stdio.h",
+        "flush",
+        "buffered output",
+        "stdout"
+      ],
+      "note": "Return value: 0 on success, EOF on error. Errors can also surface later at fclose."
+    },
+    {
+      "id": "c-static-archives-with-ar",
+      "name": "Static libraries and ar",
+      "category": "Build & Debugging",
+      "type": "concept",
+      "summary": "Package object files into a libNAME.a archive.",
+      "description": "On typical Unix-like systems, the ar tool creates static archives of .o files. GNU ar rcs inserts/replaces and indexes members; the lecture uses ar -cvq to create/quick-append and ar -t to list. The app linker can use -lctest to find libctest.a in configured library search paths. This is an external build tool, not a C-language keyword.",
+      "syntax": "ar -cvq libctest.a module1.o module2.o\nar -t libctest.a\ngcc main.o -L. -lctest -o program",
+      "options": [
+        {
+          "flag": "ar q",
+          "description": "Quick append operation."
+        },
+        {
+          "flag": "ar c",
+          "description": "Suppress create-archive diagnostic."
+        },
+        {
+          "flag": "ar v",
+          "description": "Print operations verbosely."
+        },
+        {
+          "flag": "ar t",
+          "description": "List archive members."
+        },
+        {
+          "flag": "ar rcs",
+          "description": "Common replace/create/index combination."
+        },
+        {
+          "flag": "gcc -L DIR",
+          "description": "Search DIR for linker libraries."
+        },
+        {
+          "flag": "gcc -l NAME",
+          "description": "Link against a matching libNAME."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ar -cvq libctest.a module1.o module2.o\nar -t libctest.a",
+          "description": "Tutorial 04 p. 26 examples, unchanged in intent; not executed."
+        }
+      ],
+      "keywords": [
+        "static library",
+        ".a",
+        "ar",
+        "-cvq",
+        "-t",
+        "-lctest"
+      ],
+      "note": "GNU ar: success returns 0; failures typically report a nonzero process exit status. GNU/Unix feature, not defined by ISO C99."
+    },
+    {
+      "id": "c-shared-libraries-gcc",
+      "name": "Shared libraries: -fPIC and -shared",
+      "category": "Build & Debugging",
+      "type": "concept",
+      "summary": "Create a Linux shared-object library and link against it.",
+      "description": "For typical ELF/Linux targets, compile with -fPIC (position-independent code), link .o with -shared to a libNAME.so file, and link consumers with -L DIR -lNAME. This does not guarantee runtime loader discovery. The lecture demonstrates -fpic and -shared; object/source naming typos are normalized in the sample.",
+      "syntax": "gcc -fPIC -c module1.c -o module1.o\ngcc -shared module1.o -o libctest.so\ngcc main.o -L. -lctest -o program",
+      "options": [
+        {
+          "flag": "-fPIC / -fpic",
+          "description": "Produce suitable position-independent code (target-specific model)."
+        },
+        {
+          "flag": "-shared",
+          "description": "Produce a shared object."
+        },
+        {
+          "flag": "-L DIR",
+          "description": "Link-time library directory."
+        },
+        {
+          "flag": "-l NAME",
+          "description": "Resolve library libNAME through linker search."
+        }
+      ],
+      "examples": [
+        {
+          "command": "gcc -fPIC -c module1.c -o module1.o\ngcc -shared module1.o -o libctest.so",
+          "description": "Adapted from Tutorial 04 p. 27, with consistent names; commands shown for syntax only."
+        }
+      ],
+      "keywords": [
+        "shared library",
+        ".so",
+        "position independent",
+        "dynamic",
+        "-shared"
+      ],
+      "note": "Linux/ELF-specific; exact naming and runtime loading practices differ on other platforms."
+    },
+    {
+      "id": "c-library-name-and-link-search",
+      "name": "Library naming and -L / -l",
+      "category": "Build & Debugging",
+      "type": "concept",
+      "summary": "Find libNAME.a or libNAME.so during linking.",
+      "description": "GCC forwards -L DIR to the linker as a directory in which to search for libraries; -lNAME asks the linker to search for a corresponding library such as libNAME.so or libNAME.a. The link command’s order can matter, especially for static libraries. The existence of a shared library at link time does not ensure it is found at runtime.",
+      "syntax": "gcc main.o -Lpath/to/library-directory -lctest -o prog.exe",
+      "options": [
+        {
+          "flag": "-L DIR",
+          "description": "Add a linker search directory."
+        },
+        {
+          "flag": "-l NAME",
+          "description": "Search for libNAME."
+        },
+        {
+          "flag": "-o FILE",
+          "description": "Name resulting executable."
+        }
+      ],
+      "examples": [
+        {
+          "command": "gcc module1.o module2.o -o prog.exe -Lpath/to/library-directory -lctest",
+          "description": "Tutorial 04 p. 28 example; library name -lctest corresponds to libctest."
+        }
+      ],
+      "keywords": [
+        "-L",
+        "-l",
+        "linker",
+        "libctest",
+        "library path"
+      ]
+    },
+    {
+      "id": "c-tmpfile",
+      "name": "tmpfile",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Create an anonymous temporary binary file stream.",
+      "description": "tmpfile creates a temporary binary update stream that is automatically removed upon successful normal program termination and when closed; exact implementation is platform-dependent. Useful for scratch I/O without choosing a named file. This is supporting standard-library content used in sample drafts, not a headline function in the slides.",
+      "syntax": "FILE *tmpfile(void);",
+      "examples": [
+        {
+          "command": "FILE *fp = tmpfile();\nif (fp == NULL) { perror(\"tmpfile\"); }\nelse { fclose(fp); }",
+          "description": "Temporary FILE* stream, with NULL check."
+        }
+      ],
+      "keywords": [
+        "stdio.h",
+        "temporary file"
+      ],
+      "note": "Return value: FILE* on success, NULL on failure."
+    },
+    {
+      "id": "c-remove",
+      "name": "remove",
+      "category": "Input & Output",
+      "type": "function",
+      "summary": "Delete a named file (or supported directory).",
+      "description": "remove requests deletion of a file by path. If the path refers to an open file, behavior is implementation-defined in ISO C. Do not call it merely to close a stream; use fclose for that. This is supporting standard-library content, not a central topic of the slides.",
+      "syntax": "int remove(const char *filename);",
+      "options": [
+        {
+          "flag": "filename",
+          "description": "NUL-terminated pathname to delete."
+        }
+      ],
+      "examples": [
+        {
+          "command": "if (remove(\"obsolete.tmp\") != 0) {\n    perror(\"remove\");\n}",
+          "description": "Show the deletion API and status test; do not run this against personal files."
+        }
+      ],
+      "keywords": [
+        "stdio.h",
+        "delete",
+        "unlink"
+      ],
+      "note": "Return value: 0 on success, nonzero on failure. This operation deletes a named file: avoid executing unreviewed examples."
     }
   ],
   "topics": [
@@ -4828,6 +5329,160 @@
         "alignment",
         "mask",
         "pointer cast"
+      ]
+    },
+    {
+      "id": "c-guide-module-declaration-and-linking",
+      "type": "guide",
+      "name": "Modules, declarations, object files and linking",
+      "category": "Build & Debugging",
+      "summary": "Understand a multi-file C application from headers to executable.",
+      "description": "Tutorial 04 pp. 2–12 distinguishes declaration, implementation, compilation and linking. This is about C and GCC; the independent Make library automates the commands.",
+      "sections": [
+        {
+          "title": "Interface vs implementation",
+          "body": "A .h commonly declares a public interface; a .c supplies definitions and private state. The public header can be included in several .c files. Avoid including .c implementation files into one another.",
+          "items": []
+        },
+        {
+          "title": "Compile separately",
+          "body": "gcc -c module.c -o module.o produces an object file. This does not link the application.",
+          "items": []
+        },
+        {
+          "title": "Link objects",
+          "body": "gcc main.o shape.o circle.o -o program connects referenced external definitions to produce a program. Every referenced non-library function must have a matching definition in the objects/libraries used.",
+          "items": []
+        },
+        {
+          "title": "Header guards",
+          "body": "Use #ifndef/#define/#endif to avoid processing the same header contents more than once within a translation unit. Compatible repeated prototypes alone are not generally compile errors.",
+          "items": []
+        },
+        {
+          "title": "static visibility",
+          "body": "A file-scope static function or object has internal linkage. A block-scope static variable has persistent storage duration, a different consideration.",
+          "items": []
+        },
+        {
+          "title": "Tools and statuses",
+          "body": "GCC exit 0 means command success, nonzero means a compilation/linking error; object files and headers themselves have no function return status.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "/* shape.h */\n#ifndef SHAPE_H\n#define SHAPE_H\nvoid shape_draw(void);\n#endif\n\n/* shape.c */\n#include \"shape.h\"\nvoid shape_draw(void) {}\n\n/* main.c */\n#include \"shape.h\"\nint main(void) { shape_draw(); return 0; }",
+          "description": "Each labelled section belongs in its named file. Syntax illustration only; not compiled."
+        }
+      ],
+      "keywords": [
+        "module",
+        "object file",
+        "linker",
+        "static",
+        "header guard"
+      ]
+    },
+    {
+      "id": "c-guide-static-versus-shared-libraries",
+      "type": "guide",
+      "name": "Static archives versus Linux shared libraries",
+      "category": "Build & Debugging",
+      "summary": "Choose how C object code is packaged and linked.",
+      "description": "Tutorial 04 pp. 24–28 contrasts .a archives and .so shared objects, and introduces ar, -L, -l, -fpic and -shared.",
+      "sections": [
+        {
+          "title": "Static archive",
+          "body": ".a is an archive of object files; ar -cvq and ar -t are illustrated in the slides. The familiar ar rcs combination creates/replaces and indexes members.",
+          "items": []
+        },
+        {
+          "title": "Shared object",
+          "body": ".so is a dynamically linked library on typical Linux/ELF systems, commonly built by compiling PIC objects and linking with -shared.",
+          "items": []
+        },
+        {
+          "title": "Link step",
+          "body": "-lctest matches a library named libctest.so or libctest.a; -L adds a search directory for the linker. Place libraries after objects that use them in an ordinary link command.",
+          "items": []
+        },
+        {
+          "title": "Loading step",
+          "body": "Runtime shared-library discovery is a separate concern from -L. No source example here claims a deployment configuration for every Linux distribution.",
+          "items": []
+        },
+        {
+          "title": "Source inconsistencies",
+          "body": "Tutorial 04 p. 27 has inconsistent my-library.c/linked-list.c names; p. 23 has CLINK vs CCLINK. Those examples are corrected for clear syntax.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "ar -cvq libctest.a module1.o module2.o\nar -t libctest.a",
+          "description": "Both forms shown on Tutorial 04 p. 26."
+        },
+        {
+          "command": "gcc -fPIC -c my-library.c -o my-library.o\ngcc -shared my-library.o -o libmy-library.so",
+          "description": "Names made consistent while following Tutorial 04 p. 27."
+        }
+      ],
+      "keywords": [
+        ".a",
+        ".so",
+        "ar",
+        "dynamic",
+        "static"
+      ]
+    },
+    {
+      "id": "c-guide-file-descriptors-versus-streams",
+      "type": "guide",
+      "name": "File descriptors versus C FILE* streams",
+      "category": "Input & Output",
+      "summary": "Contrast Linux descriptors and standard C buffered streams.",
+      "description": "Tutorial 03 pp. 2–12 and Workshop Live session pp. 3–7 compare low-level Unix I/O and ISO C standard I/O.",
+      "sections": [
+        {
+          "title": "Two interfaces",
+          "body": "ISO C functions such as fopen, fread, fprintf, fseek and fclose use FILE*. POSIX interfaces such as open, read, write, lseek and close use integer file descriptors.",
+          "items": []
+        },
+        {
+          "title": "Standard input and output",
+          "body": "A typical POSIX process starts with descriptors 0, 1, and 2 for stdin, stdout and stderr, although redirection may change what each connects to. ISO C does not define descriptor numbers.",
+          "items": []
+        },
+        {
+          "title": "Buffering",
+          "body": "FILE* may buffer input/output; flushing and seeking can affect what is observed. Do not intermix independent low-level and stream operations on the same file without observing POSIX active-handle rules.",
+          "items": []
+        },
+        {
+          "title": "Independent openings",
+          "body": "Two separate fopen calls of the same file normally maintain independent file positions; two descriptors shared using dup or after fork can share an open-file description and offset on POSIX.",
+          "items": []
+        },
+        {
+          "title": "Return conventions",
+          "body": "fopen returns FILE* or NULL; fread/fwrite count elements; fseek returns 0/nonzero; fclose returns 0/EOF; low-level calls have their own documented contracts.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "FILE *left = fopen(\"foobar.txt\", \"r\");\nFILE *right = fopen(\"foobar.txt\", \"r\");\n/* Check each open; use and close both streams. */",
+          "description": "Tutorial 03 pp. 19–20: independent opens; conceptual syntax sample, not executed."
+        }
+      ],
+      "keywords": [
+        "FILE*",
+        "POSIX",
+        "file descriptor",
+        "stdin",
+        "stdout",
+        "stderr"
       ]
     }
   ]

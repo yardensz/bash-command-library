@@ -4,7 +4,7 @@ This repository powers the public website at https://yardensz.github.io/bash-com
 
 ## Purpose
 
-One shared, English-only, searchable, offline-friendly reference website with independent knowledge libraries for Bash and C / C++. The UI is shared; each library owns its content, release history and cached data.
+One shared, English-only, searchable, offline-friendly reference website with independent knowledge libraries for Bash, C / C++, and GNU Make. The UI is shared; each library owns its content, release history and cached data.
 
 ## Libraries and files
 
@@ -12,21 +12,22 @@ One shared, English-only, searchable, offline-friendly reference website with in
 | --- | --- | --- | --- |
 | Bash | `commands.json` | `versions.json` | `history/<version>.json` |
 | C / C++ | `libraries/c-cpp.json` | `libraries/c-cpp-versions.json` | `libraries/history/c-cpp/<version>.json` |
+| GNU Make | `libraries/make.json` | `libraries/make-versions.json` | `libraries/history/make/<version>.json` |
 
 `libraries.json` is the catalog defining available libraries, labels, search hints, categories and data file paths. `index.html`, `app.js` and `styles.css` provide the shared interface. `sw.js` provides static/offline caching.
 
-**Never replace or delete the Bash data when editing C / C++.** Do not modify the shared UI unless specifically requested. Read the current files directly from GitHub before edits; do not rely on information from another chat as the current source of truth.
+**Never replace or delete the Bash data when editing C / C++ or GNU Make.** Do not modify the shared UI unless specifically requested. Read the current files directly from GitHub before edits; do not rely on information from another chat as the current source of truth.
 
 ## Current C / C++ status
 
-The C / C++ library was created as an intentionally **empty scaffold**, version `0.1.0`. No C or C++ explanations, examples or definitions have yet been written. Content will be created in a separate ChatGPT conversation.
+The C / C++ library is populated with C99-oriented material, now version `1.4.0` with 151 reference entries and 33 guides. Preserve C and C++ language-standard distinctions when adding future material.
 
 The library is selected through the dropdown in the website header. Direct link:
 https://yardensz.github.io/bash-command-library/?library=c-cpp
 
 ## Content schema
 
-Both data files follow a shared, extensible structure:
+The library data files follow a shared, extensible structure:
 
 ```json
 {
@@ -99,7 +100,7 @@ Choose a category from `libraries.json`. If a needed category is absent, update 
 8. Commit with an informative English message. Do not rewrite old snapshots.
 9. The website's **Check for updates** action fetches the newest files; GitHub Pages deployment/caching can delay when users see changes.
 
-The two libraries have **independent version numbers**. A C / C++ content release does not require changing Bash's `commands.json`, `versions.json`, or Bash snapshot files.
+The libraries have **independent version numbers**. A C / C++ content release does not require changing Bash's `commands.json`, `versions.json`, or Bash snapshot files.
 
 ## Instructions for a separate ChatGPT conversation
 
@@ -108,3 +109,13 @@ Copy the following message into a fresh conversation. The new chat should use it
 > I want to build the C / C++ reference library in my existing GitHub Pages website. Repository: https://github.com/yardensz/bash-command-library. Read `LIBRARY_GUIDE.md`, `libraries.json`, `libraries/c-cpp.json` and `libraries/c-cpp-versions.json` from GitHub before changing anything. We are editing **only the C / C++ content and its own version history**, not the Bash reference or the shared UI unless I ask. The site and all reference material must be in **English**; we can chat in Hebrew. Help me develop accurate, beginner-friendly, searchable entries with concise examples and relevant language-standard distinctions. Keep versioned snapshots and update the repo when I explicitly request it. Start by asking which C / C++ topic I want to add.
 
 This document is the durable cross-chat handoff. GitHub files are the source of truth, not conversational memory.
+
+## GNU Make reference library
+
+The independent GNU Make library is selected using `?library=make`. Its initial release is `0.1.0` (26 reference entries, six guides), with content in `libraries/make.json`, release metadata in `libraries/make-versions.json`, and immutable snapshots in `libraries/history/make/<version>.json`.
+
+- Distinguish GNU Make command-line flags (for example `-f`, `-j`, `-n`), Makefile constructs (for example `$@`, `$(CC)`, `.PHONY`), GCC options, GNU ar options, and C function parameters.
+- For each Make release, update content and release metadata together and create an immutable snapshot. All three libraries maintain independent version histories.
+- Shared UI files and Bash data are not part of a Make content update; modifying them requires a separate explicit request.
+- The existing `sw.js` pre-cache list was not changed for this new library. Content can be cached when visited online, but a first offline visit may not have the new Make files.
+- Treat examples as syntax illustrations. Do not execute or compile them in content reviews without explicit approval.

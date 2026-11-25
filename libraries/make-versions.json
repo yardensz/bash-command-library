@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "latestVersion": "0.1.0",
+  "releases": [
+    {
+      "version": "0.1.0",
+      "date": "2026-11-25",
+      "title": "GNU Make course reference: modules, rules and libraries",
+      "summary": "Initial independent Make knowledge library built from Tutorials 03–04 and Workshops 03: targets, dependency graphs, Makefile syntax, variables, flags, archives and shared linking.",
+      "commandCount": 26,
+      "topicCount": 6,
+      "snapshot": "libraries/history/make/0.1.0.json"
+    }
+  ]
+}

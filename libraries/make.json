@@ -1,0 +1,1223 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "updatedAt": "2026-11-25",
+  "commands": [
+    {
+      "id": "make-command",
+      "name": "make",
+      "category": "Command-line Interface",
+      "type": "command",
+      "summary": "Build targets from rules and prerequisites.",
+      "description": "GNU Make reads a makefile and updates requested targets if missing or older than ordinary prerequisites; it may call the shell for recipes. A target’s successful build is NOT the same as a C function returning a value. With ordinary operation, exit 0 means success; exit 2 means errors. With -q, exit 1 means a target needs updating.",
+      "syntax": "make [OPTIONS] [TARGET ...] [VARIABLE=VALUE ...]",
+      "options": [
+        {
+          "flag": "-f FILE / --file=FILE",
+          "description": "Read FILE as a makefile rather than using the ordinary default search."
+        },
+        {
+          "flag": "-C DIR / --directory=DIR",
+          "description": "Change working directory before reading makefiles or working on targets."
+        },
+        {
+          "flag": "-j [N] / --jobs[=N]",
+          "description": "Allow up to N recipe jobs in parallel; no N means unlimited jobs. Guard against unsafe parallel recipes."
+        },
+        {
+          "flag": "-l [LOAD] / --load-average[=LOAD]",
+          "description": "Limit launching new jobs based on system load average."
+        },
+        {
+          "flag": "-n / --just-print / --dry-run / --recon",
+          "description": "Print intended recipes without normally running them; recursive make recipes and + recipe prefixes are important exceptions."
+        },
+        {
+          "flag": "-B / --always-make",
+          "description": "Consider all targets out of date and rebuild them."
+        },
+        {
+          "flag": "-q / --question",
+          "description": "Question whether targets are current: status 0 current, 1 needs update, 2 error; do not normally run build recipes."
+        },
+        {
+          "flag": "-k / --keep-going",
+          "description": "Continue independent targets after a recipe failure when possible."
+        },
+        {
+          "flag": "-S / --no-keep-going",
+          "description": "Cancel keep-going mode."
+        },
+        {
+          "flag": "-s / --silent / --quiet",
+          "description": "Suppress recipe echoing, not necessarily all tool output."
+        },
+        {
+          "flag": "-i / --ignore-errors",
+          "description": "Ignore recipe errors; dangerous if a failed step should stop the build."
+        },
+        {
+          "flag": "-r / --no-builtin-rules",
+          "description": "Disable built-in implicit rules."
+        },
+        {
+          "flag": "-R / --no-builtin-variables",
+          "description": "Disable built-in variable definitions; also implies -r."
+        },
+        {
+          "flag": "-e / --environment-overrides",
+          "description": "Let environment variable assignments override makefile assignments in general."
+        },
+        {
+          "flag": "-I DIR / --include-dir=DIR",
+          "description": "Search DIR for included makefile fragments."
+        },
+        {
+          "flag": "-p / --print-data-base",
+          "description": "Print make’s rules and variable database."
+        },
+        {
+          "flag": "-d",
+          "description": "Print extensive debug information about decisions and dependencies."
+        },
+        {
+          "flag": "--debug[=FLAGS]",
+          "description": "Enable selected debugging information; GNU make specific."
+        },
+        {
+          "flag": "--trace",
+          "description": "Show concise why/when recipes are run."
+        },
+        {
+          "flag": "--warn-undefined-variables",
+          "description": "Warn about references to undefined variables."
+        },
+        {
+          "flag": "-t / --touch",
+          "description": "Mark targets up to date without running their ordinary recipes; special exceptions exist."
+        },
+        {
+          "flag": "-o FILE / --old-file=FILE",
+          "description": "Treat FILE as very old for dependency decisions."
+        },
+        {
+          "flag": "-W FILE / --what-if=FILE",
+          "description": "Pretend FILE was recently modified for update decisions."
+        },
+        {
+          "flag": "-w / --print-directory",
+          "description": "Print entering/leaving working-directory messages."
+        },
+        {
+          "flag": "--no-print-directory",
+          "description": "Suppress automatic directory messages."
+        },
+        {
+          "flag": "-O[TYPE] / --output-sync[=TYPE]",
+          "description": "Synchronize recipe output, especially with parallel builds."
+        },
+        {
+          "flag": "-v / --version",
+          "description": "Display GNU Make version information."
+        },
+        {
+          "flag": "-h / --help",
+          "description": "Display command help."
+        }
+      ],
+      "examples": [
+        {
+          "command": "make",
+          "description": "Build the default goal in the selected makefile."
+        },
+        {
+          "command": "make -f course.mk prog.exe",
+          "description": "Use a named makefile and request a particular target."
+        },
+        {
+          "command": "make -n clean",
+          "description": "Preview the clean recipe; read the caveat about special recursive make handling."
+        },
+        {
+          "command": "make -j4 all",
+          "description": "Build up to four independent jobs at once."
+        }
+      ],
+      "keywords": [
+        "GNU Make",
+        "GNU Make flags",
+        "-f",
+        "-n",
+        "-j",
+        "-q",
+        "return status",
+        "target"
+      ],
+      "note": "Do not equate make exit status with the return status of functions called from C. -n/-t/-q have documented exceptions involving recursive make."
+    },
+    {
+      "id": "make-rule",
+      "name": "Targets and prerequisites",
+      "category": "Targets & Dependencies",
+      "type": "concept",
+      "summary": "Declare what depends on what.",
+      "description": "A target rule has a target, prerequisite files or targets, and optional recipe. GNU Make tries to update prerequisites first. File timestamps and missing targets commonly determine whether a recipe runs. A non-file target often needs .PHONY.",
+      "syntax": "target: prerequisite1 prerequisite2\n\tcommand",
+      "options": [
+        {
+          "flag": "target",
+          "description": "The file or logical goal to make."
+        },
+        {
+          "flag": "prerequisites",
+          "description": "Dependencies to update/check before the target."
+        },
+        {
+          "flag": "recipe",
+          "description": "One or more recipe lines, each introduced by a TAB by default."
+        }
+      ],
+      "examples": [
+        {
+          "command": "shape.o: shape.c shape.h\n\tgcc -std=c99 -Wall -c shape.c -o shape.o",
+          "description": "Object file depends on source AND its header, following Tutorial 04 p. 20."
+        }
+      ],
+      "keywords": [
+        "rule syntax",
+        "target",
+        "dependencies",
+        "timestamp",
+        "prerequisite"
+      ]
+    },
+    {
+      "id": "make-default-goal",
+      "name": "Default goal",
+      "category": "Fundamentals",
+      "type": "concept",
+      "summary": "Choose which target a plain make builds.",
+      "description": "The default goal is normally the first appropriate target in the first makefile, unless .DEFAULT_GOAL selects one. The .PHONY declaration itself does not become the default goal. Explicitly asking make for a target overrides the default.",
+      "syntax": "all: program\n\t@echo \"Ready\"",
+      "options": [
+        {
+          "flag": ".DEFAULT_GOAL := all",
+          "description": "Explicitly select all as the default goal."
+        }
+      ],
+      "examples": [
+        {
+          "command": "all: program\n\nprogram: main.c\n\tgcc main.c -o program",
+          "description": "Plain make tries to build all, which needs program."
+        }
+      ],
+      "keywords": [
+        "first rule",
+        "default target",
+        ".DEFAULT_GOAL"
+      ]
+    },
+    {
+      "id": "make-f",
+      "name": "make -f",
+      "category": "Command-line Interface",
+      "type": "command",
+      "summary": "Choose a non-default makefile.",
+      "description": "Use -f or --file to read a specified makefile. You may give multiple -f options; each file contributes rules/definitions. GNU Make otherwise searches GNUmakefile, makefile, then Makefile.",
+      "syntax": "make -f FILE [TARGET]",
+      "options": [
+        {
+          "flag": "-f FILE",
+          "description": "Makefile path to read."
+        },
+        {
+          "flag": "--file=FILE",
+          "description": "Long form of the same choice."
+        }
+      ],
+      "examples": [
+        {
+          "command": "make -f build.mk clean",
+          "description": "Select build.mk and invoke its clean rule, as in Tutorial 04 p. 22."
+        }
+      ],
+      "keywords": [
+        "custom makefile",
+        "makefile name"
+      ]
+    },
+    {
+      "id": "make-timestamp-dependency",
+      "name": "Incremental rebuilds",
+      "category": "Targets & Dependencies",
+      "type": "concept",
+      "summary": "Recompile only changed targets and dependents.",
+      "description": "GNU Make considers an ordinary file target out of date when it is missing or an ordinary prerequisite is newer. When a header changes, every object file that depends on it may need recompilation, followed by relinking the executable. Accurate dependency lists matter.",
+      "syntax": "prog.exe: shape.o circle.o main.o\n\t$(CC) $^ -o $@",
+      "examples": [
+        {
+          "command": "circle.o: circle.c circle.h shape.h\n\t$(CC) $(CFLAGS) -c circle.c -o $@",
+          "description": "Changing shape.h causes circle.o to be reconsidered; rebuilding an object can cause program relinking."
+        }
+      ],
+      "keywords": [
+        "incremental",
+        "dependency graph",
+        "recompile",
+        "newer",
+        "timestamps"
+      ]
+    },
+    {
+      "id": "make-recipe-tab",
+      "name": "Recipe lines and TAB",
+      "category": "Recipes & Shell",
+      "type": "concept",
+      "summary": "Understand why recipes begin with a TAB.",
+      "description": "With GNU Make’s default recipe prefix, a recipe line must begin with a real TAB, not spaces. The tabbed text is interpreted as shell command(s) at execution time. .RECIPEPREFIX can change the prefix in GNU Make; this reference uses TAB.",
+      "syntax": "program: main.c\n\tgcc main.c -o program",
+      "examples": [
+        {
+          "command": "clean:\n\trm -f *.o prog.exe",
+          "description": "The indentation before rm is a TAB character."
+        }
+      ],
+      "keywords": [
+        "tab",
+        "recipe",
+        "missing separator",
+        "shell"
+      ]
+    },
+    {
+      "id": "make-variables",
+      "name": "Makefile variables: =, :=, ?=, +=",
+      "category": "Variables & Expansion",
+      "type": "concept",
+      "summary": "Set variables and control when they are expanded.",
+      "description": "= makes a recursively expanded variable evaluated when used; := expands immediately; ?= assigns only if the variable is undefined; += appends (flavor-dependent evaluation). Use $(NAME) or ${NAME} to reference one. Command-line NAME=value can override an ordinary makefile assignment.",
+      "syntax": "CC = gcc\nCFLAGS := -std=c99 -Wall\nCFLAGS += -g\nMODE ?= debug",
+      "options": [
+        {
+          "flag": "=",
+          "description": "Recursive/deferred expansion."
+        },
+        {
+          "flag": ":=",
+          "description": "Immediate/simple expansion."
+        },
+        {
+          "flag": "?=",
+          "description": "Assign only if undefined."
+        },
+        {
+          "flag": "+=",
+          "description": "Append to an existing value."
+        },
+        {
+          "flag": "$(NAME)",
+          "description": "Expand the named make variable."
+        }
+      ],
+      "examples": [
+        {
+          "command": "CC = gcc\nCFLAGS = -Wall -g -std=c99\nOBJS = main.o circle.o shape.o\nprog.exe: $(OBJS)\n\t$(CC) $(OBJS) -o $@",
+          "description": "Variable names mirror Tutorial 04 p. 23; one spelling is used consistently."
+        }
+      ],
+      "keywords": [
+        "CC",
+        "CFLAGS",
+        "OBJS",
+        "variable assignment",
+        "recursive",
+        "simply expanded"
+      ]
+    },
+    {
+      "id": "make-common-variables",
+      "name": "CC / CFLAGS / CPPFLAGS / LDFLAGS / LDLIBS",
+      "category": "Variables & Expansion",
+      "type": "concept",
+      "summary": "Use conventional compiler and linker variables.",
+      "description": "CC typically names the C compiler; CPPFLAGS supplies preprocessor options (-I/-D); CFLAGS supplies C compilation options; LDFLAGS supplies linker options (such as -L); LDLIBS supplies libraries (such as -lm). These are conventional names, not hard-coded commands, and recipes must use them.",
+      "syntax": "CC = gcc\nCPPFLAGS = -Iinclude\nCFLAGS = -std=c99 -Wall -g\nLDFLAGS = -Llib\nLDLIBS = -lctest",
+      "examples": [
+        {
+          "command": "program: main.o module.o\n\t$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@",
+          "description": "Separate object input, library search flags, and library selection."
+        }
+      ],
+      "keywords": [
+        "compiler variables",
+        "CC",
+        "CPPFLAGS",
+        "CFLAGS",
+        "LDFLAGS",
+        "LDLIBS"
+      ]
+    },
+    {
+      "id": "make-automatic-vars",
+      "name": "Automatic variables: $@, $<, $^, $?",
+      "category": "Automatic Variables",
+      "type": "concept",
+      "summary": "Reuse current target and prerequisite names inside recipes.",
+      "description": "$@ expands to target; $< is the first prerequisite (typically in a compile rule); $^ is all ordinary prerequisites without duplicates; $? is ordinary prerequisites newer than the target; $+ preserves duplicates. These are defined in recipe contexts; do not assume they are always available in arbitrary makefile text.",
+      "syntax": "%.o: %.c\n\t$(CC) $(CFLAGS) -c $< -o $@",
+      "options": [
+        {
+          "flag": "$@",
+          "description": "The target file name."
+        },
+        {
+          "flag": "$<",
+          "description": "First prerequisite."
+        },
+        {
+          "flag": "$^",
+          "description": "All normal prerequisites, deduplicated."
+        },
+        {
+          "flag": "$?",
+          "description": "Prerequisites newer than target."
+        },
+        {
+          "flag": "$+",
+          "description": "All prerequisites with duplicates kept."
+        },
+        {
+          "flag": "$*",
+          "description": "Stem matched by a pattern rule."
+        }
+      ],
+      "examples": [
+        {
+          "command": "prog.exe: main.o circle.o shape.o\n\t$(CC) $^ -o $@",
+          "description": "Use $^ for all objects and $@ for executable name."
+        }
+      ],
+      "keywords": [
+        "automatic variables",
+        "dollar at",
+        "dollar less",
+        "dollar caret",
+        "dollar question"
+      ]
+    },
+    {
+      "id": "make-dollar-escaping",
+      "name": "$$ in recipes",
+      "category": "Recipes & Shell",
+      "type": "concept",
+      "summary": "Pass literal dollar signs through Make to the shell.",
+      "description": "Make processes its own $ syntax before the shell sees a recipe. Use $$ to pass one dollar sign into the shell, e.g., $$HOME or $$i. Compare with $(CC), which is expanded by Make itself.",
+      "syntax": "show:\n\t@echo \"$$HOME\"",
+      "examples": [
+        {
+          "command": "count:\n\t@for n in 1 2 3; do echo \"$$n\"; done",
+          "description": "A shell loop variable is written $$n inside a Make recipe."
+        }
+      ],
+      "keywords": [
+        "shell variable",
+        "dollar dollar",
+        "escape",
+        "$(...)"
+      ]
+    },
+    {
+      "id": "make-phony",
+      "name": ".PHONY",
+      "category": "Targets & Dependencies",
+      "type": "concept",
+      "summary": "Declare logical targets that do not represent generated files.",
+      "description": ".PHONY marks goals like all and clean as commands/goals, not real file outputs. This prevents an accidental file named clean from blocking the recipe and avoids implicit rule search for those targets.",
+      "syntax": ".PHONY: all clean\nall: program\nclean:\n\trm -f program *.o",
+      "examples": [
+        {
+          "command": ".PHONY: clean\nclean:\n\trm -f main.o program",
+          "description": "The clean recipe remains available even if a file named clean exists."
+        }
+      ],
+      "keywords": [
+        "clean",
+        "phony goal",
+        "always run"
+      ]
+    },
+    {
+      "id": "make-clean",
+      "name": "make clean",
+      "category": "Fundamentals",
+      "type": "concept",
+      "summary": "Remove generated build outputs deliberately.",
+      "description": "clean is a conventional user-defined Make target, not a built-in Make command. Invoke make clean only when you intend deletion; its recipe can remove files. Prefer a narrowly scoped list rather than sweeping deletion, and mark the target .PHONY.",
+      "syntax": "make clean",
+      "examples": [
+        {
+          "command": ".PHONY: clean\nclean:\n\trm -f $(OBJS) prog.exe",
+          "description": "Safer adaptation of the clean target shown in Tutorial 04 p. 23."
+        }
+      ],
+      "keywords": [
+        "clean target",
+        "rm -f",
+        "remove outputs"
+      ],
+      "note": "A clean recipe may delete files; merely showing this example is not permission to run it."
+    },
+    {
+      "id": "make-pattern-rules",
+      "name": "Pattern rules with %",
+      "category": "Built-in Rules",
+      "type": "concept",
+      "summary": "Describe one compile rule for many .c files.",
+      "description": "% matches a filename stem. An explicit pattern rule such as %.o: %.c can create multiple object files without repeating commands. Header prerequisites still need correct dependency tracking; automatic .d file generation is one advanced option.",
+      "syntax": "%.o: %.c\n\t$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@",
+      "examples": [
+        {
+          "command": "%.o: %.c\n\t$(CC) -Wall -std=c99 -c $< -o $@",
+          "description": "Works for module.c -> module.o when prerequisites are suitable."
+        }
+      ],
+      "keywords": [
+        "pattern",
+        "implicit rule",
+        "percent",
+        "object file"
+      ]
+    },
+    {
+      "id": "make-implicit",
+      "name": "Built-in implicit rules",
+      "category": "Built-in Rules",
+      "type": "concept",
+      "summary": "Use GNU Make’s built-in ways to build common targets.",
+      "description": "GNU Make has predefined rules for common transformations (including .c to .o), usually based on standard variables. An explicit rule may specify prerequisites yet omit the recipe, allowing an applicable built-in rule to provide the compile command. This is not guaranteed after -r or when rules/variables change.",
+      "syntax": "circle.o: circle.c circle.h shape.h",
+      "examples": [
+        {
+          "command": "circle.o: circle.c circle.h shape.h",
+          "description": "Mirrors the no-recipe circle.o rule in Tutorial 04 p. 23; built-in rule may supply compilation."
+        }
+      ],
+      "keywords": [
+        "implicit rule",
+        "built in",
+        "circle.o",
+        "-r"
+      ]
+    },
+    {
+      "id": "make-includes",
+      "name": "include / -include",
+      "category": "Variables & Expansion",
+      "type": "keyword",
+      "summary": "Read additional Makefile fragments.",
+      "description": "include file.mk reads another makefile; -include file.mk or sinclude file.mk ignores a missing/unremakeable included file without an error. A common advanced use is automatically generated .d dependency files.",
+      "syntax": "include config.mk\n-include $(OBJS:.o=.d)",
+      "examples": [
+        {
+          "command": "-include main.d circle.d shape.d",
+          "description": "Ignore missing generated header dependency files on a first build."
+        }
+      ],
+      "keywords": [
+        "include directive",
+        "make .d",
+        "header dependencies"
+      ]
+    },
+    {
+      "id": "make-conditional",
+      "name": "ifeq / ifneq / ifdef / ifndef",
+      "category": "Variables & Expansion",
+      "type": "keyword",
+      "summary": "Choose makefile definitions conditionally.",
+      "description": "Make conditionals decide which makefile lines to interpret while Make reads the file. They are not shell if statements. Match each conditional with endif.",
+      "syntax": "ifeq ($(MODE),debug)\nCFLAGS += -g\nendif",
+      "examples": [
+        {
+          "command": "MODE ?= release\nifeq ($(MODE),debug)\nCFLAGS += -g\nendif",
+          "description": "Enable debug symbols when MODE=debug."
+        }
+      ],
+      "keywords": [
+        "conditional",
+        "ifeq",
+        "ifneq",
+        "ifdef",
+        "ifndef"
+      ]
+    },
+    {
+      "id": "make-commands-in-recipe",
+      "name": "@, -, + recipe prefixes",
+      "category": "Recipes & Shell",
+      "type": "concept",
+      "summary": "Control echo, ignored failure and recursive execution.",
+      "description": "At the beginning of a recipe command: @ suppresses make’s command echo, - tells Make to ignore a nonzero exit for that line, + marks recursive command execution even under some normally nonexecuting flags. These are recipe prefixes, not make CLI options.",
+      "syntax": "target:\n\t@echo \"Building\"",
+      "options": [
+        {
+          "flag": "@",
+          "description": "Suppress recipe command echo."
+        },
+        {
+          "flag": "-",
+          "description": "Ignore an error status for the prefixed recipe line."
+        },
+        {
+          "flag": "+",
+          "description": "Mark line for execution even under -n/-t/-q; typically recursive make."
+        }
+      ],
+      "examples": [
+        {
+          "command": "show:\n\t@echo \"Hello\"",
+          "description": "Only Hello is printed by the shell, not the echoed recipe text."
+        }
+      ],
+      "keywords": [
+        "recipe prefix",
+        "@",
+        "-",
+        "+",
+        "echo"
+      ]
+    },
+    {
+      "id": "make-order-only",
+      "name": "Order-only prerequisites: |",
+      "category": "Targets & Dependencies",
+      "type": "concept",
+      "summary": "Ensure ordering without causing unnecessary rebuilds.",
+      "description": "Prerequisites after | must be built/checked before the target but changes to their timestamps do not make the target out of date. Useful for output directories.",
+      "syntax": "build/program: main.o | build\n\t$(CC) main.o -o $@\nbuild:\n\tmkdir -p build",
+      "examples": [
+        {
+          "command": "build/main.o: main.c | build\n\t$(CC) -c main.c -o $@\nbuild:\n\tmkdir -p build",
+          "description": "Creating/updating the directory does not by itself force recompilation."
+        }
+      ],
+      "keywords": [
+        "order-only prerequisites",
+        "vertical bar",
+        "directory"
+      ]
+    },
+    {
+      "id": "make-function-wildcard",
+      "name": "$(wildcard ...)",
+      "category": "Variables & Expansion",
+      "type": "function",
+      "summary": "Find filenames that match glob-like patterns.",
+      "description": "GNU Make’s wildcard function expands matching filenames. It is a Make function, not a Bash regular expression. Its result is a space-separated list; be careful with unusual filenames and omitted matches.",
+      "syntax": "SOURCES := $(wildcard *.c)",
+      "examples": [
+        {
+          "command": "SOURCES := $(wildcard *.c)\nOBJS := $(SOURCES:.c=.o)",
+          "description": "Produce a conventional list of object names from C sources."
+        }
+      ],
+      "keywords": [
+        "wildcard",
+        "glob",
+        "source list"
+      ]
+    },
+    {
+      "id": "make-function-patsubst",
+      "name": "$(patsubst PATTERN,REPLACEMENT,TEXT)",
+      "category": "Variables & Expansion",
+      "type": "function",
+      "summary": "Replace word patterns in a Make variable.",
+      "description": "patsubst matches words against a % pattern and substitutes a matching stem. It is useful for mapping foo.c to foo.o; pattern replacement is separate from shell commands.",
+      "syntax": "OBJS := $(patsubst %.c,%.o,$(SOURCES))",
+      "examples": [
+        {
+          "command": "SOURCES := main.c circle.c shape.c\nOBJS := $(patsubst %.c,%.o,$(SOURCES))",
+          "description": "Convert source filenames to object filenames."
+        }
+      ],
+      "keywords": [
+        "patsubst",
+        "substitution",
+        "percent"
+      ]
+    },
+    {
+      "id": "make-command-line-variables",
+      "name": "make VAR=value",
+      "category": "Command-line Interface",
+      "type": "command",
+      "summary": "Override a variable for one Make invocation.",
+      "description": "A NAME=value argument to make supplies a make variable value that generally overrides ordinary makefile assignments; override directives and other special cases differ. This is not a shell environment assignment by itself.",
+      "syntax": "make [TARGET] CC=clang CFLAGS=\"-O2 -Wall\"",
+      "examples": [
+        {
+          "command": "make prog.exe CC=gcc CFLAGS=\"-std=c99 -O2\"",
+          "description": "Choose compiler/options for this invocation without editing the Makefile."
+        }
+      ],
+      "keywords": [
+        "variable override",
+        "make CC",
+        "command-line definition"
+      ]
+    },
+    {
+      "id": "make-ar",
+      "name": "ar — static archives",
+      "category": "Libraries & Linking",
+      "type": "command",
+      "summary": "Create or inspect Unix-style .a static archives.",
+      "description": "GNU ar packages object files into an archive; the keyletter sequence combines one operation with modifiers. ar rcs inserts/replaces members, creates the archive as needed and updates the symbol index. The lecture uses ar -cvq (quick append) and ar -t (list). Normal GNU ar exit: 0 success, nonzero on error; not the C function convention.",
+      "syntax": "ar rcs libctest.a module1.o module2.o",
+      "options": [
+        {
+          "flag": "r",
+          "description": "Insert or replace archive members."
+        },
+        {
+          "flag": "c",
+          "description": "Suppress diagnostic about creating an archive."
+        },
+        {
+          "flag": "s",
+          "description": "Write/update the symbol index."
+        },
+        {
+          "flag": "q",
+          "description": "Quick append; existing member replacement semantics differ from r."
+        },
+        {
+          "flag": "v",
+          "description": "Verbose operation output."
+        },
+        {
+          "flag": "t",
+          "description": "List archive member names."
+        },
+        {
+          "flag": "x",
+          "description": "Extract archive members."
+        },
+        {
+          "flag": "d",
+          "description": "Delete named members."
+        },
+        {
+          "flag": "p",
+          "description": "Print members to standard output."
+        },
+        {
+          "flag": "D",
+          "description": "Use deterministic metadata when supported."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ar -cvq libctest.a module1.o module2.o",
+          "description": "Lecture example (Tutorial 04 p. 26): create/archive using quick append."
+        },
+        {
+          "command": "ar -t libctest.a",
+          "description": "Lecture example: list archive member names."
+        },
+        {
+          "command": "ar rcs libctest.a module1.o module2.o",
+          "description": "Recommended common recipe for creating/updating an indexed static library."
+        }
+      ],
+      "keywords": [
+        "ar",
+        "archive",
+        "static",
+        "-cvq",
+        "-t",
+        "rcs"
+      ],
+      "note": "ar keyletters are GNU binutils options, not GNU Make switches."
+    },
+    {
+      "id": "make-static-library-rule",
+      "name": "Static library Makefile rule",
+      "category": "Libraries & Linking",
+      "type": "concept",
+      "summary": "Build a .a archive from object files.",
+      "description": "A static library stores compiled objects in libNAME.a; applications can link against it. Include the required object dependencies and use ar rcs. GCC -lNAME searches for a matching libNAME library in linker search paths.",
+      "syntax": "libctest.a: module1.o module2.o\n\tar rcs $@ $^",
+      "examples": [
+        {
+          "command": "libctest.a: module1.o module2.o\n\tar rcs $@ $^",
+          "description": "Packages updated object files into a library archive."
+        }
+      ],
+      "keywords": [
+        ".a",
+        "lib prefix",
+        "static library",
+        "ar rcs"
+      ]
+    },
+    {
+      "id": "make-shared-library-rule",
+      "name": "Shared library Makefile rule",
+      "category": "Libraries & Linking",
+      "type": "concept",
+      "summary": "Build a Linux shared-object library (.so).",
+      "description": "On typical ELF/Linux GCC systems, compile source with -fPIC or suitable position-independent code and link the objects with -shared to libNAME.so. This is platform-specific, not ISO C. Compile-time linker success does not guarantee the dynamic loader will later find the .so.",
+      "syntax": "libctest.so: module1.o module2.o\n\t$(CC) -shared $^ -o $@",
+      "options": [
+        {
+          "flag": "gcc -fPIC",
+          "description": "Generate position-independent code suitable for many shared libraries."
+        },
+        {
+          "flag": "gcc -shared",
+          "description": "Link objects as a shared library."
+        },
+        {
+          "flag": "libNAME.so",
+          "description": "Typical Linux/ELF shared-library name for -lNAME."
+        }
+      ],
+      "examples": [
+        {
+          "command": "module1.o: module1.c module1.h\n\t$(CC) -fPIC -c module1.c -o module1.o\n\nlibctest.so: module1.o\n\t$(CC) -shared module1.o -o libctest.so",
+          "description": "Corrects the inconsistent filenames in Tutorial 04 p. 27 while preserving its technique."
+        }
+      ],
+      "keywords": [
+        "shared object",
+        ".so",
+        "-shared",
+        "-fPIC",
+        "dynamic linking"
+      ],
+      "note": "On ELF/Linux, actual runtime resolution requires a suitable library search path or installed library; -L is a link-time search option."
+    },
+    {
+      "id": "make-gcc-options",
+      "name": "gcc flags for C modules and libraries",
+      "category": "Libraries & Linking",
+      "type": "command",
+      "summary": "Explain compiler, linker and library flags used in Make recipes.",
+      "description": "GCC is a compiler driver that can preprocess, compile, assemble and link. -c stops before linking; -o sets the output name; -lNAME requests libNAME; -L adds library-search directories; -I adds header-search directories. GCC returns zero for a successful command and nonzero for failure (exact nonzero code varies).",
+      "syntax": "gcc [OPTIONS] SOURCE... [-o OUTPUT]",
+      "options": [
+        {
+          "flag": "-c",
+          "description": "Compile or assemble into object files without linking."
+        },
+        {
+          "flag": "-o FILE",
+          "description": "Select output file path."
+        },
+        {
+          "flag": "-g",
+          "description": "Generate debug information."
+        },
+        {
+          "flag": "-Wall",
+          "description": "Enable a useful group of warnings, not literally all possible warnings."
+        },
+        {
+          "flag": "-Wextra",
+          "description": "Enable additional warning classes."
+        },
+        {
+          "flag": "-std=c99",
+          "description": "Choose ISO C99 source-language mode."
+        },
+        {
+          "flag": "-I DIR",
+          "description": "Add directory to header search."
+        },
+        {
+          "flag": "-L DIR",
+          "description": "Add directory to linker library search."
+        },
+        {
+          "flag": "-l NAME",
+          "description": "Ask linker to search for a library named libNAME."
+        },
+        {
+          "flag": "-shared",
+          "description": "Produce a shared library where supported."
+        },
+        {
+          "flag": "-fpic / -fPIC",
+          "description": "Generate position-independent code; choose suitable PIC model/target."
+        },
+        {
+          "flag": "-E",
+          "description": "Stop after preprocessing."
+        },
+        {
+          "flag": "-S",
+          "description": "Stop after assembly generation, before assembling."
+        },
+        {
+          "flag": "-DNAME[=VALUE]",
+          "description": "Define a preprocessor macro from CLI."
+        },
+        {
+          "flag": "-O2",
+          "description": "Enable a level of compiler optimization."
+        },
+        {
+          "flag": "-MMD -MP",
+          "description": "Generate dependency files for user headers and phony prerequisites (advanced)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "gcc -g -Wall -std=c99 -c my_file.c",
+          "description": "Compile a C file into an object, Tutorial 04 p. 12."
+        },
+        {
+          "command": "gcc -g my_file.o -o prog.exe",
+          "description": "Link an object into an executable, Tutorial 04 p. 12."
+        },
+        {
+          "command": "gcc main.o -Llib -lctest -o prog.exe",
+          "description": "Use a libctest library in lib/, adapting Tutorial 04 p. 28."
+        }
+      ],
+      "keywords": [
+        "gcc",
+        "-g",
+        "-Wall",
+        "-std=c99",
+        "-l",
+        "-L",
+        "-shared",
+        "-fpic",
+        "compile",
+        "link"
+      ]
+    },
+    {
+      "id": "make-dependency-files",
+      "name": "-MMD and -MP",
+      "category": "Built-in Rules",
+      "type": "concept",
+      "summary": "Track included C headers automatically (advanced).",
+      "description": "GCC -MMD can generate dependency .d files while compiling source; -MP adds phony targets for headers listed as prerequisites so removed headers do not immediately cause a no-rule failure. Include the generated files with -include. This is a GNU GCC/GNU Make workflow beyond the uploaded slides.",
+      "syntax": "CFLAGS += -MMD -MP\n-include $(OBJS:.o=.d)",
+      "examples": [
+        {
+          "command": "%.o: %.c\n\t$(CC) $(CFLAGS) -MMD -MP -c $< -o $@\n-include $(OBJS:.o=.d)",
+          "description": "Headers can be tracked without hand-maintained lists."
+        }
+      ],
+      "keywords": [
+        "automatic dependencies",
+        ".d",
+        "headers",
+        "MMD",
+        "MP"
+      ]
+    }
+  ],
+  "topics": [
+    {
+      "id": "make-guide-first-steps",
+      "type": "guide",
+      "name": "What GNU Make does",
+      "category": "Fundamentals",
+      "summary": "Understand incremental builds and the first target.",
+      "description": "Based on Tutorial 04 pp. 13–22, which motivate keeping the smallest necessary compile/link workflow.",
+      "sections": [
+        {
+          "title": "Source, header and object files",
+          "body": "A .c contains C function definitions, a .h declares reusable interfaces, a .o is compiled object code, and an executable is a linked output. Make coordinates commands; GCC performs compilation and linking.",
+          "items": []
+        },
+        {
+          "title": "The dependency graph",
+          "body": "The graph connects source/header prerequisites to object targets, and object targets to the final program. If shape.h changes, affected objects and the final link may need updating.",
+          "items": []
+        },
+        {
+          "title": "Default target and files",
+          "body": "Make typically reads a named makefile and starts from the first non-special default goal. You can request a named target with make TARGET.",
+          "items": []
+        },
+        {
+          "title": "Success and failure",
+          "body": "Make status 0 means successful build; status 2 means an error. With make -q, status 1 indicates not up to date.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "shape.o: shape.c shape.h\n\tgcc -c shape.c -o shape.o\n\nprog.exe: shape.o main.o\n\tgcc shape.o main.o -o prog.exe",
+          "description": "Simple structure from Tutorial 04 pp. 20–21, with TAB recipe prefixes."
+        }
+      ],
+      "keywords": [
+        "make",
+        "dependency graph",
+        "recompile",
+        "link"
+      ]
+    },
+    {
+      "id": "make-guide-course-example",
+      "type": "guide",
+      "name": "The complete three-module Makefile",
+      "category": "Fundamentals",
+      "summary": "Understand the lecture’s Makefile, its variables and rules.",
+      "description": "An annotated and typo-corrected adaptation of Tutorial 04 p. 23. Example text is provided as syntax; no recipe was run.",
+      "sections": [
+        {
+          "title": "Variables",
+          "body": "CC names GCC; CFLAGS contains debug, warnings and C99 mode; OBJS lists main.o, circle.o, shape.o.",
+          "items": []
+        },
+        {
+          "title": "Build the executable",
+          "body": "The prog.exe rule depends on object files. Make tries to update those object targets before it links the executable.",
+          "items": []
+        },
+        {
+          "title": "Build objects",
+          "body": "Each object should list its .c and relevant .h dependencies. The lecture uses a recipe-less circle.o rule to rely on Make’s built-in compilation rule.",
+          "items": []
+        },
+        {
+          "title": "Clean goal",
+          "body": "clean removes generated files and should be declared .PHONY. The prepared example removes a narrow explicit list instead of all *.exe files.",
+          "items": []
+        },
+        {
+          "title": "Lecture typo correction",
+          "body": "The original slide declares CLINK but uses CCLINK. The draft uses $(CC) consistently, preserving the intended behavior.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "CC = gcc\nCFLAGS = -std=c99 -Wall -g\nOBJS = main.o circle.o shape.o\n\n.PHONY: all clean\nall: prog.exe\n\nprog.exe: $(OBJS)\n\t$(CC) $(OBJS) -o $@\n\nmain.o: main.c circle.h shape.h\n\t$(CC) $(CFLAGS) -c main.c -o $@\n\ncircle.o: circle.c circle.h shape.h\n\t$(CC) $(CFLAGS) -c circle.c -o $@\n\nshape.o: shape.c shape.h\n\t$(CC) $(CFLAGS) -c shape.c -o $@\n\nclean:\n\trm -f $(OBJS) prog.exe",
+          "description": "Adaptation of the 23rd slide with corrected variable names, explicit compile steps, and a safer clean rule."
+        }
+      ],
+      "keywords": [
+        "CC",
+        "CFLAGS",
+        "OBJS",
+        "clean",
+        "example",
+        "three modules"
+      ]
+    },
+    {
+      "id": "make-guide-variables-and-automatic",
+      "type": "guide",
+      "name": "Variables and automatic variables",
+      "category": "Variables & Expansion",
+      "summary": "Read common Makefile expressions without confusing them with shell syntax.",
+      "description": "Extends the lecture’s variable examples with well-supported GNU Make fundamentals.",
+      "sections": [
+        {
+          "title": "Variable assignment",
+          "body": "Use NAME = value for recursively expanded variables; NAME := value for immediately expanded variables; NAME ?= value for default-only assignment; NAME += more to append.",
+          "items": []
+        },
+        {
+          "title": "Reference variables",
+          "body": "$(CC) is expanded by Make before the recipe shell runs. $$VAR passes a dollar sign through to the shell in a recipe.",
+          "items": []
+        },
+        {
+          "title": "Automatic variables",
+          "body": "$@ is target; $< first prerequisite; $^ normal prerequisites without duplicates; $? newer prerequisites. These often remove repeated filenames.",
+          "items": []
+        },
+        {
+          "title": "Pattern rules",
+          "body": "%.o: %.c and a command with $< and $@ expresses one recipe for many object files.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "%.o: %.c\n\t$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@",
+          "description": "One rule converts any suitable .c to .o."
+        }
+      ],
+      "keywords": [
+        "= ",
+        ":=",
+        "?=",
+        "+=",
+        "$@",
+        "$<",
+        "$^"
+      ]
+    },
+    {
+      "id": "make-guide-flags",
+      "type": "guide",
+      "name": "Common GNU Make command-line options",
+      "category": "Command-line Interface",
+      "summary": "Know what each make switch changes and its exit status.",
+      "description": "The slides explicitly introduce -f; the rest are additional GNU Make flags drawn from the official reference, not from lecture content.",
+      "sections": [
+        {
+          "title": "Specify a build file",
+          "body": "make -f alternate.mk TARGET loads a chosen makefile. make -C DIR switches working directory before building.",
+          "items": []
+        },
+        {
+          "title": "Preview and question",
+          "body": "make -n prints recipes that would normally run (with documented recursive exceptions). make -q checks freshness and exits 0/1/2 without normal build recipes.",
+          "items": []
+        },
+        {
+          "title": "Parallel and rebuild",
+          "body": "make -j4 builds up to four concurrent recipes; make -B forces rebuilding; make -k continues independent work after errors.",
+          "items": []
+        },
+        {
+          "title": "Verbose diagnostics",
+          "body": "make --trace explains why targets update; make -d produces extensive debugging output; --warn-undefined-variables identifies typo-like references.",
+          "items": []
+        },
+        {
+          "title": "Risk handling",
+          "body": "make -n clean can be used to inspect intended deletion but is not an absolute no-execution sandbox due to recursive-make exceptions. Do not run deletion recipes without permission.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "make -f course.mk -n prog.exe",
+          "description": "Inspect recipe text from a named Makefile."
+        },
+        {
+          "command": "make -q prog.exe",
+          "description": "Check whether prog.exe is current: 0 current, 1 needs update, 2 error."
+        }
+      ],
+      "keywords": [
+        "make flags",
+        "--trace",
+        "-q",
+        "-j",
+        "-f",
+        "-n"
+      ]
+    },
+    {
+      "id": "make-guide-libraries",
+      "type": "guide",
+      "name": "Static and shared libraries from C modules",
+      "category": "Libraries & Linking",
+      "summary": "Compare .a archives, .so shared objects and GCC link options.",
+      "description": "Directly adapted from Tutorial 04 pp. 24–28, with names and flags corrected where the slides are inconsistent.",
+      "sections": [
+        {
+          "title": "Static libraries",
+          "body": ".a files are archives of object files. ar rcs libctest.a module1.o module2.o builds or updates an indexed archive; the lecture also shows ar -cvq.",
+          "items": []
+        },
+        {
+          "title": "Shared libraries",
+          "body": "On Linux/ELF, GCC -fPIC -c produces suitable position-independent objects and GCC -shared ... -o libctest.so links a shared object.",
+          "items": []
+        },
+        {
+          "title": "Linking applications",
+          "body": "-L DIR selects a directory to search during linking; -lctest requests libctest.so or libctest.a, subject to linker policy. Put libraries after dependent object files in an ordinary GCC command.",
+          "items": []
+        },
+        {
+          "title": "Runtime loading",
+          "body": "Linker -L is not itself a promise that a dynamic loader can find a .so at runtime. Runtime deployment and library paths may require separate configuration.",
+          "items": []
+        },
+        {
+          "title": "Naming consistency",
+          "body": "Ensure target, object source and output names are consistent; the slides mix my-library.c with linked-list.c in one example.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "ar -cvq libctest.a module1.o module2.o\nar -t libctest.a",
+          "description": "Examples from Tutorial 04 p. 26 (shown as syntax, not executed)."
+        },
+        {
+          "command": "gcc -fPIC -c module1.c -o module1.o\ngcc -shared module1.o -o libctest.so\ngcc main.o -L. -lctest -o program",
+          "description": "Illustrative Linux shared-library creation and application link; no execution."
+        }
+      ],
+      "keywords": [
+        "ar",
+        "-cvq",
+        "-fPIC",
+        "-shared",
+        "-l",
+        "-L"
+      ]
+    },
+    {
+      "id": "make-guide-common-mistakes",
+      "type": "guide",
+      "name": "Makefile troubleshooting without executing builds",
+      "category": "Debugging & Safety",
+      "summary": "Recognize common Makefile mistakes by inspection.",
+      "description": "A syntax-first guide, focusing on problems visible in class examples and frequent Makefile errors.",
+      "sections": [
+        {
+          "title": "Missing separator",
+          "body": "A recipe line beginning with spaces instead of a TAB under default settings can trigger missing separator diagnostics.",
+          "items": []
+        },
+        {
+          "title": "Typos in variable names",
+          "body": "CLINK and CCLINK are different variables. An unknown $(NAME) ordinarily expands to an empty string; use one spelling consistently.",
+          "items": []
+        },
+        {
+          "title": "Missing header prerequisites",
+          "body": "If an object depends only on its .c, editing a needed header might not rebuild it. Declare .h dependencies or generate .d files.",
+          "items": []
+        },
+        {
+          "title": "Target named clean",
+          "body": "A real file named clean can prevent a recipe-less phony-style goal from being revisited; use .PHONY: clean.",
+          "items": []
+        },
+        {
+          "title": "Dangerous removal",
+          "body": "Use narrow deletion recipes and inspect them before running; do not treat make clean as automatically safe.",
+          "items": []
+        },
+        {
+          "title": "Assuming compiled equals linked",
+          "body": "gcc -c creates .o files but does not create a final executable; link after compiling all required modules.",
+          "items": []
+        }
+      ],
+      "examples": [
+        {
+          "command": "CC = gcc\nCFLAGS = -std=c99 -Wall\nprogram: main.c\n\t$(CC) $(CFLAGS) main.c -o program",
+          "description": "A minimal clear Makefile for syntax study."
+        }
+      ],
+      "keywords": [
+        "syntax errors",
+        "missing separator",
+        "CLINK",
+        "CCLINK",
+        "safety"
+      ]
+    }
+  ]
+}
